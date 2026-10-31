@@ -155,6 +155,9 @@ footer{margin-top:0 !important;padding-top:28px !important;padding-bottom:18px !
 /* Si sections vides (profil non chargé), ne prend pas de place */
 #rencontre:empty,#auth:empty,#versets:empty,#jeux:empty,#musique:empty,#moderation:empty{display:none}
 </style>
+
+
+
 </head>
 <body>
 
@@ -399,16 +402,7 @@ body{margin:0}
 
 <div class="center" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn btn-danger" onclick="deleteAllDemoProfiles()">🗑️ Supprimer TOUS</button><button class="btn btn-outline" onclick="restoreDemo()">♻️ Restaurer</button><button class="btn btn-primary" onclick="addRandomDemo()">➕ Ajouter</button><button class="btn btn-gold" onclick="resetAdminData()">🔄 Reset tchat &amp; premium (test)</button></div>
 <div id="moderationList" style="margin-top:26px">
-<div class="moderation-item"><div class="moderation-photo">S</div><div class="moderation-info"><strong>Sarah, 29 ans</strong><div class="profile-meta">Catholique • sarah@demo.love</div><div class="profile-meta">Femme cherche Homme • Découverte • 0 pts en Jésus</div></div><span class="status-pill approved">✅ Approuvé en Jésus</span><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="btn btn-outline btn-sm" onclick="approveProfile(0)">⏸️ En attente</button><button class="btn btn-outline btn-sm" onclick="editProfile(0)">✏️</button><button class="btn btn-danger btn-sm" onclick="deleteProfile(0)">🗑️</button></div></div>
-<div class="moderation-item"><div class="moderation-photo">E</div><div class="moderation-info"><strong>Esther, 27 ans</strong><div class="profile-meta">Évangélique • esther@demo.love</div><div class="profile-meta">Femme cherche Homme • Découverte • 0 pts en Jésus</div></div><span class="status-pill approved">✅ Approuvé en Jésus</span><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="btn btn-outline btn-sm" onclick="approveProfile(1)">⏸️ En attente</button><button class="btn btn-outline btn-sm" onclick="editProfile(1)">✏️</button><button class="btn btn-danger btn-sm" onclick="deleteProfile(1)">🗑️</button></div></div>
-<div class="moderation-item"><div class="moderation-photo">D</div><div class="moderation-info"><strong>David, 32 ans</strong><div class="profile-meta">Protestant • david@demo.love</div><div class="profile-meta">Homme cherche Femme • Découverte • 0 pts en Jésus</div></div><span class="status-pill approved">✅ Approuvé en Jésus</span><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="btn btn-outline btn-sm" onclick="approveProfile(2)">⏸️ En attente</button><button class="btn btn-outline btn-sm" onclick="editProfile(2)">✏️</button><button class="btn btn-danger btn-sm" onclick="deleteProfile(2)">🗑️</button></div></div>
-<div class="moderation-item"><div class="moderation-photo">R</div><div class="moderation-info"><strong>Ruth, 26 ans</strong><div class="profile-meta">Catholique • ruth@demo.love</div><div class="profile-meta">Femme cherche Homme • Découverte • 0 pts en Jésus</div></div><span class="status-pill approved">✅ Approuvé en Jésus</span><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="btn btn-outline btn-sm" onclick="approveProfile(3)">⏸️ En attente</button><button class="btn btn-outline btn-sm" onclick="editProfile(3)">✏️</button><button class="btn btn-danger btn-sm" onclick="deleteProfile(3)">🗑️</button></div></div>
-<div class="moderation-item"><div class="moderation-photo">S</div><div class="moderation-info"><strong>Samuel, 30 ans</strong><div class="profile-meta">Protestant • samuel@demo.love</div><div class="profile-meta">Homme cherche Femme • Découverte • 0 pts en Jésus</div></div><span class="status-pill approved">✅ Approuvé en Jésus</span><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="btn btn-outline btn-sm" onclick="approveProfile(4)">⏸️ En attente</button><button class="btn btn-outline btn-sm" onclick="editProfile(4)">✏️</button><button class="btn btn-danger btn-sm" onclick="deleteProfile(4)">🗑️</button></div></div>
-<div class="moderation-item"><div class="moderation-photo">M</div><div class="moderation-info"><strong>Marie, 28 ans</strong><div class="profile-meta">Catholique • marie@demo.love</div><div class="profile-meta">Femme cherche Homme • Découverte • 0 pts en Jésus</div></div><span class="status-pill approved">✅ Approuvé en Jésus</span><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="btn btn-outline btn-sm" onclick="approveProfile(5)">⏸️ En attente</button><button class="btn btn-outline btn-sm" onclick="editProfile(5)">✏️</button><button class="btn btn-danger btn-sm" onclick="deleteProfile(5)">🗑️</button></div></div>
-<div class="moderation-item"><div class="moderation-photo">J</div><div class="moderation-info"><strong>Joseph, 35 ans</strong><div class="profile-meta">Évangélique • joseph@demo.love</div><div class="profile-meta">Homme cherche Femme • Découverte • 0 pts en Jésus</div></div><span class="status-pill approved">✅ Approuvé en Jésus</span><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="btn btn-outline btn-sm" onclick="approveProfile(6)">⏸️ En attente</button><button class="btn btn-outline btn-sm" onclick="editProfile(6)">✏️</button><button class="btn btn-danger btn-sm" onclick="deleteProfile(6)">🗑️</button></div></div>
-<div class="moderation-item"><div class="moderation-photo">A</div><div class="moderation-info"><strong>Anne, 24 ans</strong><div class="profile-meta">Protestant • anne@demo.love</div><div class="profile-meta">Femme cherche Homme • Découverte • 0 pts en Jésus</div></div><span class="status-pill approved">✅ Approuvé en Jésus</span><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="btn btn-outline btn-sm" onclick="approveProfile(7)">⏸️ En attente</button><button class="btn btn-outline btn-sm" onclick="editProfile(7)">✏️</button><button class="btn btn-danger btn-sm" onclick="deleteProfile(7)">🗑️</button></div></div>
-<div class="moderation-item"><div class="moderation-photo">G</div><div class="moderation-info"><strong>Grace, 26 ans</strong><div class="profile-meta">Évangélique • grace@demo.love</div><div class="profile-meta">Femme cherche Homme • Alliance • 5 pts en Jésus</div></div><span class="status-pill approved">✅ Approuvé en Jésus</span><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="btn btn-outline btn-sm" onclick="approveProfile(8)">⏸️ En attente</button><button class="btn btn-outline btn-sm" onclick="editProfile(8)">✏️</button><button class="btn btn-danger btn-sm" onclick="deleteProfile(8)">🗑️</button></div></div>
-<div class="moderation-item"><div class="moderation-photo">P</div><div class="moderation-info"><strong>Paul, 34 ans</strong><div class="profile-meta">Évangélique • paul@demo.love</div><div class="profile-meta">Homme cherche Femme • Découverte • 0 pts en Jésus</div></div><span class="status-pill pending">⏳ En attente</span><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="btn btn-success btn-sm" onclick="approveProfile(9)">✅ Approuver en Jésus</button><button class="btn btn-outline btn-sm" onclick="editProfile(9)">✏️</button><button class="btn btn-danger btn-sm" onclick="deleteProfile(9)">🗑️</button></div></div></div></div>
+</div>
 </section>
 
 <section class="section" id="premium">
@@ -568,209 +562,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 <script>
 const PAYMENT_LINKS={Mensuel:{stripe:"https://buy.stripe.com/TON_LIEN_MENSUEL",paypal:"https://www.paypal.com/paypalme/toncompte/9000"},Alliance:{stripe:"https://buy.stripe.com/TON_LIEN_ALLIANCE",paypal:"https://www.paypal.com/paypalme/toncompte/15000"},Eternelle:{stripe:"https://buy.stripe.com/TON_LIEN_ETERNELLE",paypal:"https://www.paypal.com/paypalme/toncompte/30000"}}; // TODO: Remplace par tes vrais liens Stripe/PayPal
-const DEMO_DATA=[
-{name:"Sarah",age:29,church:"Catholique",verse:"Jésus - Jean 14:6 - Je suis le chemin",gender:"Femme",looking:"Homme",email: "sarah@demo.love",status:"approved",points:0,plan:"Découverte",photo:"",isDemo:true},
-{name:"Esther",age:27,church:"Évangélique",verse:"Jésus - Ruth 1:16 - Fidélité comme Jésus",gender:"Femme",looking:"Homme",email: "esther@demo.love",status:"approved",points:0,plan:"Découverte",photo:"",isDemo:true},
-{name:"David",age:32,church:"Protestant",verse:"Jésus - Éph 5:25 - Comme Christ a aimé l'Église",gender:"Homme",looking:"Femme",email: "david@demo.love",status:"approved",points:0,plan:"Découverte",photo:"",isDemo:true},
-{name:"Ruth",age:26,church:"Catholique",verse:"Jésus - 1 Jn 4:8 - Dieu est amour en Jésus",gender:"Femme",looking:"Homme",email: "ruth@demo.love",status:"approved",points:0,plan:"Découverte",photo:"",isDemo:true},
-{name:"Samuel",age:30,church:"Protestant",verse:"Jésus - Eccl 4:9 - Corde à 3 fils avec Jésus",gender:"Homme",looking:"Femme",email: "samuel@demo.love",status:"approved",points:0,plan:"Découverte",photo:"",isDemo:true},
-{name:"Marie",age:28,church:"Catholique",verse:"Jésus - Hé 13:4 - Mariage honoré par Jésus",gender:"Femme",looking:"Homme",email: "marie@demo.love",status:"approved",points:0,plan:"Découverte",photo:"",isDemo:true},
-{name:"Joseph",age:35,church:"Évangélique",verse:"Jésus - Gn 2:24 - Institution par Jésus",gender:"Homme",looking:"Femme",email: "joseph@demo.love",status:"approved",points:0,plan:"Découverte",photo:"",isDemo:true},
-{name:"Anne",age:24,church:"Protestant",verse:"Jésus - Col 3:14 - Amour de Jésus",gender:"Femme",looking:"Homme",email: "anne@demo.love",status:"approved",points:0,plan:"Découverte",photo:"",isDemo:true},
-{name:"Grace",age:26,church:"Évangélique",verse:"Jésus - Ps 37:4 - Fais de Jésus tes délices",gender:"Femme",looking:"Homme",email: "grace@demo.love",status:"approved",points:5,plan:"Alliance",photo:"",isDemo:true},
-{name:"Paul",age:34,church:"Évangélique",verse:"Jésus - Éph 5:25 - Aimer comme Jésus",gender:"Homme",looking:"Femme",email: "paul@demo.love",status:"pending",points:0,plan:"Découverte",photo:"",isDemo:true}
-];
-
-// ====== BACKEND SUPABASE - NIAMKE LOVE JESUS - CORRIGÉ ======
-const SUPABASE_URL = "https://qxxhbfoqlreiqyshbpqp.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_OK9ncVWB2Ih8xZ5fzqEQWg_mSV6vCoe";
-let supabaseClient = null;
-let USE_SUPABASE = false;
-try {
-  if (typeof supabase !== 'undefined' && supabase.createClient) {
-    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    USE_SUPABASE = true;
-    console.log("✅ Supabase connecté en Jésus");
-  } else if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
-    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    USE_SUPABASE = true;
-    console.log("✅ Supabase connecté via window");
-  }
-} catch(e) { console.warn("Supabase init error", e); USE_SUPABASE = false; }
-
-async function backendGetProfiles(){
-  if(!USE_SUPABASE) return null;
-  const { data, error } = await supabaseClient.from('profiles').select('*').eq('status','approved').order('created_at', {ascending:false});
-  if(error) return null;
-  return data.map(p=>({ name:p.name, age:p.age, church:p.church, confession:p.confession||p.church, verse:p.verse, gender:p.gender, looking:p.looking, email:p.email, status:p.status, points:p.points||0, plan:p.plan||'Découverte', photo:p.photo_url||"" }));
-}
-async function backendAddProfile(p, photoFile){
-  if(!USE_SUPABASE) return false;
-  let photo_url = "";
-  if(photoFile){
-    const fileName = Date.now()+'_'+photoFile.name;
-    const { error: upErr } = await supabaseClient.storage.from('photos').upload(fileName, photoFile);
-    if(!upErr){ const { data } = supabaseClient.storage.from('photos').getPublicUrl(fileName); photo_url = data.publicUrl; }
-  }
-  const { error } = await supabaseClient.from('profiles').insert([{ name:p.name, age:p.age, church:p.church, verse:p.verse, gender:p.gender, looking:p.looking, email:p.email, status:'pending', points:0, plan:'Découverte', photo_url }]);
-  return !error;
-}
-async function backendRecordPayment(email, plan, amount, provider){
-  if(!USE_SUPABASE) return false;
-  const { error } = await supabaseClient.from('payments').insert([{email, plan, amount, provider, status:'pending'}]);
-  return !error;
-}
-const PAYMENT_CONFIG = {
-  whatsapp: "221772919300",
-  whatsapp_display: "+221 77 291 93 00",
-  email: "niamkelovejesus@gmail.com",
-  pix_brazil: "PIX_BRESIL_A_REMPLACER",
-  wave_link: "https://pay.wave.com/",
-  orange_link: "https://www.orange.sn/orange-money",
-  stripe: { mensuel: "https://buy.stripe.com/test", alliance: "https://buy.stripe.com/test", eternelle: "https://buy.stripe.com/test" },
-  paypal: "https://paypal.me/"
-};
-// ====== FIN BACKEND ======
-
-// PERSISTANCE - Les suppressions ne reviennent plus
-const STORAGE_KEY="niamke_love_profiles_v4_final_jesus"; // v4 final - propre, sans cache ancien
-let profiles;
-try{
-const saved=localStorage.getItem(STORAGE_KEY);
-if(saved){
-profiles=JSON.parse(saved);
-console.log("Profils chargés depuis localStorage - suppressions conservées en Jésus");
-}else{
-profiles=JSON.parse(JSON.stringify(DEMO_DATA));
-localStorage.setItem(STORAGE_KEY, JSON.stringify(profiles));
-}
-}catch(e){
-profiles=JSON.parse(JSON.stringify(DEMO_DATA));
-}
-function saveProfiles(){
-try{localStorage.setItem(STORAGE_KEY, JSON.stringify(profiles));}catch(e){console.log("Erreur sauvegarde",e);}
-}
-
-function escapeHTML(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
-
-let currentChatUser=null;let editingIndex=null;let deletingIndex=null;let deletingAll=false;
-
-// LANG - TRADUCTION COMPLÈTE 6 LANGUES - JÉSUS AU CENTRE
-const I18N={
-fr:{
-choose:"Choisir en Jésus",free:"Gratuit",navHome:"Accueil",navMeet:"Rencontre",navVerses:"Versets Jésus",navGame:"Jeu Biblique",navMusic:"Musique",navMod:"Modération",navPremium:"Premium",
-heroBadge:"✝️ Jésus-Christ est le Chemin - 2026",heroTitle:"Jésus-Christ au centre pour trouver une alliance éternelle selon Dieu.",heroDesc:"<strong>Jésus-Christ est le fondement.</strong> Vérification pastorale, étude biblique sur Jésus, chat prière au nom de Jésus et jeux bibliques sur Jésus. L'amour n'a pas de ville, il a Jésus au centre.",
-btnDiscover:"Découvrir les profils en Jésus",btnVerses:"Versets sur Jésus",verseDayTitle:"✝️ Verset du jour - Jésus",verseDayText:"« Jésus-Christ est le même hier, aujourd'hui et éternellement - Il est notre modèle d'amour »",verseDayCite:"Hébreux 13:8 & 1 Corinthiens 13:4 — Jésus, fondement de chaque alliance",
-meetTitle:"Rencontre en Jésus-Christ",meetLead:"Plus de villes ! On cherche en Jésus, pas par quartier. Filtre par âge (entre X et Y), église et genre.",
-churchAll:"Toutes les confessions en Jésus",genderAll:"Tous genres",searchPh:"Rechercher prénom, verset Jésus...",
-ageMinLabel:"Âge minimum :",ageMaxLabel:"Âge maximum :",ageTo:"à",
-loginTitle:"Connexion en Jésus",loginBtn:"Se connecter en Jésus",registerTitle:"Inscription - Rejoins l'alliance en Jésus",registerBtn:"Créer mon profil en Jésus",
-versesTitle:"📖 Bibliothèque de Versets - Jésus au Centre",versesLead:"Tous ces versets parlent de Jésus-Christ. Clique pour copier le verset. Jésus est au centre de chaque alliance.",
-gameTitle:"Jeu Biblique sur Jésus 🎮",gameLead:"25 questions sur Jésus et le mariage, 12 versets de Jésus, 12 couples bibliques.",
-musicTitle:"Musique Chrétienne - Jésus",musicLead:"Chants pour Jésus-Christ, notre Époux céleste.",uploadTitle:"🎵 Téléverser des chants pour Jésus",uploadBtn:"Ajouter pour Jésus",
-modTitle:"Modération en Jésus",modLead:"Gère les profils en Jésus. Modifie ou supprime. Les suppressions ne reviennent plus.",
-premiumTitle:"Abonnements en Jésus - Prix CFA",premiumLead:"Prix pensés pour l'Afrique, centrés sur Jésus. 9.000 F / 15.000 F / 30.000 F",paymentTitle:"Paiement pour l'œuvre de Jésus",
-footerDesc:"Rencontre chrétienne centrée sur Jésus-Christ. Plus de villes, juste Jésus au centre. 6 langues. Suppressions définitives."
-},
-en:{
-choose:"Choose in Jesus",free:"Free",navHome:"Home",navMeet:"Meet",navVerses:"Jesus Verses",navGame:"Bible Game",navMusic:"Music",navMod:"Moderation",navPremium:"Premium",
-heroBadge:"✝️ Jesus Christ is the Way - 2026",heroTitle:"Jesus Christ at the center to find an eternal covenant according to God.",heroDesc:"<strong>Jesus Christ is the foundation.</strong> Pastoral verification, Bible study on Jesus, prayer chat in Jesus' name and Bible games about Jesus. Love has no city, it has Jesus at the center.",
-btnDiscover:"Discover profiles in Jesus",btnVerses:"Verses about Jesus",verseDayTitle:"✝️ Verse of the day - Jesus",verseDayText:"« Jesus Christ is the same yesterday, today and forever - He is our model of love »",verseDayCite:"Hebrews 13:8 & 1 Corinthians 13:4 — Jesus, foundation of every covenant",
-meetTitle:"Meeting in Jesus Christ",meetLead:"No more cities! We search in Jesus, not by neighborhood. Filter by age (between X and Y), church and gender.",
-churchAll:"All confessions in Jesus",genderAll:"All genders",searchPh:"Search first name, Jesus verse...",
-ageMinLabel:"Minimum age:",ageMaxLabel:"Maximum age:",ageTo:"to",
-loginTitle:"Login in Jesus",loginBtn:"Login in Jesus",registerTitle:"Registration - Join the covenant in Jesus",registerBtn:"Create my profile in Jesus",
-versesTitle:"📖 Library of Verses - Jesus at the Center",versesLead:"All these verses speak about Jesus Christ. Click to copy. Jesus is at the center of every covenant.",
-gameTitle:"Bible Game about Jesus 🎮",gameLead:"25 questions about Jesus and marriage, 12 verses of Jesus, 12 biblical couples.",
-musicTitle:"Christian Music - Jesus",musicLead:"Songs for Jesus Christ, our heavenly Bridegroom.",uploadTitle:"🎵 Upload songs for Jesus",uploadBtn:"Add for Jesus",
-modTitle:"Moderation in Jesus",modLead:"Manage profiles in Jesus. Edit or delete. Deletions are permanent.",
-premiumTitle:"Subscriptions in Jesus - CFA Price",premiumLead:"Prices designed for Africa, centered on Jesus. 9,000 F / 15,000 F / 30,000 F",paymentTitle:"Payment for the work of Jesus",
-footerDesc:"Christian dating centered on Jesus Christ. No more cities, just Jesus at the center. 6 languages. Permanent deletions."
-},
-es:{
-choose:"Elegir en Jesús",free:"Gratis",navHome:"Inicio",navMeet:"Encuentro",navVerses:"Versículos Jesús",navGame:"Juego Bíblico",navMusic:"Música",navMod:"Moderación",navPremium:"Premium",
-heroBadge:"✝️ Jesucristo es el Camino - 2026",heroTitle:"Jesucristo en el centro para encontrar una alianza eterna según Dios.",heroDesc:"<strong>Jesucristo es el fundamento.</strong> Verificación pastoral, estudio bíblico sobre Jesús, chat de oración en el nombre de Jesús y juegos bíblicos sobre Jesús.",
-btnDiscover:"Descubrir perfiles en Jesús",btnVerses:"Versículos sobre Jesús",verseDayTitle:"✝️ Versículo del día - Jesús",verseDayText:"« Jesucristo es el mismo ayer, hoy y por los siglos - Él es nuestro modelo de amor »",verseDayCite:"Hebreos 13:8 & 1 Corintios 13:4 — Jesús, fundamento de cada alianza",
-meetTitle:"Encuentro en Jesucristo",meetLead:"¡No más ciudades! Buscamos en Jesús, no por barrio. Filtra por edad, iglesia y género.",
-churchAll:"Todas las iglesias",genderAll:"Todos los géneros",searchPh:"Buscar nombre, versículo Jesús...",
-ageMinLabel:"Edad mínima:",ageMaxLabel:"Edad máxima:",ageTo:"a",
-loginTitle:"Conexión en Jesús",loginBtn:"Conectarse en Jesús",registerTitle:"Inscripción - Únete a la alianza en Jesús",registerBtn:"Crear mi perfil en Jesús",
-versesTitle:"📖 Biblioteca de Versículos - Jesús en el Centro",versesLead:"Todos estos versículos hablan de Jesucristo. Haz clic para copiar.",
-gameTitle:"Juego Bíblico sobre Jesús 🎮",gameLead:"25 preguntas sobre Jesús y matrimonio, 12 versículos de Jesús, 12 parejas bíblicas.",
-musicTitle:"Música Cristiana - Jesús",musicLead:"Cantos para Jesucristo, nuestro Esposo celestial.",uploadTitle:"🎵 Subir cantos para Jesús",uploadBtn:"Añadir para Jesús",
-modTitle:"Moderación en Jesús",modLead:"Gestiona perfiles en Jesús. Edita o elimina. Eliminaciones permanentes.",
-premiumTitle:"Suscripciones en Jesús - Precio CFA",premiumLead:"Precios pensados para África, centrados en Jesús.",paymentTitle:"Pago para la obra de Jesús",
-footerDesc:"Encuentro cristiano centrado en Jesucristo. Sin ciudades, solo Jesús en el centro."
-},
-pt:{
-choose:"Escolher em Jesus",free:"Grátis",navHome:"Início",navMeet:"Encontro",navVerses:"Versículos Jesus",navGame:"Jogo Bíblico",navMusic:"Música",navMod:"Moderação",navPremium:"Premium",
-heroBadge:"✝️ Jesus Cristo é o Caminho - 2026",heroTitle:"Jesus Cristo no centro para encontrar uma aliança eterna segundo Deus.",heroDesc:"<strong>Jesus Cristo é o fundamento.</strong> Verificação pastoral, estudo bíblico sobre Jesus, chat de oração em nome de Jesus.",
-btnDiscover:"Descobrir perfis em Jesus",btnVerses:"Versículos sobre Jesus",verseDayTitle:"✝️ Versículo do dia - Jesus",verseDayText:"« Jesus Cristo é o mesmo ontem, hoje e eternamente - Ele é nosso modelo de amor »",verseDayCite:"Hebreus 13:8 & 1 Coríntios 13:4 — Jesus, fundamento de cada aliança",
-meetTitle:"Encontro em Jesus Cristo",meetLead:"Sem mais cidades! Buscamos em Jesus, não por bairro. Filtre por idade, igreja e gênero.",
-churchAll:"Todas as igrejas",genderAll:"Todos os gêneros",searchPh:"Pesquisar nome, versículo Jesus...",
-ageMinLabel:"Idade mínima:",ageMaxLabel:"Idade máxima:",ageTo:"a",
-loginTitle:"Conexão em Jesus",loginBtn:"Conectar em Jesus",registerTitle:"Inscrição - Junte-se à aliança em Jesus",registerBtn:"Criar meu perfil em Jesus",
-versesTitle:"📖 Biblioteca de Versículos - Jesus no Centro",versesLead:"Todos esses versículos falam de Jesus Cristo. Clique para copiar.",
-gameTitle:"Jogo Bíblico sobre Jesus 🎮",gameLead:"25 perguntas sobre Jesus e casamento, 12 versículos de Jesus, 12 casais bíblicos.",
-musicTitle:"Música Cristã - Jesus",musicLead:"Cânticos para Jesus Cristo, nosso Noivo celestial.",uploadTitle:"🎵 Enviar cânticos para Jesus",uploadBtn:"Adicionar para Jesus",
-modTitle:"Moderação em Jesus",modLead:"Gerencie perfis em Jesus. Edite ou exclua. Exclusões permanentes.",
-premiumTitle:"Assinaturas em Jesus - Preço CFA",premiumLead:"Preços pensados para a África, centrados em Jesus.",paymentTitle:"Pagamento para a obra de Jesus",
-footerDesc:"Encontro cristão centrado em Jesus Cristo. Sem cidades, apenas Jesus no centro."
-},
-ar:{
-choose:"اختيار في يسوع",free:"مجاني",navHome:"الرئيسية",navMeet:"لقاء",navVerses:"آيات يسوع",navGame:"لعبة كتابية",navMusic:"موسيقى",navMod:"إشراف",navPremium:"اشتراك",
-heroBadge:"✝️ يسوع المسيح هو الطريق - 2026",heroTitle:"يسوع المسيح في المركز لإيجاد عهد أبدي حسب الله.",heroDesc:"<strong>يسوع المسيح هو الأساس.</strong> تحقق رعوي، دراسة كتابية عن يسوع، دردشة صلاة باسم يسوع.",
-btnDiscover:"اكتشاف الملفات في يسوع",btnVerses:"آيات عن يسوع",verseDayTitle:"✝️ آية اليوم - يسوع",verseDayText:"« يسوع المسيح هو هو أمسا واليوم وإلى الأبد - هو نموذجنا للمحبة »",verseDayCite:"عبرانيين 13:8 & 1 كورنثوس 13:4 — يسوع، أساس كل عهد",
-meetTitle:"لقاء في يسوع المسيح",meetLead:"لا مزيد من المدن! نبحث في يسوع، ليس حسب الحي. فلترة حسب العمر والكنيسة والجنس.",
-churchAll:"جميع الكنائس",genderAll:"جميع الأجناس",searchPh:"بحث عن اسم، آية يسوع...",
-ageMinLabel:"الحد الأدنى للعمر:",ageMaxLabel:"الحد الأقصى للعمر:",ageTo:"إلى",
-loginTitle:"تسجيل دخول في يسوع",loginBtn:"تسجيل دخول في يسوع",registerTitle:"تسجيل - انضم إلى العهد في يسوع",registerBtn:"إنشاء ملفي في يسوع",
-versesTitle:"📖 مكتبة الآيات - يسوع في المركز",versesLead:"كل هذه الآيات تتحدث عن يسوع المسيح. انقر للنسخ.",
-gameTitle:"لعبة كتابية عن يسوع 🎮",gameLead:"25 سؤالا عن يسوع والزواج، 12 آية ليسوع، 12 زوجا كتابيا.",
-musicTitle:"موسيقى مسيحية - يسوع",musicLead:"ترانيم ليسوع المسيح، عريسنا السماوي.",uploadTitle:"🎵 تحميل ترانيم ليسوع",uploadBtn:"إضافة ليسوع",
-modTitle:"إشراف في يسوع",modLead:"إدارة الملفات في يسوع. تعديل أو حذف. الحذف نهائي.",
-premiumTitle:"اشتراكات في يسوع - سعر فرنك أفريقي",premiumLead:"أسعار مصممة لأفريقيا، تتمحور حول يسوع.",paymentTitle:"دفع لعمل يسوع",
-footerDesc:"لقاء مسيحي يتمحور حول يسوع المسيح. لا مدن، فقط يسوع في المركز."
-},
-zh:{
-choose:"在耶稣里选择",free:"免费",navHome:"首页",navMeet:"相遇",navVerses:"耶稣经文",navGame:"圣经游戏",navMusic:"音乐",navMod:"管理",navPremium:"高级",
-heroBadge:"✝️ 耶稣基督是道路 - 2026",heroTitle:"耶稣基督为中心，按照神的心意找到永恒的盟约。",heroDesc:"<strong>耶稣基督是根基。</strong> 牧师验证，关于耶稣的圣经学习，奉耶稣名的祷告聊天和关于耶稣的圣经游戏。",
-btnDiscover:"在耶稣里发现资料",btnVerses:"关于耶稣的经文",verseDayTitle:"✝️ 今日经文 - 耶稣",verseDayText:"« 耶稣基督，昨日、今日、一直到永远，是一样的 - 祂是我们爱的榜样 »",verseDayCite:"希伯来书13:8 & 哥林多前书13:4 — 耶稣，每一个盟约的根基",
-meetTitle:"在耶稣基督里的相遇",meetLead:"不再有城市！我们在耶稣里寻找，不按街区。按年龄、教会和性别筛选。",
-churchAll:"所有教会",genderAll:"所有性别",searchPh:"搜索名字，耶稣经文...",
-ageMinLabel:"最小年龄：",ageMaxLabel:"最大年龄：",ageTo:"到",
-loginTitle:"在耶稣里登录",loginBtn:"在耶稣里登录",registerTitle:"注册 - 在耶稣里加入盟约",registerBtn:"在耶稣里创建我的资料",
-versesTitle:"📖 经文图书馆 - 耶稣为中心",versesLead:"所有这些经文都讲到耶稣基督。点击复制。",
-gameTitle:"关于耶稣的圣经游戏 🎮",gameLead:"25个关于耶稣和婚姻的问题，12节耶稣的经文，12对圣经夫妇。",
-musicTitle:"基督教音乐 - 耶稣",musicLead:"为耶稣基督，我们天上的新郎的歌曲。",uploadTitle:"🎵 为耶稣上传歌曲",uploadBtn:"为耶稣添加",
-modTitle:"在耶稣里的管理",modLead:"在耶稣里管理资料。编辑或删除。删除是永久的。",
-premiumTitle:"在耶稣里的订阅 - 非洲法郎价格",premiumLead:"为非洲设计的价格，以耶稣为中心。",paymentTitle:"为耶稣的工作付款",
-footerDesc:"以耶稣基督为中心的基督徒相遇。没有城市，只有耶稣在中心。"
-}
-};
-const CONFESSIONS=["Catholique","Protestante","Évangélique","Pentecôtiste","Adventiste","Baptiste","Méthodiste","Anglicane","Orthodoxe","Autre chrétienne en Jésus"];
-let currentLang='fr';
-let currentCurrency='XOF';
-const CURRENCY_RATES={EUR:1/655.96,USD:1.09/655.96,XOF:1,CAD:1.48/655.96,GBP:0.86/655.96};
-const CURRENCY_SYMBOLS={EUR:"€",USD:"$",XOF:"F CFA",CAD:"C$",GBP:"£"};
-const BASE_PRICES_XOF={decouverte:0,mensuel:9000,semestre:15000,annuel:30000};
-function formatPrice(xof){
-const rate=CURRENCY_RATES[currentCurrency];
-const sym=CURRENCY_SYMBOLS[currentCurrency];
-let val=xof*rate;
-if(currentCurrency==='XOF') return Math.round(val).toLocaleString('fr-FR')+' '+sym;
-if(currentCurrency==='EUR') return val.toFixed(2)+' '+sym;
-return sym+val.toFixed(2);
-}
-function renderPricing(){
-const grid=document.getElementById("pricingGrid");
-const dict=I18N[currentLang]||I18N.fr;
-const plans=[
-{key:"Découverte",keyId:"Découverte",xof:0,duration:"Gratuit à vie",features:["3 likes/jour en Jésus","Chat limité","Jeux sur Jésus","Sans ville - 100% Jésus"],cta:dict.choose,cls:""},
-{key:"Mensuel Jésus",keyId:"Mensuel",xof:BASE_PRICES_XOF.mensuel,duration:"/ mois",badge:"",features:["Likes illimités en Jésus","Chat prière au nom de Jésus","Étude biblique Jésus à deux","Support en Jésus"],cta:dict.choose,cls:""},
-{key:"Alliance 6 Mois",keyId:"Alliance",xof:BASE_PRICES_XOF.semestre,duration:"/ 6 mois",badge:"★ Le plus choisi",save:"Économisez 39.000 F en Jésus",featured:true,features:["Tout Mensuel Jésus","Jeux complets Jésus","Filtres âge Jésus","Profil mis en avant 7j"],cta:dict.choose,cls:"featured"},
-{key:"Éternelle 12 Mois",keyId:"Éternelle",xof:BASE_PRICES_XOF.annuel,duration:"/ 12 mois",badge:"★ Meilleure offre Jésus",save:"Économisez 78.000 F en Jésus",features:["Tout Alliance 6 mois","Vérification pastorale Jésus","Coaching mariage en Jésus","Top profil 1 an en Jésus","Bénédiction Jésus"],cta:dict.choose,cls:""}
-];
+const DEMO_DATA = []; // 0 exemple - supprimés en Jésus
 grid.innerHTML=plans.map(p=>{
 let priceHtml;
 if(p.xof===0) priceHtml=`<div class="price">${dict.free}<small style="font-size:.5em;display:block;color:var(--muted);margin-top:4px">${p.duration}</small></div>`;
@@ -920,234 +712,7 @@ function renderModeration(){
 const list=document.getElementById("moderationList");list.innerHTML="";
 profiles.forEach((p,i)=>{
 list.insertAdjacentHTML("beforeend",`
-<div class="moderation-item"><div class="moderation-photo">${p.photo?`<img src="${p.photo}">`:initials(p.name)}</div><div class="moderation-info"><strong>${p.name}, ${p.age} ans</strong><div class="profile-meta">${p.church} • ${p.email}</div><div class="profile-meta">${p.gender} cherche ${p.looking} • ${p.plan} • ${p.points} pts en Jésus</div></div><span class="status-pill ${p.status==="approved"?"approved":"pending"}">${p.status==="approved"?"✅ Approuvé en Jésus":"⏳ En attente"}</span><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="btn ${p.status==="approved"?"btn-outline":"btn-success"} btn-sm" onclick="approveProfile(${i})">${p.status==="approved"?"⏸️ En attente":"✅ Approuver en Jésus"}</button><button class="btn btn-outline btn-sm" onclick="editProfile(${i})">✏️</button><button class="btn btn-danger btn-sm" onclick="deleteProfile(${i})">🗑️</button></div></div>`)});
-if(!profiles.length)list.innerHTML='<p class="center" style="color:var(--muted);padding:20px;background:#fff;border-radius:14px">Aucun profil en Jésus. Restaure.</p>';
-}
-function approveProfile(i){ if(!isAdmin()){ showToast('🔒 Réservé Admin'); return; } profiles[i].status=profiles[i].status==="approved"?"pending":"approved";saveProfiles();refresh();showToast(profiles[i].status==="approved"?"✅ "+profiles[i].name+" approuvé en Jésus":"⏸️ "+profiles[i].name+" en attente")}
-function editProfile(i){editingIndex=i;const p=profiles[i];document.getElementById("editName").value=p.name;document.getElementById("editAge").value=p.age;document.getElementById("editChurch").value=p.church;document.getElementById("editVerse").value=p.verse;document.getElementById("editEmail").value=p.email;document.getElementById("editPlan").value=p.plan;document.getElementById("editStatus").value=p.status;document.getElementById("editModal").classList.add("open");}
-function closeEditModal(){document.getElementById("editModal").classList.remove("open");editingIndex=null}
-function saveEdit(){ if(!isAdmin()){ showToast('🔒 Modification réservée Admin'); return; } if(editingIndex===null)return;const p=profiles[editingIndex];Object.assign(p,{name:document.getElementById("editName").value||p.name,age:+document.getElementById("editAge").value||p.age,church:document.getElementById("editChurch").value||p.church,verse:document.getElementById("editVerse").value||p.verse,email:document.getElementById("editEmail").value||p.email,plan:document.getElementById("editPlan").value||p.plan,status:document.getElementById("editStatus").value});closeEditModal();saveProfiles();refresh();showToast("✏️ "+p.name+" modifié en Jésus");}
-function deleteProfile(i){ if(!isAdmin()){ showToast('🔒 Suppression réservée Admin'); return; } deletingIndex=i;deletingAll=false;document.getElementById("deleteText").textContent=`Supprimer ${profiles[i].name} en Jésus ?`;document.getElementById("deleteModal").classList.add("open");}
-function deleteAllDemoProfiles(){ if(!isAdmin()){ showToast('🔒 Réservé Admin'); return; } deletingIndex=null;deletingAll=true;document.getElementById("deleteText").textContent=`Supprimer TOUS les ${profiles.length} profils en Jésus ?`;document.getElementById("deleteModal").classList.add("open");}
-function closeDeleteModal(){document.getElementById("deleteModal").classList.remove("open");deletingIndex=null;deletingAll=false}
-document.getElementById("confirmDeleteBtn").addEventListener("click",()=>{ if(!isAdmin()){ showToast('🔒 Réservé Admin'); closeDeleteModal(); return; } if(deletingAll){ if(!confirm('VRAIMENT supprimer TOUS ? Tape ton code après')){closeDeleteModal();return;} const c=prompt('Code Admin pour confirmer suppression totale:'); if(c!==ADMIN_CODE){alert('Code incorrect'); closeDeleteModal(); return;} profiles=[];showToast("🗑️ Tous supprimés en Jésus - ne reviendront plus")}else if(deletingIndex!==null){const name=profiles[deletingIndex].name;profiles.splice(deletingIndex,1);showToast("🗑️ "+name+" supprimé en Jésus - ne reviendra plus")}saveProfiles();closeDeleteModal();refresh();});
-function restoreDemo(){if(!confirm("Restaurer tous les profils démo en Jésus ? Cela ramènera tous les exemplaires supprimés.")) return;profiles=JSON.parse(JSON.stringify(DEMO_DATA));saveProfiles();refresh();showToast("♻️ Restaurés en Jésus - Tous les profils sont revenus")}
-function addRandomDemo(){const names=["Grace","Paul","Esther","Moïse","Rebecca","Joël"];const n=names[Math.floor(Math.random()*names.length)];profiles.push({name:n+" "+Math.floor(Math.random()*100),age:22+Math.floor(Math.random()*18),church:["Catholique","Évangélique","Protestant"][Math.floor(Math.random()*3)],verse:"Jésus - Jean 14:6",gender:"Femme",looking:"Homme",email:n.toLowerCase()+Date.now()+"@demo.love",status:"pending",points:0,plan:"Découverte",photo:""});saveProfiles();refresh();showToast("➕ Ajouté en Jésus")}
-function refresh(){saveProfiles();renderModeration();renderProfiles();updateStats();renderPricing();renderAdminStats();}
-function renderAdminStats(){
-const total=profiles.length;
-const premium=profiles.filter(p=>p.plan!=='Découverte').length;
-const revenue=profiles.reduce((sum,p)=>{
-if(p.plan==='Mensuel') return sum+9000;
-if(p.plan==='Alliance') return sum+15000;
-if(p.plan==='Éternelle') return sum+30000;
-return sum;
-},0);
-const chats=Object.keys(chatConversations||{}).length;
-const el1=document.getElementById("adminTotal"); if(el1) el1.textContent=total;
-const el2=document.getElementById("adminPremium"); if(el2) el2.textContent=premium;
-const el3=document.getElementById("adminRevenue"); if(el3) el3.textContent=revenue.toLocaleString('fr-FR')+' F CFA';
-const el4=document.getElementById("adminChats"); if(el4) el4.textContent=chats;
-}
-function resetAdminData(){
-if(!confirm("Reset tchat & premium en Jésus ? Cela va effacer toutes les conversations et le statut premium pour tester à nouveau.")) return;
-localStorage.removeItem('niamke_chat_jesus_v2');
-localStorage.removeItem('niamke_premium_active');
-localStorage.removeItem('niamke_free_chats');
-localStorage.removeItem('niamke_premium_plan');
-chatConversations={};
-showToast("🔄 Reset fait en Jésus - Tchat et premium remis à zéro");
-renderAdminStats();
-document.getElementById("chatContacts").innerHTML='';
-document.getElementById("chatPanel").classList.add("hidden");
-}
-
-document.querySelectorAll(".modal-overlay").forEach(o=>{o.addEventListener("click",e=>{if(e.target===o){o.classList.remove("open")}})})
-
-// VERSETS JÉSUS BIBLIOTHÈQUE
-const BIBLICAL_VERSES=[
-["Jésus-Christ - Jean 14:6","Je suis le chemin, la vérité et la vie - Jésus"],
-["Genèse 2:24","L'homme quittera son père et sa mère et s'attachera à sa femme - institué par Jésus"],
-["1 Co 13:4-7","L'amour est patient, plein de bonté - L'amour de Jésus"],
-["Éph 5:25","Maris, aimez vos femmes comme Christ Jésus a aimé l'Église"],
-["Jean 3:16","Car Dieu a tant aimé le monde qu'Il a donné Jésus son Fils"],
-["Prov 18:22","Celui qui trouve une femme trouve le bonheur - grâce de Jésus"],
-["Jésus - Matthieu 19:6","Ce que Dieu a joint, que l'homme ne le sépare pas - Parole de Jésus"],
-["1 Jean 4:8","Dieu est amour - Jésus est l'amour incarné"],
-["Ruth 1:16","Où tu iras j'irai - Fidélité à l'image de Jésus"],
-["Col 3:14","Revêtez-vous de l'amour de Jésus, lien de la perfection"],
-["Hé 13:4","Que le mariage soit honoré - Jésus honore le mariage à Cana"],
-["Cant 2:16","Mon bien-aimé est à moi - Jésus notre premier bien-aimé"],
-["Marc 10:9","Que l'homme ne sépare pas ce que Dieu a joint - Jésus"],
-["Jésus - Apocalypse 19:7","Les noces de l'Agneau sont venues - Jésus l'Époux"],
-["Jésus - Jean 2:1-11","Jésus a honoré le mariage aux noces de Cana"],
-["Romains 8:38-39","Rien ne pourra nous séparer de l'amour de Jésus-Christ"]
-];
-const JESUS_VERSES_LIBRARY=[
-["Jésus-Christ - Jean 14:6","Je suis le chemin, la vérité et la vie. Nul ne vient au Père que par moi.","Jésus se présente comme le seul chemin"],
-["Jésus-Christ - Jean 3:16","Car Dieu a tant aimé le monde qu'il a donné son Fils unique","L'amour de Dieu manifesté en Jésus"],
-["Jésus-Christ - Matthieu 19:6","Ce que Dieu a joint, que l'homme ne le sépare point. Parole de Jésus sur le mariage.","Jésus affirme l'indissolubilité du mariage"],
-["Jésus-Christ - Jean 2:1-11","Jésus fut invité aux noces de Cana et Il y fit son premier miracle.","Jésus honore le mariage"],
-["Jésus-Christ - Éphésiens 5:25","Maris, aimez vos femmes, comme Christ a aimé l'Église","Jésus modèle d'amour sacrificiel"],
-["Jésus-Christ - 1 Jean 4:19","Pour nous, nous l'aimons, parce qu'il nous a aimés le premier.","Jésus nous a aimés le premier"],
-["Jésus-Christ - Apocalypse 19:7","Réjouissons-nous, les noces de l'Agneau sont venues.","Jésus l'Époux céleste"],
-["Jésus-Christ - Hébreux 13:8","Jésus-Christ est le même hier, aujourd'hui, et éternellement.","Jésus immuable"],
-["Jésus-Christ - Romains 8:39","Rien ne pourra nous séparer de l'amour de Dieu manifesté en Jésus-Christ.","L'amour inséparable de Jésus"],
-["Jésus-Christ - Matthieu 11:28","Venez à moi, vous tous qui êtes fatigués, et je vous donnerai du repos.","Jésus donne le repos"],
-["Jésus-Christ - Jean 15:12","Aimez-vous les uns les autres, comme je vous ai aimés.","Commandement de Jésus"],
-["Jésus-Christ - Colossiens 3:14","Revêtez-vous de l'amour, qui est le lien de la perfection.","Jésus, lien parfait"],
-["Jésus-Christ - Genèse 2:24","L'homme quittera son père et sa mère, et s'attachera à sa femme","Institution divine du mariage par Jésus"],
-["Jésus-Christ - Proverbes 18:22","Celui qui trouve une femme trouve le bonheur","Grâce de Jésus dans le mariage"],
-["Jésus-Christ - Ecclésiaste 4:9-12","Deux valent mieux qu'un... la corde à trois fils ne se rompt pas - Jésus 3ème corde.","Jésus au centre du couple"],
-["Jésus-Christ - Matthieu 28:20","Et voici, je suis avec vous tous les jours, jusqu'à la fin du monde. Jésus","Jésus avec le couple toujours"]
-];
-// TICKER MULTILANGUE - DÉFILEMENT HAUT SUIT LA LANGUE
-const TICKER_VERSES = {
-fr: [
-  ["Jésus-Christ - Jean 14:6", "Je suis le chemin, la vérité et la vie - Jésus"],
-  ["Genèse 2:24", "L'homme quittera son père et sa mère et s'attachera à sa femme - institué par Jésus"],
-  ["1 Co 13:4-7", "L'amour est patient, plein de bonté - L'amour de Jésus"],
-  ["Éph 5:25", "Maris, aimez vos femmes comme Christ Jésus a aimé l'Église"],
-  ["Jean 3:16", "Car Dieu a tant aimé le monde qu'Il a donné Jésus son Fils"],
-  ["Prov 18:22", "Celui qui trouve une femme trouve le bonheur - grâce de Jésus"],
-  ["Matthieu 19:6", "Ce que Dieu a joint, que l'homme ne le sépare pas - Parole de Jésus"],
-  ["1 Jean 4:8", "Dieu est amour - Jésus est l'amour incarné"]
-],
-en: [
-  ["Jesus Christ - John 14:6", "I am the way, the truth and the life - Jesus"],
-  ["Genesis 2:24", "A man shall leave his father and mother and be joined to his wife - instituted by Jesus"],
-  ["1 Cor 13:4-7", "Love is patient, love is kind - Love of Jesus"],
-  ["Eph 5:25", "Husbands, love your wives as Christ Jesus loved the Church"],
-  ["John 3:16", "For God so loved the world that He gave Jesus His Son"],
-  ["Prov 18:22", "He who finds a wife finds happiness - grace of Jesus"],
-  ["Matthew 19:6", "What God has joined together, let no one separate - Word of Jesus"],
-  ["1 John 4:8", "God is love - Jesus is love incarnate"]
-],
-es: [
-  ["Jesucristo - Juan 14:6", "Yo soy el camino, la verdad y la vida - Jesús"],
-  ["Génesis 2:24", "Dejará el hombre a su padre y a su madre y se unirá a su mujer - instituido por Jesús"],
-  ["1 Co 13:4-7", "El amor es paciente, es bondadoso - Amor de Jesús"],
-  ["Ef 5:25", "Maridos, amad a vuestras mujeres como Cristo Jesús amó a la Iglesia"],
-  ["Juan 3:16", "Porque tanto amó Dios al mundo que dio a Jesús su Hijo"],
-  ["Prov 18:22", "El que encuentra esposa encuentra felicidad - gracia de Jesús"],
-  ["Mateo 19:6", "Lo que Dios ha unido, que no lo separe el hombre - Palabra de Jesús"],
-  ["1 Juan 4:8", "Dios es amor - Jesús es el amor encarnado"]
-],
-pt: [
-  ["Jesus Cristo - João 14:6", "Eu sou o caminho, a verdade e a vida - Jesus"],
-  ["Gênesis 2:24", "Deixará o homem pai e mãe e se unirá à sua mulher - instituído por Jesus"],
-  ["1 Co 13:4-7", "O amor é paciente, é bondoso - Amor de Jesus"],
-  ["Ef 5:25", "Maridos, amai vossas mulheres como Cristo Jesus amou a Igreja"],
-  ["João 3:16", "Porque Deus amou o mundo que deu Jesus seu Filho"],
-  ["Prov 18:22", "Quem encontra uma esposa encontra felicidade - graça de Jesus"],
-  ["Mateus 19:6", "O que Deus uniu, o homem não separe - Palavra de Jesus"],
-  ["1 João 4:8", "Deus é amor - Jesus é o amor encarnado"]
-],
-ar: [
-  ["يسوع المسيح - يوحنا 14:6", "أنا هو الطريق والحق والحياة - يسوع"],
-  ["تكوين 2:24", "يترك الرجل أباه وأمه ويلتصق بامرأته - أسسه يسوع"],
-  ["1 كورنثوس 13:4-7", "المحبة تتأنى وترفق - محبة يسوع"],
-  ["أفسس 5:25", "أيها الرجال أحبوا نساءكم كما أحب المسيح يسوع الكنيسة"],
-  ["يوحنا 3:16", "هكذا أحب الله العالم حتى بذل يسوع ابنه"],
-  ["أمثال 18:22", "من يجد زوجة يجد خيرا - نعمة يسوع"],
-  ["متى 19:6", "الذي جمعه الله لا يفرقه إنسان - كلمة يسوع"],
-  ["1 يوحنا 4:8", "الله محبة - يسوع هو المحبة المتجسدة"]
-],
-zh: [
-  ["耶稣基督 - 约翰福音 14:6", "我就是道路、真理、生命 - 耶稣"],
-  ["创世记 2:24", "人要离开父母与妻子连合 - 耶稣所设立"],
-  ["哥林多前书 13:4-7", "爱是恒久忍耐又有恩慈 - 耶稣的爱"],
-  ["以弗所书 5:25", "丈夫要爱妻子正如基督耶稣爱教会"],
-  ["约翰福音 3:16", "神爱世人甚至将耶稣赐给他们"],
-  ["箴言 18:22", "得着妻子的就是得着好处 - 耶稣的恩典"],
-  ["马太福音 19:6", "神所配合的人不可分开 - 耶稣的话"],
-  ["约翰一书 4:8", "神就是爱 - 耶稣是爱的化身"]
-]
-};
-
-function renderTicker(lang){
-  const track=document.getElementById('tickerTrack');
-  if(!track) return;
-  const verses=TICKER_VERSES[lang]||TICKER_VERSES.fr;
-  const sep='<span style="color:rgba(201,162,39,.6)"> • </span>';
-  const html = verses.map(v=>`<span>✝️ <b>${v[0]}</b> — <i>"${v[1]}"</i></span>`).join(sep);
-  // Double for seamless scroll
-  track.innerHTML = html + sep + html;
-}
-
-
-function applyLang(lang){
-currentLang=lang;
-const t=I18N[lang]||I18N.fr;
-document.querySelectorAll('[data-i18n]').forEach(el=>{
-const key=el.getAttribute('data-i18n');
-if(t[key]) el.innerHTML=t[key];
-});
-// Specific placeholders
-const churchSel=document.getElementById("filterChurch");
-if(churchSel && churchSel.options[0]) churchSel.options[0].textContent=t.churchAll;
-const genderSel=document.getElementById("filterGender");
-if(genderSel && genderSel.options[0]) genderSel.options[0].textContent=t.genderAll;
-const searchIn=document.getElementById("filterSearch");
-if(searchIn) searchIn.placeholder=t.searchPh;
-const ageMinL=document.getElementById("ageMinLabel");
-if(ageMinL) ageMinL.textContent=t.ageMinLabel;
-const ageMaxL=document.getElementById("ageMaxLabel");
-if(ageMaxL) ageMaxL.textContent=t.ageMaxLabel;
-// Direction for Arabic
-if(lang==='ar' || lang==='zh'){
-document.documentElement.dir= lang==='ar' ? 'rtl' : 'ltr';
-}else{
-document.documentElement.dir='ltr';
-}
-localStorage.setItem('niamke_lang',lang);
-renderTicker(lang);
-}
-
-function renderVersesLibrary(){const lib=document.getElementById("versesLibrary");if(!lib) return;lib.innerHTML=JESUS_VERSES_LIBRARY.map(v=>`<div class="card" style="padding:20px;cursor:pointer" onclick="navigator.clipboard.writeText('${v[1]} - ${v[0]}');showToast('📖 Verset Jésus copié: ${v[0]}')"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="background:var(--navy);color:var(--gold);font-weight:800;font-size:.72rem;padding:4px 10px;border-radius:999px">✝️ ${v[0]}</span><span>📋</span></div><p style="font-family:'Playfair Display',serif;font-size:1rem;margin:8px 0">"${v[1]}"</p><p style="font-size:.82rem;color:var(--muted);font-style:italic">💡 ${v[2]}</p></div>`).join("");}
-
-// GAMES - JÉSUS AU CENTRE - 100% FONCTIONNELS
-const quiz=[
-["Quel couple a été uni par Dieu dès la création en Jésus ?",["Adam & Ève","Abraham & Sarah","Isaac & Rebecca","Jacob & Rachel"],0,"Genèse 2:24 - Jésus au commencement"],
-["Qui a dit : Où tu iras j'irai ? Modèle de fidélité en Jésus ?",["Sarah","Ruth à Naomi","Esther","Marie"],1,"Ruth 1:16 - Fidélité comme Jésus"],
-["Quel verset de Jésus dit : L'amour est patient ?",["Jean 3:16","1 Corinthiens 13:4","Romains 8:28","Psaume 23"],1,"1 Co 13:4-7 - L'amour de Jésus"],
-["Qui a prié au nom de Jésus pour trouver Rebecca ?",["Abraham","Isaac","Le serviteur d'Abraham en prière","Jacob"],2,"Genèse 24 - Prière au nom de Dieu"],
-["Quel roi a parlé de Jésus comme bien-aimé ?",["David","Salomon dans Cantique","Saül","Ezéchias"],1,"Cantique 2:16 - Jésus notre bien-aimé"],
-["Combien d'années Jacob a travaillé pour Rachel par amour en Jésus ?",["7 ans","14 ans","7+7 = 14 ans","20 ans"],2,"Genèse 29:20"],
-["Qui dit en Jésus : Maris, aimez vos femmes comme Christ ?",["Pierre","Paul aux Éphésiens","Jean","Jacques"],1,"Éphésiens 5:25 - Jésus modèle"],
-["Jésus a fait son premier miracle à quel mariage ?",["Cana","Jérusalem","Nazareth","Bethléem"],0,"Jean 2 - Jésus honore le mariage"],
-["Qui sont Aquilas et Priscille en Jésus ?",["Couple missionnaire en Jésus","2 apôtres","Frère et sœur","Roi et reine"],0,"Actes 18"],
-["Que dit Jésus en Proverbes 18:22 ?",["Celui qui trouve une femme trouve le bonheur","L'amour couvre tout","Deux valent mieux qu'un","Que le mariage soit honoré"],0,"Prov 18:22"],
-["Qui a dit en Jésus : Il n'est pas bon que l'homme soit seul ?",["Adam","Dieu dans Genèse 2:18","Moïse","Paul"],1,"Genèse 2:18"],
-["Quel verset Jésus : Que le mariage soit honoré ?",["Hébreux 13:4","Genèse 2:24","Matthieu 19:6","Marc 10:9"],0,"Héb 13:4"],
-["Que dit Jésus en Ecclésiaste 4:9 ?",["Deux valent mieux qu'un","L'amour ne périt jamais","Que le mariage soit honoré","L'homme quittera"],0,"Eccl 4:9-12 - Jésus 3ème corde"],
-["Que dit Jésus en Marc 10:9 sur le mariage ?",["Que l'homme ne sépare pas ce que Dieu a joint","Deux deviendront une seule chair","L'amour couvre tout","Dieu est amour"],0,"Marc 10:9 - Parole de Jésus"],
-["Qui a dit en Jésus : J'ai trouvé celui que mon cœur aime ?",["La Sulamite dans Cantique 3:4","Ruth","Esther","Marie"],0,"Cant 3:4 - Trouver l'aimé en Jésus"]
-];
-const verses=[
-["L'amour est ___, l'amour est plein de bonté - Jésus",["patient","fidèle","fort","doux"],"patient","1 Co 13:4 - Jésus est patient"],
-["L'homme quittera son père et sa mère et s'attachera à sa ___ en Jésus",["femme","famille","maison","église"],"femme","Gn 2:24"],
-["Maris, aimez vos ___ comme Jésus Christ a aimé l'Église",["femmes","épouses","compagnes","sœurs"],"femmes","Éph 5:25"],
-["Celui qui trouve une ___ trouve le bonheur en Jésus",["femme","épouse","compagne","amie"],"femme","Prov 18:22"],
-["Deux valent mieux qu'un avec Jésus comme ___ corde",["troisième","deuxième","première","dernière"],"troisième","Eccl 4:12 - Jésus 3ème corde"],
-["Dieu est ___ en Jésus",["amour","lumière","juste","fidèle"],"amour","1 Jn 4:8"],
-["Où tu iras j'irai, où tu demeureras je ___ en Jésus",["demeurerai","resterai","vivrai","irai"],"demeurerai","Ruth 1:16"],
-["Revêtez-vous de l'___ de Jésus",["amour","foi","joie","paix"],"amour","Col 3:14"],
-["Que le mariage soit ___ par Jésus",["honoré","respecté","béni","sacré"],"honoré","Héb 13:4"],
-["Mon bien-aimé Jésus est à moi, et je suis à ___",["lui","elle","nous","Dieu"],"lui","Cant 2:16"],
-["L'amour de Jésus ne ___ jamais",["périt","finit","meurt","cesse"],"périt","1 Co 13:8"],
-["Que l'homme ne ___ pas ce que Dieu a joint en Jésus",["sépare","divise","brise","casse"],"sépare","Marc 10:9"]
-];
-const couples=[["Adam","Ève"],["Abraham","Sarah"],["Isaac","Rebecca"],["Jacob","Rachel"],["Boaz","Ruth"],["Aquilas","Priscille"],["Zacharie","Élisabeth"],["Joseph","Marie"],["Elkana","Anne"],["Ananias","Saphira"],["David","Bethsabée"],["Moïse","Séphora"]];
-let game={index:0,points:0,lives:3,timer:null,selected:[],matched:0,cards:[]};
-function showBoard(t){document.getElementById("gameBoard").classList.remove("hidden");document.getElementById("gameTitle").textContent=t;document.getElementById("gamePoints").textContent=game.points;document.getElementById("gameLives").textContent="❤️".repeat(Math.max(game.lives,0))+"🖤".repeat(3-Math.max(game.lives,0));document.getElementById("gameBoard").scrollIntoView({behavior:"smooth",block:"center"});}
-function endGame(n){clearInterval(game.timer);let msg=game.points>=150?"🏆 Champion en Jésus !":game.points>=80?"🌟 Solide en Jésus !":"💪 Continue en Jésus !";document.getElementById("gameContent").innerHTML=`<div class="center" style="padding:20px"><div style="font-size:3.5rem">🎉✝️</div><h3>${n} terminé en Jésus !</h3><div style="background:#f0fdf4;border:2px solid var(--green);border-radius:16px;padding:20px;margin:16px 0"><p style="font-size:1.2rem">Score final en Jésus : <strong style="font-size:1.8rem;color:var(--green)">${game.points} pts</strong></p><p style="margin-top:10px;color:#166534;font-weight:600">${msg}</p></div><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px"><button class="btn btn-gold" onclick="startQuiz()">🔄 Rejouer en Jésus</button><button class="btn btn-primary" onclick="startVerses()">✍️ Versets Jésus</button><button class="btn btn-outline" onclick="startMemory()">💞 Memory Jésus</button></div></div>`;}
-function startQuiz(){game={index:0,points:0,lives:3,timer:null,selected:[],matched:0,cards:[]};showBoard("🧠 Quiz Jésus & Alliance");quizQuestion();}
-function quizQuestion(){
-if(game.index>=quiz.length) return endGame("Quiz Jésus");
-if(game.lives<=0){clearInterval(game.timer);document.getElementById("gameContent").innerHTML=`<div class="center" style="padding:20px"><div style="font-size:3rem">💔</div><h3>Vies épuisées en Jésus !</h3><p>Question ${game.index+1}/${quiz.length} - ${game.points} pts</p><button class="btn btn-gold" onclick="startQuiz()" style="margin-top:16px">🔄 Recommencer en Jésus</button></div>`;return;}
-const q=quiz[game.index];const progress=Math.round((game.index/quiz.length)*100);
-document.getElementById("gameContent").innerHTML=`<div style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;font-size:.85rem;font-weight:700;margin-bottom:6px"><span>Question ${game.index+1}/${quiz.length} en Jésus</span><span>${progress}%</span></div><div style="height:8px;background:#e2e8f0;border-radius:999px;overflow:hidden"><div style="height:100%;width:${progress}%;background:linear-gradient(90deg,var(--gold),#f3e3b3)"></div></div></div><h3 style="margin:12px 0">${q[0]}</h3><div class="answers">${q[1].map((a,i)=>`<button class="answer" onclick="quizAnswer(${i})"><span style="display:inline-block;width:26px;height:26px;background:#e2e8f0;border-radius:50%;text-align:center;line-height:26px;font-size:.8rem;margin-right:8px">${String.fromCharCode(65+i)}</span>${a}</button>`).join("")}</div><div style="display:flex;justify-content:space-between;margin-top:14px"><p class="note" id="timer" style="background:#fef3c7;padding:6px 12px;border-radius:999px;font-weight:700">⏱️ 20s</p></div><div id="quizExplain" class="hidden" style="margin-top:14px;padding:14px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;font-size:.9rem"></div>`;
+<h3 style="margin:12px 0">${q[0]}</h3><div class="answers">${q[1].map((a,i)=>`<button class="answer" onclick="quizAnswer(${i})"><span style="display:inline-block;width:26px;height:26px;background:#e2e8f0;border-radius:50%;text-align:center;line-height:26px;font-size:.8rem;margin-right:8px">${String.fromCharCode(65+i)}</span>${a}</button>`).join("")}</div><div style="display:flex;justify-content:space-between;margin-top:14px"><p class="note" id="timer" style="background:#fef3c7;padding:6px 12px;border-radius:999px;font-weight:700">⏱️ 20s</p></div><div id="quizExplain" class="hidden" style="margin-top:14px;padding:14px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;font-size:.9rem"></div>`;
 let t=20;clearInterval(game.timer);game.timer=setInterval(()=>{t--;const el=document.getElementById("timer");if(el){el.textContent=`⏱️ ${t}s`;if(t<=5) el.style.background="#fee2e2";}if(t<=0){clearInterval(game.timer);game.lives--;const ex=document.getElementById("quizExplain");if(ex){ex.classList.remove("hidden");ex.innerHTML=`⏰ Temps écoulé en Jésus !<br><strong>Bonne réponse: ${q[1][q[2]]}</strong><br><em>${q[3]}</em>`;}setTimeout(()=>{game.index++;quizQuestion()},2200);}},1000);
 }
 function quizAnswer(c){clearInterval(game.timer);const q=quiz[game.index];document.querySelectorAll(".answer").forEach((b,i)=>{b.disabled=true;b.style.pointerEvents="none";if(i===q[2]){b.classList.add("correct");b.innerHTML+=" ✅";}else if(i===c){b.classList.add("wrong");b.innerHTML+=" ❌";}});const ex=document.getElementById("quizExplain");if(ex){ex.classList.remove("hidden");if(c===q[2]){game.points+=10;ex.innerHTML=`✅ <strong>Excellent en Jésus ! +10 pts</strong><br>${q[3]}`;showToast("✅ +10 pts en Jésus");}else{game.lives--;ex.innerHTML=`❌ <strong>Bonne réponse en Jésus: ${q[1][q[2]]}</strong><br><em>${q[3]}</em>`;showToast("❌ C'était "+q[1][q[2]]);}}document.getElementById("gamePoints").textContent=game.points;document.getElementById("gameLives").textContent="❤️".repeat(Math.max(game.lives,0))+"🖤".repeat(3-Math.max(game.lives,0));setTimeout(()=>{game.index++;quizQuestion()},2500);}
@@ -1163,7 +728,7 @@ function flipCard(i){if(game.cards[i].matched) return;if(game.selected.some(s=>s
 // === ZONE MODIFIABLE - CONFIG ADMIN - TU PEUX CHANGER ICI ===
 // =========================================================
 const ADMIN_EMAIL = "niamkelovejesus@gmail.com"; // <- Change ton email ici
-const ADMIN_CODE = "JESUS2024_KAOLACK_SECURE"; // <- CHANGE CE CODE, mets un code secret difficile
+const ADMIN_CODE = ""; // Code supprimé sur demande
 const ADMIN_SESSION_HOURS = 12; // Durée session admin en heures
 
 // =========================================================
@@ -1477,29 +1042,11 @@ initApp();
 
 <!-- PANEL ADMIN FINAL - BIEN FAIT -->
 <style>
-#finalAdminPanel{position:fixed;left:16px;bottom:16px;z-index:99990;background:#0f172a;color:#fff;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.4);border:2px solid #c9a227;overflow:hidden;max-width:300px}
-#finalAdminPanelHeader{background:#c9a227;color:#111;padding:10px 14px;font-weight:900;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-#finalAdminPanelBody{padding:12px;display:flex;flex-direction:column;gap:8px}
-#finalAdminPanelBody button{padding:10px 12px;border-radius:10px;font-weight:800;font-size:.85rem;cursor:pointer;border:none;text-align:left}
-#finalAdminPanelBody button:hover{transform:translateX(2px)}
-.final-hidden{transform:translateY(calc(100% - 42px))}
+
+
 #waFloat{right:16px !important;bottom:16px !important;z-index:99991 !important}
 </style>
-<div id="finalAdminPanel">
-  <div id="finalAdminPanelHeader" onclick="document.getElementById('finalAdminPanel').classList.toggle('final-hidden')">
-    <span>✝️ Outils Admin</span><span id="finalToggleIcon">▼</span>
-  </div>
-  <div id="finalAdminPanelBody">
-    <button onclick="adminLogin()" style="background:#fef9c3;color:#111;border:2px dashed #facc15">🔑 Connexion Admin</button>
-    <button onclick="forceAdminNow()" style="background:#25D366;color:#fff">⚡ Forcer Admin (si bouton bloqué)</button>
-    <hr style="border:none;border-top:1px solid rgba(255,255,255,.15);margin:4px 0">
-    <button onclick="deleteOnlyDemoFinal()" style="background:#facc15;color:#111">✨ Supprimer SEULEMENT exemples</button>
-    <button onclick="countProfilesFinal()" style="background:#fff;color:#111">📊 Compter exemples / vrais</button>
-    <button onclick="hideDemoFinal()" style="background:#dcfce7;color:#166534">👁️ Cacher / Montrer exemples</button>
-    <button onclick="exportRealFinal()" style="background:#0f172a;color:#c9a227;border:1px solid #c9a227">📥 Exporter vrais profils</button>
-    <button onclick="document.getElementById('moderation').scrollIntoView({behavior:'smooth'})" style="background:#c9a227;color:#111">⬇️ Aller à Modération</button>
-    <div style="font-size:.72rem;color:#94a3b8;margin-top:4px">Code: JESUS2024_KAOLACK_SECURE<br>Email: niamkelovejesus@gmail.com</div>
-  </div>
+
 </div>
 <script>
 function forceAdminNow(){
@@ -1632,7 +1179,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 // PATCH MINIMAL - NE TOUCHE AUCUNE FONCTIONNALITÉ EXISTANTE
 (function(){
   // ADMIN : permettre changement mot de passe à tout moment
-  const ADMIN_DEFAULT = "JESUS2024_KAOLACK_SECURE";
+  const ADMIN_DEFAULT = ""; // Code supprimé sur demande
   window.getAdminCode = function(){ try{ return localStorage.getItem('niamke_admin_code_custom') || ADMIN_DEFAULT; }catch(e){ return ADMIN_DEFAULT; } };
 
   // Override adminLogin sans casser
@@ -1662,7 +1209,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     const box = document.createElement('div');
     box.id='changePassBoxMinimal';
     box.style.cssText='background:#fffbe6;border:2px dashed #c9a227;border-radius:12px;padding:10px;margin:0 auto 16px;max-width:900px;display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center';
-    box.innerHTML='<div><strong>🔐 Changer mot de passe Admin à tout moment</strong><br><small>Actuel: <code id="curCodeDisplay">••••</code> <button onclick="document.getElementById(\'curCodeDisplay\').textContent=getAdminCode()" style="font-size:.7rem">👁️ Voir</button></small></div><div style="display:flex;gap:6px"><button class="btn btn-gold btn-sm" onclick="changeAdminPass()">🔑 Changer</button><button class="btn btn-outline btn-sm" onclick="localStorage.removeItem(\'niamke_admin_code_custom\');alert(\'Reset à JESUS2024_KAOLACK_SECURE\');location.reload()">♻️ Reset</button></div>';
+    box.innerHTML='<div><strong>🔐 Changer mot de passe Admin à tout moment</strong><br><small>Actuel: <code id="curCodeDisplay" style="display:none">••••</code> <button onclick="document.getElementById(\'curCodeDisplay\').textContent=getAdminCode()" style="font-size:.7rem">👁️ Voir</button></small></div><div style="display:flex;gap:6px"><button class="btn btn-gold btn-sm" onclick="changeAdminPass()">🔑 Changer</button><button class="btn btn-outline btn-sm" onclick="localStorage.removeItem(\'niamke_admin_code_custom\');alert(\'Reset à [supprimé]\');location.reload()">♻️ Reset</button></div>';
     const container = mod.querySelector('.container');
     if(container){
       const firstCenter = container.querySelector('.center');
@@ -1774,5 +1321,51 @@ document.addEventListener('DOMContentLoaded',()=>{
 })();
 </script>
 <!-- === FIN PATCH === -->
+
+<a href="/admin.html" style="display:none;">Admin</a>
+
+
+
+
+
+
+
+
+<script>
+// === PAIEMENT PREMIUM - WAVE / VISA - NIAMKE LOVE JESUS ===
+const SUPABASE_URL_PAYMENT = "https://qxxhbfoqlreiqyshbpqp.supabase.co";
+const SUPABASE_ANON_PAYMENT = "sb_publishable_ok9ncvwb2ih8xz5fzqeqwg_msv6vcoe";
+const WAVE_NUMBER = "772919300";
+const WHATSAPP_NUMBER = "221772919300";
+
+async function payerPremium(montant, nomPlan) {
+  const amount = parseInt(montant) || 9000;
+  const plan = nomPlan || 'Essentiel';
+  const email = localStorage.getItem('user_email') || prompt("Ton email Gmail pour activer Premium en Jésus:") || "visiteur@niamkelove.com";
+  const name = localStorage.getItem('user_name') || email.split('@')[0];
+  if(email) localStorage.setItem('user_email', email);
+  const btn = event ? event.target : document.querySelector(`[onclick*="${amount}"]`);
+  if(btn){ btn.disabled=true; btn.innerHTML = `⏳ Paiement ${amount.toLocaleString()}F...`; }
+  try {
+    const res = await fetch(`${SUPABASE_URL_PAYMENT}/functions/v1/create-payment`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "apikey": SUPABASE_ANON_PAYMENT, "Authorization": `Bearer ${SUPABASE_ANON_PAYMENT}` },
+      body: JSON.stringify({ user_id: email, email: email, name: name, plan: plan, amount: amount })
+    });
+    const data = await res.json();
+    if(data.url){ window.location.href = data.url; return; }
+    if(data.response_text){ window.location.href = data.response_text; return; }
+    throw new Error("Pas d'URL");
+  } catch(e) {
+    const message = encodeURIComponent(`Salut Niamké Love 🙏\nJe veux payer ${plan} ${amount.toLocaleString()}F\nMon email: ${email}\nJ'ai envoyé sur Wave ${WAVE_NUMBER}. Active moi en Jésus.`);
+    const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+    if(confirm(`Paiement ${plan} - ${amount.toLocaleString()}F\n\n1️⃣ Envoie ${amount.toLocaleString()}F sur Wave: ${WAVE_NUMBER}\n2️⃣ Clique OK pour envoyer la capture sur WhatsApp`)){
+      window.open(waLink, '_blank');
+    }
+    if(btn){ btn.disabled=false; btn.innerHTML = `Payer ${amount.toLocaleString()}F - Wave / Visa 🌍`; }
+  }
+}
+function payerPlan(plan){ const amounts = {Mensuel:9000, Alliance:15000, Eternelle:30000, Essentiel:9000}; payerPremium(amounts[plan]||9000, plan); }
+</script>
 
 </body></html>

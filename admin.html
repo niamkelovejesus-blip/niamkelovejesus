@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Niamké Love Jésus · Administration</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<style>
+:root{--navy:#0f2a4a;--navy2:#1b3d66;--gold:#9a7440;--bg:#f5f6f8;--line:#dde1e7;--mut:#667085;--ok:#18794e;--bad:#b42318;--warn:#a15c07}
+*{box-sizing:border-box}
+body{margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:#14213d}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:700;margin:0}
+.hide{display:none!important}
+button,input,select{font:inherit}
+input,select{width:100%;border:1px solid var(--line);border-radius:6px;padding:8px 10px;background:#fff;color:inherit}
+input:focus,select:focus,button:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+button{border:1px solid var(--line);background:#fff;border-radius:6px;padding:6px 12px;cursor:pointer;color:inherit}
+button:hover{background:#f0f2f5}
+button.p{background:var(--navy);border-color:var(--navy);color:#fff}
+button.p:hover{background:var(--navy2)}
+button.d{color:var(--bad)}
+button.ok{color:var(--ok)}
+#login{min-height:100vh;display:grid;place-items:center;padding:16px;background:var(--navy)}
+#login form{background:#fff;border-radius:10px;padding:28px;width:100%;max-width:370px;display:grid;gap:14px}
+#login h1{font-size:22px;color:var(--navy)}
+#login p{margin:0;color:var(--mut)}
+label{display:grid;gap:4px;font-weight:600}
+.err{color:var(--bad);min-height:20px;font-weight:500}
+#app{display:grid;grid-template-columns:230px 1fr;min-height:100vh}
+aside{background:var(--navy);color:#fff;padding:20px 12px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh}
+aside h1{font-size:18px;padding:0 10px 14px;color:#fff}
+aside h1 small{display:block;font:12px system-ui;color:#c9b48a;font-weight:400}
+#nav a{display:block;padding:9px 12px;border-radius:6px;color:#d6deea;cursor:pointer}
+#nav a:hover{background:var(--navy2)}
+#nav a.on{background:#fff;color:var(--navy);font-weight:600}
+#me{margin-top:auto;padding:0 10px;color:#9fb0c7;font-size:12px;word-break:break-all}
+aside button{background:transparent;color:#fff;border-color:#4a6286}
+main{padding:24px;min-width:0}
+.head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.head h2{font-size:24px;color:var(--navy)}
+.head input{max-width:320px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.card{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:8px;padding:14px 16px;display:grid;gap:2px}
+.card b{font:700 26px Georgia,serif;color:var(--navy)}
+.m{color:var(--mut)}
+.wrap{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+th{background:#eef1f5;font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.a{white-space:nowrap;text-align:right}
+td.a button+button{margin-left:6px}
+.av{width:34px;height:34px;border-radius:50%;object-fit:cover;background:#dde1e7;display:block}
+.tag{display:inline-block;padding:2px 9px;border-radius:99px;background:#eef1f5;font-size:12px;font-weight:600}
+.tag.validated,.tag.approved{background:#e3f4ea;color:var(--ok)}
+.tag.pending{background:#fdf0d8;color:var(--warn)}
+.tag.failed,.tag.rejected{background:#fbe4e1;color:var(--bad)}
+#toast{position:fixed;right:16px;bottom:16px;display:grid;gap:8px;z-index:9}
+#toast div{background:var(--navy);color:#fff;padding:10px 14px;border-radius:6px;max-width:320px}
+#toast div.e{background:var(--bad)}
+@media(max-width:780px){
+ #app{grid-template-columns:1fr}
+ aside{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center}
+ aside h1{width:100%;padding-bottom:4px}
+ #nav{display:flex;flex-wrap:wrap;gap:4px}
+ #me{display:none}
+ main{padding:14px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div id="login" class="hide">
+  <form id="lf">
+    <h1>Niamké Love Jésus</h1>
+    <p>Espace d'administration</p>
+    <label>Email<input type="email" name="email" required autocomplete="username"></label>
+    <label>Mot de passe<input type="password" name="pw" required autocomplete="current-password"></label>
+    <button class="p" type="submit">Se connecter</button>
+    <div id="lerr" class="err" role="alert"></div>
+  </form>
+</div>
+
+<div id="app" class="hide">
+  <aside>
+    <h1>Niamké Love<small>Administration</small></h1>
+    <div id="nav"></div>
+    <div id="me"></div>
+    <button id="out">Se déconnecter</button>
+  </aside>
+  <main id="main"></main>
+</div>
+<div id="toast" aria-live="polite"></div>
+
+<script>
+const SB_URL = 'https://qxxhbfoqlreiqyshbpqp.supabase.co';
+const SB_KEY = 'sb_publishable_OK9ncVWB2Ih8xZ5fzqEQWg_mSV6vCoe'; // clé publique : la sécurité est assurée par les règles RLS
+let store; try { window.sessionStorage.setItem('_t', '1'); window.sessionStorage.removeItem('_t'); store = window.sessionStorage; } catch (e) {}
+const sb = supabase.createClient(SB_URL, SB_KEY, { auth: { persistSession: true, storage: store, autoRefreshToken: true } });
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const day = d => d ? new Date(d).toLocaleDateString('fr-FR') : '';
+const money = (n, c) => new Intl.NumberFormat('fr-FR').format(Number(n) || 0) + ' ' + (c || 'FCFA');
+const tag = s => `<span class="tag ${esc(s)}">${esc(s)}</span>`;
+const TABS = { dashboard: 'Tableau de bord', members: 'Membres', payments: 'Paiements', prayers: 'Prières', songs: 'Cantiques' };
+let cur = 'dashboard', cache = {}, me = null;
+
+function toast(m, e) {
+  const d = document.createElement('div'); d.textContent = m; if (e) d.className = 'e';
+  $('#toast').append(d); setTimeout(() => d.remove(), 4500);
+}
+async function q(p) { const r = await p; if (r.error) throw r.error; return r; }
+async function act(fn, msg) {
+  try { await fn(); toast(msg); go(cur); } catch (e) { toast(e.message || 'Erreur', true); }
+}
+const head = (t, extra = '') => `<div class="head"><h2>${t}</h2>${extra}</div>`;
+function tbl(cols, rows) {
+  if (!rows.length) return '<p class="m">Aucune donnée pour le moment.</p>';
+  return `<div class="wrap"><table><thead><tr>${cols.map(c => `<th>${c[0]}</th>`).join('')}</tr></thead><tbody>${
+    rows.map(r => `<tr>${cols.map(c => `<td${c[2] ? ' class="a"' : ''}>${c[1](r)}</td>`).join('')}</tr>`).join('')
+  }</tbody></table></div>`;
+}
+function sel(base, val, c, id) {
+  const opts = [...new Set([...base, val].filter(Boolean))];
+  return `<select data-c="${c}" data-id="${esc(id)}">${opts.map(o => `<option${o === val ? ' selected' : ''}>${esc(o)}</option>`).join('')}</select>`;
+}
+
+const V = {};
+
+V.dashboard = async () => {
+  const cnt = (t, f) => { const x = sb.from(t).select('*', { count: 'exact', head: true }); return q(f ? f(x) : x).then(r => r.count || 0); };
+  const [m, pend, pr, so, pay] = await Promise.all([
+    cnt('profiles'), cnt('payments', x => x.eq('status', 'pending')), cnt('prayers'), cnt('musiques'),
+    q(sb.from('payments').select('amount,currency').eq('status', 'validated'))
+  ]);
+  const rev = {}; pay.data.forEach(r => { const c = r.currency || 'FCFA'; rev[c] = (rev[c] || 0) + Number(r.amount || 0); });
+  const revTxt = Object.keys(rev).length ? Object.entries(rev).map(([c, v]) => money(v, c)).join(' + ') : money(0);
+  const k = (l, v) => `<div class="card"><span class="m">${l}</span><b>${v}</b></div>`;
+  $('#main').innerHTML = head('Tableau de bord') + `<div class="cards">${k('Membres', m)}${k('Paiements à traiter', pend)}${k('Revenus validés', esc(revTxt))}${k('Prières', pr)}${k('Cantiques', so)}</div>`;
+};
+
+V.members = async () => {
+  const { data } = await q(sb.from('profiles')
+    .select('id,name,last_name,age,city,country,church,email,plan,status,photo_url,created_at')
+    .order('created_at', { ascending: false }).limit(500));
+  $('#main').innerHTML = head('Membres', '<input id="s" type="search" placeholder="Rechercher un nom ou un email">') + '<div id="t"></div>';
+  const draw = () => {
+    const f = $('#s').value.toLowerCase();
+    $('#t').innerHTML = tbl([
+      ['', r => r.photo_url ? `<img class="av" alt="" src="${esc(r.photo_url)}">` : '<span class="av"></span>'],
+      ['Nom', r => esc([r.name, r.last_name].filter(Boolean).join(' '))],
+      ['Email', r => esc(r.email)],
+      ['Âge', r => esc(r.age)],
+      ['Lieu', r => esc([r.city, r.country].filter(Boolean).join(', '))],
+      ['Église', r => esc(r.church)],
+      ['Offre', r => sel(['Free', 'Premium', 'PRO'], r.plan, 'plan', r.id)],
+      ['Statut', r => sel(['approved', 'pending', 'rejected'], r.status, 'pstatus', r.id)],
+      ['Inscrit le', r => day(r.created_at)],
+      ['', r => `<button class="d" data-a="delProfile" data-id="${esc(r.id)}">Supprimer</button>`, 1]
+    ], data.filter(r => `${r.name} ${r.last_name} ${r.email}`.toLowerCase().includes(f)));
+  };
+  $('#s').oninput = draw; draw();
+};
+
+V.payments = async () => {
+  const { data } = await q(sb.from('payments').select('*').order('created_at', { ascending: false }).limit(300));
+  cache.pay = Object.fromEntries(data.map(p => [p.id, p]));
+  $('#main').innerHTML = head('Paiements') + tbl([
+    ['Email', r => esc(r.email)],
+    ['Moyen', r => esc(r.provider)],
+    ['Offre', r => esc(r.plan)],
+    ['Montant', r => esc(money(r.amount, r.currency))],
+    ['Date', r => day(r.created_at)],
+    ['Statut', r => tag(r.status)],
+    ['', r => r.status === 'pending'
+      ? `<button class="ok" data-a="payOk" data-id="${esc(r.id)}">Valider</button><button class="d" data-a="payNo" data-id="${esc(r.id)}">Refuser</button>` : '', 1]
+  ], data);
+};
+
+V.prayers = async () => {
+  const { data } = await q(sb.from('prayers').select('*').order('created_at', { ascending: false }).limit(300));
+  $('#main').innerHTML = head('Prières') + tbl([
+    ['Auteur', r => esc(r.author_name)],
+    ['Type', r => esc(r.kind)],
+    ['Contenu', r => esc((r.content || '').slice(0, 160))],
+    ['Référence', r => esc(r.reference)],
+    ['Date', r => day(r.created_at)],
+    ['Visible', r => r.visible ? tag('approved') : tag('rejected')],
+    ['', r => `<button data-a="togglePrayer" data-id="${esc(r.id)}" data-v="${r.visible ? '0' : '1'}">${r.visible ? 'Masquer' : 'Afficher'}</button><button class="d" data-a="delPrayer" data-id="${esc(r.id)}">Supprimer</button>`, 1]
+  ], data);
+};
+
+const PATH_KEY = /^(storage_path|file_path|path|file|file_url|audio_url|audio|url)$/i;
+V.songs = async () => {
+  const { data } = await q(sb.from('musiques').select('*').order('created_at', { ascending: false }).limit(300));
+  cache.songs = Object.fromEntries(data.map(s => [s.id, s]));
+  const keys = data.length ? Object.keys(data[0]).filter(k => k !== 'id') : [];
+  const pk = keys.find(k => PATH_KEY.test(k));
+  $('#main').innerHTML = head('Cantiques') + tbl([
+    ...keys.filter(k => k !== pk).map(k => [esc(k), r => k === 'created_at' ? day(r[k]) : esc(String(r[k] ?? '').slice(0, 80))]),
+    ['', r => (pk && r[pk] ? `<button data-a="playSong" data-id="${esc(r.id)}">Écouter</button>` : '') + `<button class="d" data-a="delSong" data-id="${esc(r.id)}">Supprimer</button>`, 1]
+  ], data);
+  cache.pk = pk;
+};
+
+const A = {
+  delProfile: id => confirm('Supprimer ce profil définitivement ?') && act(() => q(sb.from('profiles').delete().eq('id', id)), 'Profil supprimé'),
+  payNo: id => confirm('Refuser ce paiement ?') && act(() => q(sb.from('payments').update({ status: 'failed' }).eq('id', id)), 'Paiement refusé'),
+  payOk: id => {
+    const p = cache.pay[id];
+    if (!confirm(`Valider ${money(p.amount, p.currency)} de ${p.email || 'ce membre'} et activer l'offre « ${p.plan || ''} » ?`)) return;
+    act(async () => {
+      await q(sb.from('payments').update({ status: 'validated' }).eq('id', id));
+      if (p.email && p.plan) {
+        const r = await q(sb.from('profiles').update({ plan: p.plan }).ilike('email', p.email).select('id'));
+        if (!r.data.length) toast('Paiement validé, mais aucun profil avec cet email.', true);
+      }
+    }, 'Paiement validé');
+  },
+  togglePrayer: (id, b) => act(() => q(sb.from('prayers').update({ visible: b.dataset.v === '1' }).eq('id', id)), 'Prière mise à jour'),
+  delPrayer: id => confirm('Supprimer cette prière ?') && act(() => q(sb.from('prayers').delete().eq('id', id)), 'Prière supprimée'),
+  playSong: async id => {
+    try {
+      const v = cache.songs[id][cache.pk];
+      let url = v;
+      if (!/^https?:/i.test(v)) url = (await q(sb.storage.from('musiques').createSignedUrl(v, 600))).data.signedUrl;
+      new Audio(url).play();
+    } catch (e) { toast(e.message || 'Lecture impossible', true); }
+  },
+  delSong: id => confirm('Supprimer ce cantique ?') && act(async () => {
+    const v = cache.pk && cache.songs[id][cache.pk];
+    if (v && !/^https?:/i.test(v)) await q(sb.storage.from('musiques').remove([v]));
+    await q(sb.from('musiques').delete().eq('id', id));
+  }, 'Cantique supprimé')
+};
+const C = {
+  plan: (id, v) => act(() => q(sb.from('profiles').update({ plan: v }).eq('id', id)), 'Offre mise à jour'),
+  pstatus: (id, v) => act(() => q(sb.from('profiles').update({ status: v }).eq('id', id)), 'Statut mis à jour')
+};
+document.addEventListener('click', e => { const b = e.target.closest('[data-a]'); if (b) A[b.dataset.a](b.dataset.id, b); });
+document.addEventListener('change', e => { const t = e.target; if (t.dataset && t.dataset.c) C[t.dataset.c](t.dataset.id, t.value); });
+
+function go(t) {
+  cur = t;
+  $('#nav').innerHTML = Object.entries(TABS).map(([k, v]) => `<a class="${k === t ? 'on' : ''}" data-t="${k}">${v}</a>`).join('');
+  $('#main').innerHTML = '<p class="m">Chargement…</p>';
+  V[t]().catch(e => $('#main').innerHTML = `<p class="err">Erreur : ${esc(e.message)}<br><span class="m">Si le message parle de permission, vérifie que ton compte est bien dans la table admins.</span></p>`);
+}
+$('#nav').onclick = e => { const a = e.target.closest('[data-t]'); if (a) go(a.dataset.t); };
+
+async function boot() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) { $('#app').classList.add('hide'); return $('#login').classList.remove('hide'); }
+  const { data, error } = await sb.from('admins').select('user_id').eq('user_id', session.user.id).maybeSingle();
+  if (error || !data) {
+    await sb.auth.signOut();
+    $('#lerr').textContent = error ? 'Erreur : ' + error.message : "Ce compte n'est pas administrateur.";
+    $('#app').classList.add('hide'); return $('#login').classList.remove('hide');
+  }
+  me = session.user; $('#me').textContent = me.email;
+  $('#login').classList.add('hide'); $('#app').classList.remove('hide'); go('dashboard');
+}
+$('#lf').onsubmit = async ev => {
+  ev.preventDefault(); $('#lerr').textContent = '';
+  const f = new FormData(ev.target);
+  const { error } = await sb.auth.signInWithPassword({ email: f.get('email'), password: f.get('pw') });
+  if (error) return $('#lerr').textContent = 'Connexion refusée : ' + error.message;
+  $('#lerr').textContent = ''; boot();
+};
+$('#out').onclick = async () => { await sb.auth.signOut(); boot(); };
+boot();
+</script>
+</body>
+</html>

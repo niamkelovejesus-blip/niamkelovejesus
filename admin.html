@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0b0d12">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%9D%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<title>Niamké Love Jésus · Administration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js"></script>
+<style>
+:root{--side:#0b0d12;--side2:#1a1d26;--navy:#1e3a8a;--blue:#3b82f6;--gold:#b8893f;--bg:#f6f7f9;--line:#e4e7ec;--mut:#667085;--ok:#18794e;--bad:#b42318;--warn:#a15c07;--ink:#101828}
+*{box-sizing:border-box}
+body{margin:0;font:14px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+h1,h2,h3{margin:0;font-weight:700}
+.hide{display:none!important}
+button,input,select,textarea{font:inherit}
+input,select,textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:9px 11px;background:#fff;color:inherit}
+textarea{min-height:76px;resize:vertical}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 13px;cursor:pointer;color:inherit;font-weight:500;display:inline-flex;align-items:center;gap:6px}
+button:hover{background:#f0f2f5}
+button:disabled{opacity:.55;cursor:wait}
+button.p{background:var(--ink);border-color:var(--ink);color:#fff}
+button.p:hover{background:#2a303c}
+button.d{color:var(--bad)}
+button.ok{color:var(--ok)}
+svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+#login{min-height:100vh;display:grid;place-items:center;padding:16px;background:var(--side)}
+#login form{background:#fff;border-radius:14px;padding:30px;width:100%;max-width:380px;display:grid;gap:14px}
+#login #rf{background:#fff;border-radius:14px;padding:30px;width:100%;max-width:380px;display:grid;gap:14px}
+.lk{border:0;background:none;color:var(--navy);padding:0;justify-content:center;text-decoration:underline}
+.lk:hover{background:none}
+#login h1{font-size:22px}
+#login p{margin:0;color:var(--mut)}
+label{display:grid;gap:4px;font-weight:600}
+.pw{position:relative;display:block}.pw input{padding-right:92px}.pw button{position:absolute;right:4px;top:50%;transform:translateY(-50%);padding:4px 10px;border:0;background:transparent;color:var(--navy);font-weight:600}
+.err{color:var(--bad);min-height:20px;font-weight:500}
+#app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+aside{background:var(--side);color:#fff;padding:18px 12px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.brand{padding:4px 10px 16px;border-bottom:1px solid #20242e;margin-bottom:8px}
+.brand b{font-size:17px;display:block}
+.brand small{color:#c9a96a;font-size:12px}
+.grp{margin:14px 10px 4px;color:#7b8394;font-size:12px;font-weight:600}
+#nav a{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;color:#cdd3df;cursor:pointer}
+#nav a:hover{background:var(--side2)}
+#nav a.on{background:var(--side2);color:#fff;font-weight:600}
+#me{margin-top:auto;padding:12px 10px 8px;color:#9aa3b5;font-size:12px;word-break:break-all;border-top:1px solid #20242e}
+aside button{background:transparent;color:#fff;border-color:#2c3240;justify-content:center}
+aside button:hover{background:var(--side2)}
+#meav{margin-top:auto;display:flex;align-items:center;gap:10px;padding:12px 10px 8px;border-top:1px solid #20242e;cursor:pointer;color:#9aa3b5;font-size:12px}
+#meav:hover{color:#fff}
+#me{margin-top:0;border-top:0;padding-top:0}
+.meimg{width:46px;height:46px;border-radius:50%;background:#2c3240 center/cover no-repeat;display:grid;place-items:center;font-weight:700;font-size:18px;color:#fff;flex:none}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 28px;background:#fff;border-bottom:1px solid var(--line);color:var(--mut)}
+.top b{color:var(--ink)}
+.chip{border:1px solid var(--line);border-radius:8px;padding:3px 10px;background:var(--bg);font-size:13px}
+main{padding:24px 28px;min-width:0}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.head h2{font-size:22px}
+.head p{margin:2px 0 0;color:var(--mut)}
+.head input{max-width:320px}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:4px}
+.card b{font-size:26px;letter-spacing:-.5px}
+.m{color:var(--mut)}
+.panels{display:grid;grid-template-columns:minmax(0,2fr) minmax(260px,1fr);gap:14px;margin-bottom:16px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px}
+.panel h3{font-size:15px;margin-bottom:12px}
+.donut{width:130px;height:130px;border-radius:50%;display:grid;place-items:center;margin:0 auto 14px}
+.donut span{background:#fff;width:84px;height:84px;border-radius:50%;display:grid;place-items:center;font-weight:700;text-align:center;line-height:1.1}
+.leg{display:grid;gap:6px}
+.leg div{display:flex;align-items:center;gap:8px}
+.leg i{width:10px;height:10px;border-radius:50%;flex:none}
+.leg em{margin-left:auto;font-style:normal;font-weight:600}
+.formc{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:16px}
+.formc h3{font-size:15px;margin-bottom:12px}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:12px}
+.fg .w{grid-column:1/-1}
+.wrap{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{padding:10px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+th{background:#f9fafb;font-weight:600;color:var(--mut);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.a{white-space:nowrap;text-align:right}
+td.a button+button{margin-left:6px}
+.thumb{width:40px;height:40px;border-radius:8px;object-fit:cover;background:var(--line);display:block}
+.badge{margin-left:auto;background:#f59e0b;color:#111;border-radius:99px;padding:0 8px;font-size:12px;font-weight:700}
+.avl{cursor:pointer;display:block;position:relative}
+.av{width:34px;height:34px;border-radius:50%;object-fit:cover;background:var(--line);display:block}
+.tag{display:inline-block;padding:2px 9px;border-radius:99px;background:#eef1f5;font-size:12px;font-weight:600}
+.tag.validated,.tag.approved{background:#e3f4ea;color:var(--ok)}
+.tag.pending{background:#fdf0d8;color:var(--warn)}
+.tag.failed,.tag.rejected{background:#fbe4e1;color:var(--bad)}
+#toast{position:fixed;right:16px;bottom:16px;display:grid;gap:8px;z-index:9}
+#toast div{background:var(--ink);color:#fff;padding:10px 14px;border-radius:8px;max-width:320px}
+#toast div.e{background:var(--bad)}
+@media(max-width:860px){
+ #app{grid-template-columns:1fr}
+ aside{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center}
+ .brand{width:100%}
+ #nav{display:flex;flex-wrap:wrap;gap:4px}
+ .grp,#me{display:none}
+ .panels{grid-template-columns:1fr}
+ main{padding:14px}.top{padding:10px 14px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div id="login" class="hide">
+  <form id="lf">
+    <h1>Niamké Love Jésus</h1>
+    <p>Espace d'administration</p>
+    <label>Email<input type="email" name="email" required autocomplete="username"></label>
+    <label>Mot de passe<span class="pw"><input type="password" name="pw" required autocomplete="current-password"><button type="button" id="eye" aria-label="Afficher le mot de passe">Afficher</button></span></label>
+    <button class="p" type="submit" style="justify-content:center">Se connecter</button>
+    <button type="button" id="forgot" class="lk">Mot de passe oublié ?</button>
+    <div id="lerr" class="err" role="alert"></div>
+  </form>
+  <form id="rf" class="hide">
+    <h1>Nouveau mot de passe</h1>
+    <p>Choisissez un nouveau mot de passe (8 caractères minimum).</p>
+    <label>Nouveau mot de passe<input type="password" name="np" required minlength="8" autocomplete="new-password"></label>
+    <button class="p" type="submit" style="justify-content:center">Enregistrer</button>
+    <div id="rerr" class="err" role="alert"></div>
+  </form>
+</div>
+
+<div id="app" class="hide">
+  <aside>
+    <div class="brand"><b>Niamké Love</b><small>Administration</small></div>
+    <div id="nav"></div>
+    <label id="meav" title="Changer ma photo de profil"><span id="mepic" class="meimg"></span><span>Changer ma photo<input type="file" id="mefile" accept="image/*" hidden></span></label>
+    <div id="me"></div>
+    <button id="out">Se déconnecter</button>
+  </aside>
+  <div>
+    <div class="top"><span>Niamké / <b id="crumb"></b></span><span class="chip" id="today"></span></div>
+    <main id="main"></main>
+  </div>
+</div>
+<div id="toast" aria-live="polite"></div>
+
+<script>
+const SB_URL = 'https://qxxhbfoqlreiqyshbpqp.supabase.co';
+const SB_KEY = 'sb_publishable_OK9ncVWB2Ih8xZ5fzqEQWg_mSV6vCoe'; // clé publique : la sécurité est assurée par les règles RLS
+let store; try { window.sessionStorage.setItem('_t', '1'); window.sessionStorage.removeItem('_t'); store = window.sessionStorage; } catch (e) {}
+const sb = supabase.createClient(SB_URL, SB_KEY, { auth: { persistSession: true, storage: store, autoRefreshToken: true } });
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const day = d => d ? new Date(d).toLocaleDateString('fr-FR') : '';
+const money = (n, c) => new Intl.NumberFormat('fr-FR').format(Number(n) || 0) + ' ' + (c || 'FCFA');
+const tag = s => `<span class="tag ${esc(s)}">${esc(s)}</span>`;
+const IC = {
+  grid: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+  users: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5M16 4.8a3.5 3.5 0 0 1 0 6.4M18 14.8c2 .6 3.2 2.3 3.5 5.2"/>',
+  card: '<rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19"/>',
+  pray: '<path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/>',
+  music: '<path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/>',
+  book: '<path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5zM4 19.5V4.5M9 7h7"/>',
+  game: '<rect x="2.5" y="7" width="19" height="11" rx="4"/><path d="M7 10.5v4M5 12.5h4M16 11h.01M18.5 14h.01"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  dl: '<path d="M12 4v11M7 11l5 5 5-5M4 20h16"/>',
+  flag: '<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+  chat: '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/>'
+};
+const ico = n => `<svg class="i" viewBox="0 0 24 24">${IC[n]}</svg>`;
+const TABS = {
+  dashboard: ['Tableau de bord', 'grid', 'Aperçu'], members: ['Membres', 'users', 'Gestion'], payments: ['Paiements', 'card', 'Gestion'], reports: ['Signalements', 'flag', 'Gestion'],
+  prayers: ['Prières', 'pray', 'Gestion'], songs: ['Musiques', 'music', 'Contenu'], lyrics: ['Paroles', 'book', 'Contenu'], verses: ['Versets bibliques', 'book', 'Contenu'], pubprayers: ['Publier une prière', 'pray', 'Contenu'], games: ['Jeux bibliques', 'game', 'Contenu'], confessions: ['Confessions', 'chat', 'Contenu']
+};
+// Langues proposées pour les paroles (code = celui que le site utilise pour la langue du membre)
+const LANGS = [['fr','Français'],['en','English'],['es','Español'],['pt','Português'],['ar','العربية (Arabe)'],['sw','Kiswahili'],['de','Deutsch'],['it','Italiano'],['zh','中文 (Chinois)'],['wo','Wolof']];
+const langName = c => (LANGS.find(l => l[0] === c) || [c, c])[1];
+let cur = 'dashboard', cache = {}, me = null;
+
+function toast(m, e) {
+  const d = document.createElement('div'); d.textContent = m; if (e) d.className = 'e';
+  $('#toast').append(d); setTimeout(() => d.remove(), e ? 15000 : 4500);
+}
+async function q(p) { const r = await p; if (r.error) throw r.error; return r; }
+async function act(fn, msg) {
+  try { await fn(); toast(msg); go(cur); return true; } catch (e) { act.err = e.message || 'Erreur'; toast(act.err, true); return false; }
+}
+const head = (t, sub = '', extra = '') => `<div class="head"><div><h2>${t}</h2>${sub ? `<p>${sub}</p>` : ''}</div>${extra}</div>`;
+function tbl(cols, rows) {
+  if (!rows.length) return '<p class="m">Aucune donnée pour le moment.</p>';
+  return `<div class="wrap"><table><thead><tr>${cols.map(c => `<th>${c[0]}</th>`).join('')}</tr></thead><tbody>${
+    rows.map(r => `<tr>${cols.map(c => `<td${c[2] ? ' class="a"' : ''}>${c[1](r)}</td>`).join('')}</tr>`).join('')
+  }</tbody></table></div>`;
+}
+function sel(base, val, c, id) {
+  const opts = [...new Set([...base, val].filter(Boolean))];
+  return `<select data-c="${c}" data-id="${esc(id)}">${opts.map(o => `<option${o === val ? ' selected' : ''}>${esc(o)}</option>`).join('')}</select>`;
+}
+const fld = ([k, l, t, o]) => {
+  const w = t === 'textarea' ? ' class="w"' : '';
+  const inp = t === 'textarea' ? `<textarea name="${k}"></textarea>` : t === 'select' ? `<select name="${k}">${o.map(x => `<option>${x}</option>`).join('')}</select>` : `<input name="${k}">`;
+  return `<label${w}>${l}${inp}</label>`;
+};
+
+async function upImg(file) {
+  if (!file || !file.size) return null;
+  const path = `${Date.now()}-${file.name.replace(/[^\w.\-]+/g, '_')}`;
+  await q(sb.storage.from('images').upload(path, file, { contentType: file.type }));
+  return sb.storage.from('images').getPublicUrl(path).data.publicUrl;
+}
+const imgIn = '<label>Photo (facultatif)<input type="file" name="photo" accept="image/*"></label>';
+const thumb = u => u ? `<img class="thumb" alt="" src="${esc(u)}">` : '<span class="thumb"></span>';
+const csvBtn = k => `<button data-a="csv" data-k="${k}">${ico('dl')}Exporter CSV</button>`;
+
+const V = {};
+
+V.dashboard = async () => {
+  const cnt = (t, f) => { const x = sb.from(t).select('*', { count: 'exact', head: true }); return q(f ? f(x) : x).then(r => r.count || 0).catch(() => 0); };
+  const [m, pend, pr, so, ve, je, pay, prof, rep, inv] = await Promise.all([
+    cnt('profiles'), cnt('payments', x => x.eq('status', 'pending')), cnt('prayers', x => x.eq('kind', 'priere')), cnt('musiques'), cnt('prayers', x => x.eq('kind', 'verset')), cnt('jeux'),
+    q(sb.from('payments').select('amount,currency,created_at').eq('status', 'validated')),
+    q(sb.from('profiles').select('church').limit(2000)),
+    cnt('reports'), cnt('conversation_invites', x => x.eq('status', 'pending'))
+  ]);
+  const rev = {}; pay.data.forEach(r => { const c = r.currency || 'FCFA'; rev[c] = (rev[c] || 0) + Number(r.amount || 0); });
+  const revTxt = Object.keys(rev).length ? Object.entries(rev).map(([c, v]) => money(v, c)).join(' + ') : money(0);
+  const k = (l, v) => `<div class="card"><span class="m">${l}</span><b>${v}</b></div>`;
+
+  // Revenus sur 30 jours
+  const days = [...Array(30)].map((_, i) => { const d = new Date(); d.setDate(d.getDate() - 29 + i); return d.toISOString().slice(0, 10); });
+  const by = Object.fromEntries(days.map(d => [d, 0]));
+  pay.data.forEach(r => { const d = (r.created_at || '').slice(0, 10); if (d in by) by[d] += Number(r.amount || 0); });
+  const vals = days.map(d => by[d]), mx = Math.max(...vals, 1);
+  const pts = vals.map((v, i) => [10 + i * (580 / 29), 160 - (v / mx) * 140]);
+  const line = pts.map(p => p.join(',')).join(' ');
+  const chart = `<svg viewBox="0 0 600 190" style="width:100%;height:auto" role="img" aria-label="Revenus des 30 derniers jours">
+    <polygon points="10,160 ${line} 590,160" fill="#1e3a8a" opacity=".08"/><polyline points="${line}" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+    <line x1="10" y1="160" x2="590" y2="160" stroke="#e4e7ec"/>
+    <text x="10" y="182" font-size="11" fill="#667085">${day(days[0])}</text><text x="590" y="182" font-size="11" fill="#667085" text-anchor="end">${day(days[29])}</text></svg>`;
+
+  // Répartition par église
+  const ch = {}; prof.data.forEach(r => { const c = (r.church || '').trim() || 'Non renseignée'; ch[c] = (ch[c] || 0) + 1; });
+  const top = Object.entries(ch).sort((a, b) => b[1] - a[1]), main5 = top.slice(0, 5), rest = top.slice(5).reduce((s, x) => s + x[1], 0);
+  if (rest) main5.push(['Autres', rest]);
+  const col = ['#1e3a8a', '#3b82f6', '#93c5fd', '#f59e0b', '#10b981', '#d0d5dd'], tot = prof.data.length || 1;
+  let acc = 0; const stops = main5.map(([, n], i) => { const a = acc / tot * 100; acc += n; return `${col[i]} ${a}% ${acc / tot * 100}%`; }).join(',');
+  const donut = `<div class="donut" style="background:conic-gradient(${stops || '#e4e7ec 0 100%'})"><span>${top.length}<br>églises</span></div>
+    <div class="leg">${main5.map(([n, c], i) => `<div><i style="background:${col[i]}"></i>${esc(n)}<em>${Math.round(c / tot * 100)}%</em></div>`).join('')}</div>`;
+
+  $('#main').innerHTML = head('Tableau de bord', 'Vue d\'ensemble de l\'activité et des revenus de la communauté.',
+    `<div class="acts"><button class="p" data-t="songs">${ico('music')}Ajouter une musique</button><button data-t="verses">${ico('book')}Ajouter un verset</button><button data-t="games">${ico('game')}Ajouter un jeu</button></div>`)
+    + `<div class="cards">${k('Membres', m)}${k('Paiements à traiter', pend)}${k('Revenus validés', esc(revTxt))}${k('Prières', pr)}${k('Musiques', so)}${k('Versets', ve)}${k('Jeux', je)}${k('Signalements', rep)}${k('Invitations en attente', inv)}</div>`
+    + `<div class="panels"><div class="panel"><h3>Revenus · 30 derniers jours</h3>${chart}</div><div class="panel"><h3>Répartition par église</h3>${donut}</div></div>`;
+};
+
+V.members = async () => {
+  const { data } = await q(sb.from('profiles')
+    .select('id,name,last_name,age,city,country,church,email,plan,status,photo_url,created_at')
+    .order('created_at', { ascending: false }).limit(500));
+  cache.members = data;
+  $('#main').innerHTML = head('Membres', `${data.length} membres inscrits · cliquez sur une photo pour la changer`, `<div class="acts"><input id="s" type="search" placeholder="Rechercher un nom ou un email">${csvBtn('members')}</div>`) + '<div id="t"></div>';
+  const draw = () => {
+    const f = $('#s').value.toLowerCase();
+    $('#t').innerHTML = tbl([
+      ['', r => `<label class="avl" title="Changer la photo">${r.photo_url ? `<img class="av" alt="" src="${esc(r.photo_url)}">` : '<span class="av"></span>'}<input type="file" accept="image/*" data-p="${esc(r.id)}" hidden></label>`],
+      ['Nom', r => esc([r.name, r.last_name].filter(Boolean).join(' '))],
+      ['Email', r => esc(r.email)],
+      ['Âge', r => esc(r.age)],
+      ['Lieu', r => esc([r.city, r.country].filter(Boolean).join(', '))],
+      ['Église', r => esc(r.church)],
+      ['Offre', r => sel(['Découverte', 'Mensuel', 'Alliance', 'Éternelle'], r.plan, 'plan', r.id)],
+      ['Statut', r => sel(['approved', 'pending', 'rejected'], r.status, 'pstatus', r.id)],
+      ['Inscrit le', r => day(r.created_at)],
+      ['', r => `<button class="d" data-a="delProfile" data-id="${esc(r.id)}">Supprimer</button>`, 1]
+    ], data.filter(r => `${r.name} ${r.last_name} ${r.email}`.toLowerCase().includes(f)));
+  };
+  $('#s').oninput = draw; draw();
+};
+
+V.payments = async () => {
+  const { data } = await q(sb.from('payments').select('*').order('created_at', { ascending: false }).limit(300));
+  cache.pay = Object.fromEntries(data.map(p => [p.id, p]));
+  $('#main').innerHTML = head('Paiements', `${data.filter(p => p.status === 'pending').length} en attente de validation`, csvBtn('payments')) + tbl([
+    ['Email', r => esc(r.email)],
+    ['Moyen', r => esc(r.provider)],
+    ['Offre', r => esc(r.plan)],
+    ['Montant', r => esc(money(r.amount, r.currency))],
+    ['Date', r => day(r.created_at)],
+    ['Statut', r => tag(r.status)],
+    ['', r => r.status === 'pending'
+      ? `<button class="ok" data-a="payOk" data-id="${esc(r.id)}">Valider</button><button class="d" data-a="payNo" data-id="${esc(r.id)}">Refuser</button>` : '', 1]
+  ], data);
+};
+
+V.prayers = async () => {
+  const { data } = await q(sb.from('prayers').select('*').order('created_at', { ascending: false }).limit(300));
+  $('#main').innerHTML = head('Prières', 'Modérez les prières publiées par les membres.') + tbl([
+    ['Auteur', r => esc(r.author_name)],
+    ['Type', r => esc(r.kind)],
+    ['Contenu', r => esc((r.content || '').slice(0, 160))],
+    ['Référence', r => esc(r.reference)],
+    ['Date', r => day(r.created_at)],
+    ['Visible', r => r.visible ? tag('approved') : tag('rejected')],
+    ['', r => `<button data-a="togglePrayer" data-id="${esc(r.id)}" data-v="${r.visible ? '0' : '1'}">${r.visible ? 'Masquer' : 'Afficher'}</button><button class="d" data-a="delPrayer" data-id="${esc(r.id)}">Supprimer</button>`, 1]
+  ], data);
+};
+
+V.reports = async () => {
+  const [r, p] = await Promise.all([
+    q(sb.from('reports').select('*').order('created_at', { ascending: false }).limit(300)),
+    q(sb.from('profiles').select('id,user_id,name,last_name,email,status').limit(2000))
+  ]);
+  const byU = Object.fromEntries(p.data.filter(x => x.user_id).map(x => [x.user_id, x]));
+  const byP = Object.fromEntries(p.data.map(x => [x.id, x]));
+  const tg = x => byU[x.reported_user] || byP[x.profile_id];
+  const nm = u => u ? esc([u.name, u.last_name].filter(Boolean).join(' ') || u.email || '') : '<span class="m">Profil introuvable</span>';
+  cache.rep = Object.fromEntries(r.data.map(x => [x.id, x]));
+  cache.repTarget = Object.fromEntries(r.data.map(x => [x.id, tg(x)]));
+  const cntBy = {}; r.data.forEach(x => { const t = tg(x); if (t) cntBy[t.id] = (cntBy[t.id] || 0) + 1; });
+  $('#main').innerHTML = head('Signalements', `${r.data.length} signalement${r.data.length > 1 ? 's' : ''} de membres · suspendre masque le profil sur le site`) + tbl([
+    ['Membre signalé', x => { const t = tg(x); return nm(t) + (t && cntBy[t.id] > 1 ? ` <span class="tag pending">${cntBy[t.id]} signalements</span>` : ''); }],
+    ['Profil', x => { const t = tg(x); return t ? tag(t.status || 'approved') : ''; }],
+    ['Motif', x => esc(String(x.reason || '').slice(0, 200))],
+    ['Signalé par', x => { const u = byU[x.reporter_id]; return u ? nm(u) : '<span class="m">Membre</span>'; }],
+    ['Date', x => day(x.created_at)],
+    ['', x => { const t = tg(x); return (t ? (t.status === 'rejected' ? `<button class="ok" data-a="repRestore" data-id="${esc(x.id)}">Réactiver</button>` : `<button class="d" data-a="repSuspend" data-id="${esc(x.id)}">Suspendre</button>`) : '') + `<button data-a="repClose" data-id="${esc(x.id)}">Classer</button>`; }, 1]
+  ], r.data);
+};
+
+// ---- Musiques : envoi de fichier audio + liste ----
+const PATH_KEY = /^(storage_path|file_path|path|file|file_url|audio_url|audio|url)$/i;
+V.songs = async () => {
+  const { data } = await q(sb.from('musiques').select('*').order('created_at', { ascending: false }).limit(300));
+  cache.songs = Object.fromEntries(data.map(s => [s.id, s]));
+  const keys = data.length ? Object.keys(data[0]).filter(k => k !== 'id') : [];
+  const pk = keys.find(k => PATH_KEY.test(k));
+  cache.pk = pk;
+  $('#main').innerHTML = head('Musiques', `${data.length} musiques en ligne`)
+    + `<form class="formc" data-f="song"><h3>Ajouter une musique</h3><div class="fg">
+        ${fld(['title', 'Titre'])}${fld(['artist', 'Artiste'])}
+        <label>Fichier audio (mp3, m4a, wav)<input type="file" name="file" accept="audio/*" required></label><label>Poids du fichier<select name="quality"><option value="128">Allégé (128 kbps), recommandé</option><option value="96">Léger (96 kbps)</option><option value="64">Très léger (64 kbps)</option><option value="0">Original, sans compression</option></select></label>${imgIn.replace("Photo (facultatif)", "Pochette (image, facultatif)")}</div>
+        <button class="p" type="submit">${ico('plus')}Envoyer la musique</button><div class="err" data-e role="alert"></div></form>`
+    + tbl([
+      ['', r => thumb(r.image_url)],
+      ...keys.filter(k => k !== pk && k !== 'image_url').map(k => [esc(k), r => k === 'created_at' ? day(r[k]) : esc(String(r[k] ?? '').slice(0, 80))]),
+      ['', r => `<button data-a="lyricsFor" data-id="${esc(r.id)}">Paroles</button>` + (pk && r[pk] ? `<button data-a="playSong" data-id="${esc(r.id)}">Écouter</button>` : '') + `<button class="d" data-a="delSong" data-id="${esc(r.id)}">Supprimer</button>`, 1]
+    ], data);
+};
+
+// ---- Paroles : texte des chansons par langue ----
+const songName = r => r.title || r.titre || r.nom || r.name || String(r.id);
+V.lyrics = async () => {
+  const [s, p] = await Promise.all([
+    q(sb.from('musiques').select('*').order('created_at', { ascending: false }).limit(300)),
+    q(sb.from('paroles').select('*').order('created_at', { ascending: false }).limit(1000))
+  ]);
+  cache.songs = Object.fromEntries(s.data.map(x => [x.id, x]));
+  cache.lyr = Object.fromEntries(p.data.map(x => [x.id, x]));
+  const sel0 = String(cache.lyricSong || (s.data[0] && s.data[0].id) || '');
+  const done = id => p.data.filter(x => String(x.musique_id) === String(id)).map(x => langName(x.langue));
+  $('#main').innerHTML = head('Paroles des chansons', 'Collez le texte d’une chanson dans une langue. Le site l’affichera dans la langue choisie par le membre.')
+    + `<form class="formc" data-f="lyrics"><h3>Ajouter ou modifier des paroles</h3><div class="fg">
+        <label>Musique<select name="musique_id">${s.data.map(x => `<option value="${esc(x.id)}"${String(x.id) === sel0 ? ' selected' : ''}>${esc(songName(x))}${x.artist ? ' · ' + esc(x.artist) : ''}</option>`).join('')}</select></label>
+        <label>Langue du texte collé<select name="langue">${LANGS.map(l => `<option value="${l[0]}">${esc(l[1])}</option>`).join('')}</select></label>
+        <label class="w">Paroles (collez ici, un couplet par paragraphe)<textarea name="texte" style="min-height:240px" required></textarea></label></div>
+        <p class="m" id="lc" style="margin:0 0 12px"></p>
+        <label style="display:flex;gap:8px;align-items:center;font-weight:500;margin-bottom:12px"><input type="checkbox" name="auto" checked style="width:auto"> Traduire automatiquement dans les autres langues du site (les traductions déjà enregistrées ne sont pas écrasées)</label>
+        <button class="p" type="submit">${ico('plus')}Enregistrer les paroles</button><div class="err" data-e role="alert"></div></form>`
+    + (s.data.length ? '' : '<p class="m">Ajoutez d’abord une musique dans l’onglet « Musiques ».</p>')
+    + tbl([
+      ['Musique', r => esc(cache.songs[r.musique_id] ? songName(cache.songs[r.musique_id]) : r.musique_id)],
+      ['Langue', r => `<span class="tag">${esc(langName(r.langue))}</span>`],
+      ['Aperçu', r => esc(String(r.texte || '').replace(/\s+/g, ' ').slice(0, 90))],
+      ['Ajouté le', r => day(r.created_at)],
+      ['', r => `<button data-a="editLyric" data-id="${esc(r.id)}">Modifier</button><button class="d" data-a="delLyric" data-id="${esc(r.id)}">Supprimer</button>`, 1]
+    ], p.data);
+  const f = $('form[data-f="lyrics"]'), hint = () => {
+    const d = done(f.musique_id.value);
+    $('#lc').textContent = d.length ? 'Déjà enregistré pour cette musique : ' + d.join(', ') + '. Choisir la même langue remplace le texte.' : 'Aucune parole enregistrée pour cette musique.';
+  };
+  f.musique_id.onchange = () => { cache.lyricSong = f.musique_id.value; hint(); }; hint();
+};
+
+// ---- Versets et jeux : formulaire + liste générés ----
+const G = {
+  // Le site lit les versets et les prières dans la table « prayers » (colonne kind = 'verset' ou 'priere')
+  verses: { table: 'prayers', where: ['kind', 'verset'], fixed: { kind: 'verset', visible: true }, noimg: true, title: 'Versets bibliques', one: 'verset', fields: [['reference', 'Référence (ex. Jean 3:16)'], ['content', 'Texte du verset', 'textarea']] },
+  pubprayers: { table: 'prayers', where: ['kind', 'priere'], fixed: { kind: 'priere', visible: true }, noimg: true, f: 1, title: 'Publier une prière', one: 'prière', fields: [['content', 'Texte de la prière', 'textarea']] },
+  games: { table: 'jeux', title: 'Jeux bibliques', one: 'jeu', fields: [['titre', 'Titre du jeu'], ['type', 'Type', 'select', ['Quiz', 'Mots mêlés', 'Puzzle', 'Mémo', 'Vrai ou faux', 'Lien externe']], ['niveau', 'Niveau', 'select', ['Facile', 'Moyen', 'Difficile']], ['description', 'Description', 'textarea'], ['lien', 'Lien du jeu (facultatif)'], ['contenu', 'Contenu du jeu (quiz : Question | Bonne réponse | Mauvaise 1 | Mauvaise 2, une ligne par question)', 'textarea']] }
+};
+V.confessions = async () => {
+  const { data } = await q(sb.from('confessions').select('*').order('created_at', { ascending: false }).limit(300));
+  const keys = data.length ? Object.keys(data[0]).filter(k => k !== 'id') : [];
+  $('#main').innerHTML = head('Confessions', `${data.length} confessions`) + tbl([
+    ...keys.map(k => [esc(k), r => k === 'created_at' ? day(r[k]) : esc(String(r[k] ?? '').slice(0, 140))]),
+    ['', r => `<button class="d" data-a="delConf" data-id="${esc(r.id)}">Supprimer</button>`, 1]
+  ], data);
+};
+
+Object.keys(G).forEach(k => V[k] = async () => {
+  const g = G[k];
+  let qq = sb.from(g.table).select('*'); if (g.where) qq = qq.eq(g.where[0], g.where[1]);
+  const { data } = await q(qq.order('created_at', { ascending: false }).limit(300));
+  $('#main').innerHTML = head(g.title, `${data.length} ${g.one}${data.length > 1 ? 's' : ''} publié${g.f ? 'e' : ''}${data.length > 1 ? 's' : ''}`, '<input id="s" type="search" placeholder="Rechercher…">')
+    + `<form class="formc" data-f="${k}"><h3>Ajouter ${g.f ? 'une' : 'un'} ${g.one}</h3><div class="fg">${g.fields.map(fld).join('')}${g.noimg ? '' : imgIn}</div><button class="p" type="submit">${ico('plus')}Publier ${g.f ? 'la' : 'le'} ${g.one}</button><div class="err" data-e role="alert"></div></form><div id="t"></div>`;
+  const draw = () => {
+    const f = $('#s').value.toLowerCase();
+    $('#t').innerHTML = tbl([
+      ...(g.noimg ? [] : [['', r => thumb(r.image_url)]]),
+      ...g.fields.map(x => [x[1].replace(/ \(.*\)/, ''), r => esc(String(r[x[0]] ?? '').slice(0, 120))]),
+      ['Ajouté le', r => day(r.created_at)],
+      ['Visible', r => r.visible === false ? tag('rejected') : tag('approved')],
+      ['', r => (g.table === 'prayers' ? `<button data-a="togglePrayer" data-id="${esc(r.id)}" data-v="${r.visible === false ? '1' : '0'}">${r.visible === false ? 'Afficher' : 'Masquer'}</button>` : '') + `<button class="d" data-a="delRow" data-id="${esc(r.id)}" data-k="${k}">Supprimer</button>`, 1]
+    ], data.filter(r => JSON.stringify(r).toLowerCase().includes(f)));
+  };
+  $('#s').oninput = draw; draw();
+});
+
+async function squeeze(file, kbps) {
+  if (!window.lamejs) throw new Error('Outil de compression indisponible : vérifiez votre connexion ou choisissez « Original ».');
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  let buf; try { buf = await ctx.decodeAudioData(await file.arrayBuffer()); } finally { ctx.close(); }
+  const ch = Math.min(buf.numberOfChannels, 2), enc = new lamejs.Mp3Encoder(ch, buf.sampleRate, kbps);
+  const to16 = f => { const o = new Int16Array(f.length); for (let i = 0; i < f.length; i++) { const v = Math.max(-1, Math.min(1, f[i])); o[i] = v < 0 ? v * 32768 : v * 32767; } return o; };
+  const L = to16(buf.getChannelData(0)), R = ch > 1 ? to16(buf.getChannelData(1)) : null, step = 1152 * 10, parts = [];
+  for (let i = 0, n = 0; i < L.length; i += step, n++) {
+    const o = ch > 1 ? enc.encodeBuffer(L.subarray(i, i + step), R.subarray(i, i + step)) : enc.encodeBuffer(L.subarray(i, i + step));
+    if (o.length) parts.push(o);
+    if (n % 30 === 0) await new Promise(r => setTimeout(r));
+  }
+  const end = enc.flush(); if (end.length) parts.push(end);
+  return new File(parts, file.name.replace(/\.[^.]+$/, '') + '.mp3', { type: 'audio/mpeg' });
+}
+
+const FORMS = {
+  async song(f) {
+    let file = f.file.files[0]; if (!file) throw new Error('Choisissez un fichier audio.');
+    const kb = Number(f.quality.value), btn = f.querySelector('button.p'), txt = btn.innerHTML;
+    if (kb) {
+      btn.textContent = 'Compression en cours…';
+      try { const small = await squeeze(file, kb); if (small.size < file.size) { toast(`Fichier allégé : ${(file.size / 1e6).toFixed(1)} Mo → ${(small.size / 1e6).toFixed(1)} Mo`); file = small; } }
+      finally { btn.innerHTML = txt; }
+    }
+    const path = `${Date.now()}-${file.name.replace(/[^\w.\-]+/g, '_')}`;
+    btn.textContent = 'Envoi en cours…';
+    try { await q(sb.storage.from('musiques').upload(path, file, { contentType: file.type })); }
+    catch (e) { throw new Error('Envoi du fichier refusé : ' + (e.message || e)); }
+    const row = { title: f.title.value.trim() || file.name, artist: f.artist.value.trim() || null, url: path, storage_path: path };
+    if (cache.pk && !(cache.pk in row)) row[cache.pk] = path;
+    const u = await upImg(f.photo.files[0]); if (u) row.image_url = u;
+    const skipped = [];
+    for (;;) {
+      try { await q(sb.from('musiques').insert(row)); break; }
+      catch (e) {
+        const m = /Could not find the '([^']+)' column/.exec(e.message || '');
+        const others = ['url', 'storage_path'].filter(k => k !== m?.[1] && k in row);
+        if (m && m[1] in row && (!['url', 'storage_path'].includes(m[1]) || others.length)) { delete row[m[1]]; skipped.push(m[1]); continue; }
+        throw new Error('Fichier envoyé, mais enregistrement refusé : ' + (e.message || e));
+      }
+    }
+    if (skipped.length) toast('Colonne(s) absente(s) de votre table, ignorée(s) : ' + skipped.join(', '));
+  }
+};
+// ---- Traduction automatique des paroles (même service que le site) ----
+const AUTO_LANGS = ['fr', 'en', 'es', 'pt', 'it', 'de', 'ar', 'zh-CN', 'nl', 'ru'];
+const TS_RE = /^(\[\d+:\d+(?:\.\d+)?\]\s*)?(.*)$/;
+async function gtxLines(lines, tl) {
+  const SEP = '\n§§§\n';
+  const r = await fetch('https://translate.googleapis.com/translate_a/single', {
+    method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: 'client=gtx&sl=auto&tl=' + encodeURIComponent(tl) + '&dt=t&q=' + encodeURIComponent(lines.join(SEP))
+  });
+  if (!r.ok) throw new Error('Service de traduction indisponible');
+  const j = await r.json(), full = (j[0] || []).map(x => x[0] || '').join('');
+  const parts = full.split(/\s*§\s*§\s*§\s*/);
+  if (parts.length !== lines.length) throw new Error('Découpage incohérent');
+  return parts.map(x => x.trim());
+}
+async function autoTranslate(mid, langue, texte) {
+  const lines = texte.split(/\r?\n/), idx = lines.map((l, i) => l.trim() ? i : -1).filter(i => i >= 0);
+  const parsed = idx.map(i => TS_RE.exec(lines[i].trim()));
+  const have = new Set(Object.values(cache.lyr || {}).filter(x => String(x.musique_id) === String(mid)).map(x => x.langue));
+  const ok = [], ko = [];
+  for (const tl of AUTO_LANGS) {
+    const code = tl.slice(0, 2);
+    if (code === langue || have.has(code)) continue;
+    try {
+      const out = [];
+      for (let k = 0; k < parsed.length; k += 30) out.push(...await gtxLines(parsed.slice(k, k + 30).map(m => m[2]), tl));
+      const res = lines.slice(); idx.forEach((i, k) => { res[i] = (parsed[k][1] || '') + out[k]; });
+      await q(sb.from('paroles').upsert({ musique_id: mid, langue: code, texte: res.join('\n') }, { onConflict: 'musique_id,langue' }));
+      ok.push(code);
+    } catch (e) { ko.push(code); }
+  }
+  if (ok.length) toast('Traductions ajoutées : ' + ok.join(', ').toUpperCase());
+  if (ko.length) toast('Traduction impossible pour : ' + ko.join(', ').toUpperCase() + ' (réessayez plus tard)', true);
+}
+FORMS.lyrics = async f => {
+  const mid = f.musique_id.value, langue = f.langue.value, texte = f.texte.value.trim();
+  if (!mid) throw new Error('Choisissez une musique.');
+  if (!texte) throw new Error('Collez le texte de la chanson.');
+  cache.lyricSong = mid;
+  try { await q(sb.from('paroles').upsert({ musique_id: mid, langue, texte }, { onConflict: 'musique_id,langue' })); }
+  catch (e) {
+    if (/paroles/.test(e.message || '') && /(schema cache|does not exist)/.test(e.message || '')) throw new Error('La table « paroles » n’existe pas encore : exécutez le script SQL dans Supabase (voir les instructions).');
+    throw e;
+  }
+  if (f.auto && f.auto.checked) await autoTranslate(mid, langue, texte);
+};
+Object.keys(G).forEach(k => FORMS[k] = async f => {
+  const row = {}; G[k].fields.forEach(([n]) => { const v = f.elements[n].value.trim(); row[n] = v || null; });
+  if (G[k].fixed && !row.content) throw new Error('Le texte est obligatoire.');
+  if (!Object.values(row).some(Boolean)) throw new Error('Remplissez au moins un champ.');
+  if (G[k].fixed) Object.assign(row, G[k].fixed, { user_id: me.id, author_name: 'Niamké Love Jésus' });
+  const u = G[k].noimg ? null : await upImg(f.photo.files[0]); if (u) row.image_url = u;
+  const skipped = [];
+  for (;;) {
+    try { await q(sb.from(G[k].table).insert(row)); break; }
+    catch (e) {
+      const m = /Could not find the '([^']+)' column/.exec(e.message || '');
+      if (m && m[1] in row) { delete row[m[1]]; skipped.push(m[1]); continue; }
+      throw e;
+    }
+  }
+  if (skipped.length) toast('Colonne(s) absente(s) de votre table, ignorée(s) : ' + skipped.join(', ') + '. Exécutez le script SQL pour les ajouter.', true);
+});
+
+const A = {
+  lyricsFor: id => { cache.lyricSong = id; go('lyrics'); },
+  editLyric: id => {
+    const r = cache.lyr[id], f = $('form[data-f="lyrics"]'); if (!r || !f) return;
+    f.musique_id.value = r.musique_id; f.langue.value = r.langue; f.texte.value = r.texte; cache.lyricSong = r.musique_id;
+    f.musique_id.dispatchEvent(new Event('change')); f.scrollIntoView({ behavior: 'smooth' }); f.texte.focus();
+  },
+  delLyric: id => confirm('Supprimer ces paroles ?') && act(() => q(sb.from('paroles').delete().eq('id', id)), 'Paroles supprimées'),
+  csv: (id, b) => {
+    const rows = b.dataset.k === 'members' ? cache.members : Object.values(cache.pay || {});
+    if (!rows || !rows.length) return toast('Rien à exporter', true);
+    const ks = Object.keys(rows[0]), cell = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
+    const t = [ks.join(';'), ...rows.map(r => ks.map(k => cell(r[k])).join(';'))].join('\n');
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['\ufeff' + t], { type: 'text/csv' }));
+    a.download = b.dataset.k + '.csv'; a.click();
+  },
+  repSuspend: id => { const t = cache.repTarget[id]; if (!t) return toast('Profil introuvable', true); return confirm('Suspendre ' + (t.name || t.email || 'ce membre') + ' ? Son profil ne sera plus visible sur le site.') && act(() => q(sb.from('profiles').update({ status: 'rejected' }).eq('id', t.id)), 'Profil suspendu'); },
+  repRestore: id => { const t = cache.repTarget[id]; if (!t) return toast('Profil introuvable', true); return act(() => q(sb.from('profiles').update({ status: 'approved' }).eq('id', t.id)), 'Profil réactivé'); },
+  repClose: id => confirm('Classer ce signalement ? Il sera supprimé de la liste.') && act(() => q(sb.from('reports').delete().eq('id', id)), 'Signalement classé'),
+  delConf: id => confirm('Supprimer cette confession ?') && act(() => q(sb.from('confessions').delete().eq('id', id)), 'Confession supprimée'),
+  delProfile: id => confirm('Supprimer ce profil définitivement ?') && act(() => q(sb.from('profiles').delete().eq('id', id)), 'Profil supprimé'),
+  payNo: id => confirm('Refuser ce paiement ?') && act(() => q(sb.rpc('admin_reject_payment', { p_payment_id: id })), 'Paiement refusé'),
+  payOk: id => {
+    const p = cache.pay[id];
+    const MONTHS = { 'Mensuel': 1, 'Alliance': 6, 'Éternelle': 12 };
+    const months = MONTHS[p.plan];
+    if (!months) return toast(`Offre « ${p.plan || '?'} » inconnue : activation impossible.`, true);
+    if (!confirm(`Valider ${money(p.amount, p.currency)} de ${p.email || 'ce membre'} et activer « ${p.plan} » pour ${months} mois ?`)) return;
+    act(() => q(sb.rpc('admin_activate_premium', { p_payment_id: id, p_months: months })), 'Paiement validé · Premium activé');
+  },
+  togglePrayer: (id, b) => act(() => q(sb.from('prayers').update({ visible: b.dataset.v === '1' }).eq('id', id)), 'Prière mise à jour'),
+  delPrayer: id => confirm('Supprimer cette prière ?') && act(() => q(sb.from('prayers').delete().eq('id', id)), 'Prière supprimée'),
+  playSong: async id => {
+    try {
+      const v = cache.songs[id][cache.pk];
+      let url = v;
+      if (!/^https?:/i.test(v)) url = (await q(sb.storage.from('musiques').createSignedUrl(v, 600))).data.signedUrl;
+      new Audio(url).play();
+    } catch (e) { toast(e.message || 'Lecture impossible', true); }
+  },
+  delSong: id => confirm('Supprimer cette musique ?') && act(async () => {
+    const v = cache.pk && cache.songs[id][cache.pk];
+    if (v && !/^https?:/i.test(v)) await q(sb.storage.from('musiques').remove([v]));
+    await q(sb.from('musiques').delete().eq('id', id));
+  }, 'Musique supprimée'),
+  delRow: (id, b) => { const g = G[b.dataset.k]; return confirm(`Supprimer ${g.f ? 'cette' : 'ce'} ${g.one} ?`) && act(() => q(sb.from(g.table).delete().eq('id', id)), `${g.one[0].toUpperCase() + g.one.slice(1)} supprimé${g.f ? 'e' : ''}`); }
+};
+const C = {
+  plan: (id, v) => act(() => q(sb.rpc('admin_set_plan', { p_profile_id: id, p_plan: v })), 'Offre mise à jour'),
+  pstatus: (id, v) => act(() => q(sb.from('profiles').update({ status: v }).eq('id', id)), 'Statut mis à jour')
+};
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-a]'); if (b) return A[b.dataset.a](b.dataset.id, b);
+  const t = e.target.closest('[data-t]'); if (t) go(t.dataset.t);
+});
+document.addEventListener('change', e => {
+  const t = e.target;
+  if (t.dataset && t.dataset.c) C[t.dataset.c](t.dataset.id, t.value);
+  if (t.dataset && t.dataset.p && t.files[0]) act(async () => {
+    const u = await upImg(t.files[0]);
+    await q(sb.from('profiles').update({ photo_url: u }).eq('id', t.dataset.p));
+  }, 'Photo mise à jour');
+});
+document.addEventListener('submit', async e => {
+  const f = e.target; if (!f.dataset.f) return;
+  e.preventDefault(); const b = f.querySelector('button.p'), t0 = b.innerHTML, box = f.querySelector('[data-e]');
+  b.disabled = true; if (box) box.textContent = '';
+  const ok = await act(() => FORMS[f.dataset.f](f), 'Enregistré');
+  if (!ok) { b.disabled = false; b.innerHTML = t0; if (box) box.textContent = act.err; }
+});
+
+function go(t) {
+  cur = t;
+  let h = '', g = '';
+  Object.entries(TABS).forEach(([k, [n, i, grp]]) => {
+    if (grp !== g) { g = grp; h += `<div class="grp">${grp}</div>`; }
+    h += `<a class="${k === t ? 'on' : ''}" data-t="${k}">${ico(i)}${n}</a>`;
+  });
+  $('#nav').innerHTML = h; $('#crumb').textContent = TABS[t][0];
+  sb.from('payments').select('*', { count: 'exact', head: true }).eq('status', 'pending').then(r => {
+    const a = document.querySelector('#nav [data-t="payments"]');
+    if (a && r.count) a.insertAdjacentHTML('beforeend', `<span class="badge">${r.count}</span>`);
+  });
+  sb.from('reports').select('*', { count: 'exact', head: true }).then(r => {
+    const a = document.querySelector('#nav [data-t="reports"]');
+    if (a && r.count) a.insertAdjacentHTML('beforeend', `<span class="badge">${r.count}</span>`);
+  });
+  $('#main').innerHTML = '<p class="m">Chargement…</p>';
+  V[t]().catch(e => $('#main').innerHTML = `<p class="err">Erreur : ${esc(e.message)}<br><span class="m">Si le message parle de permission, vérifie que ton compte est bien dans la table admins. Si la table n'existe pas, crée-la dans Supabase.</span></p>`);
+}
+
+async function boot() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (recovering) return showRec();
+  if (!session) { $('#app').classList.add('hide'); return $('#login').classList.remove('hide'); }
+  const { data, error } = await sb.from('admins').select('user_id').eq('user_id', session.user.id).maybeSingle();
+  if (error || !data) {
+    await sb.auth.signOut();
+    $('#lerr').textContent = error ? 'Erreur : ' + error.message : "Ce compte n'est pas administrateur.";
+    $('#app').classList.add('hide'); return $('#login').classList.remove('hide');
+  }
+  me = session.user; $('#me').textContent = me.email; paintMe();
+  $('#today').textContent = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+  $('#login').classList.add('hide'); $('#app').classList.remove('hide'); go('dashboard');
+}
+$('#lf').onsubmit = async ev => {
+  ev.preventDefault(); $('#lerr').textContent = '';
+  const f = new FormData(ev.target);
+  const { error } = await sb.auth.signInWithPassword({ email: f.get('email'), password: f.get('pw') });
+  if (error) return $('#lerr').textContent = 'Connexion refusée : ' + error.message;
+  $('#lerr').textContent = ''; $('#lerr').style.color = ''; boot();
+};
+$('#forgot').onclick = async () => {
+  const email = $('#lf').email.value.trim(), m = $('#lerr');
+  m.style.color = '';
+  if (!email) return m.textContent = "Entrez d'abord votre email ci-dessus.";
+  const opt = /^https?:$/.test(location.protocol) ? { redirectTo: location.href.split('#')[0] } : {};
+  const { error } = await sb.auth.resetPasswordForEmail(email, opt);
+  if (error) return m.textContent = 'Erreur : ' + error.message;
+  m.style.color = 'var(--ok)'; m.textContent = 'Si ce compte existe, un email de réinitialisation vient d\'être envoyé.';
+};
+let recovering = /type=recovery/.test(location.hash);
+function showRec() {
+  recovering = true; $('#app').classList.add('hide'); $('#login').classList.remove('hide');
+  $('#lf').classList.add('hide'); $('#rf').classList.remove('hide');
+}
+sb.auth.onAuthStateChange(ev => { if (ev === 'PASSWORD_RECOVERY') showRec(); });
+$('#rf').onsubmit = async ev => {
+  ev.preventDefault(); const m = $('#rerr'); m.textContent = '';
+  const { error } = await sb.auth.updateUser({ password: ev.target.np.value });
+  if (error) return m.textContent = 'Erreur : ' + error.message;
+  recovering = false; await sb.auth.signOut(); history.replaceState(null, '', location.pathname);
+  $('#rf').classList.add('hide'); $('#lf').classList.remove('hide');
+  $('#lerr').style.color = 'var(--ok)'; $('#lerr').textContent = 'Mot de passe changé. Connectez-vous.';
+};
+function paintMe() {
+  const u = me && me.user_metadata && me.user_metadata.avatar_url, el = $('#mepic');
+  el.style.backgroundImage = u ? `url("${String(u).replace(/"/g, '%22')}")` : '';
+  el.textContent = u ? '' : ((me && me.email) || '?')[0].toUpperCase();
+}
+$('#mefile').onchange = async e => {
+  const f = e.target.files[0]; if (!f) return;
+  try {
+    const u = await upImg(f);
+    const { data, error } = await sb.auth.updateUser({ data: { avatar_url: u } });
+    if (error) throw error;
+    me = data.user; paintMe(); toast('Photo de profil mise à jour');
+  } catch (err) { toast('Photo refusée : ' + (err.message || err), true); }
+  e.target.value = '';
+};
+$('#eye').onclick = () => {
+  const i = $('#lf').pw, show = i.type === 'password';
+  i.type = show ? 'text' : 'password';
+  $('#eye').textContent = show ? 'Masquer' : 'Afficher';
+  $('#eye').setAttribute('aria-label', show ? 'Masquer le mot de passe' : 'Afficher le mot de passe');
+};
+$('#out').onclick = async () => { await sb.auth.signOut(); boot(); };
+boot();
+</script>
+</body>
+</html>

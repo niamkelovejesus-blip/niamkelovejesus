@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérification de l'e-mail — Niamké Love Jésus</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .container { background: #fff; padding: 40px 30px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; max-width: 420px; width: 100%; border-top: 5px solid #d4af37; }
+        .icon { font-size: 48px; margin-bottom: 20px; }
+        h1 { font-size: 22px; margin-bottom: 15px; }
+        p { font-size: 16px; line-height: 1.6; color: #666; margin-bottom: 20px; }
+        input { width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #ddd; font-size: 15px; }
+        .btn-resend { width: 100%; background: #007bff; color: #fff; border: none; padding: 14px; font-size: 16px; font-weight: 600; border-radius: 8px; cursor: pointer; }
+        .btn-resend:disabled { background: #ccc; cursor: not-allowed; }
+        .btn-green { background: #28a745 !important; }
+        .status-message { margin-top: 15px; font-size: 14px; display: none; padding: 10px; border-radius: 8px; }
+        #successBox, #loadingBox { display: none; }
+        #successBox h1 { color: #28a745; }
+    </style>
+</head>
+<body>
+    <div class="container" id="loadingBox">
+        <div class="icon">⏳</div>
+        <h1>Vérification en cours...</h1>
+        <p>Patiente un instant, on vérifie ton lien.</p>
+    </div>
+
+    <div class="container" id="mainBox">
+        <div class="icon">✉️</div>
+        <h1 id="mainTitle">Vérification requise</h1>
+        <p id="mainText">Va vérifier ton email, on t'a envoyé un lien pour entrer.</p>
+        <input type="email" id="email" placeholder="Mets ton email ici" autocomplete="email" />
+        <button id="resendBtn" class="btn-resend">Renvoyer l'email</button>
+        <button id="enterBtn" class="btn-resend btn-green" style="display:none;margin-top:10px;" onclick="window.location.href='index.html'">Entrer sur le site</button>
+        <div id="status" class="status-message"></div>
+        <p style="font-size:13px;margin-top:15px;color:#999;">Astuce : Vérifie aussi dans SPAMS / Courriers indésirables</p>
+    </div>
+
+    <div class="container" id="successBox">
+        <div class="icon">✅</div>
+        <h1>Email vérifié !</h1>
+        <p>Ton email est confirmé. Tu peux maintenant entrer.</p>
+        <button class="btn-resend" onclick="window.location.href='index.html'">Entrer sur le site</button>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const MON_URL = "https://qxxhbfoqlreiqyshbpqp.supabase.co";
+  const MA_CLE = "sb_publishable_OK9ncVWB2Ih8xZ5fzqEQWg_mSV6vCoe";
+
+  const emailInput = document.getElementById('email');
+  const resendBtn = document.getElementById('resendBtn');
+  const enterBtn = document.getElementById('enterBtn');
+  const status = document.getElementById('status');
+
+  function showMain(){ document.getElementById('loadingBox').style.display='none'; document.getElementById('mainBox').style.display='block'; document.getElementById('successBox').style.display='none'; }
+  function showSuccess(){ document.getElementById('loadingBox').style.display='none'; document.getElementById('mainBox').style.display='none'; document.getElementById('successBox').style.display='block'; }
+  function showLoading(){ document.getElementById('loadingBox').style.display='block'; document.getElementById('mainBox').style.display='none'; document.getElementById('successBox').style.display='none'; }
+  function showError(msg){ status.style.display='block'; status.style.color='red'; status.style.background='#ffe6e6'; status.textContent=msg; }
+  function showOk(msg){ status.style.display='block'; status.style.color='green'; status.style.background='#e6ffe6'; status.textContent=msg; }
+
+  if(!window.supabase){
+    showMain();
+    showError('Pas de connexion internet. Recharge la page.');
+  } else {
+
+  const supabase = window.supabase.createClient(MON_URL, MA_CLE, {
+    auth: { detectSessionInUrl: false, persistSession: true, autoRefreshToken: true }
+  });
+
+  const urlParams = new URLSearchParams(window.location.search);
+  if(urlParams.get('email')) emailInput.value = urlParams.get('email');
+
+  async function handleEmailLink(){
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const hashParams = new URLSearchParams(window.location.hash.replace('#','?'));
+      const code = params.get('code');
+      const token_hash = params.get('token_hash') || hashParams.get('token_hash');
+      const type = params.get('type') || hashParams.get('type') || 'signup';
+      const errorDesc = params.get('error_description') || hashParams.get('error_description') || params.get('error');
+
+      if(errorDesc){ showMain(); showError('Lien expiré ou déjà utilisé. Mets ton email et clique sur Renvoyer.'); return; }
+
+      if(token_hash){
+        showLoading();
+        const { data, error } = await supabase.auth.verifyOtp({ token_hash, type: type });
+        if(error){ showMain(); showError('Lien expiré ou ouvert sur un autre téléphone. Demande un nouveau lien ci-dessous.'); }
+        else if(data.session || data.user){ showSuccess(); }
+        else { showMain(); }
+        window.history.replaceState({}, '', window.location.pathname);
+        return;
+      }
+      if(code){
+        showLoading();
+        const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+        if(error){ showMain(); showError('Tu as ouvert le lien sur un autre téléphone / navigateur que celui de l’inscription. Mets ton email ici et clique sur Renvoyer pour recevoir un nouveau lien.'); }
+        else if(data.session){ showSuccess(); }
+        else { showMain(); }
+        window.history.replaceState({}, '', window.location.pathname);
+        return;
+      }
+      // CORRECTION V6 : On gère nous-mêmes le #access_token, on ne compte plus sur Supabase
+      if(hashParams.get('access_token')){
+        showLoading();
+        const { data, error } = await supabase.auth.setSession({
+          access_token: hashParams.get('access_token'),
+          refresh_token: hashParams.get('refresh_token') || ''
+        });
+        if(error || !data.session){ showMain(); showError('Lien expiré. Demande un nouveau lien ci-dessous.'); }
+        else { showSuccess(); }
+        window.history.replaceState({}, '', window.location.pathname);
+        return;
+      }
+      const { data } = await supabase.auth.getSession();
+      if(data.session && data.session.user && data.session.user.email_confirmed_at){ showSuccess(); }
+      else { showMain(); }
+    } catch(e) {
+      // CORRECTION V6 : Si n'importe quoi plante, on ne reste jamais bloqué sur "Vérification en cours"
+      showMain();
+      showError('Petit problème de connexion. Recharge la page ou demande un nouveau lien.');
+    }
+  }
+  handleEmailLink();
+
+  supabase.auth.onAuthStateChange((event) => { if(event === 'SIGNED_IN') showSuccess(); });
+
+  resendBtn.addEventListener('click', async function() {
+    const email = emailInput.value.trim().toLowerCase();
+    if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      showError('Mets un vrai email, par exemple : toi@gmail.com');
+      return;
+    }
+    resendBtn.disabled = true;
+    resendBtn.textContent = 'Envoi en cours...';
+    try {
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email: email,
+        options: { emailRedirectTo: window.location.origin + window.location.pathname }
+      });
+      if(error){
+        if(error.message.toLowerCase().includes('already confirmed') || error.message.toLowerCase().includes('already registered')){
+          showOk('Ton email est déjà vérifié !');
+          enterBtn.style.display = 'block';
+        } else if(error.message.toLowerCase().includes('rate') || error.message.toLowerCase().includes('too many')){
+          showError('Tu as demandé trop de liens. Attends 1 minute et réessaie.');
+        } else {
+          showError('Erreur : ' + error.message);
+        }
+        resendBtn.disabled = false;
+        resendBtn.textContent = 'Renvoyer l\'email';
+      } else {
+        showOk('Un nouvel e-mail de confirmation a été envoyé ! Vérifie ta boîte mail et tes SPAMS.');
+        resendBtn.textContent = 'Email envoyé !';
+        setTimeout(()=>{ resendBtn.disabled=false; resendBtn.textContent='Renvoyer l\'email'; }, 60000);
+      }
+    } catch(e){
+      showError('Problème de connexion. Réessaie.');
+      resendBtn.disabled = false;
+      resendBtn.textContent = 'Renvoyer l\'email';
+    }
+  });
+
+  }
+</script>
+</body>
+</html>

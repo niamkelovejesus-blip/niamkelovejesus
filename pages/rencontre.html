@@ -26,7 +26,25 @@
 
 
 
-</head>
+</head><style>
+.ms-list{background:#fff;border-radius:16px;overflow:hidden}
+.ms-row{display:flex;align-items:center;gap:16px;padding:12px 16px;cursor:pointer;transition:background .15s}
+.ms-row:hover,.ms-row.cur{background:#f5f7fb}
+.ms-row:focus-visible{outline:2px solid #1a73e8;outline-offset:-2px}
+.ms-ic{flex:0 0 auto;width:64px;height:64px;border-radius:14px;display:grid;place-items:center}
+.ms-ic svg{width:28px;height:28px}
+.ms-b{background:#d2e3fc;color:#1a56a8}
+.ms-o{background:#fbdca3;color:#8a4b00}
+.ms-g{background:#c8e8c9;color:#0b7a1f}
+.ms-r{background:#fad4d4;color:#a1272d}
+.ms-n{background:#e8eaed;color:#3c4043}
+.ms-tx{flex:1;min-width:0}
+.ms-t{font-size:1.15rem;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ms-s{font-size:.95rem;color:#5f6368;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ms-pp{flex:0 0 auto;color:#3c4043;display:grid;place-items:center}
+.ms-pp svg{width:28px;height:28px}
+.ms-row.on .ms-t{color:#1a56a8;font-weight:600}
+</style>
 <body>
 
 

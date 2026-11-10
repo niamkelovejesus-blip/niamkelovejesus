@@ -1,0 +1,2 @@
+/* les anciens liens 1ere/2eme/3eme_page.html n'existent plus : on utilise la navigation du site */
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var m=(a.getAttribute('href')||'').match(/([123])(?:ere|eme)_page\.html/);if(!m)return;e.preventDefault();e.stopPropagation();try{if(typeof closePremium==='function')closePremium();}catch(x){}try{parent.postMessage({nlj:'go',page:'p'+m[1]},'*');}catch(x){}},true);

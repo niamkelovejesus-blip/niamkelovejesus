@@ -1,0 +1,2 @@
+/* Langue automatique : à la 1re visite, on suit la langue du téléphone (FR, EN, ES, PT, IT, DE, NL, RU, ZH, AR ; toute autre langue → anglais) ; le choix manuel du visiteur reste prioritaire */
+(function(){try{if(localStorage.getItem('niamke_lang'))return;var OK={fr:1,en:1,es:1,pt:1,it:1,de:1,nl:1,ru:1,zh:1,ar:1},L=(navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||'fr']),c='en';for(var i=0;i<L.length;i++){var p=String(L[i]||'').toLowerCase().split('-')[0];if(OK[p]){c=p;break;}}localStorage.setItem('niamke_lang',c);}catch(e){}})();

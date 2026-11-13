@@ -79,7 +79,8 @@
     if(h==='facebook.com'||h==='fb.watch'||h==='fb.com'){
       var base=h==='fb.watch'?'https://fb.watch':'https://www.facebook.com',full=base+p+u.search,enc=encodeURIComponent(full);
       var vid=h==='fb.watch'||/\/(videos?|watch|reels?|share\/[vr])(\/|$)/.test(p)||/\/video\.php$/.test(p)||(u.searchParams.has('v')&&/\/(watch|video\.php)/.test(p));
-      if(vid)return {net:'Facebook',kind:'v',src:'https://www.facebook.com/plugins/video.php?show_text=false&width=560&href='+enc};
+      if(vid){var reel=/\/reels?\//.test(p);   /* un reel est vertical (9:16) : cadre portrait */
+        return {net:'Facebook',kind:reel?'r':'v',src:'https://www.facebook.com/plugins/video.php?show_text=false&width='+(reel?'340':'560')+'&href='+enc};}
       if(/\/(posts|permalink\.php|story\.php|photos?|share\/p|pfbid)|pfbid|fbid=|\/p\//.test(p+u.search))
         return {net:'Facebook',kind:'p',src:'https://www.facebook.com/plugins/post.php?width=500&show_text=true&href='+enc};
       return null;   /* page ou profil : ne se lit pas, on proposera « Ouvrir sur Facebook » */

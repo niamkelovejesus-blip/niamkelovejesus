@@ -23,7 +23,7 @@ var css=document.createElement('style');css.textContent=
 '#medias .md-m i{position:absolute;inset:0;margin:auto;width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center}'+
 '#medias .md-m svg{width:22px;height:22px;margin-left:3px;fill:#0f172a}'+
 '#medias .md-f{position:relative;width:100%}'+
-'#medias .md-f.v{aspect-ratio:16/9}#medias .md-f.s{height:152px}#medias .md-f.sl{height:352px}#medias .md-f.p{height:520px}'+
+'#medias .md-f.v{aspect-ratio:16/9}#medias .md-f.r{height:600px;max-width:340px;margin:0 auto}.md-f.s{height:152px}#medias .md-f.sl{height:352px}#medias .md-f.p{height:520px}'+
 '#medias .md-f iframe{position:absolute;inset:0;width:100%;height:100%;border:0}'+
 '#medias .md-i{padding:10px 14px 12px}'+
 '#medias .md-t{font-weight:700;color:#0f172a;margin:0;line-height:1.3}'+
@@ -50,7 +50,7 @@ function withAutoplay(e){
   var s=e.src,j=s.indexOf('?')<0?'?':'&';
   if(e.net==='YouTube')return s+j+'autoplay=1&playsinline=1&rel=0';
   if(e.net==='Vimeo'||e.net==='Dailymotion')return s+j+'autoplay=1';
-  if(e.net==='Facebook'&&e.kind==='v')return s+'&autoplay=true';
+  if(e.net==='Facebook'&&(e.kind==='v'||e.kind==='r'))return s+'&autoplay=true';
   if(e.net==='SoundCloud')return s+'&auto_play=true';
   return s;
 }

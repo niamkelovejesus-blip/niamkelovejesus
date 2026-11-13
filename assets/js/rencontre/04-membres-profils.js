@@ -373,7 +373,7 @@
     var st=chat.current?invState(chat.current):'none',off=!chat.current||st==='none'||st==='pending_in'||st==='declined_in'||st==='blocked';
     var bb=$('chatBlock'),rb=$('chatReport');if(bb){bb.style.display=chat.current?'':'none';bb.title=st==='blocked'?'Débloquer ce membre':'Bloquer ce membre';bb.textContent=st==='blocked'?'✅':'🚫';}if(rb)rb.style.display=chat.current?'':'none';
     var inp=$('chatInput'),btn=document.querySelector('#chatForm .mg-send');
-    if(inp){inp.disabled=off;inp.required=!off;inp.placeholder=off?(st==='blocked'?'Membre bloqué':st==='none'?'Envoie d\'abord une invitation…':'Accepte l\'invitation pour répondre…'):'Écrire un message…';}
+    if(inp){inp.disabled=off;inp.required=!off;inp.placeholder=off?(st==='blocked'?'Membre bloqué':st==='none'?'Envoie d\'abord une invitation…':'Accepte l\'invitation pour répondre…'):'Écris un message au nom de Jésus…';}
     if(btn)btn.disabled=off;
   }
   async function setSub(){

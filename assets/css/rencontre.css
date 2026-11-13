@@ -344,7 +344,7 @@ footer{margin-top:0 !important;padding-top:28px !important;padding-bottom:18px !
 .section{padding:48px 0}
 .center>h2::after{content:"";display:block;width:56px;height:3px;background:var(--gold);border-radius:3px;margin:12px auto 0}
 .nav-msg{border:0;background:var(--gold);color:#111;font-weight:800;font-size:.88rem;padding:8px 14px;border-radius:999px;cursor:pointer;font-family:inherit;display:inline-flex;gap:6px;align-items:center}
-@media(max-width:700px){.nav-links{flex-wrap:wrap!important;overflow:visible!important;justify-content:center!important;width:100%}.nav-links a,.nav-links button{flex:0 0 auto;white-space:nowrap}}
+@media(max-width:700px){.nav-links{flex-wrap:nowrap!important;overflow-x:auto!important;justify-content:flex-start!important;width:100%;scrollbar-width:none;padding-bottom:4px}.nav-links::-webkit-scrollbar{display:none}.nav-links a,.nav-links button{flex:none;white-space:nowrap}}
 /* Messagerie type Messenger */
 .msg-fab{position:fixed;right:24px;bottom:104px;z-index:99998;width:56px;height:56px;border-radius:50%;border:0;background:var(--navy);color:#fff;font-size:1.5rem;box-shadow:0 10px 28px rgba(15,23,42,.35);cursor:pointer}
 .msg-fab .msg-badge{position:absolute;top:-4px;right:-4px}
@@ -639,9 +639,9 @@ img{max-width:100%}
 .nav-links button.nav-msg{border:0;cursor:pointer;background:var(--gold);color:#111;box-shadow:0 2px 8px rgba(201,162,39,.35)}
 .nav-links button.nav-msg:hover{filter:brightness(.95)}
 @media (max-width:700px){
-  /* Téléphone : tous les onglets visibles, sur plusieurs lignes (plus de défilement caché) */
-  .nav-links{flex-wrap:wrap!important;overflow:visible!important;justify-content:center!important;gap:6px!important}
-  .nav-links a,.nav-links button.nav-msg{flex:0 0 auto;min-height:36px;padding:7px 12px;font-size:.84rem}
+  .nav-links{flex-wrap:nowrap!important;overflow-x:auto!important;justify-content:flex-start!important;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .nav-links::-webkit-scrollbar{display:none}
+  .nav-links a,.nav-links button.nav-msg{flex:none}
 }
 .pc-msg{white-space:nowrap}
 
@@ -677,3 +677,49 @@ img{max-width:100%}
 .pm-v{flex:1;min-width:0;overflow-wrap:anywhere;color:#0f172a;font-weight:600}
 .pm-v i{color:#94a3b8;font-weight:400}
 .pm-zoom{display:block;width:100%;margin-top:10px;padding:9px;border:0;border-radius:999px;background:#c9a227;color:#1b1400;font-weight:800;font-size:.82rem;cursor:pointer}
+
+/* === nlj-mz-flat : liste des chants à plat (tuiles colorées + bouton lecture) === */
+.mz-listwrap{position:relative;margin-top:12px}
+#mzApp .mz-listwrap .mz-list{margin-top:0;max-height:min(560px,72vh);overflow-y:auto;overscroll-behavior:contain;scroll-behavior:smooth;background:#fff;border:1px solid #e6e2d8;border-radius:16px}
+#mzApp .mz-list .mz-lh{position:sticky;top:0;z-index:2}
+#mzApp .mz-list .mz-row{display:flex;align-items:center;gap:16px;min-height:88px;padding:12px 20px;box-sizing:border-box;border-top:0;box-shadow:none;background:#fff;cursor:pointer;transition:background .15s}
+#mzApp .mz-list .mz-row+.mz-row{border-top:0}
+#mzApp .mz-list .mz-row:hover{background:#faf8f3}
+#mzApp .mz-list .mz-row.cur{background:#f6f1e3;box-shadow:none}
+#mzApp .mz-list .mz-row:focus-visible{outline:2px solid #c9a227;outline-offset:-2px}
+#mzApp .mz-list .mz-tile{flex:none;width:64px;height:64px;border-radius:16px;display:grid;place-items:center}
+#mzApp .mz-list .mz-tile svg{width:30px;height:30px;display:block}
+#mzApp .mz-list .mz-main{flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:4px}
+#mzApp .mz-list .mz-t{font-size:1.2rem;font-weight:500;line-height:1.25;color:#202124;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#mzApp .mz-list .mz-a{display:block;margin:0;font-size:.98rem;color:#5f6368;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#mzApp .mz-list .mz-go{flex:none;width:34px;height:34px;display:grid;place-items:center;color:#5f6368}
+#mzApp .mz-list .mz-go svg{width:28px;height:28px;display:block}
+#mzApp .mz-list .mz-row.on .mz-go{color:#9a7440}
+#mzApp .mz-list .mz-row.on .mz-t{font-weight:700}
+.mz-down{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);width:50px;height:50px;border-radius:50%;border:0;background:#fff;color:#202124;display:grid;place-items:center;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.22);z-index:3}
+.mz-down[hidden]{display:none}
+.mz-down svg{width:24px;height:24px}
+.mz-down:hover{background:#f6f1e3}
+@media(max-width:620px){
+  #mzApp .mz-list .mz-row{gap:14px;min-height:84px;padding:10px 14px}
+  #mzApp .mz-list .mz-tile{width:60px;height:60px;border-radius:15px}
+  #mzApp .mz-list .mz-t{font-size:1.1rem}
+}
+
+/* === nlj-chat-scroll-lock : quand la discussion est ouverte, la page derrière ne défile plus === */
+html:has(#chatPanel:not(.hidden)),body:has(#chatPanel:not(.hidden)){overflow:hidden!important;overscroll-behavior:none}
+#chatPanel,.msgr,.mg-contacts,.msgr .chat-messages{overscroll-behavior:contain}
+
+/* === nlj-presence : point vert = connecté, point gris = pas connecté === */
+.profile.pc .pc-ph{position:relative}
+html.nlj-pres-ready .profile.pc[data-uid] .pc-name::after,html.nlj-pres-ready .mg-ct[data-chat] .mg-ci b::after{content:"";display:inline-block;width:10px;height:10px;margin-left:7px;border-radius:50%;background:#9ca3af;vertical-align:middle}
+html.nlj-pres-ready .profile.pc.is-online .pc-name::after,html.nlj-pres-ready .mg-ct.is-online .mg-ci b::after{background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.28)}
+.profile.pc.is-online .pc-ph{border-color:#22c55e}
+
+/* === nlj-chat-plein-ecran : sur téléphone, la discussion couvre tout l'écran (plus de page visible derrière en haut/en bas) === */
+@media(max-width:760px){
+  #chatPanel{align-items:stretch!important;justify-content:stretch!important;background:#fdfcf8!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;top:0!important;bottom:0!important;left:0!important;right:0!important}
+  #chatPanel .msgr{height:100%!important;max-height:none!important;width:100%!important}
+}
+
+.mz-sw{padding:8px 12px}.mz-q{width:100%;box-sizing:border-box;padding:10px 14px;border:1px solid #e8dcae;border-radius:999px;font:inherit;background:#fffdf6}

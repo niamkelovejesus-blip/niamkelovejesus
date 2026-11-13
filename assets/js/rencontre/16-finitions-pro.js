@@ -24,3 +24,19 @@
   document.addEventListener('visibilitychange',function(){if(!document.hidden)refreshProfiles();});
   try{if(typeof supabaseClient!=='undefined'&&supabaseClient)supabaseClient.auth.onAuthStateChange(function(){setTimeout(refreshProfiles,400);});}catch(e){}
 })();
+
+/* Discussion instantanée : le doigt qui glisse sur la fenêtre ne fait plus défiler le site derrière */
+(function(){
+  function scrollable(el,root){
+    while(el&&el!==root){
+      if(el.nodeType===1){var o=getComputedStyle(el).overflowY;if((o==='auto'||o==='scroll')&&el.scrollHeight>el.clientHeight+1)return true;}
+      el=el.parentNode;
+    }
+    return false;
+  }
+  document.addEventListener('touchmove',function(e){
+    var p=document.getElementById('chatPanel');
+    if(!p||p.classList.contains('hidden')||!p.contains(e.target))return;
+    if(!scrollable(e.target,p))e.preventDefault();
+  },{passive:false});
+})();

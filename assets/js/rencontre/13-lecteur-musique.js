@@ -170,12 +170,16 @@
       '<input type="range" id="mzVol" min="0" max="1" step="0.05" value="0.8" aria-label="Volume"><button type="button" class="mz-dl" id="mzDl"></button></div>'+
     '</div></div>'+
     '<details class="mz-lyr" open><summary><span>🎤</span><span id="mzLyTitle">Paroles</span><span id="mzLyNote"></span><span class="mz-chev">▾</span></summary><div class="mz-lyr-box" id="mzLyBox"></div></details><div id=mzAdm></div>'+
-    '<div class="mz-list" id="mzList"></div>';
+    '<div class="mz-sw"><input type="search" id="mzQ" class="mz-q" autocomplete="off"></div>'+
+    '<div class="mz-listwrap"><div class="mz-list" id="mzList"></div><button type="button" class="mz-down" id="mzDown" aria-label="Descendre" hidden></button></div>';
+    var qb=$('mzQ');if(qb){qb.placeholder=((document.documentElement.lang||'fr').slice(0,2)==='en')?'Search a song or artist…':'Rechercher un chant ou un artiste…';qb.oninput=function(){QS=this.value;renderList();};}
     $('mzPp').onclick=function(){playing?pause():play();};
     $('mzPrev').onclick=function(){go(-1);};$('mzNext').onclick=function(){go(1);};
     $('mzVol').oninput=function(){audio.volume=+this.value;};audio.volume=.8;
     $('mzBar').onclick=function(e){var r=this.getBoundingClientRect();if(audio.duration)audio.currentTime=(e.clientX-r.left)/r.width*audio.duration;};
     $('mzDl').onclick=function(){download(TR[cur]);};
+    $('mzDown').innerHTML=DOWNI;$('mzDown').onclick=function(){var l=$('mzList');l.scrollBy({top:Math.round(l.clientHeight*0.8),behavior:'smooth'});};
+    $('mzList').addEventListener('scroll',updDown,{passive:true});window.addEventListener('resize',updDown);
     $('mzList').onclick=function(e){
       var d=e.target.closest('[data-dl]');if(d){e.stopPropagation();download(TR[+d.getAttribute('data-dl')]);return;}
       var r=e.target.closest('.mz-row');if(!r)return;var i=+r.getAttribute('data-i');
@@ -190,7 +194,47 @@
     $('mzList').addEventListener('toggle',function(e){var d=e.target;if(d&&d.getAttribute&&d.getAttribute('data-g')!==null){OPEN[GN[+d.getAttribute('data-g')]]=d.open;}},true);$('mzList').onkeydown=function(e){if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('mz-row')){e.preventDefault();e.target.click();}};
     $('mzLyNote').onclick=function(e){if(e.target.id==='mzOrig'){e.preventDefault();showOrig=!showOrig;renderLyrics();}};
   }
-  var HT={fr:['Touchez un nom pour ouvrir et écouter ses chants','Voir les chants','Fermer'],en:['Tap a name to open and listen to their songs','View songs','Close'],es:['Toca un nombre para abrir y escuchar sus cantos','Ver cantos','Cerrar'],pt:['Toque num nome para abrir e ouvir os cânticos','Ver cânticos','Fechar'],it:['Tocca un nome per aprire e ascoltare i canti','Vedi canti','Chiudi'],de:['Namen antippen, um die Lieder zu öffnen und zu hören','Lieder ansehen','Schließen'],ar:['المس اسمًا لفتح ترانيمه والاستماع إليها','عرض الترانيم','إغلاق'],zh:['点击名字即可打开并收听他的歌曲','查看歌曲','关闭'],nl:['Tik op een naam om de liederen te openen en te beluisteren','Liederen bekijken','Sluiten'],ru:['Нажмите на имя, чтобы открыть и послушать песни','Показать песни','Закрыть']};var OPEN={},GN=[];function renderList(){var l=$('mzList');if(!l)return;var T=L();var head='<div class=mz-lh>'+esc(T.pl)+'<span>'+TR.length+' '+esc(TR.length>1?T.cnt:T.cnt1)+'</span></div><div class=mz-hint>👆 '+(HT[lang()]||HT.fr)[0]+'</div>';var groups=[],map={};GN=[];TR.forEach(function(k,i){var n=k.artist||'';if(!map.hasOwnProperty(n)){map[n]={name:n,items:[]};groups.push(map[n]);}map[n].items.push(i);});l.innerHTML=head+groups.map(function(g,gi){GN[gi]=g.name;var hasCur=g.items.indexOf(cur)>-1;var open=OPEN.hasOwnProperty(g.name)?OPEN[g.name]:(hasCur||groups.length===1);var rows=g.items.map(function(i,j){var k=TR[i],isCur=(i===cur),on=isCur&&playing,ch=chips(k),d=k.dur?fmt(k.dur):'',ttl=esc(k.ttl||k.title);return '<div class=\"mz-row'+(isCur?' cur':'')+(on?' on':'')+'\" data-i='+i+' role=button tabindex=0 aria-label=\"'+ttl+'\">'+'<span class=mz-n><span class=mz-num>'+(j+1)+'</span><span class=mz-pl aria-hidden=true>▶</span><span class=mz-eq aria-hidden=true><i></i><i></i><i></i></span></span>'+'<div class=mz-main><div class=mz-t>'+ttl+'</div><div class=mz-a><span class=mz-role>'+esc(T.comp)+'</span><span class=mz-name>'+esc(k.artist)+'</span></div></div>'+(ch?'<div class=mz-who>'+ch+'</div>':'')+(d?'<span class=mz-dur>'+d+'</span>':'')+'<button type=button class=\"mz-rdl'+(premium()?'':' locked')+'\" data-dl='+i+' title=\"'+esc(premium()?T.dl:T.lock)+'\" aria-label=\"'+esc(premium()?T.dl:T.lock)+'\">'+(premium()?ICO_DL:ICO_LOCK)+'</button></div>';}).join('');return '<details class=mz-grp data-g='+gi+(open?' open':'')+'><summary><span class=mz-gi>🎙</span><span class=mz-gn>'+esc(g.name)+'</span><span class=mz-gc>🎵 '+g.items.length+' '+esc(g.items.length>1?T.cnt:T.cnt1)+'</span><span class=mz-btn><span class=mz-bo>'+(HT[lang()]||HT.fr)[1]+'</span><span class=mz-bc>'+(HT[lang()]||HT.fr)[2]+'</span><span class=mz-chev>▾</span></span></summary>'+rows+'</details>';}).join('');if(window.NLJ_NAVM)window.NLJ_NAVM();}  function renderPlayer(){
+  var HT={fr:['Touchez un nom pour ouvrir et écouter ses chants','Voir les chants','Fermer'],en:['Tap a name to open and listen to their songs','View songs','Close'],es:['Toca un nombre para abrir y escuchar sus cantos','Ver cantos','Cerrar'],pt:['Toque num nome para abrir e ouvir os cânticos','Ver cânticos','Fechar'],it:['Tocca un nome per aprire e ascoltare i canti','Vedi canti','Chiudi'],de:['Namen antippen, um die Lieder zu öffnen und zu hören','Lieder ansehen','Schließen'],ar:['المس اسمًا لفتح ترانيمه والاستماع إليها','عرض الترانيم','إغلاق'],zh:['点击名字即可打开并收听他的歌曲','查看歌曲','关闭'],nl:['Tik op een naam om de liederen te openen en te beluisteren','Liederen bekijken','Sluiten'],ru:['Нажмите на имя, чтобы открыть и послушать песни','Показать песни','Закрыть']};var OPEN={},GN=[];var PAL=[['#d3e5fb','#1b5fa8'],['#f8dfa6','#7a4a00'],['#c9e8c9','#0b7a1f'],['#fad5d5','#9b2335'],['#e3d8f6','#5b3aa0'],['#cdeeee','#0e6f73']];
+  var NOTE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="17.5" r="3"/><circle cx="17.5" cy="15.5" r="3"/><path d="M10 17.5V6l10.5-2v11.5"/><path d="M10 9.5l10.5-2"/></svg>';
+  var PLAYI='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg>';
+  var PAUSEI='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+  var DOWNI='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>';
+  function palIdx(str){var n=String(str||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');if(/louange|praise/.test(n))return 0;if(/adoration|worship/.test(n))return 1;if(/priere|prayer/.test(n))return 2;if(/enfant|kid|child/.test(n))return 3;var h=0;str=n;str=String(str||'');for(var i=0;i<str.length;i++){h=(h*31+str.charCodeAt(i))>>>0;}return h%PAL.length;}
+  function subLine(k){var p=[];if(k.cat)p.push(k.cat);if(k.coll)p.push(k.coll);if(!p.length){if(k.artist)p.push(k.artist);var pl=k.city||k.country;if(pl)p.push(pl);}return p.join(' \u00b7 ');}
+  function updDown(){var l=$('mzList'),b=$('mzDown');if(!l||!b)return;b.hidden=!((l.scrollHeight-l.clientHeight>24)&&(l.scrollTop+l.clientHeight<l.scrollHeight-24));}
+  var QS='';
+  function renderList(){var l=$('mzList');if(!l)return;var T=L(),q=QS.trim().toLowerCase(),AUTRES='Autres chants';
+    var head='<div class=mz-lh>'+esc(T.pl)+'<span>'+TR.length+' '+esc(TR.length>1?T.cnt:T.cnt1)+'</span></div>';
+    var G={},order=[];
+    TR.forEach(function(k,i){
+      var hay=((k.ttl||k.title)+' '+k.artist+' '+k.cat+' '+k.coll).toLowerCase();
+      if(q&&hay.indexOf(q)<0)return;
+      var n=k.cat||AUTRES;if(!G[n]){G[n]=[];order.push(n);}G[n].push(i);
+    });
+    var pref=['louange','adoration','priere','prière'];
+    order.sort(function(a,b){
+      if(a===AUTRES)return 1;if(b===AUTRES)return -1;
+      var ia=pref.indexOf(a.toLowerCase()),ib=pref.indexOf(b.toLowerCase());
+      if(ia>-1||ib>-1)return (ia<0?99:ia)-(ib<0?99:ib);
+      return a.localeCompare(b,'fr',{sensitivity:'base'});
+    });
+    GN=order;
+    var body=order.map(function(n,gi){
+      var idx=G[n].slice().sort(function(a,b){return String(TR[a].title).localeCompare(String(TR[b].title),'fr',{sensitivity:'base'});});
+      var open=q?true:(OPEN[n]===undefined?(idx.indexOf(cur)>-1&&playing):OPEN[n]);
+      var rows=idx.map(function(i){
+        var k=TR[i],isCur=(i===cur),on=isCur&&playing,ttl=esc(k.ttl||k.title),c=PAL[palIdx(k.cat||k.artist)];
+        var sub=[k.artist,k.coll].filter(Boolean).join(' \u00b7 ');
+        return '<div class="mz-row'+(isCur?' cur':'')+(on?' on':'')+'" data-i='+i+' role=button tabindex=0 aria-label="'+ttl+'">'
+          +'<span class=mz-tile style="background:'+c[0]+';color:'+c[1]+'">'+NOTE+'</span>'
+          +'<div class=mz-main><div class=mz-t>'+ttl+'</div><div class=mz-a>'+esc(sub)+'</div></div>'
+          +'<span class=mz-go aria-hidden=true>'+(on?PAUSEI:PLAYI)+'</span></div>';
+      }).join('');
+      return '<details class="mz-grp" data-g="'+gi+'"'+(open?' open':'')+'><summary><span class="mz-gn">'+esc(n)+'</span><span class="mz-gc">'+idx.length+'</span><span class="mz-chev">\u25BE</span></summary>'+rows+'</details>';
+    }).join('');
+    l.innerHTML=head+(body||'<div class=mz-lh style="justify-content:center">\u2014</div>');
+    if(window.NLJ_NAVM)window.NLJ_NAVM();
+    updDown();}  function renderPlayer(){
     var k=TR[cur];if(!k)return;
     $('mzNt').textContent=k.ttl||k.title;
     $('mzNm').innerHTML=(k.artist?'<span class="mz-chip">🎙 '+esc(k.artist)+'</span>':'')+chips(k);
@@ -276,7 +320,7 @@
     try{
       var r=await c.from('musiques').select('*').order('created_at',{ascending:false}).limit(300);
       if(r.error)throw r.error;
-      var rows=(r.data||[]).filter(function(s){return s&&pick(s,['url','storage_path','file_path','path','file','file_url','audio_url','audio']);});
+      var rows=(r.data||[]).filter(function(s){return s&&pick(s,['url','storage_path','file_path','path','file','file_url','audio_url','audio'])&&!(window.NLJ_EMBED&&(NLJ_EMBED.isLink||NLJ_EMBED.parse)(pick(s,['url','storage_path','file_path','path','file','file_url','audio_url','audio'])));});
       /* infos membre (pays, âge, ville) */
       var ids=[];rows.forEach(function(s){var u=pick(s,['user_id','uploader_id','owner_id','profile_id','created_by','member_id']);if(u&&ids.indexOf(u)<0)ids.push(u);});
       var byUser={},byId={};
@@ -303,6 +347,8 @@
           age:pick(s,['age'])||p.age||'',
           city:pick(s,['city','ville'])||p.city||'',
           country:pick(s,['country','pays'])||p.country||'',
+          cat:String(pick(s,['categorie','category','genre','type','rubrique'])||'').trim(),
+          coll:String(pick(s,['recueil','collection','album','playlist','event','evenement'])||'').trim(),
           lang:LG0,
           raw:rawL||'',lyrics:parseLyrics(rawL),lyrBy:pb,
           dur:+s.duration||0
@@ -331,7 +377,7 @@
       if(ONLY_VERSE_AUTHORS.length)q=q.in('user_id',ONLY_VERSE_AUTHORS);
       var r=await q;if(r.error)throw r.error;
       var rows=r.data||[];
-      box.innerHTML=rows.length?rows.map(function(v){return '<div class="pv-card"><blockquote>« '+esc(v.content)+' »'+(v.reference?'<cite>'+esc(v.reference)+'</cite>':'')+'</blockquote><small>'+esc(v.author_name||'')+'</small></div>';}).join(''):'<p class="pw-empty" style="grid-column:1/-1;text-align:center;color:#64748b">—</p>';
+      var __vh=rows.length?rows.map(function(v){return '<div class="pv-card"><blockquote>« '+esc(v.content)+' »'+(v.reference?'<cite>'+esc(v.reference)+'</cite>':'')+'</blockquote><small>'+esc(v.author_name||'')+'</small></div>';}).join(''):'<p class="pw-empty" style="grid-column:1/-1;text-align:center;color:#64748b">—</p>';if(box._h!==__vh||!box.children.length){box._h=__vh;box.innerHTML=__vh;}
     }catch(e){if(!box.children.length)box.innerHTML='';}
   }
 

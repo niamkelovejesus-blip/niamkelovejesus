@@ -210,7 +210,7 @@
     $('chatSubtitle').textContent='Passe en Premium pour tchater en Jésus';
     $('chatContacts').innerHTML='<div style="padding:16px;text-align:center"><div style="font-size:2.5rem">🔒</div><h4 style="margin:10px 0">Tchat réservé Premium en Jésus</h4><p style="font-size:.85rem;color:var(--muted)">Le tchat est réservé aux abonnés. Choisis un abonnement pour écrire aux membres.</p><div style="margin-top:16px;display:grid;gap:8px"><button class="btn btn-gold" data-nlj="premium">💳 Voir les abonnements - 9 000 F</button></div></div>';
     $('chatMessages').innerHTML='<div style="padding:20px;text-align:center;color:var(--muted)"><p>💬 <strong>Pourquoi le tchat est réservé aux abonnés ?</strong></p><p style="font-size:.85rem;margin-top:10px">Pour éviter les faux profils et garder une communauté sérieuse tournée vers le mariage.</p><p style="font-size:.85rem;margin-top:10px">✅ Mensuel : 9 000 F<br>✅ Alliance 6 mois : 15 000 F<br>✅ Éternelle 12 mois : 30 000 F</p></div>';
-    p.scrollIntoView({behavior:'smooth'});
+    /* fenêtre plein écran : pas de défilement de la page derrière */
   }
   /* ---------- Tchat : gratuit = 20 messages/jour sans coordonnées ; Premium = texte + vocal ---------- */
     var DIGIT_WORDS=/^(zero|un|une|deux|trois|quatre|cinq|six|sept|huit|neuf|one|two|three|four|five|seven|eight|nine|cero|uno|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|dois|quatro|oito|nove)$/;
@@ -387,7 +387,7 @@
     $('chatTitle').textContent=uid?nameOf(uid)+' en Jésus':'Mes messages';
     setSub();
     await loadMessages();renderContacts();renderMsgs();startLive();
-    p.scrollIntoView({behavior:'smooth',block:'center'});
+    /* fenêtre plein écran : pas de défilement de la page derrière */
   };
   window.closeChatPanel=function(){var p=$('chatPanel');if(p)p.classList.add('hidden');stopLive();};
   $('chatContacts').addEventListener('click',function(e){var d=e.target.closest('[data-chat]');if(d)openChat(d.getAttribute('data-chat'));});

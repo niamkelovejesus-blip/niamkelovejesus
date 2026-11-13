@@ -39,7 +39,7 @@ window.addEventListener('message',function(e){
   else if(d.nlj==='need-state')sendState();
   else if(d.nlj==='filters'){window.FILTERS={church:d.church||'',gender:d.gender||'',search:d.search||'',ageMin:d.ageMin,ageMax:d.ageMax};show('p2','profilesGrid');}
   else if(d.nlj==='legal')showLegal(d.doc);
-  else if(d.nlj==='authed'){loaded.p2=false;show('p2','profil');}
+  else if(d.nlj==='authed'){loaded.p2=false;show('p2','');}
   else if(d.nlj==='noauth'){if(cur==='p2'){_show('p1','',true);openLogin('need');}}
   else if(d.nlj==='logout'){wipePrivate();_show('p1');}
 });
@@ -54,4 +54,4 @@ show(start,'',true);
 /* Déjà connecté dans CET onglet (ex. actualisation, retour de paiement) : on rouvre l'espace membre. Après fermeture de la page, la session n'existe plus → mot de passe redemandé. */
 if(!rec&&start==='p1'){hasSession().then(function(ok){if(ok){try{history.replaceState({p:'p2'},'','#rencontre');}catch(e){}show('p2','',true);}});}
 /* la page 2 se charge en arrière-plan pour connaître la session (Premium, connexion) */
-setTimeout(function(){load('p2');},800);
+setTimeout(function(){load('p2');},3500);

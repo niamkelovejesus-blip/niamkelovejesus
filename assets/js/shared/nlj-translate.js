@@ -46,8 +46,9 @@
   /* ---------- cache (mémoire + localStorage) ---------- */
   function cacheFor(l) {
     if (mem[l]) return mem[l];
+    try { Object.keys(localStorage).forEach(function (k) { if (/^nljt_/.test(k)) localStorage.removeItem(k); }); } catch (e) {}   // ancien cache (pouvait contenir du français)
     var c = {};
-    try { c = JSON.parse(localStorage.getItem('nljt_' + l) || '{}') || {}; } catch (e) {}
+    try { c = JSON.parse(localStorage.getItem('nljt2_' + l) || '{}') || {}; } catch (e) {}
     return (mem[l] = c);
   }
   function persist(l) {
@@ -55,8 +56,8 @@
     saveTimer = setTimeout(function () {
       var c = cacheFor(l), keys = Object.keys(c);
       if (keys.length > 1500) { keys.slice(0, keys.length - 1200).forEach(function (k) { delete c[k]; }); }
-      try { localStorage.setItem('nljt_' + l, JSON.stringify(c)); } catch (e) {
-        try { Object.keys(localStorage).forEach(function (k) { if (/^nljt_/.test(k) && k !== 'nljt_' + l) localStorage.removeItem(k); }); } catch (e2) {}
+      try { localStorage.setItem('nljt2_' + l, JSON.stringify(c)); } catch (e) {
+        try { Object.keys(localStorage).forEach(function (k) { if (/^nljt2?_/.test(k) && k !== 'nljt2_' + l) localStorage.removeItem(k); }); } catch (e2) {}
       }
     }, 800);
   }
@@ -89,15 +90,22 @@
     // essaie le lot ; si le découpage ne correspond pas, traduit un par un
     return gtxBatch(texts, tgt).catch(function () {
       return Promise.all(texts.map(function (t) {
-        return gtxOne(t, tgt).catch(function () { return myMemory(t, tgt); }).catch(function () { return t; });
+        return gtxOne(t, tgt).catch(function () { return myMemory(t, tgt); }).catch(function () { return null; });
       }));
     });
   }
 
   /* ---------- sélection du texte à traduire ---------- */
+  var SCRIPT = { ar: /[\u0600-\u06FF]/g, ru: /[\u0400-\u04FF]/g, zh: /[\u4E00-\u9FFF]/g };
+  function inTargetScript(t) {
+    var re = SCRIPT[curLang()]; if (!re) return false;
+    var m = t.match(re), letters = t.match(/[A-Za-z\u00C0-\u00FF\u0400-\u04FF\u0600-\u06FF\u4E00-\u9FFF]/g);
+    return !!m && !!letters && m.length / letters.length > 0.5;
+  }
   function translatable(s) {
     if (!s) return false;
     var t = s.trim();
+    if (inTargetScript(t)) return false;
     if (t.length < 2 || t.length > 20000) return false;
     if (!/[A-Za-zÀ-ÿ\u0400-\u04FF\u0600-\u06FF\u4E00-\u9FFF]/.test(t)) return false;
     if (/^(https?:\/\/|www\.)\S+$/i.test(t) || /^[\w.+-]+@[\w-]+\.[\w.-]+$/.test(t)) return false;
@@ -169,7 +177,7 @@
     if (n.nodeValue !== val) n.nodeValue = val;
   }
 
-  function run(root, tgt) {
+  function run(root, tgt, cacheOnly) {
     if (tgt === 'fr' && !hasOriginals()) { setBar(); return Promise.resolve(); }
     var c = cacheFor(tgt), found = collect(root || document.body), need = {}, jobs = [];
 
@@ -193,7 +201,7 @@
       if (c[key] != null) { apply(j, c[key]); }
       else { if (!need[key]) { need[key] = 1; pending.push(key); } }
     });
-    if (!pending.length) { setBar(); return Promise.resolve(); }
+    if (!pending.length || cacheOnly) { if (!cacheOnly) setBar(); return Promise.resolve(); }
 
     busy++; setBar();
     // textes longs : découpés en morceaux, traduits, puis recollés
@@ -205,14 +213,18 @@
     // lots de 35 textes / 3500 caractères max
     var batches = [], cur = [], len = 0;
     units.forEach(function (t) {
-      if (cur.length >= 35 || len + t.length > 3500) { batches.push(cur); cur = []; len = 0; }
+      if (cur.length >= 25 || len + t.length > 2500) { batches.push(cur); cur = []; len = 0; }
       cur.push(t); len += t.length + SEP.length;
     });
     if (cur.length) batches.push(cur);
 
-    var chain = Promise.resolve();
-    batches.forEach(function (b) {
-      chain = chain.then(function () {
+    var bi = 0;
+    function nextBatch() {
+      if (bi >= batches.length) return Promise.resolve();
+      var b = batches[bi++];
+      return handleBatch(b).then(nextBatch);
+    }
+    function handleBatch(b) {
         return translateMany(b, MT[tgt]).then(function (res) {
           if (curLang() !== tgt) return;                      // l'utilisateur a changé de langue entre-temps
           b.forEach(function (u, i) { if (res[i]) ut[u] = res[i]; });
@@ -228,10 +240,11 @@
           });
           persist(tgt);
           jobs.forEach(function (j) { var k = j.orig.trim(); if (c[k] != null && !j.applied) apply(j, c[k]); });
-        });
-      });
-    });
-    return chain.catch(function () {}).then(function () { busy--; setBar(); });
+        }).catch(function () {});
+    }
+    var workers = [];
+    for (var w = 0; w < 4; w++) workers.push(nextBatch());
+    return Promise.all(workers).catch(function () {}).then(function () { busy--; setBar(); });
 
     function apply(j, tr) {
       if (j.applied || showOriginal) return; j.applied = true;
@@ -299,12 +312,19 @@
 
   function go(force) {
     var l = curLang();
-    if (!force && l === applied) { run(document.body, l); return; }
+    if (!force && l === applied) { return run(document.body, l); }
     var changed = l !== applied; applied = l; setDir(l);
-    if (l === 'fr') { restore(); setBar(); return; }
+    if (l === 'fr') { restore(); setBar(); return Promise.resolve(); }
     if (changed) restore();                                   // repart toujours du texte d'origine
     seenAny = true;
-    run(document.body, l);
+    return run(document.body, l);
+  }
+
+  /* Prévient la page parente (écran de démarrage) que la 1re traduction est prête */
+  var readySent = false;
+  function signalReady() {
+    if (readySent) return; readySent = true;
+    try { if (window.parent && window.parent !== window) window.parent.postMessage({ nlj: 'i18n-ready' }, '*'); } catch (e) {}
   }
 
   function schedule() {
@@ -320,6 +340,7 @@
         var m = muts[i];
         if (m.type === 'characterData' && store.done.get(m.target) === m.target.nodeValue) continue;
         if (m.target && m.target.closest && m.target.closest('#nljt-bar')) continue;
+        try { run(document.body, curLang(), true); } catch (e) {}
         return schedule();
       }
     });
@@ -335,7 +356,13 @@
     }, true);
     window.addEventListener('storage', function (e) { if (e.key === 'niamke_lang') go(false); });
     setInterval(function () { if (curLang() !== applied && !showOriginal) go(false); }, 700);   // sélecteurs React, autres pages…
-    setTimeout(function () { go(false); }, 400);
+    try { go(false); } catch (e) {}                              // tout de suite : texte du cache sans attendre
+    function afterBoot() {
+      if (document.documentElement.classList.contains('nlj-boot')) { setTimeout(afterBoot, 80); return; }
+      Promise.resolve(go(false)).then(signalReady, signalReady);
+    }
+    setTimeout(afterBoot, 400);
+    setTimeout(signalReady, 3500);
     setTimeout(function () { go(false); }, 2500);               // contenu chargé après coup (Supabase)
   }
 

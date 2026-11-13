@@ -24,7 +24,7 @@
       SOC.l={};SOC.c={};(a.data||[]).forEach(function(x){var k=String(x.prayer_id);(SOC.l[k]=SOC.l[k]||[]).push(x.user_id);});(b.data||[]).forEach(function(x){var k=String(x.prayer_id);(SOC.c[k]=SOC.c[k]||[]).push(x);});render();}catch(e){}}
   function render(){
     if(!rows.length){list.innerHTML='<p class="pw-empty">Aucune prière pour l\'instant. Sois le premier à déposer une prière ou un verset 🙏</p>';return;}
-    var ae=document.activeElement,kv=ae&&ae.getAttribute?ae.getAttribute('data-cin'):null,kval=kv?ae.value:'';list.innerHTML=rows.map(item).join('');if(kv){var ni=list.querySelector('[data-cin="'+kv+'"]');if(ni){ni.value=kval;ni.focus();}}
+    var ae=document.activeElement,kv=ae&&ae.getAttribute?ae.getAttribute('data-cin'):null,kval=kv?ae.value:'';var h=rows.map(item).join('');if(list._h===h&&!list.querySelector('.pw-empty'))return;list._h=h;list.innerHTML=h;if(kv){var ni=list.querySelector('[data-cin="'+kv+'"]');if(ni){ni.value=kval;ni.focus();}}
   }
   function sortRows(){rows.sort(function(a,b){return new Date(b.created_at)-new Date(a.created_at);});if(rows.length>200)rows.length=200;}
   function upsert(r){if(!r||!r.id)return;if(r.visible===false){remove(r.id);return;}var i=rows.findIndex(function(x){return x.id===r.id;});if(i>=0)rows[i]=r;else rows.push(r);sortRows();render();}

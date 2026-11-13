@@ -9,6 +9,6 @@
     }
   },true);
   window.addEventListener('message',function(e){
-    if(e.data&&e.data.nlj==='scroll'){var el=e.data.id&&document.getElementById(e.data.id);if(el)el.scrollIntoView();else window.scrollTo(0,0);}
+    if(e.data&&e.data.nlj==='scroll'){var el=e.data.id&&document.getElementById(e.data.id);if(el){try{el.scrollIntoView({behavior:'instant',block:'start'});}catch(x){el.scrollIntoView();}}else{try{window.scrollTo({top:0,left:0,behavior:'instant'});}catch(x){window.scrollTo(0,0);}}}
   });
 })();

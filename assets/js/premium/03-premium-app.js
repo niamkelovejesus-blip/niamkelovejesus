@@ -92,7 +92,7 @@ async function loadDbMusic(){
   const c=musicSb(); if(!c) return;
   const r=await c.from('musiques').select('*').order('created_at',{ascending:false}).limit(200);
   if(r.error||!r.data||!r.data.length) return;
-  DBMUSIC=r.data.map(function(x){const pk=Object.keys(x).find(function(k){return MUSIC_PATH_KEY.test(k)&&x[k];});return {t:x.title||x.titre||x.name||'Musique',dur:x.artist||'',size:'',path:pk?x[pk]:null};}).filter(function(x){return x.path;});
+  DBMUSIC=r.data.map(function(x){const pk=Object.keys(x).find(function(k){return MUSIC_PATH_KEY.test(k)&&x[k];});return {t:x.title||x.titre||x.name||'Musique',dur:x.artist||'',size:'',path:pk?x[pk]:null};}).filter(function(x){return x.path&&!(window.NLJ_EMBED&&(NLJ_EMBED.isLink||NLJ_EMBED.parse)(x.path));});
   if(DBMUSIC.length&&musicVisible) renderMusicList();
  }catch(e){}
 }

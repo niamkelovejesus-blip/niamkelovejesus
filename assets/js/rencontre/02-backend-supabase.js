@@ -256,11 +256,13 @@ const gender=document.getElementById("filterGender").value;
 const search=document.getElementById("filterSearch").value.toLowerCase();
 const ageMin=parseInt(document.getElementById("ageMin").value);
 const ageMax=parseInt(document.getElementById("ageMax").value);
-const grid=document.getElementById("profilesGrid");grid.innerHTML="";
+const realGrid=document.getElementById("profilesGrid");const grid=document.createElement("div");
 profiles.filter(p=>String(p.status||"").trim().toLowerCase()==="approved").filter(p=>!church||p.church===church||p.confession===church).filter(p=>!gender||p.gender===gender).filter(p=>!p.age||(p.age>=ageMin && p.age<=ageMax)).filter(p=>!search||((p.name||"")+(p.verse||"")+(p.church||"")).toLowerCase().includes(search)).forEach(p=>{
 const realIdx=profiles.indexOf(p);
-grid.insertAdjacentHTML("beforeend",`<div class="profile pc"><div class="pc-ph">${p.photo?`<img src="${escapeHTML(p.photo)}" alt="${escapeHTML(p.name||"Membre")}" loading="lazy">`:initials(p.name||"Membre")}</div><div class="pc-info"><div class="pc-name">${escapeHTML(p.name||"Membre")}</div><div class="pc-sub">${p.age?escapeHTML(p.age)+" ans":"Âge non renseigné"} · 📍 ${p.city?escapeHTML(p.city):"Ville non renseignée"}</div></div><div class="pc-act"><button class="btn ${(window.NLJ&&NLJ.liked&&NLJ.liked.has(p.id))?'btn-outline':'btn-primary'} btn-sm" data-nlj-act="likeProfile" data-nlj-a="[${realIdx}]">❤️ ${escapeHTML(p.points||0)}</button>${p.user_id?`<button class="btn btn-gold btn-sm pc-msg" title="Écrire un message" data-nlj-act="openChat" data-nlj-a="${NLJA([p.user_id])}">💬 Écrire</button>`:""}<button class="btn btn-outline btn-sm" data-nlj-report data-nlj-act="reportProfile" data-nlj-a="[${realIdx}]">🚩</button></div></div>`)});
+grid.insertAdjacentHTML("beforeend",`<div class="profile pc"${p.user_id?` data-uid="${escapeHTML(p.user_id)}"`:""}><div class="pc-ph">${p.photo?`<img src="${escapeHTML(p.photo)}" alt="${escapeHTML(p.name||"Membre")}" loading="lazy">`:initials(p.name||"Membre")}</div><div class="pc-info"><div class="pc-name">${escapeHTML(p.name||"Membre")}</div><div class="pc-sub">${p.age?escapeHTML(p.age)+" ans":"Âge non renseigné"} · 📍 ${p.city?escapeHTML(p.city):"Ville non renseignée"}</div></div><div class="pc-act"><button class="btn ${(window.NLJ&&NLJ.liked&&NLJ.liked.has(p.id))?'btn-outline':'btn-primary'} btn-sm" data-nlj-act="likeProfile" data-nlj-a="[${realIdx}]">❤️ ${escapeHTML(p.points||0)}</button>${p.user_id?`<button class="btn btn-gold btn-sm pc-msg" title="Écrire un message" data-nlj-act="openChat" data-nlj-a="${NLJA([p.user_id])}">💬 Écrire</button>`:""}<button class="btn btn-outline btn-sm" data-nlj-report data-nlj-act="reportProfile" data-nlj-a="[${realIdx}]">🚩</button></div></div>`)});
 if(!grid.children.length)grid.innerHTML='<div class="empty-state"><div class="es-icon">🔍</div><h3>Aucun profil ne correspond pour le moment</h3><p>Élargis la tranche d\'âge ou change de confession pour voir plus de profils.</p><blockquote>« Cherchez, et vous trouverez ; frappez, et l\'on vous ouvrira. »<cite>Matthieu 7:7</cite></blockquote></div>';
+if(realGrid.innerHTML.replace(/ is-online/g,"")!==grid.innerHTML)realGrid.innerHTML=grid.innerHTML;
+if(window.nljApplyPresence)window.nljApplyPresence();
 }
 // CHAT COMPLET - TCHAT EN JÉSUS - PERSISTANT
 const CHAT_STORAGE_KEY="niamke_chat_jesus_v2";
@@ -285,7 +287,7 @@ document.getElementById("chatTitle").textContent="💳 Tchat réservé aux abonn
 document.getElementById("chatSubtitle").textContent="Passe en Premium pour tchater en Jésus";
 document.getElementById("chatContacts").innerHTML='<div style="padding:16px;text-align:center"><div style="font-size:2.5rem">🔒</div><h4 style="margin:10px 0">Tchat réservé Premium en Jésus</h4><p style="font-size:.85rem;color:var(--muted)">Le tchat est réservé aux abonnés. Pour tchater au nom de Jésus, choisis un abonnement.</p><div style="margin-top:16px;display:grid;gap:8px"><button class="btn btn-gold" data-nlj-act="scrollPremium">💳 Voir les abonnements - 9 000 F</button>'+'</div></div>';
 document.getElementById("chatMessages").innerHTML='<div style="padding:20px;text-align:center;color:var(--muted)"><p>💬 <strong>Pourquoi le tchat est payant en Jésus ?</strong></p><p style="font-size:.85rem;margin-top:10px">Pour éviter les faux profils et garder une communauté sérieuse en Jésus. 9 000 F CFA = engagement sérieux pour le mariage en Jésus, pas pour s\'amuser.</p><p style="font-size:.85rem;margin-top:10px">✅ Mensuel Jésus: 9 000 F - Tchat illimité en Jésus<br>✅ Alliance 6 mois: 15 000 F - Le plus choisi<br>✅ Éternelle 12 mois: 30 000 F</p></div>';
-document.getElementById("chatPanel").scrollIntoView({behavior:"smooth"});
+/* fenêtre plein écran : pas de défilement de la page derrière */
 return;
 }
 
@@ -296,7 +298,7 @@ document.getElementById("chatTitle").textContent=n+" en Jésus";
 document.getElementById("chatSubtitle").textContent=isPremium ? "✅ Premium - Tchat illimité en Jésus" : "🎁 Tchat gratuit - "+(1-freeChatsUsed)+" restant en Jésus";
 renderChatContacts();
 renderChatMessages(n);
-document.getElementById("chatPanel").scrollIntoView({behavior:"smooth",block:"center"});
+/* fenêtre plein écran : pas de défilement de la page derrière */
 if(!isPremium){
 localStorage.setItem('niamke_free_chats', (freeChatsUsed+1).toString());
 }
@@ -559,7 +561,7 @@ async function loadSongs(){
   try{
     var r=await c.from("musiques").select("*").order("created_at",{ascending:false}).limit(300);
     if(r.error)throw r.error;
-    var rows=(r.data||[]).filter(function(s){return s&&(s.url||s.storage_path||s.file_path||s.path||s.file||s.file_url||s.audio_url||s.audio);});
+    var rows=(r.data||[]).filter(function(s){return s&&(s.url||s.storage_path||s.file_path||s.path||s.file||s.file_url||s.audio_url||s.audio)&&!(window.NLJ_EMBED&&(NLJ_EMBED.isLink||NLJ_EMBED.parse)(s.url||s.storage_path||s.file_path||s.path||s.file||s.file_url||s.audio_url||s.audio));});
     tracks=await Promise.all(rows.map(async function(s){
       var v=s.url||s.storage_path||s.file_path||s.path||s.file||s.file_url||s.audio_url||s.audio,u=v;
       if(!/^https?:/i.test(v)){

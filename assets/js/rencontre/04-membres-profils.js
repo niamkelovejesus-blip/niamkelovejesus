@@ -18,13 +18,17 @@
       var s=await supabaseClient.from('subscriptions').select('plan,expires_at').eq('user_id',NLJ.user.id).maybeSingle();
       if(s.data&&(!s.data.expires_at||new Date(s.data.expires_at)>new Date())){NLJ.premium=true;NLJ.plan=s.data.plan||'';}
     }catch(e){}
+    /* l'administrateur a toutes les fonctionnalités Premium, sans abonnement */
+    if(NLJ.admin){NLJ.premium=true;if(!NLJ.plan)NLJ.plan='Éternelle';}
     try{localStorage.removeItem('niamke_premium_active');}catch(e){}
   }
   async function loadAccount(){
     NLJ.admin=false;NLJ.liked=new Set();
-    await refreshPremium();
     if(USE_SUPABASE&&NLJ.user){
       try{var a=await supabaseClient.rpc('is_admin');NLJ.admin=(a.data===true);}catch(e){}
+    }
+    await refreshPremium();
+    if(USE_SUPABASE&&NLJ.user){
       try{var l=await supabaseClient.from('likes').select('profile_id');(l.data||[]).forEach(function(x){NLJ.liked.add(x.profile_id);});}catch(e){}
     }
     try{localStorage.removeItem('niamke_premium_active');}catch(e){}
@@ -35,7 +39,7 @@
     if(NLJ.user){
       box.style.display='block';form.style.display='none';
       box.innerHTML='<p style="margin:0 0 6px"><strong>Connecté</strong> : '+esc(NLJ.user.email)+'</p>'+
-        '<p style="margin:0 0 14px">'+(NLJ.premium?'⭐ Premium '+esc(NLJ.plan):'Plan Découverte (gratuit)')+'</p>'+
+        '<p style="margin:0 0 14px">'+(NLJ.admin?'🛠️ Administrateur · accès complet':NLJ.premium?'⭐ Premium '+esc(NLJ.plan):'Plan Découverte (gratuit)')+'</p>'+
         '<div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn btn-primary btn-sm" data-nlj="msgs">💬 Mes messages</button>'+
         (NLJ.premium?'':'<button type="button" class="btn btn-gold btn-sm" data-nlj="premium">⭐ Devenir Premium</button>')+
         '<button type="button" class="btn btn-outline btn-sm" data-nlj="logout">Se déconnecter</button></div>';

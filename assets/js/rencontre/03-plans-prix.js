@@ -14,7 +14,13 @@ function renderPlans(){
 function renderMethods(){
  $("pmMethods").innerHTML=Object.keys(METHODS).map(function(k){var m=METHODS[k];
   return '<button type="button" class="pm-method" data-m="'+k+'"><span class="pm-ico">'+m.icon+'</span><span><strong>'+m.name+'</strong><small>'+m.sub+'</small></span></button>';}).join("");
- $("pmMethods").querySelectorAll(".pm-method").forEach(function(b){b.addEventListener("click",function(){pmPay(b.dataset.m);});});
+}
+/* clic sur un moyen de paiement : écouteur unique sur le conteneur (survit à la traduction et aux re-rendus) */
+function onMethodClick(e){
+ var b=e.target&&e.target.closest&&e.target.closest(".pm-method");if(!b)return;
+ e.preventDefault();
+ try{pmPay(b.getAttribute("data-m")||"paydunya");}
+ catch(err){try{console.error("pmPay:",err);}catch(x){}try{showToast("❌ Impossible de lancer le paiement : "+((err&&err.message)||"erreur inconnue"));}catch(x){}}
 }
 window.pmGo=function(n){
  [1,2,3].forEach(function(i){$("pmStep"+i).hidden=(i!==n);});
@@ -54,7 +60,9 @@ window.startPayDunya=async function(plan,details){
 };
 function goToPayDunya(url){try{window.top.location.href=url;}catch(e){window.open(url,"_blank");}}
 function pmPay(method){
-  var m=METHODS[method]||METHODS.paydunya,p=PLANS[pm.plan],d=pm.data,price=formatPrice(p.xof());
+  var m=METHODS[method]||METHODS.paydunya,p=PLANS[pm.plan]||PLANS.Mensuel,d=pm.data;
+  if(!d){pmGo(1);showToast("Complète d'abord tes informations.");return;}
+  var price=formatPrice(p.xof());
   var rows=[["Nom",d.prenom+" "+d.nom],["Ville",d.ville],["Confession",d.eglise],["Âge",d.age+" ans"],["Abonnement",p.label+" · "+price],["Paiement","PayDunya"]];
   var dl=document.createElement("dl");dl.className="pm-recap";
   rows.forEach(function(r){var dt=document.createElement("dt");dt.textContent=r[0];var dd=document.createElement("dd");dd.textContent=r[1];dl.appendChild(dt);dl.appendChild(dd);});
@@ -79,6 +87,7 @@ window.payWith=function(){
   startPayDunya(plan,null).then(goToPayDunya).catch(function(err){if(st)st.textContent="❌ "+((err&&err.message)||"Paiement indisponible.");});
 };
 document.addEventListener("DOMContentLoaded",function(){
+ $("pmMethods").addEventListener("click",onMethodClick);
  $("pmForm").addEventListener("submit",function(e){
   e.preventDefault();
   var d={prenom:$("pmPrenom").value.trim(),nom:$("pmNom").value.trim(),ville:$("pmVille").value.trim(),eglise:$("pmEglise").value,age:parseInt($("pmAge").value,10)};

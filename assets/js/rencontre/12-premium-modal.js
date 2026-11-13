@@ -27,11 +27,12 @@ async function auto(){
    var el=$(id),val=String(v[id]==null?'':v[id]).trim(),box=el.closest('div');
    if(id==='pmEglise'&&val&&![].some.call(el.options,function(o){return o.value===val||o.text===val;}))val='';
    if(id==='pmAge'){var a=parseInt(val,10);if(!(a>=18&&a<=75))val='';}
-   if(val){el.value=val;box.classList.add('pm-hide');}else{box.classList.remove('pm-hide');all=false;miss++;}
+   if(val){el.value=val;}else{all=false;miss++;}
+  box.classList.remove('pm-hide');
   });
-  if(all){$('pmForm').dispatchEvent(new Event('submit',{cancelable:true,bubbles:true}));}
-  else{var n=$('pmAutoNote');if(!n){n=document.createElement('p');n.id='pmAutoNote';n.className='pm-mini';$('pmForm').insertAdjacentElement('afterbegin',n);}
-   n.textContent='✅ Le reste est déjà enregistré à ton inscription. Complète seulement ce qui manque.';}
+  /* l'étape « Tes informations » reste toujours affichée : la personne vérifie puis clique sur « Continuer » */
+  var n=$('pmAutoNote');if(!n){n=document.createElement('p');n.id='pmAutoNote';n.className='pm-mini';$('pmForm').insertAdjacentElement('afterbegin',n);}
+  n.textContent=all?'✅ Tes informations sont déjà enregistrées. Vérifie-les puis clique sur « Continuer ».':'Complète les informations manquantes puis clique sur « Continuer ».';
  }catch(e){}
 }
 var op=window.openPremium;

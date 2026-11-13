@@ -723,3 +723,12 @@ html.nlj-pres-ready .profile.pc.is-online .pc-name::after,html.nlj-pres-ready .m
 }
 
 .mz-sw{padding:8px 12px}.mz-q{width:100%;box-sizing:border-box;padding:10px 14px;border:1px solid #e8dcae;border-radius:999px;font:inherit;background:#fffdf6}
+
+/* === nlj-mobile-menu === */
+/* Téléphone : le menu du haut (Rencontre, Versets, Jeu biblique, Musique…) passe sur plusieurs lignes et reste entièrement visible, sans glisser de côté */
+@media (max-width:700px){
+  header .nav-links{flex-wrap:wrap!important;overflow:visible!important;justify-content:center!important;gap:6px!important;padding:6px 0 8px!important}
+  header .nav-links a,header .nav-links button.nav-msg{flex:0 0 auto!important;min-height:36px!important;padding:7px 12px!important;font-size:.82rem!important;background:#f1f5f9;border:1px solid #e2e8f0}
+  header .nav-links a.active,header .nav-links a:active{background:var(--navy)!important;color:#fff!important}
+  header .nav-links button.nav-msg{background:var(--gold)!important;border-color:var(--gold)}
+}

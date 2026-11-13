@@ -191,21 +191,24 @@
     if(st==='none'){box.innerHTML='<div class="mg-inv big"><div style="font-size:2.2rem">✉️</div><p><b>Envoie d\'abord une invitation à '+esc(nameOf(chat.current))+'</b></p><p style="margin-top:8px">Si elle n\'est pas acceptée, tu pourras envoyer '+PENDING_LIMIT+' messages maximum. Si elle est acceptée : '+FREE_LIMIT+' messages par jour chacun.</p><button type="button" class="btn btn-gold" data-inv="send">✉️ Envoyer une invitation</button></div>';applyComposer();return;}
     var banner=st==='pending_in'||st==='declined_in'?'<div class="mg-inv"><b>'+esc(nameOf(chat.current))+'</b> t\'a envoyé une invitation.<br>Accepte pour pouvoir répondre.<br><button type="button" class="btn btn-gold btn-sm" data-inv="accept">✅ Accepter</button>'+(st==='pending_in'?'<button type="button" class="btn btn-outline btn-sm" data-inv="decline">Refuser</button>':'')+'</div>':st==='pending_out'||st==='declined_out'?'<div class="mg-inv">⏳ Invitation '+(st==='declined_out'?'refusée':'en attente')+' : <b>'+Math.max(0,PENDING_LIMIT-list.filter(function(m){return m.sender_id===NLJ.user.id;}).length)+'/'+PENDING_LIMIT+'</b> messages restants tant qu\'elle n\'est pas acceptée.</div>':'';
     box.innerHTML=banner+(list.length?listHtml(list):'<div class="mg-empty big"><div>🙏</div><b>Dis bonjour à '+esc(nameOf(chat.current))+'</b><p>Écris le premier message, au nom de Jésus.</p></div>');
-    applyComposer();rtEnsure();if(chat.typing)setTypingUI();box.scrollTop=box.scrollHeight;hydrateVoice(box);
+    applyComposer();rtEnsure();if(chat.typing)setTypingUI();box.scrollTop=box.scrollHeight;hydrateVoice(box);hydratePhotos(box);
   }
   async function deleteMsg(id){
     var m=chat.msgs.find(function(x){return String(x.id)===String(id);});
     if(!m||!NLJ.user||m.sender_id!==NLJ.user.id)return;
-    var vc=isVoice(m);
-    if(!(await askConfirm(vc?'Supprimer ce message vocal ?':'Supprimer ce message ?')))return;
+    var vc=isVoice(m),ph=isPhoto(m);
+    if(!(await askConfirm(vc?'Supprimer ce message vocal ?':ph?'Supprimer cette photo ?':'Supprimer ce message ?')))return;
     var r=await supabaseClient.from('messages').delete().eq('id',m.id).eq('sender_id',NLJ.user.id).select('id');
     if(r.error||!r.data||!r.data.length){showToast('❌ Suppression impossible'+(r.error?' : '+r.error.message:' (droit de suppression non activé sur le serveur)'));return;}
     var warn='';
     if(vc){
       try{var rm=await supabaseClient.storage.from('voice').remove([m.body.slice(6)]);if(rm&&rm.error)warn=' (le fichier audio n\u2019a pas pu être effacé : '+(rm.error.message||'droit manquant')+')';}catch(e){warn=' (fichier audio non effacé)';}
     }
+    if(ph){
+      try{var rp=await supabaseClient.storage.from('chat-photos').remove([m.body.slice(6)]);if(rp&&rp.error)warn=' (le fichier photo n\u2019a pas pu être effacé : '+(rp.error.message||'droit manquant')+')';}catch(e){warn=' (fichier photo non effacé)';}
+    }
     chat.msgs=chat.msgs.filter(function(x){return String(x.id)!==String(m.id);});
-    renderContacts();renderMsgs();showToast((vc?'🗑 Vocal supprimé':'🗑 Message supprimé')+warn);
+    renderContacts();renderMsgs();showToast((vc?'🗑 Vocal supprimé':ph?'🗑 Photo supprimée':'🗑 Message supprimé')+warn);
   }
   document.addEventListener('click',function(e){var b=e.target&&e.target.closest&&e.target.closest('[data-mdel]');if(!b)return;e.preventDefault();e.stopPropagation();deleteMsg(b.getAttribute('data-mdel'));});
   /* ===== Tchat « comme WhatsApp » : son, écrit…, coches ✓ / ✓✓, confirmation ===== */
@@ -382,7 +385,7 @@
     else if(u&&st!=='accepted'){var k=await countMsgs(u);chat.rem=Math.max(0,PENDING_LIMIT-k);chat.remKind='pending';txt='⏳ Invitation non acceptée - '+Math.max(0,PENDING_LIMIT-k)+'/'+PENDING_LIMIT+' messages restants';nt="Tant que l'invitation n'est pas acceptée : "+PENDING_LIMIT+" messages maximum (ils ne comptent pas dans la limite quotidienne).";}
     else if(NLJ.premium){txt='✅ Premium - messages écrits et vocaux illimités';nt='⭐ Premium : messages écrits et vocaux, sans limite.';}
     else{var n=u?await countMsgs(u,todayISO()):0;if(u){chat.rem=Math.max(0,FREE_LIMIT-n);chat.remKind='free';}txt=(u&&FREE_LIMIT-n<=2?'⚠️ ':'')+'🎁 Gratuit - '+Math.max(0,FREE_LIMIT-n)+'/'+FREE_LIMIT+" messages restants aujourd'hui dans cette conversation";
-      nt="Version gratuite : "+FREE_LIMIT+" messages par jour dans chaque conversation (remise à zéro chaque jour à minuit), sans numéro de téléphone ni autre coordonnée. Messages vocaux et échange de contacts réservés aux Premium ⭐";}
+      nt="Version gratuite : "+FREE_LIMIT+" messages par jour dans chaque conversation (remise à zéro chaque jour à minuit), sans numéro de téléphone ni autre coordonnée. Messages vocaux, photos, appels vidéo et échange de contacts réservés aux Premium ⭐";}
     el.textContent=txt;if(note)note.textContent=nt;
     if(mic)mic.style.opacity=NLJ.premium?1:.5;
   }
@@ -390,16 +393,24 @@
   var VOICE_DAYS=7;   /* durée de conservation des vocaux (doit être la même que dans la purge Supabase) */
   var VOICE_GONE='🎤 Message vocal expiré (supprimé après '+VOICE_DAYS+' jours)';
   function bodyHtml(m){
+    if(isPhoto(m)){if(!NLJ.premium)return '🔒 Photo — réservée aux membres Premium ⭐';return '<img class="mg-photo" alt="Photo envoyée" data-photo="'+esc(m.body.slice(6))+'" loading="lazy">';}
     if(!isVoice(m))return callHtml(m.body)||esc(m.body);
     if(!NLJ.premium)return '🔒 Message vocal — réservé aux membres Premium ⭐';
     if(m.created_at&&(Date.now()-new Date(m.created_at).getTime())>VOICE_DAYS*864e5)return '<em style="opacity:.75">'+VOICE_GONE+'</em>';
     return '<audio controls controlsList="nodownload" preload="none" data-voice="'+esc(m.body.slice(6))+'" style="max-width:100%"></audio>';
   }
-  function previewOf(m){return isVoice(m)?'🎤 Message vocal':String(m.body).substring(0,28);}
+  function isPhoto(m){return typeof m.body==='string'&&m.body.indexOf('photo:')===0;}
+  function previewOf(m){return isVoice(m)?'🎤 Message vocal':isPhoto(m)?'📷 Photo':String(m.body).substring(0,28);}
   async function hydrateVoice(box){
     var els=box.querySelectorAll('audio[data-voice]');
     for(var i=0;i<els.length;i++){
       try{var s=await supabaseClient.storage.from('voice').createSignedUrl(els[i].getAttribute('data-voice'),3600);if(s&&s.data&&s.data.signedUrl)els[i].src=s.data.signedUrl;else if(s&&s.error&&els[i].parentNode){var em=document.createElement('em');em.style.opacity='.75';em.textContent=VOICE_GONE;els[i].parentNode.replaceChild(em,els[i]);}}catch(e){}
+    }
+  }
+  async function hydratePhotos(box){
+    var els=box.querySelectorAll('img[data-photo]:not([src])');
+    for(var i=0;i<els.length;i++){
+      try{var s=await supabaseClient.storage.from('chat-photos').createSignedUrl(els[i].getAttribute('data-photo'),3600);if(s&&s.data&&s.data.signedUrl)els[i].src=s.data.signedUrl;else if(els[i].parentNode){var em=document.createElement('em');em.style.opacity='.75';em.textContent='📷 Photo indisponible';els[i].parentNode.replaceChild(em,els[i]);}}catch(e){}
     }
   }
   var rec=null;
@@ -453,6 +464,61 @@
   }
   (function(){var f=$('chatForm'),m=$('chatMic');if(f&&m&&!$('chatVideo')){var b=document.createElement('button');b.type='button';b.id='chatVideo';b.className=m.className;b.title='Appel vidéo (Premium)';b.textContent='📹';m.insertAdjacentElement('afterend',b);}})();
   document.addEventListener('click',function(e){if(e.target&&e.target.id==='chatVideo')videoClick();});
+
+  /* ===== Photo dans le tchat (Premium) ===== */
+  var PHOTO_MAX_MB=10,PHOTO_SIDE=1600;
+  function shrinkImage(file){
+    return new Promise(function(ok,ko){
+      var url=URL.createObjectURL(file),img=new Image();
+      img.onload=function(){
+        var k=Math.min(1,PHOTO_SIDE/Math.max(img.width,img.height)),c=document.createElement('canvas');
+        c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);
+        c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(url);
+        c.toBlob(function(b){b?ok(b):ko(new Error('conversion'));},'image/jpeg',0.82);
+      };
+      img.onerror=function(){URL.revokeObjectURL(url);ko(new Error('image illisible'));};
+      img.src=url;
+    });
+  }
+  function photoClick(){
+    if(!NLJ.user||!chat.current){showToast("Choisis d'abord une conversation");return;}
+    if(!NLJ.premium){showToast('📷 L\u2019envoi de photos est réservé aux membres Premium ⭐');return;}
+    if(invState(chat.current)!=='accepted'){showToast('✉️ Invitation acceptée requise pour envoyer une photo');return;}
+    var f=$('chatPhotoFile');if(f)f.click();
+  }
+  async function photoPicked(inp){
+    var file=inp.files&&inp.files[0],to=chat.current;inp.value='';
+    if(!file||!to||!NLJ.user||!NLJ.premium)return;
+    if(!/^image\//.test(file.type)){showToast('Choisis une image (JPG, PNG, WebP…)');return;}
+    if(file.size>PHOTO_MAX_MB*1048576){showToast('Photo trop lourde (max '+PHOTO_MAX_MB+' Mo)');return;}
+    var blob;try{blob=await shrinkImage(file);}catch(e){showToast('❌ Photo illisible');return;}
+    showToast('📷 Envoi de la photo…');
+    var path=NLJ.user.id+'/'+Date.now()+'.jpg';
+    var up=await supabaseClient.storage.from('chat-photos').upload(path,blob,{contentType:'image/jpeg'});
+    if(up.error){showToast('❌ Envoi photo impossible : '+((up.error&&up.error.message)||'serveur'));return;}
+    var r=await supabaseClient.from('messages').insert([{sender_id:NLJ.user.id,receiver_id:to,body:'photo:'+path}]).select('id,sender_id,receiver_id,body,created_at').single();
+    if(r.error||!r.data){try{await supabaseClient.storage.from('chat-photos').remove([path]);}catch(e){}showToast('❌ Photo non envoyée : '+((r.error&&r.error.message)||''));return;}
+    if(!chat.msgs.some(function(x){return x.id===r.data.id;}))chat.msgs.push(r.data);
+    renderContacts();renderMsgs();
+  }
+  (function(){
+    var f=$('chatForm'),m=$('chatMic');
+    if(f&&m&&!$('chatPhoto')){
+      var b=document.createElement('button');b.type='button';b.id='chatPhoto';b.className=m.className;b.title='Envoyer une photo (Premium)';b.setAttribute('aria-label','Envoyer une photo');b.textContent='📷';
+      m.insertAdjacentElement('beforebegin',b);
+      var i=document.createElement('input');i.type='file';i.id='chatPhotoFile';i.accept='image/*';i.hidden=true;f.appendChild(i);
+      i.addEventListener('change',function(){photoPicked(i);});
+    }
+  })();
+  document.addEventListener('click',function(e){
+    var t=e.target;if(!t)return;
+    if(t.id==='chatPhoto'){photoClick();return;}
+    if(t.classList&&t.classList.contains('mg-photo')&&t.src){
+      var o=document.createElement('div');o.className='mg-lb';o.setAttribute('role','dialog');o.setAttribute('aria-label','Photo en grand');
+      var im=document.createElement('img');im.src=t.src;im.alt='Photo en grand';o.appendChild(im);
+      o.addEventListener('click',function(){o.remove();});document.body.appendChild(o);
+    }
+  });
 
   /* ===== Notification « quelqu'un a aimé ton profil » ===== */
   (function(){try{

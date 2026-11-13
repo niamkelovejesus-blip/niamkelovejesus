@@ -802,3 +802,8 @@ html.nlj-pres-ready .profile.pc.is-online .pc-name::after,html.nlj-pres-ready .m
 .mg-sy{background:#e11d48;color:#fff}.mg-sn{background:#f0f2f5;color:#111b21}
 @media(min-width:761px){.mg-sheet{align-items:center}.mg-sheet-c{border-radius:18px}}
 .msgr{position:relative}
+
+/* Photos du tchat (v28) */
+.mg-photo{display:block;max-width:100%;max-height:260px;border-radius:10px;cursor:zoom-in;background:rgba(0,0,0,.06);min-width:120px;min-height:80px;object-fit:cover}
+.mg-lb{position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,.88);display:grid;place-items:center;padding:16px;cursor:zoom-out}
+.mg-lb img{max-width:100%;max-height:100%;border-radius:8px}

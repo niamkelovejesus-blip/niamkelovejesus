@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-uGmXLEll6tO9JODNDDR9U5KdFqAWneSMpU13E+X2WkY=' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'sha256-9HXO0M+GULA5wMC17g+x31zGrwyrYLZd0bcdHkSq8CI=' ; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://qxxhbfoqlreiqyshbpqp.supabase.co wss://qxxhbfoqlreiqyshbpqp.supabase.co https://translate.googleapis.com; worker-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-o5UV6tUuU3QcoJdiY4DrDqT3S5GhtUyxJMJqIkH2Mq0=' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'sha256-9HXO0M+GULA5wMC17g+x31zGrwyrYLZd0bcdHkSq8CI=' ; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://qxxhbfoqlreiqyshbpqp.supabase.co wss://qxxhbfoqlreiqyshbpqp.supabase.co https://translate.googleapis.com; worker-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <meta name="referrer" content="no-referrer">
 <meta name="color-scheme" content="light">
 <script>if(window.top!==window.self){document.documentElement.style.display="none";try{window.top.location.replace(window.self.location.href)}catch(e){}}</script>
@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="assets/js/shared/nlj-embed.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js"></script>
+<script src="assets/js/shared/nlj-embed.js?v=16"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js"></script>
 <style>
 :root{--side:#0b0d12;--side2:#1a1d26;--navy:#1e3a8a;--blue:#3b82f6;--gold:#b8893f;--bg:#f6f7f9;--line:#e4e7ec;--mut:#667085;--ok:#18794e;--bad:#b42318;--warn:#a15c07;--ink:#101828}
 *{box-sizing:border-box}
@@ -650,12 +650,13 @@ const FORMS = {
     const lines = f.links.value.split('\n').map(x => x.trim()).filter(Boolean);
     if (!lines.length) throw new Error('Collez au moins un lien.');
     const cat = (f.cat_new.value.trim() || f.cat.value).trim(), coll = f.coll.value.trim();
-    const seen = new Set(Object.values(cache.songs || {}).map(songSrc)), rows = [], bad = [];
+    const seen = new Set(Object.values(cache.songs || {}).map(songSrc)), rows = [], bad = [], warn = [];
     for (const ln of lines) {
-      const [u, t, a] = ln.split('|').map(x => x.trim()), short = (u || ln).slice(0, 45);
+      const parts = ln.split('|').map(x => x.trim()), t = parts[1], a = parts[2], short = (parts[0] || ln).slice(0, 45);
+      const u = (window.NLJ_EMBED && NLJ_EMBED.clean(parts[0])) || parts[0];   // accepte aussi « youtube.com/… » sans https ou un texte contenant le lien
       if (!/^https?:\/\/\S+$/i.test(u || '')) { bad.push(short + ' : lien invalide'); continue; }
       const emb = window.NLJ_EMBED && NLJ_EMBED.parse(u);
-      if (!emb && STREAMING.test(u)) { bad.push(short + ' : ce lien ne peut pas être lu dans le site (copiez le lien de la vidéo, du titre ou de la publication)'); continue; }
+      if (!emb && STREAMING.test(u)) warn.push(short + ' : enregistré, mais ce n’est pas une vidéo/publication précise : il s’ouvrira dans un nouvel onglet');
       if (seen.has(u)) { bad.push(short + ' : déjà ajouté'); continue; }
       seen.add(u);
       let nm = ''; try { nm = cleanTitle(decodeURIComponent(u.split('?')[0].split('/').pop() || '')); } catch (e) { }
@@ -675,6 +676,7 @@ const FORMS = {
     }
     if (skipped.length) toast('Colonne(s) absente(s), classement ignoré : ' + skipped.join(', ') + '. Exécutez supabase_musiques_liens.sql dans Supabase.', true);
     if (bad.length) toast(rows.length + ' ajouté(s). Refusé : ' + bad.join(' | '), true);
+    else if (warn.length) toast(rows.length + ' ajouté(s). ' + warn.join(' | '), true);
   },
   async song(f) {
     let file = f.file.files[0]; if (!file) throw new Error('Choisissez un fichier audio.');

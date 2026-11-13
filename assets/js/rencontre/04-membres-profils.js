@@ -250,16 +250,19 @@
     if(mic)mic.style.opacity=NLJ.premium?1:.5;
   }
   function isVoice(m){return typeof m.body==='string'&&m.body.indexOf('voice:')===0;}
+  var VOICE_DAYS=7;   /* durée de conservation des vocaux (doit être la même que dans la purge Supabase) */
+  var VOICE_GONE='🎤 Message vocal expiré (supprimé après '+VOICE_DAYS+' jours)';
   function bodyHtml(m){
     if(!isVoice(m))return callHtml(m.body)||esc(m.body);
     if(!NLJ.premium)return '🔒 Message vocal — réservé aux membres Premium ⭐';
+    if(m.created_at&&(Date.now()-new Date(m.created_at).getTime())>VOICE_DAYS*864e5)return '<em style="opacity:.75">'+VOICE_GONE+'</em>';
     return '<audio controls controlsList="nodownload" preload="none" data-voice="'+esc(m.body.slice(6))+'" style="max-width:100%"></audio>';
   }
   function previewOf(m){return isVoice(m)?'🎤 Message vocal':String(m.body).substring(0,28);}
   async function hydrateVoice(box){
     var els=box.querySelectorAll('audio[data-voice]');
     for(var i=0;i<els.length;i++){
-      try{var s=await supabaseClient.storage.from('voice').createSignedUrl(els[i].getAttribute('data-voice'),3600);if(s&&s.data&&s.data.signedUrl)els[i].src=s.data.signedUrl;}catch(e){}
+      try{var s=await supabaseClient.storage.from('voice').createSignedUrl(els[i].getAttribute('data-voice'),3600);if(s&&s.data&&s.data.signedUrl)els[i].src=s.data.signedUrl;else if(s&&s.error&&els[i].parentNode){var em=document.createElement('em');em.style.opacity='.75';em.textContent=VOICE_GONE;els[i].parentNode.replaceChild(em,els[i]);}}catch(e){}
     }
   }
   var rec=null;

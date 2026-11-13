@@ -732,3 +732,13 @@ html.nlj-pres-ready .profile.pc.is-online .pc-name::after,html.nlj-pres-ready .m
   header .nav-links a.active,header .nav-links a:active{background:var(--navy)!important;color:#fff!important}
   header .nav-links button.nav-msg{background:var(--gold)!important;border-color:var(--gold)}
 }
+
+/* ===== Couleur du tchat (discussion instantanée) : pour changer de couleur, modifier ces 2 lignes ===== */
+.msgr{--chat:#2563eb;--chat-dark:#1d4ed8;--chat-soft:#dbeafe}
+.mg-lh{background:linear-gradient(145deg,var(--chat-dark),var(--chat))!important}
+.mg-lh h3{color:#fff!important}
+.mg-b.me{background:var(--chat)!important;color:#fff!important}
+.mg-ct.on{background:var(--chat-soft)!important}
+.mg-ct.un .mg-ci span{color:var(--chat-dark)!important}
+.mg-send{background:var(--chat)!important;color:#fff!important}
+.mg-th{background:#f5f8ff!important}

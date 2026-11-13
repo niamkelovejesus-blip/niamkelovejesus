@@ -853,3 +853,18 @@ html.nlj-pres-ready .mg-ct.is-online .mg-ci b::after{background:#22c55e!importan
 .mg-note{background:var(--nl-cream)!important;color:#7a5f2a!important}
 .mg-th::after{content:"Mode respectueux \2022  Conversation guidée par les valeurs chrétiennes";display:block;text-align:center;padding:2px 12px 10px;font-size:.78rem;color:#7a5f2a;background:var(--nl-cream)}
 @media(max-width:760px){.msgr{border-radius:0!important}}
+
+
+/* === v29b : coches plus visibles + icônes photo / micro / vidéo === */
+.mg-tk{color:#0f2a4a!important;opacity:.8;font-size:1.05rem!important;font-weight:900!important;letter-spacing:-5px!important;margin-right:6px!important}
+.mg-tk.rd{color:#0b5fff!important;opacity:1;text-shadow:0 0 .5px #0b5fff}
+.mg-b.me .mg-meta,.mg-b.me .mg-meta time{color:#3b2a0c!important}
+.mg-b .mg-del{color:#0f2a4a!important;opacity:.75!important;font-size:.95rem!important}
+.mg-b .mg-del:hover{color:#b91c1c!important;opacity:1!important}
+
+#chatMic,#chatPhoto,#chatVideo{font-size:0!important;color:transparent!important;width:46px!important;height:46px!important;border-radius:50%!important;background-color:#f3eadb!important;border:1px solid #d9c18a!important;background-repeat:no-repeat!important;background-position:center!important;background-size:24px 24px!important;transition:background-color .15s,transform .15s}
+#chatPhoto{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238a6320' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z'/%3E%3Ccircle cx='12' cy='13.5' r='3.5'/%3E%3C/svg%3E")!important}
+#chatMic{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238a6320' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='3' width='6' height='11' rx='3'/%3E%3Cpath d='M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6'/%3E%3C/svg%3E")!important}
+#chatVideo{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238a6320' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='6' width='12' height='12' rx='2'/%3E%3Cpath d='M15 10l6-3v10l-6-3z'/%3E%3C/svg%3E")!important}
+#chatMic:hover,#chatPhoto:hover,#chatVideo:hover{background-color:#f4dfaa!important;transform:scale(1.06)}
+#chatMic.rec{font-size:.9rem!important;font-weight:800;color:#fff!important;background-color:#dc2626!important;border-color:#dc2626!important;background-image:none!important;width:auto!important;min-width:76px;padding:0 14px!important;border-radius:999px!important}

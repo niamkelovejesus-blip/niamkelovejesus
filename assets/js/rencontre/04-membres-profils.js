@@ -426,11 +426,11 @@
     var mime='',cand=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg'];
     for(var i=0;i<cand.length;i++){if(MediaRecorder.isTypeSupported(cand[i])){mime=cand[i];break;}}
     var mr=mime?new MediaRecorder(stream,{mimeType:mime}):new MediaRecorder(stream),chunks=[],t0=Date.now(),to=chat.current;
-    rec={mr:mr};
+    rec={mr:mr};mic.classList.add('rec');
     var tick=setInterval(function(){var s=Math.floor((Date.now()-t0)/1000);mic.textContent='⏹ '+Math.floor(s/60)+':'+('0'+(s%60)).slice(-2);if(s>=120)stopRec();},500);
     mr.ondataavailable=function(e){if(e.data&&e.data.size)chunks.push(e.data);};
     mr.onstop=async function(){
-      clearInterval(tick);stream.getTracks().forEach(function(t){t.stop();});mic.textContent='🎤';rec=null;
+      clearInterval(tick);stream.getTracks().forEach(function(t){t.stop();});mic.textContent='🎤';mic.classList.remove('rec');rec=null;
       if(Date.now()-t0<800||!chunks.length)return;
       var type=(mr.mimeType||mime||'audio/webm').split(';')[0],ext=type.indexOf('mp4')>=0?'m4a':type.indexOf('ogg')>=0?'ogg':'webm';
       var path=NLJ.user.id+'/'+Date.now()+'.'+ext;

@@ -86,7 +86,8 @@
   };
 
   /* ---------- tchat réel ---------- */
-  var chat={msgs:[],inv:{},blocks:{},rem:null,remKind:'',current:null,timer:null,channel:null};
+  var chat={msgs:[],inv:{},blocks:{},rem:null,remKind:'',current:null,timer:null,channel:null,rt:null,rtFor:null,typing:false,peerRead:null,noRead:false,loaded:false};
+  var notified={};
   var FREE_LIMIT=20,PENDING_LIMIT=3;
   function invState(u){if(chat.blocks&&chat.blocks[u])return 'blocked';var i=chat.inv&&chat.inv[u];if(!i)return 'none';if(i.status==='accepted')return 'accepted';var out=i.sender_id===(NLJ.user&&NLJ.user.id);if(i.status==='declined')return out?'declined_out':'declined_in';return out?'pending_out':'pending_in';}
   function invLabel(u){var s=invState(u);return s==='blocked'?'🚫 Membre bloqué':s==='pending_in'?'✉️ Invitation reçue':s==='pending_out'?'⏳ Invitation envoyée':s==='declined_in'?'Invitation refusée':s==='declined_out'?'Invitation refusée':s==='none'?'Invitation à envoyer':'Nouvelle conversation';}
@@ -136,8 +137,16 @@
   function timeOf(m){try{return new Date(m.created_at).toLocaleString('fr-FR',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'});}catch(e){return '';}}
   async function loadMessages(){
     await loadInvites();
-    var r=await supabaseClient.from('messages').select('id,sender_id,receiver_id,body,created_at').order('created_at',{ascending:true}).limit(1000);
-    if(!r.error&&r.data)chat.msgs=r.data;else if(r.error){console.warn('messages (lecture):',r.error);if(!window.__nljMsgWarned){window.__nljMsgWarned=1;try{showToast('⚠️ Messages indisponibles : '+r.error.message);}catch(e){}}}
+    var cols='id,sender_id,receiver_id,body,created_at'+(chat.noRead?'':',read_at');
+    var r=await supabaseClient.from('messages').select(cols).order('created_at',{ascending:true}).limit(1000);
+    if(r.error&&!chat.noRead&&/read_at|42703/i.test((r.error.message||'')+(r.error.code||''))){chat.noRead=true;r=await supabaseClient.from('messages').select('id,sender_id,receiver_id,body,created_at').order('created_at',{ascending:true}).limit(1000);}
+    if(!r.error&&r.data){
+      var had={};chat.msgs.forEach(function(x){had[x.id]=1;});
+      var fresh=chat.loaded?r.data.filter(function(x){return !had[x.id]&&x.receiver_id===NLJ.user.id;}):[];
+      chat.msgs=r.data;
+      if(!chat.loaded){chat.loaded=true;r.data.forEach(function(x){notified[x.id]=1;});}
+      fresh.forEach(notifyIncoming);
+    }else if(r.error){console.warn('messages (lecture):',r.error);if(!window.__nljMsgWarned){window.__nljMsgWarned=1;try{showToast('⚠️ Messages indisponibles : '+r.error.message);}catch(e){}}}
   }
   function contactList(){
     var seen={},order=[];
@@ -150,7 +159,7 @@
   function avHtml(u){var ph=photoOf(u);return '<span class="mg-av">'+(ph?'<img src="'+esc(ph)+'" alt="">':esc(nameOf(u).charAt(0).toUpperCase()))+'</span>';}
   function lrKey(){return 'nlj_lastread_'+(NLJ.user?NLJ.user.id:'');}
   function lrGet(){try{return JSON.parse(localStorage.getItem(lrKey())||'{}');}catch(e){return {};}}
-  function markRead(u){var r=lrGet();r[u]=new Date().toISOString();try{localStorage.setItem(lrKey(),JSON.stringify(r));}catch(e){}}
+  function markRead(u){var r=lrGet(),had=chat.msgs.some(function(m){return m.sender_id===u&&isUnread(m,r);});r[u]=new Date().toISOString();try{localStorage.setItem(lrKey(),JSON.stringify(r));}catch(e){}if(had)sendRead(u);}
   function isUnread(m,r){return m.receiver_id===NLJ.user.id&&new Date(m.created_at)>new Date(r[m.sender_id]||0);}
   function unreadOf(u){var r=lrGet();return chat.msgs.filter(function(m){return m.sender_id===u&&isUnread(m,r);}).length;}
   function updBadge(){var n=0;if(NLJ.user){var r=lrGet();n=chat.msgs.filter(function(m){return isUnread(m,r);}).length;Object.keys(chat.inv||{}).forEach(function(u){if(invState(u)==='pending_in')n++;});}
@@ -159,7 +168,7 @@
   function nljBadgeInit(){
     if(!NLJ.user||!USE_SUPABASE){chat.msgs=[];updBadge();return;}
     loadMessages().then(updBadge);
-    if(!window._nljBT)window._nljBT=setInterval(function(){if(NLJ.user&&!document.hidden&&!panelOpen())loadMessages().then(updBadge);},15000);document.addEventListener('visibilitychange',function(){if(!document.hidden&&NLJ.user)loadMessages().then(function(){updBadge();if(panelOpen()){renderContacts();renderMsgs();}});});
+    if(!window._nljBT)window._nljBT=setInterval(function(){if(NLJ.user&&!document.hidden&&!panelOpen())loadMessages().then(updBadge);},8000);document.addEventListener('visibilitychange',function(){if(!document.hidden&&NLJ.user)loadMessages().then(function(){updBadge();if(panelOpen()){renderContacts();renderMsgs();}});});
   }
   function renderContacts(){
     var c=$('chatContacts'),list=contactList(),pn=$('chatPanel');
@@ -181,32 +190,160 @@
     if(st==='blocked'){box.innerHTML='<div class="mg-inv big"><div style="font-size:2.2rem">🚫</div><p><b>Tu as bloqué '+esc(nameOf(chat.current))+'</b></p><p style="margin-top:8px">Ce membre ne peut plus t\'écrire. Tu peux le débloquer avec le bouton ✅ en haut.</p></div>';applyComposer();return;}
     if(st==='none'){box.innerHTML='<div class="mg-inv big"><div style="font-size:2.2rem">✉️</div><p><b>Envoie d\'abord une invitation à '+esc(nameOf(chat.current))+'</b></p><p style="margin-top:8px">Si elle n\'est pas acceptée, tu pourras envoyer '+PENDING_LIMIT+' messages maximum. Si elle est acceptée : '+FREE_LIMIT+' messages par jour chacun.</p><button type="button" class="btn btn-gold" data-inv="send">✉️ Envoyer une invitation</button></div>';applyComposer();return;}
     var banner=st==='pending_in'||st==='declined_in'?'<div class="mg-inv"><b>'+esc(nameOf(chat.current))+'</b> t\'a envoyé une invitation.<br>Accepte pour pouvoir répondre.<br><button type="button" class="btn btn-gold btn-sm" data-inv="accept">✅ Accepter</button>'+(st==='pending_in'?'<button type="button" class="btn btn-outline btn-sm" data-inv="decline">Refuser</button>':'')+'</div>':st==='pending_out'||st==='declined_out'?'<div class="mg-inv">⏳ Invitation '+(st==='declined_out'?'refusée':'en attente')+' : <b>'+Math.max(0,PENDING_LIMIT-list.filter(function(m){return m.sender_id===NLJ.user.id;}).length)+'/'+PENDING_LIMIT+'</b> messages restants tant qu\'elle n\'est pas acceptée.</div>':'';
-    box.innerHTML=banner+(list.length?list.map(function(m){var me=m.sender_id===NLJ.user.id;
-      return '<div class="mg-b '+(me?'me':'them')+'"><div>'+bodyHtml(m)+'</div><time>'+esc(timeOf(m))+'</time>'+(me?'<button type="button" class="mg-del" data-mdel="'+esc(String(m.id))+'" title="Supprimer ce message" aria-label="Supprimer ce message">🗑</button>':'')+'</div>';}).join(''):'<div class="mg-empty big"><div>🙏</div><b>Dis bonjour à '+esc(nameOf(chat.current))+'</b><p>Écris le premier message, au nom de Jésus.</p></div>');
-    applyComposer();box.scrollTop=box.scrollHeight;hydrateVoice(box);
+    box.innerHTML=banner+(list.length?listHtml(list):'<div class="mg-empty big"><div>🙏</div><b>Dis bonjour à '+esc(nameOf(chat.current))+'</b><p>Écris le premier message, au nom de Jésus.</p></div>');
+    applyComposer();rtEnsure();if(chat.typing)setTypingUI();box.scrollTop=box.scrollHeight;hydrateVoice(box);
   }
   async function deleteMsg(id){
     var m=chat.msgs.find(function(x){return String(x.id)===String(id);});
     if(!m||!NLJ.user||m.sender_id!==NLJ.user.id)return;
-    if(!confirm('Supprimer ce message ?'))return;
+    var vc=isVoice(m);
+    if(!(await askConfirm(vc?'Supprimer ce message vocal ?':'Supprimer ce message ?')))return;
     var r=await supabaseClient.from('messages').delete().eq('id',m.id).eq('sender_id',NLJ.user.id).select('id');
     if(r.error||!r.data||!r.data.length){showToast('❌ Suppression impossible'+(r.error?' : '+r.error.message:' (droit de suppression non activé sur le serveur)'));return;}
-    if(typeof m.body==='string'&&m.body.indexOf('voice:')===0){try{await supabaseClient.storage.from('voice').remove([m.body.slice(6)]);}catch(e){}}
+    var warn='';
+    if(vc){
+      try{var rm=await supabaseClient.storage.from('voice').remove([m.body.slice(6)]);if(rm&&rm.error)warn=' (le fichier audio n\u2019a pas pu être effacé : '+(rm.error.message||'droit manquant')+')';}catch(e){warn=' (fichier audio non effacé)';}
+    }
     chat.msgs=chat.msgs.filter(function(x){return String(x.id)!==String(m.id);});
-    renderContacts();renderMsgs();showToast('🗑 Message supprimé');
+    renderContacts();renderMsgs();showToast((vc?'🗑 Vocal supprimé':'🗑 Message supprimé')+warn);
   }
   document.addEventListener('click',function(e){var b=e.target&&e.target.closest&&e.target.closest('[data-mdel]');if(!b)return;e.preventDefault();e.stopPropagation();deleteMsg(b.getAttribute('data-mdel'));});
+  /* ===== Tchat « comme WhatsApp » : son, écrit…, coches ✓ / ✓✓, confirmation ===== */
+  var SND_KEY='nlj_chat_sound';
+  function soundOn(){try{return localStorage.getItem(SND_KEY)!=='0';}catch(e){return true;}}
+  var actx=null;
+  function audioCtx(){try{if(!actx){var C=window.AudioContext||window.webkitAudioContext;if(C)actx=new C();}if(actx&&actx.state==='suspended')actx.resume();}catch(e){}return actx;}
+  ['pointerdown','keydown','touchstart'].forEach(function(ev){document.addEventListener(ev,function(){audioCtx();},{once:true,passive:true});});
+  function tone(c,f,t0,dur,vol){var o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0.0001,t0);g.gain.exponentialRampToValueAtTime(vol,t0+0.015);g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);o.connect(g);g.connect(c.destination);o.start(t0);o.stop(t0+dur+0.02);}
+  function ding(kind){
+    if(!soundOn())return;
+    try{var c=audioCtx();if(!c)return;var t=c.currentTime;
+      if(kind==='sent'){tone(c,660,t,0.12,0.05);}
+      else if(kind==='in'){tone(c,740,t,0.14,0.09);}
+      else{tone(c,880,t,0.18,0.14);tone(c,1175,t+0.16,0.26,0.14);if(navigator.vibrate)navigator.vibrate([120,60,120]);}
+    }catch(e){}
+  }
+  function bellSync(){var b=$('chatBell');if(b){b.textContent=soundOn()?'🔔':'🔕';b.title=soundOn()?'Son des messages : activé':'Son des messages : coupé';}}
+  (function(){var hd=document.querySelector('#chatPanel .mg-head'),rp=$('chatReport');
+    if(hd&&rp&&!$('chatBell')){var b=document.createElement('button');b.type='button';b.id='chatBell';b.className='mg-hb';b.setAttribute('aria-label','Son des messages');hd.insertBefore(b,rp);
+      b.addEventListener('click',function(){var on=soundOn();try{localStorage.setItem(SND_KEY,on?'0':'1');}catch(e){}bellSync();if(!on)ding('notif');});}
+    if(hd&&!$('chatTyping')){var s=document.createElement('span');s.id='chatTyping';s.className='mg-typing';s.textContent='est en train d\u2019écrire…';var sb=$('chatSubtitle');if(sb&&sb.parentNode)sb.parentNode.appendChild(s);}
+    bellSync();})();
+
+  /* notification d'un message reçu (son + bulle), une seule fois par message */
+  function notifyIncoming(m){
+    if(!m||!NLJ.user||m.receiver_id!==NLJ.user.id||notified[m.id])return;notified[m.id]=1;
+    var inThread=panelOpen()&&chat.current===m.sender_id&&!document.hidden;
+    if(inThread){ding('in');return;}
+    ding('notif');
+    try{showToast('💬 '+nameOf(m.sender_id)+' : '+previewOf(m));}catch(e){}
+  }
+
+  /* canal temps réel privé entre deux membres : « écrit… » et accusés de lecture */
+  function pairKey(u){return 'nlj-rt-'+[NLJ.user.id,u].sort().join('_');}
+  function rtStop(){if(chat.rt){try{supabaseClient.removeChannel(chat.rt);}catch(e){}chat.rt=null;chat.rtFor=null;}}
+  function rtEnsure(){
+    if(!NLJ.user||!chat.current||!panelOpen()){return;}
+    if(chat.rt&&chat.rtFor===chat.current)return;
+    rtStop();chat.typing=false;setTypingUI();chat.rtFor=chat.current;
+    try{
+      chat.rt=supabaseClient.channel(pairKey(chat.current),{config:{broadcast:{self:false}}})
+        .on('broadcast',{event:'typing'},function(p){var d=p&&p.payload;if(d&&d.from&&d.from!==NLJ.user.id)peerTyping(d.from);})
+        .on('broadcast',{event:'read'},function(p){var d=p&&p.payload;if(d&&d.from&&d.from!==NLJ.user.id&&d.at){peerReadSet(d.from,d.at);}})
+        .subscribe();
+    }catch(e){}
+  }
+  function rtSend(ev,payload){if(chat.rt&&chat.rtFor===chat.current){try{chat.rt.send({type:'broadcast',event:ev,payload:payload});}catch(e){}}}
+  var typTimer=null,lastTypSent=0;
+  function peerTyping(from){
+    if(from!==chat.current)return;
+    chat.typing=true;setTypingUI();
+    clearTimeout(typTimer);typTimer=setTimeout(function(){chat.typing=false;setTypingUI();},4000);
+  }
+  function setTypingUI(){
+    var hd=document.querySelector('#chatPanel .mg-head'),box=$('chatMessages');if(!hd||!box)return;
+    var on=!!chat.typing&&!!chat.current;hd.classList.toggle('typing',on);
+    var tb=box.querySelector('.mg-b.typing');
+    if(on&&!tb){var near=box.scrollHeight-box.scrollTop-box.clientHeight<120;tb=document.createElement('div');tb.className='mg-b them typing';tb.innerHTML='<span></span><span></span><span></span>';box.appendChild(tb);if(near)box.scrollTop=box.scrollHeight;}
+    else if(!on&&tb)tb.remove();
+    var cts=document.querySelectorAll('.mg-ct[data-chat]');cts.forEach(function(c){var u=c.getAttribute('data-chat'),sp=c.querySelector('.mg-ci span');if(!sp)return;if(on&&u===chat.current){if(!sp.getAttribute('data-keep'))sp.setAttribute('data-keep',sp.textContent);sp.textContent='écrit…';sp.classList.add('wr');}else if(sp.getAttribute('data-keep')){sp.textContent=sp.getAttribute('data-keep');sp.removeAttribute('data-keep');sp.classList.remove('wr');}});
+  }
+  function sendTyping(){
+    if(!chat.current||!NLJ.user)return;var now=Date.now();if(now-lastTypSent<2500)return;
+    var inp=$('chatInput');if(!inp||inp.disabled||!inp.value)return;lastTypSent=now;rtEnsure();rtSend('typing',{from:NLJ.user.id});
+  }
+  (function(){var inp=$('chatInput');if(inp)inp.addEventListener('input',sendTyping);})();
+
+  /* coches : ✓ envoyé, ✓✓ lu (bleu) */
+  function prKey(){return 'nlj_peerread_'+(NLJ.user?NLJ.user.id:'');}
+  function prLoad(){try{chat.peerRead=JSON.parse(localStorage.getItem(prKey())||'{}');}catch(e){chat.peerRead={};}}
+  function peerReadSet(u,at){
+    if(!chat.peerRead)prLoad();
+    if(!chat.peerRead[u]||new Date(at)>new Date(chat.peerRead[u])){chat.peerRead[u]=at;try{localStorage.setItem(prKey(),JSON.stringify(chat.peerRead));}catch(e){}}
+    updateTicks();
+  }
+  function isReadMsg(m){
+    if(m.read_at)return true;
+    if(!chat.peerRead)prLoad();
+    var r=chat.peerRead[m.receiver_id];return !!(r&&new Date(m.created_at)<=new Date(r));
+  }
+  function ticksHtml(m){var rd=isReadMsg(m);return '<span class="mg-tk'+(rd?' rd':'')+'" title="'+(rd?'Lu':'Envoyé')+'" aria-label="'+(rd?'Lu':'Envoyé')+'">'+(rd?'✓✓':'✓')+'</span>';}
+  function updateTicks(){
+    var box=$('chatMessages');if(!box)return;
+    box.querySelectorAll('.mg-b.me[data-mid]').forEach(function(el){
+      var m=chat.msgs.find(function(x){return String(x.id)===el.getAttribute('data-mid');});if(!m)return;
+      var tk=el.querySelector('.mg-tk');if(!tk)return;var rd=isReadMsg(m);
+      tk.classList.toggle('rd',rd);tk.textContent=rd?'✓✓':'✓';tk.title=rd?'Lu':'Envoyé';
+    });
+  }
+  function sendRead(u){
+    if(!NLJ.user||document.hidden)return;var at=new Date().toISOString();
+    rtEnsure();rtSend('read',{from:NLJ.user.id,at:at});
+    if(!chat.noRead){
+      try{supabaseClient.from('messages').update({read_at:at}).eq('receiver_id',NLJ.user.id).eq('sender_id',u).is('read_at',null).then(function(r){if(r&&r.error&&/read_at|column|42703|PGRST204/i.test((r.error.message||'')+(r.error.code||'')))chat.noRead=true;});}catch(e){}
+    }
+  }
+
+  /* confirmation intégrée (confirm() est bloqué dans certaines fenêtres/iframes) */
+  function askConfirm(msg,yes){
+    return new Promise(function(res){
+      var host=document.querySelector('#chatPanel .msgr')||document.body,o=document.createElement('div');o.className='mg-sheet';
+      o.innerHTML='<div class="mg-sheet-c" role="dialog" aria-modal="true"><p>'+esc(msg)+'</p><button type="button" class="mg-sy" data-y="1">'+esc(yes||'Supprimer')+'</button><button type="button" class="mg-sn" data-n="1">Annuler</button></div>';
+      function done(v){o.remove();res(v);}
+      o.addEventListener('click',function(e){if(e.target===o||(e.target.getAttribute&&e.target.getAttribute('data-n')))done(false);else if(e.target.getAttribute&&e.target.getAttribute('data-y'))done(true);});
+      host.appendChild(o);
+    });
+  }
+  function dayLabel(d){
+    try{var t=new Date(),y=new Date();y.setDate(t.getDate()-1);
+      if(d.toDateString()===t.toDateString())return "Aujourd'hui";if(d.toDateString()===y.toDateString())return 'Hier';
+      return d.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});}catch(e){return '';}
+  }
+  function clockOf(m){try{return new Date(m.created_at).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});}catch(e){return '';}}
+  function bubbleHtml(m){
+    var me=m.sender_id===NLJ.user.id,v=isVoice(m);
+    return '<div class="mg-b '+(me?'me':'them')+(v?' vc':'')+'" data-mid="'+esc(String(m.id))+'"><div class="mg-bt">'+bodyHtml(m)+'</div><div class="mg-meta"><time>'+esc(clockOf(m))+'</time>'+(me?ticksHtml(m)+'<button type="button" class="mg-del" data-mdel="'+esc(String(m.id))+'" title="Supprimer ce message" aria-label="Supprimer ce message">🗑</button>':'')+'</div></div>';
+  }
+  function listHtml(list){
+    var out='',last='';
+    list.forEach(function(m){var d=new Date(m.created_at),k=d.toDateString();if(k!==last){last=k;out+='<div class="mg-day"><span>'+esc(dayLabel(d))+'</span></div>';}out+=bubbleHtml(m);});
+    return out;
+  }
   function panelOpen(){var p=$('chatPanel');return p&&!p.classList.contains('hidden');}
-  function stopLive(){if(chat.timer){clearInterval(chat.timer);chat.timer=null;}if(chat.channel){try{supabaseClient.removeChannel(chat.channel);}catch(e){}chat.channel=null;}}
+  function stopLive(){if(chat.timer){clearInterval(chat.timer);chat.timer=null;}if(chat.channel){try{supabaseClient.removeChannel(chat.channel);}catch(e){}chat.channel=null;}rtStop();chat.typing=false;}
   function startLive(){
     stopLive();
-    chat.timer=setInterval(async function(){if(!panelOpen()||document.hidden)return;var n=chat.msgs.length;await loadMessages();if(chat.msgs.length!==n){renderContacts();renderMsgs();}},6000);
+    chat.timer=setInterval(async function(){if(!panelOpen()||document.hidden)return;var n=chat.msgs.length;await loadMessages();if(chat.msgs.length!==n){renderContacts();renderMsgs();}else updateTicks();},6000);
     try{
       chat.channel=supabaseClient.channel('nlj-messages').on('postgres_changes',{event:'INSERT',schema:'public',table:'messages'},function(p){
         var m=p.new;if(!m||chat.msgs.some(function(x){return x.id===m.id;}))return;
-        if(m.sender_id===NLJ.user.id||m.receiver_id===NLJ.user.id){chat.msgs.push(m);renderContacts();renderMsgs();}
+        if(m.sender_id===NLJ.user.id||m.receiver_id===NLJ.user.id){chat.msgs.push(m);if(m.sender_id===chat.current){chat.typing=false;}renderContacts();renderMsgs();notifyIncoming(m);}
+      }).on('postgres_changes',{event:'UPDATE',schema:'public',table:'messages'},function(p){
+        var m=p.new;if(!m||m.id==null)return;var x=chat.msgs.find(function(y){return String(y.id)===String(m.id);});
+        if(x&&m.read_at&&!x.read_at){x.read_at=m.read_at;updateTicks();}
       }).on('postgres_changes',{event:'DELETE',schema:'public',table:'messages'},function(p){var o=p.old;if(!o||o.id==null)return;var n=chat.msgs.length;chat.msgs=chat.msgs.filter(function(x){return String(x.id)!==String(o.id);});if(chat.msgs.length!==n){renderContacts();renderMsgs();}}).subscribe();
     }catch(e){}
+    rtEnsure();
   }
   function lockUI(){
     var p=$('chatPanel');p.classList.remove('hidden');
@@ -398,7 +535,7 @@
   };
   window.closeChatPanel=function(){var p=$('chatPanel');if(p)p.classList.add('hidden');stopLive();};
   $('chatContacts').addEventListener('click',function(e){var d=e.target.closest('[data-chat]');if(d)openChat(d.getAttribute('data-chat'));});
-  $('chatBack').addEventListener('click',function(){chat.current=null;renderContacts();renderMsgs();});
+  $('chatBack').addEventListener('click',function(){chat.current=null;chat.typing=false;rtStop();setTypingUI();renderContacts();renderMsgs();});
   $('chatForm').addEventListener('submit',async function(e){
     e.preventDefault();e.stopImmediatePropagation();
     var inp=$('chatInput'),v=inp.value.trim();
@@ -413,7 +550,7 @@
     else if(!NLJ.premium&&await countMsgs(chat.current,todayISO())>=FREE_LIMIT){showToast('🎁 Limite de '+FREE_LIMIT+' messages par jour dans cette conversation. Remise à zéro à minuit.');return;}
     var r=await supabaseClient.from('messages').insert([{sender_id:NLJ.user.id,receiver_id:chat.current,body:v}]).select('id,sender_id,receiver_id,body,created_at').single();
     if(r.error||!r.data){console.error('messages (envoi):',r.error);var em=(r.error&&r.error.message)||'',cd=(r.error&&r.error.code)||'',why;if(/nlj_blocked/.test(em))why="ce membre ne peut pas recevoir tes messages";else if(/nlj_invite_required/.test(em))why="invitation requise";else if(/nlj_accept_required/.test(em))why="accepte d'abord l'invitation";else if(/nlj_pending_limit/.test(em))why="invitation non acceptée : "+PENDING_LIMIT+" messages maximum";else if(/nlj_daily_limit/.test(em))why="limite de "+FREE_LIMIT+" messages par jour atteinte dans cette conversation";else if(cd==='23503')why="ce membre n'a pas de compte valide";else if(cd==='42501'||/row-level security/i.test(em))why=NLJ.premium?"envoi refusé par la base de données (droits à vérifier)":"limite quotidienne atteinte, coordonnées interdites ou droits refusés";else why=em||'erreur inconnue';showToast('❌ Message non envoyé : '+why);return;}
-    inp.value='';
+    inp.value='';ding('sent');
     if(!chat.msgs.some(function(x){return x.id===r.data.id;}))chat.msgs.push(r.data);
     renderContacts();renderMsgs();await setSub();
     if(chat.remKind==='free'&&chat.rem===1){var W="⚠️ Attention : il te reste 1 seul message gratuit aujourd'hui dans cette conversation (limite de "+FREE_LIMIT+" par jour). Passe en Premium pour écrire sans limite.";try{var ne=$('chatNote');if(ne){ne.textContent=W;ne.style.color='#b45309';ne.style.fontWeight='700';}}catch(e){}showToast(W);}else if(chat.rem!=null&&((chat.remKind==='free'&&chat.rem<=2)||(chat.remKind==='pending'&&chat.rem<=1))){var r0=chat.rem,pl=r0>1?'s':'';showToast(r0===0?(chat.remKind==='pending'?'✉️ Dernier message avant l\'acceptation de ton invitation':'🎁 Dernier message gratuit utilisé aujourd\'hui. Reviens demain ou passe en Premium ⭐'):'⚠️ Plus que '+r0+' message'+pl+(chat.remKind==='free'?' gratuit'+pl+' aujourd\'hui':' avant acceptation'));}

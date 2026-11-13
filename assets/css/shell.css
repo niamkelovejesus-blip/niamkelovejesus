@@ -30,3 +30,6 @@ iframe.on{display:block}
   .hero-inner { grid-template-columns: 1fr !important; gap: 20px !important; }
   .hero h1 { font-size: 1.8rem !important; line-height: 1.2 !important; }
 }
+
+/* === contenu texte pour les moteurs de recherche (miroir de la page d'accueil) === */
+.nlj-seo{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);white-space:nowrap;border:0}

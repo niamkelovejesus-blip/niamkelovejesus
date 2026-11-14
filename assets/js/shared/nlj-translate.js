@@ -103,16 +103,36 @@
     return fetch(url, opt).then(function (r) { if (tm) clearTimeout(tm); return r; },
       function (e) { if (tm) clearTimeout(tm); throw e; });
   }
+  var lastErr = '';
+  function errTxt(e) { return !e ? '' : e.http ? ('HTTP ' + e.http) : (e.name === 'AbortError' ? 'timeout' : (e.mismatch ? 'format' : 'réseau')); }
+  function parseGtx(j, texts) {
+    var full = (j[0] || []).map(function (x) { return x[0] || ''; }).join('');
+    var parts = full.split(/\s*§\s*§\s*§\s*/);
+    if (parts.length !== texts.length) { var e = new Error('mismatch'); e.mismatch = true; throw e; }
+    return parts.map(function (p) { return p.trim(); });
+  }
+  /* Secours : même service en GET (certains navigateurs / réseaux refusent le POST). Lots courts (< 1700 car. encodés). */
+  function gtxGetBatch(texts, tgt) {
+    var groups = [], cur = [], len = 0;
+    texts.forEach(function (t) {
+      var l = encodeURIComponent(t + SEP).length;
+      if (cur.length && len + l > 1700) { groups.push(cur); cur = []; len = 0; }
+      cur.push(t); len += l;
+    });
+    if (cur.length) groups.push(cur);
+    return Promise.all(groups.map(function (g) {
+      var u = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=' + encodeURIComponent(tgt) + '&dt=t&q=' + encodeURIComponent(g.join(SEP));
+      return fetchT(u, { method: 'GET' }, 9000).then(function (r) { if (!r.ok) { var e = new Error('gtx ' + r.status); e.http = r.status; throw e; } return r.json(); })
+        .then(function (j) { return parseGtx(j, g); });
+    })).then(function (a) { return [].concat.apply([], a); });
+  }
   function gtxBatch(texts, tgt) {
     var body = 'client=gtx&sl=auto&tl=' + encodeURIComponent(tgt) + '&dt=t&q=' + encodeURIComponent(texts.join(SEP));
     return fetchT('https://translate.googleapis.com/translate_a/single', {
       method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body
     }, 9000).then(function (r) { if (!r.ok) { var e = new Error('gtx ' + r.status); e.http = r.status; throw e; } return r.json(); })
       .then(function (j) {
-        var full = (j[0] || []).map(function (x) { return x[0] || ''; }).join('');
-        var parts = full.split(/\s*§\s*§\s*§\s*/);
-        if (parts.length !== texts.length) { var e = new Error('mismatch'); e.mismatch = true; throw e; }
-        return parts.map(function (p) { return p.trim(); });
+        return parseGtx(j, texts);
       });
   }
   function myMemory(text, tgt) {
@@ -140,9 +160,12 @@
         }
         return myMemory(texts[0], tgt).then(function (t) { return [t]; }, function () { return [null]; });
       }
-      // réseau coupé, 429, 5xx, délai dépassé : on met le service en pause
-      trip();
-      return nulls(texts.length);
+      // POST refusé / réseau / 429 / délai : on essaie le même service en GET, sinon on met en pause
+      lastErr = errTxt(err);
+      return gtxGetBatch(texts, tgt).then(function (r) { healthy(); lastErr = ''; return r; }, function (e2) {
+        if (e2 && e2.mismatch && texts.length === 1) return myMemory(texts[0], tgt).then(function (t) { return [t]; }, function () { trip(); return [null]; });
+        lastErr = errTxt(e2) || lastErr; trip(); return nulls(texts.length);
+      });
     });
   }
 
@@ -354,7 +377,7 @@
     bar.style.display = 'flex';
     document.documentElement.classList.add('nljt-on');
     if (failing() && !showOriginal) {
-      bar.querySelector('#nljt-t').textContent = '🌐 ⚠ ' + l.toUpperCase();
+      bar.querySelector('#nljt-t').textContent = '🌐 ⚠ ' + l.toUpperCase() + (lastErr ? ' · ' + lastErr : '');
       bar.querySelector('#nljt-b').textContent = '↻';
     } else {
       bar.querySelector('#nljt-t').textContent = busy ? '🌐 ' + ui(3) : '🌐 ' + ui(0) + (l !== 'fr' ? ' (' + l.toUpperCase() + ')' : '');
@@ -433,7 +456,7 @@
     setTimeout(function () { go(false); }, 2500);               // contenu chargé après coup (Supabase)
   }
 
-  window.NLJT = { refresh: function () { go(true); }, lang: curLang, toggleOriginal: toggleOriginal };
+  window.NLJT = { diag: function () { return { lang: curLang(), erreur: lastErr, pause: tripped(), echecs: cool.step }; }, refresh: function () { go(true); }, lang: curLang, toggleOriginal: toggleOriginal };
 
   if (document.body) boot(); else document.addEventListener('DOMContentLoaded', boot);
 })();

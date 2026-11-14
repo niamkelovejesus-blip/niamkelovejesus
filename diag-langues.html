@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Diagnostic des langues</title>
+<style>body{font:16px/1.5 system-ui,sans-serif;margin:0;padding:16px;background:#0f2a4a;color:#fff}
+h1{font-size:20px;margin:0 0 12px}button{font:700 16px system-ui;padding:12px 18px;border:0;border-radius:10px;background:#d9b97a;color:#1b1400}
+pre{white-space:pre-wrap;word-break:break-word;background:rgba(255,255,255,.1);padding:12px;border-radius:10px;font-size:14px}</style></head>
+<body><h1>🌐 Diagnostic des langues</h1>
+<p>Appuie sur le bouton, attends 15 secondes, puis envoie-moi une capture d’écran de tout le résultat.</p>
+<button id="go" type="button">▶ Lancer le test</button><pre id="out">En attente…</pre>
+<script>
+(function(){
+var out=document.getElementById('out'),L=[];
+function log(s){L.push(s);out.textContent=L.join('\n');}
+function T(url,opt,ms){var c=new AbortController(),t=setTimeout(function(){c.abort();},ms||9000);opt=opt||{};opt.signal=c.signal;
+  return fetch(url,opt).then(function(r){clearTimeout(t);return r;},function(e){clearTimeout(t);throw e;});}
+function why(e){return e&&e.name==='AbortError'?'délai dépassé (9 s)':'bloqué par le navigateur / réseau / extension ('+(e&&e.message||e)+')';}
+async function run(){
+  L=[];log('Navigateur : '+navigator.userAgent.slice(0,90));
+  try{log('Langue enregistrée (niamke_lang) : '+(localStorage.getItem('niamke_lang')||'(aucune)'));}catch(e){log('localStorage inaccessible');}
+  log('Connexion Internet : '+(navigator.onLine?'oui':'NON'));log('');
+  /* 1. version du traducteur réellement en ligne */
+  try{var r=await T('assets/js/shared/nlj-translate.js?x='+Date.now(),{cache:'no-store'});var s=await r.text();
+    log('1) Fichier nlj-translate.js en ligne : '+(r.ok?'trouvé':'ERREUR '+r.status)+' — '+(s.indexOf('gtxGetBatch')>-1?'✅ version v34 (à jour)':'❌ ANCIENNE version : les nouveaux fichiers ne sont pas publiés'));
+  }catch(e){log('1) Fichier nlj-translate.js : ❌ '+why(e));}
+  var langs=[['ko','Coréen'],['ln','Lingala'],['ur','Ourdou']];
+  /* 2. Google en POST */
+  for(var i=0;i<langs.length;i++){var l=langs[i];
+    try{var r2=await T('https://translate.googleapis.com/translate_a/single',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'client=gtx&sl=auto&tl='+l[0]+'&dt=t&q='+encodeURIComponent('Bonjour, que Dieu vous bénisse.')});
+      if(!r2.ok){log('2) Google POST '+l[1]+' : ❌ HTTP '+r2.status);continue;}
+      var j=await r2.json();log('2) Google POST '+l[1]+' : ✅ '+(j[0]||[]).map(function(x){return x[0];}).join(''));
+    }catch(e){log('2) Google POST '+l[1]+' : ❌ '+why(e));}}
+  /* 3. Google en GET */
+  try{var r3=await T('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=ko&dt=t&q='+encodeURIComponent('Bonjour, que Dieu vous bénisse.'));
+    if(!r3.ok)log('3) Google GET Coréen : ❌ HTTP '+r3.status);else{var j3=await r3.json();log('3) Google GET Coréen : ✅ '+(j3[0]||[]).map(function(x){return x[0];}).join(''));}
+  }catch(e){log('3) Google GET Coréen : ❌ '+why(e));}
+  /* 4. MyMemory (secours) */
+  try{var r4=await T('https://api.mymemory.translated.net/get?q='+encodeURIComponent('Bonjour')+'&langpair=fr|ko',{},8000);var j4=await r4.json();
+    log('4) MyMemory Coréen : '+(j4&&j4.responseData?'✅ '+j4.responseData.translatedText:'❌ réponse vide'));
+  }catch(e){log('4) MyMemory : ❌ '+why(e));}
+  log('');log('✔ Test terminé.');
+}
+document.getElementById('go').addEventListener('click',function(){out.textContent='Test en cours…';run();});
+})();
+</script></body></html>

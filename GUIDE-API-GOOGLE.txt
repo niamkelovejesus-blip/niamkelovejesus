@@ -1,0 +1,30 @@
+BRANCHER L'API OFFICIELLE GOOGLE TRADUCTION  (≈ 20 minutes)
+===========================================================
+Le site utilise l'API officielle en premier. Si elle n'est pas encore installée,
+il retombe tout seul sur l'ancien service : rien ne casse pendant que tu installes.
+
+A. GOOGLE CLOUD  (console.cloud.google.com)
+  1. Crée un projet (ex. "niamke-love-jesus") et active la facturation (carte bancaire
+     demandée ; les 500 000 premiers caractères par mois sont gratuits).
+  2. Menu « API et services » > « Bibliothèque » > cherche « Cloud Translation API » > Activer.
+  3. « API et services » > « Identifiants » > Créer des identifiants > Clé API.
+  4. Modifie la clé > « Restrictions relatives aux API » > Restreindre la clé > coche
+     UNIQUEMENT « Cloud Translation API » > Enregistrer. Copie la clé.
+  5. IMPORTANT (protège ton budget) : « API et services » > Cloud Translation API > Quotas
+     > limite « caractères par jour » à une valeur raisonnable (ex. 100 000). Et dans
+     « Facturation » > « Budgets et alertes », crée une alerte (ex. 10 $).
+
+B. SUPABASE
+  1. SQL Editor : colle le contenu de supabase_traduction_cache.sql > Run.
+  2. Edge Functions > « Deploy a new function » (ou « Via Editor ») > nom : translate
+     (exactement) > colle le contenu de supabase/functions/translate/index.ts > Deploy.
+  3. Dans la fonction translate > réglages : désactive « Verify JWT » (le site n'est pas
+     connecté au moment de traduire).
+  4. Edge Functions > « Secrets » > ajoute :
+       GOOGLE_TRANSLATE_KEY  = (la clé copiée à l'étape A.4)
+       ALLOWED_ORIGINS       = https://niamkelovejesus-blip.github.io,https://TON-NOUVEAU-DOMAINE
+     (sans "/" à la fin ; sépare par une virgule ; ajoute le domaine + la version www)
+
+C. VÉRIFIER
+  Ouvre le site, choisis le coréen, puis (sur ordinateur) F12 > Console > tape  NLJT.diag()
+  Tu dois lire : moteur: "API officielle Google".

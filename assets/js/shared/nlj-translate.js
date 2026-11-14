@@ -148,14 +148,14 @@
   function nulls(n) { var a = []; for (var i = 0; i < n; i++) a.push(null); return a; }
   /* Lot ; si Google a abîmé le séparateur, on coupe le lot en deux (et non texte par texte) :
      quelques requêtes au lieu de centaines. Jamais d'exception : les échecs reviennent en null. */
-  function translateMany(texts, tgt) {
+  function translateGtx(texts, tgt) {
     if (!texts.length) return Promise.resolve([]);
     if (tripped()) return Promise.resolve(nulls(texts.length));
     return gtxBatch(texts, tgt).then(function (r) { healthy(); return r; }, function (err) {
       if (err && err.mismatch) {
         if (texts.length > 1) {
           var h = Math.ceil(texts.length / 2);
-          return Promise.all([translateMany(texts.slice(0, h), tgt), translateMany(texts.slice(h), tgt)])
+          return Promise.all([translateGtx(texts.slice(0, h), tgt), translateGtx(texts.slice(h), tgt)])
             .then(function (a) { return a[0].concat(a[1]); });
         }
         return myMemory(texts[0], tgt).then(function (t) { return [t]; }, function () { return [null]; });
@@ -168,6 +168,33 @@
       });
     });
   }
+
+
+  /* API OFICIELLE Google Cloud Translation, via la fonction Supabase « translate » (la clé reste secrète côté serveur).
+     Si la fonction n'est pas installée ou en panne, on retombe automatiquement sur l'ancien service gratuit. */
+  var SB_FN = 'https://qxxhbfoqlreiqyshbpqp.supabase.co/functions/v1/translate';
+  var SB_PK = 'sb_publishable_OK9ncVWB2Ih8xZ5fzqEQWg_mSV6vCoe';
+  var official = { off: 0 };
+  function officialBatch(texts, tgt) {
+    if (nowMs() < official.off) return Promise.reject(new Error('official-off'));
+    return fetchT(SB_FN, { method: 'POST', headers: { 'Content-Type': 'application/json', 'apikey': SB_PK, 'Authorization': 'Bearer ' + SB_PK },
+      body: JSON.stringify({ target: tgt, texts: texts }) }, 15000)
+      .then(function (r) { if (!r.ok) { var e = new Error('official ' + r.status); e.http = r.status; throw e; } return r.json(); })
+      .then(function (j) {
+        if (!j || !j.t || j.t.length !== texts.length) throw new Error('official-format');
+        return j.t.map(function (x) { return String(x == null ? '' : x).trim(); });
+      });
+  }
+  function translateMany(texts, tgt) {
+    if (!texts.length) return Promise.resolve([]);
+    return officialBatch(texts, tgt).then(function (r) { healthy(); lastErr = ''; officialOk = true; return r; }, function (e) {
+      var h = e && e.http;
+      official.off = nowMs() + ((h === 404 || h === 401 || h === 403 || h === 500) ? 600000 : 60000);   // pas installée / mal réglée : on n'insiste pas
+      officialErr = h ? ('API ' + h) : 'API réseau';
+      return translateGtx(texts, tgt);
+    });
+  }
+  var officialOk = false, officialErr = '';
 
   /* ---------- sélection du texte à traduire ---------- */
   var SCRIPT = { ar: /[\u0600-\u06FF]/g, ru: /[\u0400-\u04FF]/g, zh: /[\u4E00-\u9FFF]/g, hi: /[\u0900-\u097F]/g, ko: /[\uAC00-\uD7AF]/g };
@@ -456,7 +483,7 @@
     setTimeout(function () { go(false); }, 2500);               // contenu chargé après coup (Supabase)
   }
 
-  window.NLJT = { diag: function () { return { lang: curLang(), erreur: lastErr, pause: tripped(), echecs: cool.step }; }, refresh: function () { go(true); }, lang: curLang, toggleOriginal: toggleOriginal };
+  window.NLJT = { diag: function () { return { lang: curLang(), moteur: officialOk ? 'API officielle Google' : 'service gratuit (secours)', erreur_api: officialErr, erreur: lastErr, pause: tripped(), echecs: cool.step }; }, refresh: function () { go(true); }, lang: curLang, toggleOriginal: toggleOriginal };
 
   if (document.body) boot(); else document.addEventListener('DOMContentLoaded', boot);
 })();

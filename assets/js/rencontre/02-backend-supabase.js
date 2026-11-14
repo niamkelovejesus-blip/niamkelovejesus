@@ -79,7 +79,7 @@ gameTitle:"Jeu Biblique sur Jésus 🎮",gameLead:"25 questions sur Jésus et le
 musicTitle:"Musique Chrétienne - Jésus",musicLead:"Chants pour Jésus-Christ, notre Époux céleste.",uploadTitle:"🎵 Téléverser des chants pour Jésus",uploadBtn:"Ajouter pour Jésus",
 modTitle:"Modération en Jésus",modLead:"Gère les profils en Jésus. Modifie ou supprime. Les suppressions ne reviennent plus.",
 premiumTitle:"Abonnements en Jésus - Prix CFA",premiumLead:"Prix pensés pour l'Afrique, centrés sur Jésus. 9 000 F / 15 000 F / 30 000 F",paymentTitle:"Paiement pour l'œuvre de Jésus",
-footerDesc:"Rencontre chrétienne centrée sur Jésus-Christ. Jésus au centre. 10 langues. Suppressions définitives."
+footerDesc:"Rencontre chrétienne centrée sur Jésus-Christ. Jésus au centre. 21 langues. Suppressions définitives."
 },
 en:{
 choose:"Choose in Jesus",free:"Free",navHome:"Home",navMeet:"Meet",navVerses:"Jesus Verses",navGame:"Bible Game",navMusic:"Music",navMod:"Moderation",navPremium:"Premium",
@@ -94,7 +94,7 @@ gameTitle:"Bible Game about Jesus 🎮",gameLead:"25 questions about Jesus and m
 musicTitle:"Christian Music - Jesus",musicLead:"Songs for Jesus Christ, our heavenly Bridegroom.",uploadTitle:"🎵 Upload songs for Jesus",uploadBtn:"Add for Jesus",
 modTitle:"Moderation in Jesus",modLead:"Manage profiles in Jesus. Edit or delete. Deletions are permanent.",
 premiumTitle:"Subscriptions in Jesus - CFA Price",premiumLead:"Prices designed for Africa, centered on Jesus. 9,000 F / 15,000 F / 30,000 F",paymentTitle:"Payment for the work of Jesus",
-footerDesc:"Christian dating centered on Jesus Christ. No more cities, just Jesus at the center. 6 languages. Permanent deletions."
+footerDesc:"Christian dating centered on Jesus Christ. No more cities, just Jesus at the center. 21 languages. Permanent deletions."
 },
 es:{
 choose:"Elegir en Jesús",free:"Gratis",navHome:"Inicio",navMeet:"Encuentro",navVerses:"Versículos Jesús",navGame:"Juego Bíblico",navMusic:"Música",navMod:"Moderación",navPremium:"Premium",
@@ -154,7 +154,7 @@ gameTitle:"Gioco Biblico su Gesù 🎮 - GRATUIT ✅",gameLead:"25 domande su Ge
 musicTitle:"Musica Cristiana - GRATUIT ✅",musicLead:"Canti per Gesù Cristo, nostro Sposo celeste. GRATUIT",uploadTitle:"🎵 Carica canti per Gesù",uploadBtn:"Aggiungi per Gesù",
 modTitle:"Moderazione in Gesù",modLead:"Gestisci profili in Gesù. Modifica o elimina. Les suppressions ne reviennent plus.",
 premiumTitle:"Abonnements en Jésus - Prix CFA",premiumLead:"Prix pensés pour l'Afrique, centrés sur Jésus. 9 000 F / 15 000 F / 30 000 F - TCHAT PREMIUM",paymentTitle:"Paiement pour l'œuvre de Jésus",
-footerDesc:"Incontro cristiano centrato su Gesù Cristo. 8 lingue. Giochi/Musica/Bibbia GRATUIT, Tchat PREMIUM."
+footerDesc:"Incontro cristiano centrato su Gesù Cristo. 21 lingue. Giochi/Musica/Bibbia GRATUIT, Tchat PREMIUM."
 },
 de:{
 choose:"In Jesus wählen",free:"Kostenlos",navHome:"Start",navMeet:"Treffen",navVerses:"Jesus-Verse",navGame:"Bibelspiel",navMusic:"Musik",navMod:"Moderation",navPremium:"Premium - KOSTENLOS vs PREMIUM",
@@ -169,7 +169,7 @@ gameTitle:"Bibelspiel über Jesus 🎮 - KOSTENLOS ✅",gameLead:"25 Fragen übe
 musicTitle:"Christliche Musik - KOSTENLOS ✅",musicLead:"Lieder für Jesus Christus, unseren himmlischen Bräutigam. KOSTENLOS",uploadTitle:"🎵 Lieder für Jesus hochladen",uploadBtn:"Für Jesus hinzufügen",
 modTitle:"Moderation in Jesus",modLead:"Profile in Jesus verwalten. Bearbeiten oder löschen. Löschungen sind endgültig.",
 premiumTitle:"Abos in Jesus - CFA Preis",premiumLead:"Preise für Afrika gedacht, zentriert auf Jesus. 9 000 F / 15 000 F / 30 000 F - PREMIUM CHAT",paymentTitle:"Zahlung für das Werk Jesu",
-footerDesc:"Christliches Treffen zentriert auf Jesus Christus. 8 Sprachen. Spiele/Musik/Bibel KOSTENLOS, Chat PREMIUM."
+footerDesc:"Christliches Treffen zentriert auf Jesus Christus. 21 Sprachen. Spiele/Musik/Bibel KOSTENLOS, Chat PREMIUM."
 },
 nl:{
 choose:"Kies in Jezus",free:"Gratis",navHome:"Home",navMeet:"Ontmoeting",navVerses:"Jezus Verzen",navGame:"Bijbelspel",navMusic:"Muziek",navMod:"Moderatie",navPremium:"Premium",
@@ -181,9 +181,9 @@ versesTitle:"📖 Verzenbibliotheek - GRATIS ✅",versesLead:"GRATIS in Jezus.",
 gameTitle:"Bijbelspel over Jezus 🎮 - GRATIS ✅",gameLead:"25 vragen over Jezus en huwelijk. GRATIS",
 musicTitle:"Christelijke Muziek - GRATIS ✅",musicLead:"Liederen voor Jezus Christus. GRATIS",
 premiumTitle:"Abonnementen in Jezus - CFA Prijs",premiumLead:"9 000 F / 15 000 F / 30 000 F - PREMIUM CHAT",
-footerDesc:"Christelijke ontmoeting gecentreerd op Jezus Christus. 9 talen. Spellen/Muziek/Bijbel GRATIS, Chat PREMIUM."
+footerDesc:"Christelijke ontmoeting gecentreerd op Jezus Christus. 21 talen. Spellen/Muziek/Bijbel GRATIS, Chat PREMIUM."
 },
-ru:{choose:"Выбрать в Иисусе",free:"Бесплатно",navHome:"Главная",navMeet:"Встреча",navVerses:"Стихи Иисуса",navGame:"Библейская игра",navMusic:"Музыка",navMod:"Модерация",navPremium:"Премиум",heroBadge:"✝️ Иисус Христос — Путь - 2026",heroTitle:"Иисус Христос в центре",heroDesc:"Иисус Христос — основание.",btnDiscover:"Найти профили в Иисусе",btnVerses:"Стихи об Иисусе - БЕСПЛАТНО",meetTitle:"Встреча в Иисусе Христе - ПРЕМИУМ ЧАТ 🔒",meetLead:"Игры и музыка БЕСПЛАТНО, чат Премиум.",versesTitle:"📖 Библиотека стихов - БЕСПЛАТНО ✅",versesLead:"БЕСПЛАТНО в Иисусе.",gameTitle:"Библейская игра об Иисусе 🎮 - БЕСПЛАТНО ✅",gameLead:"25 вопросов. БЕСПЛАТНО",musicTitle:"Христианская музыка - БЕСПЛАТНО ✅",musicLead:"Песни для Иисуса. БЕСПЛАТНО",premiumTitle:"Подписки в Иисусе",premiumLead:"9 000 F / 15 000 F / 30 000 F",footerDesc:"10 языков. Игры/Музыка/Библия БЕСПЛАТНО, Чат ПРЕМИУМ."},
+ru:{choose:"Выбрать в Иисусе",free:"Бесплатно",navHome:"Главная",navMeet:"Встреча",navVerses:"Стихи Иисуса",navGame:"Библейская игра",navMusic:"Музыка",navMod:"Модерация",navPremium:"Премиум",heroBadge:"✝️ Иисус Христос — Путь - 2026",heroTitle:"Иисус Христос в центре",heroDesc:"Иисус Христос — основание.",btnDiscover:"Найти профили в Иисусе",btnVerses:"Стихи об Иисусе - БЕСПЛАТНО",meetTitle:"Встреча в Иисусе Христе - ПРЕМИУМ ЧАТ 🔒",meetLead:"Игры и музыка БЕСПЛАТНО, чат Премиум.",versesTitle:"📖 Библиотека стихов - БЕСПЛАТНО ✅",versesLead:"БЕСПЛАТНО в Иисусе.",gameTitle:"Библейская игра об Иисусе 🎮 - БЕСПЛАТНО ✅",gameLead:"25 вопросов. БЕСПЛАТНО",musicTitle:"Христианская музыка - БЕСПЛАТНО ✅",musicLead:"Песни для Иисуса. БЕСПЛАТНО",premiumTitle:"Подписки в Иисусе",premiumLead:"9 000 F / 15 000 F / 30 000 F",footerDesc:"21 язык. Игры/Музыка/Библия БЕСПЛАТНО, Чат ПРЕМИУМ."},
 zh:{
 
 choose:"在耶稣里选择",free:"免费",navHome:"首页",navMeet:"相遇",navVerses:"耶稣经文",navGame:"圣经游戏",navMusic:"音乐",navMod:"管理",navPremium:"高级 - 免费 vs 高级",
@@ -198,11 +198,14 @@ gameTitle:"关于耶稣的圣经游戏 🎮 - 免费 ✅",gameLead:"25个关于�
 musicTitle:"基督教音乐 - 免费 ✅",musicLead:"为耶稣基督，我们天上的新郎的歌曲。免费",uploadTitle:"🎵 为耶稣上传歌曲",uploadBtn:"为耶稣添加",
 modTitle:"在耶稣里的管理",modLead:"在耶稣里管理资料。编辑或删除。删除是永久的。",
 premiumTitle:"在耶稣里的订阅 - 非洲法郎价格",premiumLead:"为非洲设计的价格，以耶稣为中心。9 000 F / 15 000 F / 30 000 F - 高级聊天",paymentTitle:"为耶稣的工作付款",
-footerDesc:"以耶稣基督为中心的基督徒相遇。8种语言。游戏/音乐/圣经免费，聊天高级。"
+footerDesc:"以耶稣基督为中心的基督徒相遇。21种语言。游戏/音乐/圣经免费，聊天高级。"
 }
 };
 
-const CONFESSIONS=["Catholique","Protestante","Évangélique","Pentecôtiste","Adventiste","Baptiste","Méthodiste","Anglicane","Orthodoxe","Église Royaume Universel de Dieu","Autre chrétienne en Jésus"];
+const CONFESSIONS=["Catholique", "Protestante", "Évangélique", "Pentecôtiste", "Baptiste", "Adventiste du 7ème Jour", "Orthodoxe", "Méthodiste", "Presbytérienne", "Luthérienne", "Anglicane", "Église de Réveil", "Église Kimbanguiste", "Église Royaume Universel de Dieu", "Autre chrétienne en Jésus"];
+/* comparaison tolérante des églises (anciens profils « Adventiste », « Protestant »…) */
+function nljChNorm(x){x=String(x==null?"":x).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim();if(x.indexOf("adventiste")===0)return "adventiste";if(x==="protestant")return "protestante";if(x.indexOf("autre")===0)return "autre";return x;}
+function nljSameChurch(a,b){return !!a&&!!b&&nljChNorm(a)===nljChNorm(b);}
 let currentLang='fr';
 let currentCurrency='XOF';
 const CURRENCY_RATES={EUR:1/655.96,USD:1.09/655.96,XOF:1,CAD:1.48/655.96,GBP:0.86/655.96};
@@ -257,7 +260,7 @@ const search=document.getElementById("filterSearch").value.toLowerCase();
 const ageMin=parseInt(document.getElementById("ageMin").value);
 const ageMax=parseInt(document.getElementById("ageMax").value);
 const realGrid=document.getElementById("profilesGrid");const grid=document.createElement("div");
-profiles.filter(p=>String(p.status||"").trim().toLowerCase()==="approved").filter(p=>!church||p.church===church||p.confession===church).filter(p=>!gender||p.gender===gender).filter(p=>!p.age||(p.age>=ageMin && p.age<=ageMax)).filter(p=>!search||((p.name||"")+(p.verse||"")+(p.church||"")).toLowerCase().includes(search)).forEach(p=>{
+profiles.filter(p=>String(p.status||"").trim().toLowerCase()==="approved").filter(p=>!church||nljSameChurch(p.church,church)||nljSameChurch(p.confession,church)).filter(p=>!gender||p.gender===gender).filter(p=>!p.age||(p.age>=ageMin && p.age<=ageMax)).filter(p=>!search||((p.name||"")+(p.verse||"")+(p.church||"")).toLowerCase().includes(search)).forEach(p=>{
 const realIdx=profiles.indexOf(p);
 grid.insertAdjacentHTML("beforeend",`<div class="profile pc"${p.user_id?` data-uid="${escapeHTML(p.user_id)}"`:""}><div class="pc-ph">${p.photo?`<img src="${escapeHTML(p.photo)}" alt="${escapeHTML(p.name||"Membre")}" loading="lazy">`:initials(p.name||"Membre")}</div><div class="pc-info"><div class="pc-name">${escapeHTML(p.name||"Membre")}</div><div class="pc-sub">${p.age?escapeHTML(p.age)+" ans":"Âge non renseigné"} · 📍 ${p.city?escapeHTML(p.city):"Ville non renseignée"}</div></div><div class="pc-act"><button class="btn ${(window.NLJ&&NLJ.liked&&NLJ.liked.has(p.id))?'btn-outline':'btn-primary'} btn-sm" data-nlj-act="likeProfile" data-nlj-a="[${realIdx}]">❤️ ${escapeHTML(p.points||0)}</button>${p.user_id?`<button class="btn btn-gold btn-sm pc-msg" title="Écrire un message" data-nlj-act="openChat" data-nlj-a="${NLJA([p.user_id])}">💬 Écrire</button>`:""}<button class="btn btn-outline btn-sm" data-nlj-report data-nlj-act="reportProfile" data-nlj-a="[${realIdx}]">🚩</button></div></div>`)});
 if(!grid.children.length)grid.innerHTML='<div class="empty-state"><div class="es-icon">🔍</div><h3>Aucun profil ne correspond pour le moment</h3><p>Élargis la tranche d\'âge ou change de confession pour voir plus de profils.</p><blockquote>« Cherchez, et vous trouverez ; frappez, et l\'on vous ouvrira. »<cite>Matthieu 7:7</cite></blockquote></div>';
@@ -457,7 +460,7 @@ const JESUS_VERSES_LIBRARY=[
 function renderTicker(){const track=document.getElementById("tickerTrack");if(!track)return;const build=BIBLICAL_VERSES.map(v=>`<span>✝️ <b>${v[0]}</b> — <i>« ${v[1]} »</i></span><span style="color:rgba(201,162,39,.6)"> • </span>`).join("");track.innerHTML=build+build;}
 function applyLang(lang){
 currentLang=lang;
-lang=String(lang||'fr').toLowerCase(); if(!I18N[lang])lang='fr'; const t=Object.assign({},I18N.fr,I18N.en,I18N[lang]);
+lang=String(lang||'fr').toLowerCase(); const __code=lang; if(!I18N[lang])lang='fr'; const t=Object.assign({},I18N.fr,I18N.en,I18N[lang]);
 document.querySelectorAll('[data-i18n]').forEach(el=>{
 const key=el.getAttribute('data-i18n');
 if(t[key]) el.innerHTML=t[key];
@@ -473,14 +476,10 @@ const ageMinL=document.getElementById("ageMinLabel");
 if(ageMinL) ageMinL.textContent=t.ageMinLabel;
 const ageMaxL=document.getElementById("ageMaxLabel");
 if(ageMaxL) ageMaxL.textContent=t.ageMaxLabel;
-document.documentElement.lang=lang;
-// Direction for Arabic
-if(lang==='ar' || lang==='zh'){
-document.documentElement.dir= lang==='ar' ? 'rtl' : 'ltr';
-}else{
-document.documentElement.dir='ltr';
-}
-localStorage.setItem('niamke_lang',lang);
+document.documentElement.lang=__code;
+// Direction : arabe et ourdou de droite à gauche
+document.documentElement.dir=(__code==='ar'||__code==='ur')?'rtl':'ltr';
+localStorage.setItem('niamke_lang',__code);
 }
 
 function renderVersesLibrary(){const lib=document.getElementById("versesLibrary");if(!lib) return;

@@ -9,7 +9,9 @@
   'use strict';
   if (window.NLJT) return;
 
-  var MT = { fr: 'fr', en: 'en', es: 'es', pt: 'pt', it: 'it', de: 'de', ar: 'ar', zh: 'zh-CN', nl: 'nl', ru: 'ru' };
+  var MT = { fr: 'fr', en: 'en', es: 'es', pt: 'pt', it: 'it', de: 'de', ar: 'ar', zh: 'zh-CN', nl: 'nl', ru: 'ru',
+    ln: 'ln', sw: 'sw', hi: 'hi', id: 'id', tl: 'tl', ko: 'ko', vi: 'vi', pl: 'pl', uk: 'uk', ur: 'ur', ro: 'ro' };
+  var NEWLANG = { ln: 1, sw: 1, hi: 1, id: 1, tl: 1, ko: 1, vi: 1, pl: 1, uk: 1, ur: 1, ro: 1 };
   var UI = {
     fr: ['Traduit automatiquement', 'Voir l’original', 'Voir la traduction', 'Traduction en cours…'],
     en: ['Automatically translated', 'Show original', 'Show translation', 'Translating…'],
@@ -20,7 +22,18 @@
     ar: ['ترجمة تلقائية', 'عرض الأصل', 'عرض الترجمة', 'جارٍ الترجمة…'],
     zh: ['自动翻译', '查看原文', '查看翻译', '翻译中…'],
     nl: ['Automatisch vertaald', 'Origineel tonen', 'Vertaling tonen', 'Vertalen…'],
-    ru: ['Автоперевод', 'Показать оригинал', 'Показать перевод', 'Перевод…']
+    ru: ['Автоперевод', 'Показать оригинал', 'Показать перевод', 'Перевод…'],
+    ln: ['Ebongolami na machine', 'Tala ya yambo', 'Tala ebongoli', 'Ebongolami…'],
+    sw: ['Imetafsiriwa kiotomatiki', 'Ona asili', 'Ona tafsiri', 'Inatafsiriwa…'],
+    hi: ['स्वचालित रूप से अनुवादित', 'मूल देखें', 'अनुवाद देखें', 'अनुवाद हो रहा है…'],
+    id: ['Diterjemahkan otomatis', 'Lihat aslinya', 'Lihat terjemahan', 'Menerjemahkan…'],
+    tl: ['Awtomatikong isinalin', 'Tingnan ang orihinal', 'Tingnan ang salin', 'Isinasalin…'],
+    ko: ['자동 번역됨', '원문 보기', '번역 보기', '번역 중…'],
+    vi: ['Đã dịch tự động', 'Xem bản gốc', 'Xem bản dịch', 'Đang dịch…'],
+    pl: ['Przetłumaczono automatycznie', 'Pokaż oryginał', 'Pokaż tłumaczenie', 'Tłumaczenie…'],
+    uk: ['Автоматичний переклад', 'Показати оригінал', 'Показати переклад', 'Переклад…'],
+    ur: ['خودکار ترجمہ', 'اصل دیکھیں', 'ترجمہ دیکھیں', 'ترجمہ ہو رہا ہے…'],
+    ro: ['Tradus automat', 'Vezi originalul', 'Vezi traducerea', 'Se traduce…']
   };
 
   /* Éléments jamais traduits : noms, lecteur de chants (il gère déjà ses paroles), champs de saisie… */
@@ -96,7 +109,7 @@
   }
 
   /* ---------- sélection du texte à traduire ---------- */
-  var SCRIPT = { ar: /[\u0600-\u06FF]/g, ru: /[\u0400-\u04FF]/g, zh: /[\u4E00-\u9FFF]/g };
+  var SCRIPT = { ar: /[\u0600-\u06FF]/g, ru: /[\u0400-\u04FF]/g, zh: /[\u4E00-\u9FFF]/g, hi: /[\u0900-\u097F]/g, ko: /[\uAC00-\uD7AF]/g };
   function inTargetScript(t) {
     var re = SCRIPT[curLang()]; if (!re) return false;
     var m = t.match(re), letters = t.match(/[A-Za-z\u00C0-\u00FF\u0400-\u04FF\u0600-\u06FF\u4E00-\u9FFF]/g);
@@ -111,8 +124,17 @@
     if (/^(https?:\/\/|www\.)\S+$/i.test(t) || /^[\w.+-]+@[\w-]+\.[\w.-]+$/.test(t)) return false;
     return true;
   }
+  /* Nouvelles langues : les listes déroulantes (églises, filtres…) sont traduites aussi.
+     Seules les <option> qui ont un attribut value sont touchées : la valeur enregistrée ne change jamais. */
+  var SKIP_NOOPT = SKIP_SEL.replace('select,option,', '');
   function skipped(el) {
-    return !el || (el.closest && el.closest(SKIP_SEL));
+    if (!el) return true;
+    if (el.tagName === 'OPTION' && el.hasAttribute('value') && NEWLANG[curLang()]) {
+      var sel = el.parentElement && el.parentElement.closest ? el.parentElement.closest('select') : null;
+      if (sel && (sel.id === 'langSelect' || sel.id === 'currencySelect')) return true;
+      return !!(el.closest && el.closest(SKIP_NOOPT.replace(/,#langSelect|,#currencySelect/g, '')));
+    }
+    return !!(el.closest && el.closest(SKIP_SEL));
   }
 
   function collect(root) {
@@ -306,7 +328,7 @@
   function setDir(l) {
     try {
       document.documentElement.lang = l;
-      document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+      document.documentElement.dir = (l === 'ar' || l === 'ur') ? 'rtl' : 'ltr';
     } catch (e) {}
   }
 

@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-o5UV6tUuU3QcoJdiY4DrDqT3S5GhtUyxJMJqIkH2Mq0=' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'sha256-9HXO0M+GULA5wMC17g+x31zGrwyrYLZd0bcdHkSq8CI=' ; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://qxxhbfoqlreiqyshbpqp.supabase.co wss://qxxhbfoqlreiqyshbpqp.supabase.co https://translate.googleapis.com; worker-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-fE9cBMOQiDcBUpJQdDQr7NB/+uLsOHb8TOKFhNddnlk=' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'sha256-9HXO0M+GULA5wMC17g+x31zGrwyrYLZd0bcdHkSq8CI=' ; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://qxxhbfoqlreiqyshbpqp.supabase.co wss://qxxhbfoqlreiqyshbpqp.supabase.co https://translate.googleapis.com; worker-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <meta name="referrer" content="no-referrer">
 <meta name="color-scheme" content="light">
 <script>if(window.top!==window.self){document.documentElement.style.display="none";try{window.top.location.replace(window.self.location.href)}catch(e){}}</script>
@@ -204,10 +204,11 @@ const TABS = {
   dashboard: ['Tableau de bord', 'grid', 'Aperçu'], members: ['Membres', 'users', 'Gestion'], payments: ['Paiements', 'card', 'Gestion'], reports: ['Signalements', 'flag', 'Gestion'],
   messages: ['Messages', 'chat', 'Gestion'], prayers: ['Prières', 'pray', 'Gestion'],
   pasteurs: ['Pasteurs', 'church', 'Église'], events: ['Événements & cultes', 'cal', 'Église'], annonces: ['Annonces', 'bell', 'Église'], welcome: ['Message de bienvenue', 'gift', 'Église'],
-  songs: ['Musiques', 'music', 'Contenu'], links: ['Liens & classement', 'link', 'Contenu'], videos: ['Vidéos souvenirs', 'video', 'Contenu'], lyrics: ['Paroles', 'book', 'Contenu'], verses: ['Versets bibliques', 'book', 'Contenu'], pubprayers: ['Publier une prière', 'pray', 'Contenu'], games: ['Jeux bibliques', 'game', 'Contenu'], confessions: ['Confessions', 'chat', 'Contenu']
+  songs: ['Musiques', 'music', 'Contenu'], links: ['Liens & classement', 'link', 'Contenu'], videos: ['Vidéos souvenirs', 'video', 'Contenu'], lyrics: ['Paroles', 'book', 'Contenu'], verses: ['Versets bibliques', 'book', 'Contenu'], pubprayers: ['Publier une prière', 'pray', 'Contenu'], games: ['Jeux bibliques', 'game', 'Contenu'], confessions: ['Confessions', 'chat', 'Contenu'],
+  priereaudio: ['Prière audio épinglée', 'pray', 'Contenu'], mursvocal: ['Mur vocal (modération)', 'chat', 'Gestion']
 };
 // Langues proposées pour les paroles (code = celui que le site utilise pour la langue du membre)
-const LANGS = [['fr','Français'],['en','English'],['es','Español'],['pt','Português'],['ar','العربية (Arabe)'],['sw','Kiswahili'],['de','Deutsch'],['it','Italiano'],['zh','中文 (Chinois)'],['wo','Wolof']];
+const LANGS = [['fr','Français'],['en','English'],['es','Español'],['pt','Português'],['ar','العربية (Arabe)'],['sw','Kiswahili'],['de','Deutsch'],['it','Italiano'],['zh','中文 (Chinois)'],['wo','Wolof'],['ln','Lingála'],['hi','हिन्दी'],['id','Bahasa Indonesia'],['tl','Tagalog'],['ko','한국어'],['vi','Tiếng Việt'],['pl','Polski'],['uk','Українська'],['ur','اردو'],['ro','Română']];
 const langName = c => (LANGS.find(l => l[0] === c) || [c, c])[1];
 let cur = 'dashboard', cache = {}, me = null;
 // Pagination : 300 lignes par page, bouton « Afficher plus » quand il en reste
@@ -1005,6 +1006,98 @@ const A = {
   }, 'Vidéo supprimée'),
   delRow: (id, b) => { const g = G[b.dataset.k]; return confirm(`Supprimer ${g.f ? 'cette' : 'ce'} ${g.one} ?`) && act(() => delRows(sb.from(g.table).delete().eq('id', id)), `${g.one[0].toUpperCase() + g.one.slice(1)} supprimé${g.f ? 'e' : ''}`); }
 };
+// ---- MUR VOCAL : prière audio + texte épinglée (doré) et modération des messages vocaux ----
+const MV = 'mur-vocal', mvUrl = p => sb.storage.from(MV).getPublicUrl(p).data.publicUrl;
+let mvAudio = null, mvRec = { mr: null, chunks: [], blob: null, t0: 0, tick: null };
+function mvPlay(path) {
+  try { if (mvAudio) mvAudio.pause(); } catch (e) {}
+  mvAudio = new Audio(mvUrl(path)); mvAudio.play().catch(() => toast('Lecture impossible', true));
+}
+V.priereaudio = async () => {
+  const { data } = await q(sb.from('admin_prayers').select('*').order('created_at', { ascending: false }).limit(LIM('priereaudio')));
+  cache.pa = Object.fromEntries(data.map(r => [r.id, r]));
+  $('#main').innerHTML = head('Prière audio épinglée', 'La plus récente s’affiche en haut du Mur vocal, sur fond doré. Les membres écoutent, lisent et cliquent AMEN / J’aime.')
+    + `<form class="formc" data-f="prayeraudio"><h3>Publier une prière (audio + texte)</h3><div class="fg">
+        ${fld(['title', 'Titre (ex. Prière du matin)'])}
+        <label class="w">Texte de la prière<textarea name="body" rows="5"></textarea></label>
+        <label>Fichier audio (mp3, m4a, wav, webm)<input type="file" name="file" accept="audio/*"></label>
+        <div class="w"><button type="button" data-a="paRec" id="paRecBtn">🎤 Enregistrer ma voix maintenant</button>
+          <span class="m" id="paRecInfo" style="margin-left:10px"></span><audio id="paPrev" controls hidden style="margin-top:8px;max-width:100%"></audio></div>
+      </div>
+      <button class="p" type="submit">${ico('plus')}Publier sur le mur</button><div class="err" data-e role="alert"></div></form>`
+    + tbl([
+      ['Date', r => day(r.created_at)],
+      ['Titre', r => `<b>${esc(r.title || '(sans titre)')}</b>`],
+      ['Texte', r => esc(String(r.body || '').slice(0, 90))],
+      ['Audio', r => r.audio_path ? '✅' : '—'],
+      ['', r => (r.audio_path ? `<button data-a="paPlay" data-id="${esc(r.id)}">Écouter</button>` : '') + `<button class="d" data-a="delPA" data-id="${esc(r.id)}">Supprimer</button>`, 1]
+    ], data) + moreBtn('priereaudio', data.length);
+};
+FORMS.prayeraudio = async f => {
+  const E = f.elements, title = E.title.value.trim(), body = E.body.value.trim();
+  let file = E.file.files[0] || null, blob = null, type = '';
+  if (file) { type = file.type || 'audio/mpeg'; blob = file; }
+  else if (mvRec.blob) { blob = mvRec.blob; type = String(mvRec.blob.type || 'audio/webm').split(';')[0]; }
+  if (!blob && !body) throw new Error('Ajoutez au moins un texte ou un audio.');
+  if (blob && blob.size > 20 * 1024 * 1024) throw new Error('Audio trop lourd (20 Mo maximum).');
+  let path = null;
+  if (blob) {
+    type = type.replace(/^video\//, 'audio/');
+    const ext = /mp4|m4a|aac/.test(type) ? 'm4a' : /mpeg|mp3/.test(type) ? 'mp3' : /ogg/.test(type) ? 'ogg' : /wav/.test(type) ? 'wav' : 'webm';
+    if (ext === 'm4a') type = 'audio/mp4';
+    path = `admin/${ym()}/${uid8()}.${ext}`;
+    try { await q(sb.storage.from(MV).upload(path, blob, { contentType: type, cacheControl: '31536000', upsert: false })); }
+    catch (e) { throw new Error('Envoi de l’audio refusé : ' + (e.message || e) + ' (le script supabase_mur_vocal.sql a-t-il été exécuté ?)'); }
+  }
+  try { await q(sb.from('admin_prayers').insert({ title: title || null, body: body || null, audio_path: path, visible: true })); }
+  catch (e) { if (path) sb.storage.from(MV).remove([path]); throw new Error('Enregistrement refusé : ' + (e.message || e)); }
+  mvRec.blob = null;
+};
+Object.assign(A, {
+  paPlay: id => { const r = cache.pa[id]; if (r && r.audio_path) mvPlay(r.audio_path); },
+  delPA: id => confirm('Supprimer cette prière (texte et audio) ?') && act(async () => {
+    const r = cache.pa[id];
+    await delRows(sb.from('admin_prayers').delete().eq('id', id));
+    if (r && r.audio_path) await sb.storage.from(MV).remove([r.audio_path]);
+  }, 'Prière supprimée'),
+  paRec: async (id, b) => {
+    const info = $('#paRecInfo'), prev = $('#paPrev');
+    if (mvRec.mr && mvRec.mr.state === 'recording') { mvRec.mr.stop(); return; }
+    let st; try { st = await navigator.mediaDevices.getUserMedia({ audio: true }); } catch (e) { return toast('Micro refusé : autorisez le micro dans le navigateur.', true); }
+    mvRec.chunks = []; mvRec.blob = null; prev.hidden = true;
+    const mr = new MediaRecorder(st); mvRec.mr = mr;
+    mr.ondataavailable = ev => ev.data && ev.data.size && mvRec.chunks.push(ev.data);
+    mr.onstop = () => {
+      clearInterval(mvRec.tick); st.getTracks().forEach(t => t.stop());
+      mvRec.blob = new Blob(mvRec.chunks, { type: mr.mimeType || 'audio/webm' });
+      prev.src = URL.createObjectURL(mvRec.blob); prev.hidden = false;
+      b.textContent = '🎤 Recommencer l’enregistrement'; info.textContent = 'Enregistré. Écoutez puis cliquez « Publier ».';
+    };
+    mvRec.t0 = Date.now(); mr.start(); b.textContent = '⏹️ Arrêter l’enregistrement';
+    mvRec.tick = setInterval(() => { const s = Math.round((Date.now() - mvRec.t0) / 1000); info.textContent = 'Enregistrement… ' + Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }, 500);
+  },
+  vpPlay: id => { const r = cache.vp[id]; if (r) mvPlay(r.audio_path); },
+  vpHide: id => { const r = cache.vp[id]; return r && act(() => updRows(sb.from('voice_posts').update({ visible: !r.visible }).eq('id', id)), r.visible ? 'Message masqué' : 'Message réaffiché'); },
+  delVP: id => confirm('Supprimer ce message vocal (et ses réponses) ?') && act(async () => {
+    const r = cache.vp[id], paths = Object.values(cache.vp).filter(x => x.id === id || x.parent_id === id).map(x => x.audio_path);
+    await delRows(sb.from('voice_posts').delete().eq('id', id));
+    if (paths.length) await sb.storage.from(MV).remove(paths);
+  }, 'Message supprimé')
+});
+V.mursvocal = async () => {
+  const { data } = await q(sb.from('voice_posts').select('*').order('created_at', { ascending: false }).limit(LIM('mursvocal')));
+  cache.vp = Object.fromEntries(data.map(r => [r.id, r]));
+  $('#main').innerHTML = head('Mur vocal (modération)', `${data.length} message${data.length > 1 ? 's' : ''} vocaux des membres`)
+    + tbl([
+      ['Date', r => day(r.created_at)],
+      ['Membre', r => esc(r.author_name || 'Membre')],
+      ['Type', r => r.parent_id ? 'Réponse' : 'Question'],
+      ['Durée', r => r.duration ? r.duration + ' s' : ''],
+      ['État', r => r.visible ? '<span class="tag">Visible</span>' : '<span class="tag">Masqué</span>'],
+      ['', r => `<button data-a="vpPlay" data-id="${esc(r.id)}">Écouter</button><button data-a="vpHide" data-id="${esc(r.id)}">${r.visible ? 'Masquer' : 'Réafficher'}</button><button class="d" data-a="delVP" data-id="${esc(r.id)}">Supprimer</button>`, 1]
+    ], data) + moreBtn('mursvocal', data.length);
+};
+
 const C = {
   plan: (id, v) => act(() => q(sb.rpc('admin_set_plan', { p_profile_id: id, p_plan: v })), 'Offre mise à jour'),
   pstatus: (id, v) => act(() => updRows(sb.from('profiles').update({ status: v }).eq('id', id)), 'Statut mis à jour')

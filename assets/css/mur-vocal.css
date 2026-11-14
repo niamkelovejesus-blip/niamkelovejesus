@@ -1,0 +1,83 @@
+/* ===== Mur vocal + Mur admin doré (ajout, ne modifie aucun style existant) ===== */
+#mur-vocal{background:#fffdf6}
+#mur-vocal .mv-wrap{max-width:860px;margin:0 auto}
+#mur-vocal .mv-title{font-family:'Playfair Display',serif;color:#0f172a;text-align:center;margin:0 0 6px}
+#mur-vocal .mv-sub{text-align:center;color:#64748b;margin:0 0 22px}
+#mur-vocal button{font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+
+/* ---- MUR ADMIN : fond doré, épinglé en haut ---- */
+.mv-admin{position:sticky;top:8px;z-index:5;margin-bottom:26px;border-radius:22px;padding:18px 18px 16px;
+  background:linear-gradient(135deg,#fff3b0 0%,#facc15 45%,#d4a017 100%);
+  border:3px solid #a8841a;box-shadow:0 14px 34px rgba(168,132,26,.35);color:#3b2a00}
+.mv-admin .mv-pin{display:inline-flex;align-items:center;gap:8px;background:#3b2a00;color:#fde68a;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.85rem;letter-spacing:.04em}
+.mv-admin h3{margin:10px 0 4px;font-family:'Playfair Display',serif;font-size:1.45rem;color:#2b1d00}
+.mv-admin time{font-size:.8rem;opacity:.75}
+.mv-admin .mv-text{background:rgba(255,255,255,.55);border-radius:14px;padding:14px 16px;margin:12px 0;line-height:1.65;font-size:1.05rem;white-space:pre-wrap;color:#2b1d00}
+.mv-admin .mv-old{margin-top:10px}
+.mv-admin .mv-old summary{cursor:pointer;font-weight:800;padding:8px 0}
+.mv-admin .mv-oldi{border-top:1px dashed #a8841a;padding:12px 0}
+.mv-admin-empty{opacity:.85;text-align:center;padding:10px 0}
+
+/* ---- Lecteur vocal : gros bouton ---- */
+.mv-play{display:flex;align-items:center;gap:14px;width:100%;border:0;border-radius:18px;padding:10px 16px 10px 10px;
+  background:#0f172a;color:#fff;text-align:left;min-height:68px}
+.mv-play .mv-pb{flex:0 0 auto;width:52px;height:52px;border-radius:50%;background:#facc15;color:#0f172a;display:grid;place-items:center;font-size:1.5rem;line-height:1}
+.mv-play .mv-bar{flex:1;height:10px;border-radius:999px;background:rgba(255,255,255,.25);overflow:hidden}
+.mv-play .mv-bar i{display:block;height:100%;width:0;background:#facc15;transition:width .2s linear}
+.mv-play .mv-dur{font-weight:800;font-variant-numeric:tabular-nums;min-width:44px;text-align:right}
+.mv-play.on .mv-pb{background:#fff}
+.mv-admin .mv-play{background:#2b1d00}
+
+/* ---- Boutons de réaction (AMEN / J'aime) ---- */
+.mv-react{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.mv-react button,.mv-act button{border:2px solid #0f172a;background:#fff;color:#0f172a;border-radius:999px;padding:10px 18px;font-weight:800;font-size:1rem;min-height:48px}
+.mv-react button.on{background:#0f172a;color:#fde68a}
+.mv-admin .mv-react button{border-color:#2b1d00}
+.mv-admin .mv-react button.amen{background:#fff;font-size:1.1rem}
+.mv-admin .mv-react button.on{background:#2b1d00;color:#fde68a}
+
+/* ---- Bouton micro principal ---- */
+.mv-ask{display:flex;flex-direction:column;align-items:center;gap:10px;margin:0 0 22px}
+.mv-mic{width:132px;height:132px;border-radius:50%;border:0;background:linear-gradient(135deg,#ef4444,#b91c1c);color:#fff;font-size:3.4rem;
+  box-shadow:0 12px 28px rgba(185,28,28,.4);display:grid;place-items:center}
+.mv-mic:active{transform:scale(.96)}
+.mv-ask b{font-size:1.15rem;color:#0f172a}
+.mv-steps{display:flex;gap:10px;align-items:center;font-size:1.7rem;color:#64748b}
+.mv-steps small{font-size:.8rem;display:block;text-align:center}
+
+/* ---- Fenêtre d'enregistrement (bas d'écran) ---- */
+.mv-rec{position:fixed;left:0;right:0;bottom:0;z-index:2000;background:#0f172a;color:#fff;border-radius:26px 26px 0 0;padding:22px 18px calc(22px + env(safe-area-inset-bottom,0px));
+  box-shadow:0 -12px 40px rgba(0,0,0,.45);transform:translateY(110%);transition:transform .25s ease;text-align:center}
+.mv-rec.open{transform:none}
+.mv-rec h4{margin:0 0 6px;font-size:1.2rem}
+.mv-rec .mv-timer{font-size:2.6rem;font-weight:900;font-variant-numeric:tabular-nums;margin:6px 0}
+.mv-rec .mv-hint{opacity:.8;margin:0 0 12px;min-height:1.3em}
+.mv-rec .mv-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.mv-rec .mv-big{border:0;border-radius:20px;padding:16px 26px;font-size:1.25rem;font-weight:900;min-width:150px;min-height:64px}
+.mv-big.go{background:#ef4444;color:#fff}.mv-big.stop{background:#facc15;color:#0f172a}
+.mv-big.send{background:#16a34a;color:#fff}.mv-big.redo{background:#e2e8f0;color:#0f172a}.mv-big.cancel{background:transparent;color:#cbd5e1;border:2px solid #475569!important}
+.mv-rec.recording .mv-timer{color:#fca5a5;animation:mvpulse 1s infinite}
+@keyframes mvpulse{50%{opacity:.5}}
+.mv-rec audio{width:100%;max-width:420px;margin:8px auto 12px;display:block}
+
+/* ---- Cartes questions / réponses ---- */
+.mv-q{background:#fff;border:1px solid #efe4b8;border-radius:20px;padding:14px;margin-bottom:14px;box-shadow:0 6px 18px rgba(15,23,42,.06)}
+.mv-h{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.mv-av{width:42px;height:42px;border-radius:50%;background:#facc15;color:#0f172a;display:grid;place-items:center;font-weight:900;font-size:1.1rem;flex:0 0 auto}
+.mv-h b{color:#0f172a}.mv-h time{color:#64748b;font-size:.8rem;display:block}
+.mv-h .mv-del{margin-left:auto;border:0;background:#fee2e2;color:#b91c1c;border-radius:10px;width:40px;height:40px;font-size:1rem}
+.mv-act{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.mv-act button{padding:8px 14px;min-height:44px}
+.mv-act button.on{background:#0f172a;color:#fde68a}
+.mv-rep{margin:12px 0 0 14px;padding-left:12px;border-left:4px solid #facc15}
+.mv-rep .mv-r{padding:8px 0}
+.mv-empty{text-align:center;color:#64748b;padding:26px 8px}
+.mv-login{text-align:center;background:#fff7d6;border:1px dashed #a8841a;border-radius:16px;padding:14px;margin-bottom:18px}
+.mv-login button{margin-top:8px;border:0;background:#0f172a;color:#fff;border-radius:12px;padding:12px 22px;font-weight:800;font-size:1rem}
+#mur-vocal .mv-quota{text-align:center;color:#64748b;font-size:.85rem;margin-top:-10px;margin-bottom:12px}
+
+@media (max-width:520px){
+  .mv-admin{position:static}
+  .mv-mic{width:116px;height:116px;font-size:3rem}
+}
+@media (prefers-reduced-motion:reduce){.mv-rec{transition:none}.mv-rec.recording .mv-timer{animation:none}}

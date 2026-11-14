@@ -2,7 +2,7 @@
 (function(){
   /* ---------- config ---------- */
   var ONLY_VERSE_AUTHORS=[]; /* ids utilisateur Supabase dont les versets s'affichent dans « Versets ». Vide = tous les versets publiés sur le Mur de prière. */
-  var MT={fr:'fr',en:'en',es:'es',pt:'pt',it:'it',de:'de',ar:'ar',zh:'zh-CN',nl:'nl',ru:'ru'};
+  var MT={fr:'fr',en:'en',es:'es',pt:'pt',it:'it',de:'de',ar:'ar',zh:'zh-CN',nl:'nl',ru:'ru',ln:'ln',sw:'sw',hi:'hi',id:'id',tl:'tl',ko:'ko',vi:'vi',pl:'pl',uk:'uk',ur:'ur',ro:'ro'};
   var UI={
     fr:{pl:'Liste des chants',cnt:'chants',cnt1:'chant',comp:'Compositeur',lyr:'Paroles',dl:'Télécharger',lock:'Le téléchargement est réservé aux membres Premium ⭐',ok:'Téléchargement…',yrs:'ans',none:'Paroles non disponibles pour ce chant.',tr:'Traduit automatiquement',orig:'Voir l’original',tra:'Voir la traduction',trg:'Traduction…',empty:'Les chants arrivent bientôt',err:'Impossible de charger les chants'},
     en:{pl:'Playlist',cnt:'songs',cnt1:'song',comp:'Composer',lyr:'Lyrics',dl:'Download',lock:'Downloads are for Premium members ⭐',ok:'Downloading…',yrs:'yrs',none:'No lyrics available for this song.',tr:'Automatically translated',orig:'Show original',tra:'Show translation',trg:'Translating…',empty:'Songs are coming soon',err:'Unable to load songs'},
@@ -21,8 +21,8 @@
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function sb(){try{if(typeof supabaseClient!=='undefined'&&supabaseClient)return supabaseClient;var pc=null;try{pc=window.parent.supabaseClient;}catch(e){}if(pc)return pc;if(window.supabase&&window.supabase.createClient){window.__nlj_sb=window.__nlj_sb||window.supabase.createClient('https://qxxhbfoqlreiqyshbpqp.supabase.co','sb_publishable_OK9ncVWB2Ih8xZ5fzqEQWg_mSV6vCoe');return window.__nlj_sb;}}catch(e){}return null;}function rd(){try{if(window.__nlj_rd)return window.__nlj_rd;if(window.supabase&&window.supabase.createClient){window.__nlj_rd=window.supabase.createClient('https://qxxhbfoqlreiqyshbpqp.supabase.co','sb_publishable_OK9ncVWB2Ih8xZ5fzqEQWg_mSV6vCoe',{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false,storageKey:'nlj-public-read'}});return window.__nlj_rd;}}catch(e){}return sb();}
   function toast(m){try{showToast(m);}catch(e){}}
-  function lang(){var l='fr';try{l=(($('langSelect')||{}).value||localStorage.getItem('niamke_lang')||'fr').toLowerCase();}catch(e){}return UI[l]?l:'fr';}
-  function L(){return UI[lang()];}
+  function lang(){var l='fr';try{l=(($('langSelect')||{}).value||localStorage.getItem('niamke_lang')||'fr').toLowerCase();}catch(e){}return UI[l]?l:(MT[l]?l:'fr');}
+  function L(){return UI[lang()]||UI.en;}
   function premium(){return !!(window.NLJ&&window.NLJ.premium);}
   function fmt(s){s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2);}
   function pick(o,keys){for(var i=0;i<keys.length;i++){if(o[keys[i]]!=null&&o[keys[i]]!=='')return o[keys[i]];}return '';}
@@ -95,7 +95,7 @@
     $('mzAdmOpen').onclick=admOpen;}
   function admOpen(){var k=TR[cur],b=$('mzAdm');if(!k||!b)return;admEd=true;
     var raw=k.raw==null?'':(Array.isArray(k.raw)?k.raw.join(String.fromCharCode(10)):String(k.raw));
-    var lg=(k.lang||'fr').slice(0,2),names={fr:'Français',en:'English',es:'Español',pt:'Português',it:'Italiano',de:'Deutsch',ar:'العربية',zh:'中文',nl:'Nederlands',ru:'Русский'};
+    var lg=(k.lang||'fr').slice(0,2),names={fr:'Français',en:'English',es:'Español',pt:'Português',it:'Italiano',de:'Deutsch',ar:'العربية',zh:'中文',nl:'Nederlands',ru:'Русский',ln:'Lingála',sw:'Kiswahili',hi:'हिन्दी',id:'Bahasa Indonesia',tl:'Tagalog',ko:'한국어',vi:'Tiếng Việt',pl:'Polski',uk:'Українська',ur:'اردو',ro:'Română'};
     var opts=Object.keys(names).map(function(c){return '<option value='+c+(c===lg?' selected':'')+'>'+names[c]+'</option>';}).join('');
     b.innerHTML='<div style="margin-top:12px;padding:14px;border:1px solid #e5d9a8;border-radius:14px;background:#fffdf6">'
      +'<div style="font-weight:800;margin-bottom:6px">✏️ Paroles de : '+esc(k.title)+'</div>'
@@ -117,7 +117,7 @@
       admEd=false;admKey='';trKey='';trLines=null;loadLyrics();admBar();toast('✅ Paroles enregistrées');
     }catch(e){st.style.color='#b91c1c';st.textContent='Erreur : '+((e&&e.message)||e);}}
   var GEN={fr:['Générer les paroles (IA)','Chant en :'],en:['Generate lyrics (AI)','Song language:'],es:['Generar letra (IA)','Idioma del canto:'],pt:['Gerar letra (IA)','Idioma do cântico:'],it:['Genera testo (IA)','Lingua del canto:'],de:['Text erzeugen (KI)','Sprache des Liedes:'],ar:['إنشاء الكلمات (ذكاء اصطناعي)','لغة الترنيمة:'],zh:['生成歌词（AI）','歌曲语言：'],nl:['Tekst genereren (AI)','Taal van het lied:'],ru:['Создать текст (ИИ)','Язык песни:']};
-  var LNAMES={fr:'Français',en:'English',es:'Español',pt:'Português',it:'Italiano',de:'Deutsch',ar:'العربية',zh:'中文',nl:'Nederlands',ru:'Русский'};
+  var LNAMES={fr:'Français',en:'English',es:'Español',pt:'Português',it:'Italiano',de:'Deutsch',ar:'العربية',zh:'中文',nl:'Nederlands',ru:'Русский',ln:'Lingála',sw:'Kiswahili',hi:'हिन्दी',id:'Bahasa Indonesia',tl:'Tagalog',ko:'한국어',vi:'Tiếng Việt',pl:'Polski',uk:'Українська',ur:'اردو',ro:'Română'};
   function genUi(k){var g=GEN[lang()]||GEN.en,cl=(k.lang||'fr').slice(0,2);
     return '<div class="mz-gen" translate="no" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:10px"><label style="font-size:.85rem;font-weight:600">'+esc(g[1])+' <select id="mzGenLg" style="padding:6px;border-radius:8px">'+Object.keys(LNAMES).map(function(c){return '<option value="'+c+'"'+(c===cl?' selected':'')+'>'+LNAMES[c]+'</option>';}).join('')+'</select></label><button type="button" id="mzGen" style="padding:9px 16px;border-radius:999px;border:0;background:#c9a227;color:#1b1400;font-weight:800;cursor:pointer">🎤 '+esc(g[0])+'</button></div>';}
   document.addEventListener('click',function(e){var b=e.target&&e.target.closest&&e.target.closest('#mzGen');if(!b)return;var k=TR[cur];if(!k)return;var sl=$('mzGenLg');k.tsLang=sl?sl.value:(k.lang||'fr');k.tsDone=0;transcribe(k,true);});

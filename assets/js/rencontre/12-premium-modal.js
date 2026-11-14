@@ -25,6 +25,7 @@ async function auto(){
   var v={pmPrenom:p.name||m.first_name||m.name,pmNom:p.last_name||m.last_name,pmVille:p.city||m.city,pmAge:p.age||m.age,pmEglise:p.church||p.confession||m.church||m.confession},all=true,miss=0;
   Object.keys(v).forEach(function(id){
    var el=$(id),val=String(v[id]==null?'':v[id]).trim(),box=el.closest('div');
+   if(id==='pmEglise'&&/^adventiste/i.test(val))val='Adventiste du 7ème Jour';
    if(id==='pmEglise'&&val&&![].some.call(el.options,function(o){return o.value===val||o.text===val;}))val='';
    if(id==='pmAge'){var a=parseInt(val,10);if(!(a>=18&&a<=75))val='';}
    if(val){el.value=val;}else{all=false;miss++;}

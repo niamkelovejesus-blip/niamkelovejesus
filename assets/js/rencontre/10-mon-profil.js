@@ -1,7 +1,7 @@
 /* ===== Mon profil : chargé automatiquement depuis Supabase (profiles) avec l'ID utilisateur ===== */
 (function(){
   function $(i){return document.getElementById(i);}
-  var CH=["Catholique", "Protestante", "Évangélique", "Pentecôtiste", "Adventiste", "Baptiste", "Méthodiste", "Anglicane", "Orthodoxe", "Église Royaume Universel de Dieu", "Autre chrétienne en Jésus"];
+  var CH=["Catholique", "Protestante", "Évangélique", "Pentecôtiste", "Baptiste", "Adventiste du 7ème Jour", "Orthodoxe", "Méthodiste", "Presbytérienne", "Luthérienne", "Anglicane", "Église de Réveil", "Église Kimbanguiste", "Église Royaume Universel de Dieu", "Autre chrétienne en Jésus"];
   var uid=null,user=null,busy=false;
   function cli(){try{return (typeof supabaseClient!=='undefined'&&supabaseClient)||null;}catch(e){return null;}}
   function toast(m){try{if(typeof showToast==='function')showToast(m);}catch(e){}}
@@ -12,7 +12,7 @@
     var s=$('pfChurch'),h='<option value="">Choisir…</option>';
     CH.forEach(function(c){h+='<option value="'+c.replace(/"/g,'&quot;')+'">'+c+'</option>';});
     
-    s.innerHTML=h;s.value=val||'';
+    if(/^adventiste/i.test(String(val||'')))val='Adventiste du 7ème Jour';if(/^protestant$/i.test(String(val||'')))val='Protestante';s.innerHTML=h;s.value=val||'';
   }
   function photo(url,name){
     var ph=$('pfPh');

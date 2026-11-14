@@ -1,6 +1,6 @@
 (function(){
 var $=function(id){return document.getElementById(id)};
-var PLANS={"Mensuel":{label:"Mensuel",per:"/ mois",xof:function(){return BASE_PRICES_XOF.mensuel}},"Alliance":{label:"Alliance 6 mois",per:"/ 6 mois",xof:function(){return BASE_PRICES_XOF.semestre}},"Éternelle":{label:"Éternelle 12 mois",per:"/ 12 mois",xof:function(){return BASE_PRICES_XOF.annuel}}};
+var PLANS={"Mensuel":{get label(){return PXL(1,"Mensuel")},get per(){return PX(5)},xof:function(){return BASE_PRICES_XOF.mensuel}},"Alliance":{get label(){return PXL(2,"Alliance 6 mois")},get per(){return PX(6)},xof:function(){return BASE_PRICES_XOF.semestre}},"Éternelle":{get label(){return PXL(3,"Éternelle 12 mois")},get per(){return PX(7)},xof:function(){return BASE_PRICES_XOF.annuel}}};
 var METHODS={
  paydunya:{icon:"🔒",name:"Payer en ligne (PayDunya)",sub:"Orange Money, Wave, MTN, Moov, cartes bancaires",how:"Tu vas être redirigé vers la page sécurisée PayDunya pour payer par Orange Money, Wave, MTN MoMo, Moov Money ou carte bancaire. Ton Premium s'active automatiquement dès que le paiement est confirmé."}
 };

@@ -172,18 +172,37 @@ premiumTitle:"Abos in Jesus - CFA Preis",premiumLead:"Preise für Afrika gedacht
 footerDesc:"Christliches Treffen zentriert auf Jesus Christus. 21 Sprachen. Spiele/Musik/Bibel KOSTENLOS, Chat PREMIUM."
 },
 nl:{
-choose:"Kies in Jezus",free:"Gratis",navHome:"Home",navMeet:"Ontmoeting",navVerses:"Jezus Verzen",navGame:"Bijbelspel",navMusic:"Muziek",navMod:"Moderatie",navPremium:"Premium",
-heroBadge:"✝️ Jezus Christus is de Weg - 2026",heroTitle:"Jezus Christus in het centrum om een eeuwig verbond naar God te vinden.",
-heroDesc:"Jezus Christus is het fundament. Pastorale verificatie, Bijbelstudie, gebedschat en Bijbelspellen. Liefde heeft Jezus in het centrum.",
-btnDiscover:"Profielen in Jezus ontdekken",btnVerses:"Verzen over Jezus - GRATIS",
-meetTitle:"Ontmoeting in Jezus Christus - PREMIUM CHAT 🔒",meetLead:"Spellen en muziek GRATIS, chat Premium.",
-versesTitle:"📖 Verzenbibliotheek - GRATIS ✅",versesLead:"GRATIS in Jezus.",
-gameTitle:"Bijbelspel over Jezus 🎮 - GRATIS ✅",gameLead:"25 vragen over Jezus en huwelijk. GRATIS",
-musicTitle:"Christelijke Muziek - GRATIS ✅",musicLead:"Liederen voor Jezus Christus. GRATIS",
-premiumTitle:"Abonnementen in Jezus - CFA Prijs",premiumLead:"9 000 F / 15 000 F / 30 000 F - PREMIUM CHAT",
-footerDesc:"Christelijke ontmoeting gecentreerd op Jezus Christus. 21 talen. Spellen/Muziek/Bijbel GRATIS, Chat PREMIUM."
+choose:"Kies dit abonnement",free:"Gratis",navHome:"Home",navMeet:"Ontmoeting",navVerses:"Verzen over Jezus",navGame:"Bijbelspel",navMusic:"Muziek",navMod:"Moderatie",navPremium:"Premium",
+heroBadge:"✝️ Jezus Christus is de Weg - 2026",heroTitle:"Jezus Christus in het centrum om een eeuwig verbond naar Gods wil te vinden.",heroDesc:"<strong>Jezus Christus is het fundament.</strong> Pastorale verificatie, Bijbelstudie over Jezus, gebedschat in de naam van Jezus en Bijbelspellen over Jezus. Liefde heeft Jezus in het centrum.",
+btnDiscover:"Ontdek profielen in Jezus",btnVerses:"Verzen over Jezus",
+verseDayTitle:"✝️ Vers van de dag - Jezus",verseDayText:"« Jezus Christus is gisteren en heden dezelfde, en tot in eeuwigheid - Hij is ons voorbeeld van liefde »",verseDayCite:"Hebreeën 13:8 & 1 Korintiërs 13:4 — Jezus, fundament van elk verbond",
+meetTitle:"Ontmoeting in Jezus Christus",meetLead:"Elk profiel toont naam, leeftijd en stad. Filter op leeftijd (tussen X en Y), kerk en geslacht.",
+churchAll:"Alle kerkgenootschappen in Jezus",genderAll:"Alle geslachten",searchPh:"Zoek voornaam, vers over Jezus...",
+ageMinLabel:"Minimumleeftijd:",ageMaxLabel:"Maximumleeftijd:",ageTo:"tot",
+loginTitle:"Inloggen in Jezus",loginBtn:"Inloggen in Jezus",registerTitle:"Registratie - Sluit je aan bij het verbond in Jezus",registerBtn:"Maak mijn profiel in Jezus",
+versesTitle:"📖 Verzenbibliotheek - Jezus in het centrum",versesLead:"Al deze verzen gaan over Jezus Christus. Klik om het vers te kopiëren. Jezus staat in het centrum van elk verbond.",
+gameTitle:"Bijbelspel over Jezus 🎮",gameLead:"25 vragen over Jezus en het huwelijk, 12 verzen van Jezus, 12 bijbelse paren.",
+musicTitle:"Christelijke muziek - Jezus",musicLead:"Liederen voor Jezus Christus, onze hemelse Bruidegom.",
+uploadTitle:"🎵 Liederen voor Jezus uploaden",uploadBtn:"Toevoegen voor Jezus",
+modTitle:"Moderatie in Jezus",modLead:"Beheer profielen in Jezus. Bewerk of verwijder. Verwijderingen zijn definitief.",
+premiumTitle:"Abonnementen in Jezus - Prijzen in CFA",premiumLead:"Prijzen ontworpen voor Afrika, gecentreerd op Jezus. 9 000 F / 15 000 F / 30 000 F",paymentTitle:"Betaling voor het werk van Jezus",footerDesc:"Christelijke ontmoeting gecentreerd op Jezus Christus. Jezus in het centrum. 21 talen. Definitieve verwijderingen."
 },
-ru:{choose:"Выбрать в Иисусе",free:"Бесплатно",navHome:"Главная",navMeet:"Встреча",navVerses:"Стихи Иисуса",navGame:"Библейская игра",navMusic:"Музыка",navMod:"Модерация",navPremium:"Премиум",heroBadge:"✝️ Иисус Христос — Путь - 2026",heroTitle:"Иисус Христос в центре",heroDesc:"Иисус Христос — основание.",btnDiscover:"Найти профили в Иисусе",btnVerses:"Стихи об Иисусе - БЕСПЛАТНО",meetTitle:"Встреча в Иисусе Христе - ПРЕМИУМ ЧАТ 🔒",meetLead:"Игры и музыка БЕСПЛАТНО, чат Премиум.",versesTitle:"📖 Библиотека стихов - БЕСПЛАТНО ✅",versesLead:"БЕСПЛАТНО в Иисусе.",gameTitle:"Библейская игра об Иисусе 🎮 - БЕСПЛАТНО ✅",gameLead:"25 вопросов. БЕСПЛАТНО",musicTitle:"Христианская музыка - БЕСПЛАТНО ✅",musicLead:"Песни для Иисуса. БЕСПЛАТНО",premiumTitle:"Подписки в Иисусе",premiumLead:"9 000 F / 15 000 F / 30 000 F",footerDesc:"21 язык. Игры/Музыка/Библия БЕСПЛАТНО, Чат ПРЕМИУМ."},
+ru:{
+choose:"Выбрать этот тариф",free:"Бесплатно",navHome:"Главная",navMeet:"Знакомства",navVerses:"Стихи об Иисусе",navGame:"Библейская игра",navMusic:"Музыка",navMod:"Модерация",navPremium:"Премиум",
+heroBadge:"✝️ Иисус Христос — Путь - 2026",heroTitle:"Иисус Христос в центре, чтобы обрести вечный завет по воле Бога.",heroDesc:"<strong>Иисус Христос — основание.</strong> Пасторская проверка, изучение Библии об Иисусе, молитвенный чат во имя Иисуса и библейские игры об Иисусе. В центре любви — Иисус.",
+btnDiscover:"Смотреть анкеты в Иисусе",btnVerses:"Стихи об Иисусе",
+verseDayTitle:"✝️ Стих дня - Иисус",verseDayText:"« Иисус Христос вчера и сегодня и вовеки Тот же - Он наш образец любви »",verseDayCite:"Евреям 13:8 и 1 Коринфянам 13:4 — Иисус, основание каждого завета",
+meetTitle:"Знакомства в Иисусе Христе",meetLead:"В каждой анкете указаны имя, возраст и город. Фильтруйте по возрасту (от X до Y), церкви и полу.",
+churchAll:"Все конфессии в Иисусе",genderAll:"Все полы",searchPh:"Искать имя, стих об Иисусе...",
+ageMinLabel:"Минимальный возраст:",ageMaxLabel:"Максимальный возраст:",ageTo:"до",
+loginTitle:"Вход в Иисусе",loginBtn:"Войти в Иисусе",registerTitle:"Регистрация - Присоединяйся к завету в Иисусе",registerBtn:"Создать мою анкету в Иисусе",
+versesTitle:"📖 Библиотека стихов - Иисус в центре",versesLead:"Все эти стихи говорят об Иисусе Христе. Нажмите, чтобы скопировать стих. Иисус — в центре каждого завета.",
+gameTitle:"Библейская игра об Иисусе 🎮",gameLead:"25 вопросов об Иисусе и браке, 12 стихов Иисуса, 12 библейских пар.",
+musicTitle:"Христианская музыка - Иисус",musicLead:"Песни для Иисуса Христа, нашего Небесного Жениха.",
+uploadTitle:"🎵 Загрузить песни для Иисуса",uploadBtn:"Добавить для Иисуса",
+modTitle:"Модерация в Иисусе",modLead:"Управляйте анкетами в Иисусе. Редактируйте или удаляйте. Удалённое не возвращается.",
+premiumTitle:"Подписки в Иисусе - Цены в CFA",premiumLead:"Цены, созданные для Африки, с Иисусом в центре. 9 000 F / 15 000 F / 30 000 F",paymentTitle:"Оплата на дело Иисуса",footerDesc:"Христианские знакомства с Иисусом Христом в центре. Иисус в центре. 21 язык. Удаление окончательное."
+},
 zh:{
 
 choose:"在耶稣里选择",free:"免费",navHome:"首页",navMeet:"相遇",navVerses:"耶稣经文",navGame:"圣经游戏",navMusic:"音乐",navMod:"管理",navPremium:"高级 - 免费 vs 高级",
@@ -199,6 +218,182 @@ musicTitle:"基督教音乐 - 免费 ✅",musicLead:"为耶稣基督，我们天
 modTitle:"在耶稣里的管理",modLead:"在耶稣里管理资料。编辑或删除。删除是永久的。",
 premiumTitle:"在耶稣里的订阅 - 非洲法郎价格",premiumLead:"为非洲设计的价格，以耶稣为中心。9 000 F / 15 000 F / 30 000 F - 高级聊天",paymentTitle:"为耶稣的工作付款",
 footerDesc:"以耶稣基督为中心的基督徒相遇。21种语言。游戏/音乐/圣经免费，聊天高级。"
+},
+ln:{
+choose:"Pona formule oyo",free:"Ofele",navHome:"Ndako",navMeet:"Kokutana",navVerses:"Mavɛrsɛ ya Yesu",navGame:"Momekano ya Biblia",navMusic:"Miziki",navMod:"Bokengi",navPremium:"Premium",
+heroBadge:"✝️ Yesu Kristo azali Nzela - 2026",heroTitle:"Yesu Kristo na katikati mpo na kozwa bondeko ya seko engebene na Nzambe.",heroDesc:"<strong>Yesu Kristo azali moboko.</strong> Botalaka ya pasteur, kopesa mayele na Biblia na ntina ya Yesu, tchat ya mabondeli na kombo ya Yesu mpe momekano ya Biblia na ntina ya Yesu. Bolingo ezali na Yesu na katikati.",
+btnDiscover:"Tala bapwofile na Yesu",btnVerses:"Mavɛrsɛ na ntina ya Yesu",
+verseDayTitle:"✝️ Vɛrsɛ ya mokolo - Yesu",verseDayText:"« Yesu Kristo azali ndenge moko lobi, lelo mpe libela - Azali ndakisa na biso ya bolingo »",verseDayCite:"Baebele 13:8 & 1 Bakolinti 13:4 — Yesu, moboko ya bondeko nyonso",
+meetTitle:"Kokutana na Yesu Kristo",meetLead:"Pwofile nyonso emonisi kombo, mbula mpe engumba. Pona engebene na mbula (kati na X mpe Y), eklezya mpe bonsomi.",
+churchAll:"Mitindo nyonso na Yesu",genderAll:"Bonsomi nyonso",searchPh:"Luka kombo, vɛrsɛ ya Yesu...",
+ageMinLabel:"Mbula ya moke :",ageMaxLabel:"Mbula ya monene :",ageTo:"kino",
+loginTitle:"Kokota na Yesu",loginBtn:"Kokota na Yesu",registerTitle:"Komikomisa - Kota na bondeko na Yesu",registerBtn:"Salela pwofile na ngai na Yesu",
+versesTitle:"📖 Libwɛ ya Mavɛrsɛ - Yesu na katikati",versesLead:"Mavɛrsɛ oyo nyonso ezali koloba na ntina ya Yesu Kristo. Fina mpo na kokopa vɛrsɛ. Yesu azali na katikati ya bondeko nyonso.",
+gameTitle:"Momekano ya Biblia na ntina ya Yesu 🎮",gameLead:"Mituna 25 na ntina ya Yesu mpe libala, mavɛrsɛ 12 ya Yesu, babalani 12 ya Biblia.",
+musicTitle:"Miziki ya Bakristu - Yesu",musicLead:"Nzembo mpo na Yesu Kristo, Mobali na biso ya likolo.",
+uploadTitle:"🎵 Tia nzembo mpo na Yesu",uploadBtn:"Bakisa mpo na Yesu",
+modTitle:"Bokengi na Yesu",modLead:"Kamba bapwofile na Yesu. Bongola to longola. Bolongoli ezongaka lisusu te.",
+premiumTitle:"Bokotisi na Yesu - Talo ya CFA",premiumLead:"Talo esalemi mpo na Afrika, na Yesu na katikati. 9 000 F / 15 000 F / 30 000 F",paymentTitle:"Kofuta mpo na mosala ya Yesu",footerDesc:"Kokutana ya Bakristu na katikati ya Yesu Kristo. Yesu na katikati. Minoko 21. Bolongoli ezali ya seko."
+},
+sw:{
+choose:"Chagua mpango huu",free:"Bure",navHome:"Mwanzo",navMeet:"Kukutana",navVerses:"Mistari ya Yesu",navGame:"Mchezo wa Biblia",navMusic:"Muziki",navMod:"Usimamizi",navPremium:"Premium",
+heroBadge:"✝️ Yesu Kristo ndiye Njia - 2026",heroTitle:"Yesu Kristo katikati ili kupata agano la milele kulingana na Mungu.",heroDesc:"<strong>Yesu Kristo ndiye msingi.</strong> Uthibitisho wa kichungaji, funzo la Biblia kuhusu Yesu, gumzo la maombi kwa jina la Yesu na michezo ya Biblia kuhusu Yesu. Upendo una Yesu katikati.",
+btnDiscover:"Gundua wasifu katika Yesu",btnVerses:"Mistari kuhusu Yesu",
+verseDayTitle:"✝️ Mstari wa siku - Yesu",verseDayText:"« Yesu Kristo ni yeye yule jana, leo na hata milele - Yeye ndiye kielelezo chetu cha upendo »",verseDayCite:"Waebrania 13:8 na 1 Wakorintho 13:4 — Yesu, msingi wa kila agano",
+meetTitle:"Kukutana katika Yesu Kristo",meetLead:"Kila wasifu unaonyesha jina, umri na mji. Chuja kwa umri (kati ya X na Y), kanisa na jinsia.",
+churchAll:"Madhehebu yote katika Yesu",genderAll:"Jinsia zote",searchPh:"Tafuta jina, mstari wa Yesu...",
+ageMinLabel:"Umri wa chini:",ageMaxLabel:"Umri wa juu:",ageTo:"hadi",
+loginTitle:"Kuingia katika Yesu",loginBtn:"Ingia katika Yesu",registerTitle:"Usajili - Jiunge na agano katika Yesu",registerBtn:"Fungua wasifu wangu katika Yesu",
+versesTitle:"📖 Maktaba ya Mistari - Yesu katikati",versesLead:"Mistari hii yote inamzungumzia Yesu Kristo. Bofya ili kunakili mstari. Yesu yuko katikati ya kila agano.",
+gameTitle:"Mchezo wa Biblia kuhusu Yesu 🎮",gameLead:"Maswali 25 kuhusu Yesu na ndoa, mistari 12 ya Yesu, wanandoa 12 wa Biblia.",
+musicTitle:"Muziki wa Kikristo - Yesu",musicLead:"Nyimbo za Yesu Kristo, Bwana Arusi wetu wa mbinguni.",
+uploadTitle:"🎵 Pakia nyimbo za Yesu",uploadBtn:"Ongeza kwa ajili ya Yesu",
+modTitle:"Usimamizi katika Yesu",modLead:"Simamia wasifu katika Yesu. Hariri au futa. Vilivyofutwa havirudi tena.",
+premiumTitle:"Usajili katika Yesu - Bei za CFA",premiumLead:"Bei zilizopangwa kwa ajili ya Afrika, zikimlenga Yesu. 9 000 F / 15 000 F / 30 000 F",paymentTitle:"Malipo kwa ajili ya kazi ya Yesu",footerDesc:"Kukutana kwa Wakristo kukimlenga Yesu Kristo. Yesu katikati. Lugha 21. Ufutaji ni wa kudumu."
+},
+hi:{
+choose:"यह योजना चुनें",free:"निःशुल्क",navHome:"मुख्य पृष्ठ",navMeet:"मुलाक़ात",navVerses:"यीशु के वचन",navGame:"बाइबल खेल",navMusic:"संगीत",navMod:"प्रबंधन",navPremium:"प्रीमियम",
+heroBadge:"✝️ यीशु मसीह ही मार्ग हैं - 2026",heroTitle:"परमेश्वर के अनुसार अनन्त वाचा पाने के लिए यीशु मसीह केंद्र में।",heroDesc:"<strong>यीशु मसीह ही नींव हैं।</strong> पास्टरीय सत्यापन, यीशु पर बाइबल अध्ययन, यीशु के नाम में प्रार्थना चैट और यीशु पर बाइबल खेल। प्रेम के केंद्र में यीशु हैं।",
+btnDiscover:"यीशु में प्रोफ़ाइल देखें",btnVerses:"यीशु के बारे में वचन",
+verseDayTitle:"✝️ आज का वचन - यीशु",verseDayText:"« यीशु मसीह कल, आज और युगानुयुग एक सा है - वही हमारे प्रेम का आदर्श है »",verseDayCite:"इब्रानियों 13:8 और 1 कुरिन्थियों 13:4 — यीशु, हर वाचा की नींव",
+meetTitle:"यीशु मसीह में मुलाक़ात",meetLead:"हर प्रोफ़ाइल में नाम, उम्र और शहर दिखता है। उम्र (X और Y के बीच), कलीसिया और लिंग के अनुसार छाँटें।",
+churchAll:"यीशु में सभी कलीसियाएँ",genderAll:"सभी लिंग",searchPh:"नाम, यीशु का वचन खोजें...",
+ageMinLabel:"न्यूनतम उम्र :",ageMaxLabel:"अधिकतम उम्र :",ageTo:"से",
+loginTitle:"यीशु में लॉगिन",loginBtn:"यीशु में लॉगिन करें",registerTitle:"पंजीकरण - यीशु में वाचा से जुड़ें",registerBtn:"यीशु में मेरी प्रोफ़ाइल बनाएँ",
+versesTitle:"📖 वचनों का पुस्तकालय - यीशु केंद्र में",versesLead:"ये सभी वचन यीशु मसीह के बारे में हैं। वचन कॉपी करने के लिए क्लिक करें। यीशु हर वाचा के केंद्र में हैं।",
+gameTitle:"यीशु पर बाइबल खेल 🎮",gameLead:"यीशु और विवाह पर 25 प्रश्न, यीशु के 12 वचन, 12 बाइबल जोड़े।",
+musicTitle:"मसीही संगीत - यीशु",musicLead:"यीशु मसीह के लिए गीत, हमारे स्वर्गीय दूल्हे के लिए।",
+uploadTitle:"🎵 यीशु के लिए गीत अपलोड करें",uploadBtn:"यीशु के लिए जोड़ें",
+modTitle:"यीशु में प्रबंधन",modLead:"यीशु में प्रोफ़ाइल प्रबंधित करें। संपादित करें या हटाएँ। हटाया गया वापस नहीं आता।",
+premiumTitle:"यीशु में सदस्यता - CFA मूल्य",premiumLead:"अफ़्रीका के लिए बनाए गए मूल्य, यीशु पर केंद्रित। 9 000 F / 15 000 F / 30 000 F",paymentTitle:"यीशु के कार्य के लिए भुगतान",footerDesc:"यीशु मसीह पर केंद्रित मसीही मुलाक़ात। यीशु केंद्र में। 21 भाषाएँ। स्थायी रूप से हटाना।"
+},
+id:{
+choose:"Pilih paket ini",free:"Gratis",navHome:"Beranda",navMeet:"Pertemuan",navVerses:"Ayat Yesus",navGame:"Permainan Alkitab",navMusic:"Musik",navMod:"Moderasi",navPremium:"Premium",
+heroBadge:"✝️ Yesus Kristus adalah Jalan - 2026",heroTitle:"Yesus Kristus di pusat untuk menemukan perjanjian kekal menurut Allah.",heroDesc:"<strong>Yesus Kristus adalah dasarnya.</strong> Verifikasi pastoral, pendalaman Alkitab tentang Yesus, obrolan doa dalam nama Yesus, dan permainan Alkitab tentang Yesus. Cinta memiliki Yesus di pusatnya.",
+btnDiscover:"Temukan profil dalam Yesus",btnVerses:"Ayat tentang Yesus",
+verseDayTitle:"✝️ Ayat hari ini - Yesus",verseDayText:"« Yesus Kristus tetap sama, kemarin, hari ini dan selama-lamanya - Dialah teladan kasih kita »",verseDayCite:"Ibrani 13:8 & 1 Korintus 13:4 — Yesus, dasar setiap perjanjian",
+meetTitle:"Pertemuan dalam Yesus Kristus",meetLead:"Setiap profil menampilkan nama, usia, dan kota. Saring berdasarkan usia (antara X dan Y), gereja, dan jenis kelamin.",
+churchAll:"Semua denominasi dalam Yesus",genderAll:"Semua jenis kelamin",searchPh:"Cari nama, ayat Yesus...",
+ageMinLabel:"Usia minimum:",ageMaxLabel:"Usia maksimum:",ageTo:"sampai",
+loginTitle:"Masuk dalam Yesus",loginBtn:"Masuk dalam Yesus",registerTitle:"Pendaftaran - Bergabunglah dalam perjanjian di dalam Yesus",registerBtn:"Buat profil saya dalam Yesus",
+versesTitle:"📖 Perpustakaan Ayat - Yesus di Pusat",versesLead:"Semua ayat ini berbicara tentang Yesus Kristus. Klik untuk menyalin ayat. Yesus ada di pusat setiap perjanjian.",
+gameTitle:"Permainan Alkitab tentang Yesus 🎮",gameLead:"25 pertanyaan tentang Yesus dan pernikahan, 12 ayat Yesus, 12 pasangan Alkitab.",
+musicTitle:"Musik Kristen - Yesus",musicLead:"Lagu untuk Yesus Kristus, Mempelai Pria surgawi kita.",
+uploadTitle:"🎵 Unggah lagu untuk Yesus",uploadBtn:"Tambahkan untuk Yesus",
+modTitle:"Moderasi dalam Yesus",modLead:"Kelola profil dalam Yesus. Ubah atau hapus. Penghapusan tidak dapat dikembalikan.",
+premiumTitle:"Langganan dalam Yesus - Harga CFA",premiumLead:"Harga dirancang untuk Afrika, berpusat pada Yesus. 9.000 F / 15.000 F / 30.000 F",paymentTitle:"Pembayaran untuk pekerjaan Yesus",footerDesc:"Pertemuan Kristen yang berpusat pada Yesus Kristus. Yesus di pusat. 21 bahasa. Penghapusan permanen."
+},
+tl:{
+choose:"Piliin ang planong ito",free:"Libre",navHome:"Home",navMeet:"Pagkikita",navVerses:"Mga Talata ni Hesus",navGame:"Larong Biblikal",navMusic:"Musika",navMod:"Pangangasiwa",navPremium:"Premium",
+heroBadge:"✝️ Si Hesukristo ang Daan - 2026",heroTitle:"Si Hesukristo sa sentro upang matagpuan ang walang hanggang tipan ayon sa Diyos.",heroDesc:"<strong>Si Hesukristo ang pundasyon.</strong> Pastoral na beripikasyon, pag-aaral ng Biblia tungkol kay Hesus, panalanging chat sa pangalan ni Hesus, at mga larong biblikal tungkol kay Hesus. Si Hesus ang sentro ng pag-ibig.",
+btnDiscover:"Tuklasin ang mga profile kay Hesus",btnVerses:"Mga talata tungkol kay Hesus",
+verseDayTitle:"✝️ Talata ng araw - Hesus",verseDayText:"« Si Hesukristo ay pareho kahapon, ngayon, at magpakailanman - Siya ang ating huwaran ng pag-ibig »",verseDayCite:"Hebreo 13:8 at 1 Corinto 13:4 — Hesus, pundasyon ng bawat tipan",
+meetTitle:"Pagkikita kay Hesukristo",meetLead:"Ipinapakita ng bawat profile ang pangalan, edad, at lungsod. Mag-filter ayon sa edad (sa pagitan ng X at Y), simbahan, at kasarian.",
+churchAll:"Lahat ng denominasyon kay Hesus",genderAll:"Lahat ng kasarian",searchPh:"Maghanap ng pangalan, talata ni Hesus...",
+ageMinLabel:"Pinakamababang edad:",ageMaxLabel:"Pinakamataas na edad:",ageTo:"hanggang",
+loginTitle:"Pag-login kay Hesus",loginBtn:"Mag-login kay Hesus",registerTitle:"Pagpaparehistro - Sumali sa tipan kay Hesus",registerBtn:"Gawin ang aking profile kay Hesus",
+versesTitle:"📖 Aklatan ng mga Talata - Si Hesus sa Sentro",versesLead:"Ang lahat ng talatang ito ay tungkol kay Hesukristo. I-click para kopyahin ang talata. Si Hesus ang sentro ng bawat tipan.",
+gameTitle:"Larong Biblikal tungkol kay Hesus 🎮",gameLead:"25 tanong tungkol kay Hesus at pag-aasawa, 12 talata ni Hesus, 12 magkapareha sa Biblia.",
+musicTitle:"Kristiyanong Musika - Hesus",musicLead:"Mga awit para kay Hesukristo, ang ating makalangit na Kasintahang Lalaki.",
+uploadTitle:"🎵 Mag-upload ng mga awit para kay Hesus",uploadBtn:"Idagdag para kay Hesus",
+modTitle:"Pangangasiwa kay Hesus",modLead:"Pamahalaan ang mga profile kay Hesus. I-edit o burahin. Hindi na maibabalik ang mga binura.",
+premiumTitle:"Mga Subscription kay Hesus - Presyo sa CFA",premiumLead:"Mga presyong idinisenyo para sa Africa, nakasentro kay Hesus. 9,000 F / 15,000 F / 30,000 F",paymentTitle:"Bayad para sa gawain ni Hesus",footerDesc:"Kristiyanong pagkikita na nakasentro kay Hesukristo. Si Hesus sa sentro. 21 wika. Permanente ang pagbura."
+},
+ko:{
+choose:"이 요금제 선택",free:"무료",navHome:"홈",navMeet:"만남",navVerses:"예수님의 말씀",navGame:"성경 게임",navMusic:"음악",navMod:"관리",navPremium:"프리미엄",
+heroBadge:"✝️ 예수 그리스도는 길이십니다 - 2026",heroTitle:"하나님의 뜻에 따라 영원한 언약을 찾기 위해 예수 그리스도를 중심에.",heroDesc:"<strong>예수 그리스도는 터전이십니다.</strong> 목회적 검증, 예수님에 관한 성경 공부, 예수님의 이름으로 하는 기도 채팅, 예수님에 관한 성경 게임. 사랑의 중심에는 예수님이 계십니다.",
+btnDiscover:"예수님 안에서 프로필 보기",btnVerses:"예수님에 관한 말씀",
+verseDayTitle:"✝️ 오늘의 말씀 - 예수님",verseDayText:"« 예수 그리스도는 어제나 오늘이나 영원토록 동일하시니 - 그분은 우리 사랑의 모범이십니다 »",verseDayCite:"히브리서 13:8 & 고린도전서 13:4 — 예수님, 모든 언약의 터전",
+meetTitle:"예수 그리스도 안에서의 만남",meetLead:"각 프로필에는 이름, 나이, 도시가 표시됩니다. 나이(X와 Y 사이), 교회, 성별로 필터링하세요.",
+churchAll:"예수님 안의 모든 교단",genderAll:"모든 성별",searchPh:"이름, 예수님 말씀 검색...",
+ageMinLabel:"최소 나이:",ageMaxLabel:"최대 나이:",ageTo:"~",
+loginTitle:"예수님 안에서 로그인",loginBtn:"예수님 안에서 로그인",registerTitle:"회원가입 - 예수님 안에서 언약에 동참하세요",registerBtn:"예수님 안에서 내 프로필 만들기",
+versesTitle:"📖 말씀 도서관 - 예수님 중심",versesLead:"이 모든 말씀은 예수 그리스도에 관한 것입니다. 클릭하면 말씀이 복사됩니다. 예수님은 모든 언약의 중심이십니다.",
+gameTitle:"예수님에 관한 성경 게임 🎮",gameLead:"예수님과 결혼에 관한 25문제, 예수님의 말씀 12개, 성경 속 커플 12쌍.",
+musicTitle:"기독교 음악 - 예수님",musicLead:"우리의 하늘 신랑이신 예수 그리스도를 위한 찬양.",
+uploadTitle:"🎵 예수님을 위한 찬양 업로드",uploadBtn:"예수님을 위해 추가",
+modTitle:"예수님 안에서의 관리",modLead:"예수님 안에서 프로필을 관리하세요. 수정하거나 삭제하세요. 삭제는 되돌릴 수 없습니다.",
+premiumTitle:"예수님 안에서의 구독 - CFA 가격",premiumLead:"아프리카를 위해 마련된, 예수님 중심의 가격. 9,000 F / 15,000 F / 30,000 F",paymentTitle:"예수님의 사역을 위한 결제",footerDesc:"예수 그리스도 중심의 기독교 만남. 예수님이 중심. 21개 언어. 삭제는 영구적입니다."
+},
+vi:{
+choose:"Chọn gói này",free:"Miễn phí",navHome:"Trang chủ",navMeet:"Gặp gỡ",navVerses:"Câu Kinh Thánh về Chúa Giêsu",navGame:"Trò chơi Kinh Thánh",navMusic:"Âm nhạc",navMod:"Quản trị",navPremium:"Premium",
+heroBadge:"✝️ Chúa Giêsu Kitô là Con Đường - 2026",heroTitle:"Chúa Giêsu Kitô ở trung tâm để tìm một giao ước vĩnh cửu theo ý Chúa.",heroDesc:"<strong>Chúa Giêsu Kitô là nền tảng.</strong> Xác minh mục vụ, học Kinh Thánh về Chúa Giêsu, trò chuyện cầu nguyện nhân danh Chúa Giêsu và trò chơi Kinh Thánh về Chúa Giêsu. Tình yêu có Chúa Giêsu ở trung tâm.",
+btnDiscover:"Khám phá hồ sơ trong Chúa Giêsu",btnVerses:"Câu Kinh Thánh về Chúa Giêsu",
+verseDayTitle:"✝️ Câu Kinh Thánh hôm nay - Chúa Giêsu",verseDayText:"« Chúa Giêsu Kitô hôm qua, hôm nay và mãi mãi vẫn là một - Ngài là gương mẫu tình yêu của chúng ta »",verseDayCite:"Hê-bơ-rơ 13:8 & 1 Cô-rinh-tô 13:4 — Chúa Giêsu, nền tảng của mọi giao ước",
+meetTitle:"Gặp gỡ trong Chúa Giêsu Kitô",meetLead:"Mỗi hồ sơ hiển thị tên, tuổi và thành phố. Lọc theo độ tuổi (từ X đến Y), hội thánh và giới tính.",
+churchAll:"Mọi giáo phái trong Chúa Giêsu",genderAll:"Mọi giới tính",searchPh:"Tìm tên, câu Kinh Thánh...",
+ageMinLabel:"Tuổi tối thiểu:",ageMaxLabel:"Tuổi tối đa:",ageTo:"đến",
+loginTitle:"Đăng nhập trong Chúa Giêsu",loginBtn:"Đăng nhập trong Chúa Giêsu",registerTitle:"Đăng ký - Gia nhập giao ước trong Chúa Giêsu",registerBtn:"Tạo hồ sơ của tôi trong Chúa Giêsu",
+versesTitle:"📖 Thư viện Câu Kinh Thánh - Chúa Giêsu ở trung tâm",versesLead:"Tất cả những câu này nói về Chúa Giêsu Kitô. Nhấn để sao chép câu Kinh Thánh. Chúa Giêsu ở trung tâm mọi giao ước.",
+gameTitle:"Trò chơi Kinh Thánh về Chúa Giêsu 🎮",gameLead:"25 câu hỏi về Chúa Giêsu và hôn nhân, 12 câu Kinh Thánh của Chúa Giêsu, 12 cặp đôi trong Kinh Thánh.",
+musicTitle:"Âm nhạc Kitô giáo - Chúa Giêsu",musicLead:"Những bài ca dâng Chúa Giêsu Kitô, Chàng Rể trên trời của chúng ta.",
+uploadTitle:"🎵 Tải lên bài ca dâng Chúa Giêsu",uploadBtn:"Thêm cho Chúa Giêsu",
+modTitle:"Quản trị trong Chúa Giêsu",modLead:"Quản lý hồ sơ trong Chúa Giêsu. Chỉnh sửa hoặc xóa. Nội dung đã xóa không thể khôi phục.",
+premiumTitle:"Gói đăng ký trong Chúa Giêsu - Giá CFA",premiumLead:"Mức giá dành cho châu Phi, lấy Chúa Giêsu làm trung tâm. 9.000 F / 15.000 F / 30.000 F",paymentTitle:"Thanh toán cho công việc của Chúa Giêsu",footerDesc:"Gặp gỡ Kitô hữu lấy Chúa Giêsu Kitô làm trung tâm. Chúa Giêsu ở trung tâm. 21 ngôn ngữ. Xóa vĩnh viễn."
+},
+pl:{
+choose:"Wybierz ten plan",free:"Za darmo",navHome:"Strona główna",navMeet:"Spotkania",navVerses:"Wersety o Jezusie",navGame:"Gra biblijna",navMusic:"Muzyka",navMod:"Moderacja",navPremium:"Premium",
+heroBadge:"✝️ Jezus Chrystus jest Drogą - 2026",heroTitle:"Jezus Chrystus w centrum, aby znaleźć wieczne przymierze według Boga.",heroDesc:"<strong>Jezus Chrystus jest fundamentem.</strong> Weryfikacja duszpasterska, studium biblijne o Jezusie, czat modlitewny w imię Jezusa i gry biblijne o Jezusie. Miłość ma Jezusa w centrum.",
+btnDiscover:"Odkryj profile w Jezusie",btnVerses:"Wersety o Jezusie",
+verseDayTitle:"✝️ Werset dnia - Jezus",verseDayText:"« Jezus Chrystus wczoraj i dziś, ten sam także na wieki - On jest naszym wzorem miłości »",verseDayCite:"List do Hebrajczyków 13:8 i 1 List do Koryntian 13:4 — Jezus, fundament każdego przymierza",
+meetTitle:"Spotkania w Jezusie Chrystusie",meetLead:"Każdy profil pokazuje imię, wiek i miasto. Filtruj według wieku (między X a Y), Kościoła i płci.",
+churchAll:"Wszystkie wyznania w Jezusie",genderAll:"Wszystkie płcie",searchPh:"Szukaj imienia, wersetu o Jezusie...",
+ageMinLabel:"Wiek minimalny:",ageMaxLabel:"Wiek maksymalny:",ageTo:"do",
+loginTitle:"Logowanie w Jezusie",loginBtn:"Zaloguj się w Jezusie",registerTitle:"Rejestracja - Dołącz do przymierza w Jezusie",registerBtn:"Utwórz mój profil w Jezusie",
+versesTitle:"📖 Biblioteka wersetów - Jezus w centrum",versesLead:"Wszystkie te wersety mówią o Jezusie Chrystusie. Kliknij, aby skopiować werset. Jezus jest w centrum każdego przymierza.",
+gameTitle:"Gra biblijna o Jezusie 🎮",gameLead:"25 pytań o Jezusa i małżeństwo, 12 wersetów Jezusa, 12 par biblijnych.",
+musicTitle:"Muzyka chrześcijańska - Jezus",musicLead:"Pieśni dla Jezusa Chrystusa, naszego niebieskiego Oblubieńca.",
+uploadTitle:"🎵 Prześlij pieśni dla Jezusa",uploadBtn:"Dodaj dla Jezusa",
+modTitle:"Moderacja w Jezusie",modLead:"Zarządzaj profilami w Jezusie. Edytuj lub usuń. Usunięte treści nie wracają.",
+premiumTitle:"Subskrypcje w Jezusie - Ceny w CFA",premiumLead:"Ceny stworzone z myślą o Afryce, skupione na Jezusie. 9 000 F / 15 000 F / 30 000 F",paymentTitle:"Płatność na dzieło Jezusa",footerDesc:"Chrześcijańskie spotkania skupione na Jezusie Chrystusie. Jezus w centrum. 21 języków. Usunięcie jest trwałe."
+},
+uk:{
+choose:"Обрати цей тариф",free:"Безкоштовно",navHome:"Головна",navMeet:"Знайомства",navVerses:"Вірші про Ісуса",navGame:"Біблійна гра",navMusic:"Музика",navMod:"Модерація",navPremium:"Преміум",
+heroBadge:"✝️ Ісус Христос — це Шлях - 2026",heroTitle:"Ісус Христос у центрі, щоб знайти вічний завіт за волею Бога.",heroDesc:"<strong>Ісус Христос — це основа.</strong> Пастирська перевірка, вивчення Біблії про Ісуса, молитовний чат в ім’я Ісуса та біблійні ігри про Ісуса. У центрі любові — Ісус.",
+btnDiscover:"Дивитися анкети в Ісусі",btnVerses:"Вірші про Ісуса",
+verseDayTitle:"✝️ Вірш дня - Ісус",verseDayText:"« Ісус Христос учора, і сьогодні, і навіки той самий - Він наш зразок любові »",verseDayCite:"Євреїв 13:8 і 1 Коринтян 13:4 — Ісус, основа кожного завіту",
+meetTitle:"Знайомства в Ісусі Христі",meetLead:"Кожна анкета показує ім’я, вік і місто. Фільтруйте за віком (від X до Y), церквою та статтю.",
+churchAll:"Усі конфесії в Ісусі",genderAll:"Усі статі",searchPh:"Шукати ім’я, вірш про Ісуса...",
+ageMinLabel:"Мінімальний вік:",ageMaxLabel:"Максимальний вік:",ageTo:"до",
+loginTitle:"Вхід в Ісусі",loginBtn:"Увійти в Ісусі",registerTitle:"Реєстрація - Приєднуйся до завіту в Ісусі",registerBtn:"Створити мою анкету в Ісусі",
+versesTitle:"📖 Бібліотека віршів - Ісус у центрі",versesLead:"Усі ці вірші говорять про Ісуса Христа. Натисни, щоб скопіювати вірш. Ісус — у центрі кожного завіту.",
+gameTitle:"Біблійна гра про Ісуса 🎮",gameLead:"25 запитань про Ісуса та шлюб, 12 віршів Ісуса, 12 біблійних пар.",
+musicTitle:"Християнська музика - Ісус",musicLead:"Пісні для Ісуса Христа, нашого небесного Нареченого.",
+uploadTitle:"🎵 Завантажити пісні для Ісуса",uploadBtn:"Додати для Ісуса",
+modTitle:"Модерація в Ісусі",modLead:"Керуй анкетами в Ісусі. Редагуй або видаляй. Видалене не повертається.",
+premiumTitle:"Підписки в Ісусі - Ціни в CFA",premiumLead:"Ціни, створені для Африки, зосереджені на Ісусі. 9 000 F / 15 000 F / 30 000 F",paymentTitle:"Оплата на діло Ісуса",footerDesc:"Християнські знайомства, зосереджені на Ісусі Христі. Ісус у центрі. 21 мова. Видалення остаточне."
+},
+ur:{
+choose:"یہ پلان منتخب کریں",free:"مفت",navHome:"ہوم",navMeet:"ملاقات",navVerses:"یسوع کی آیات",navGame:"بائبل کھیل",navMusic:"موسیقی",navMod:"نگرانی",navPremium:"پریمیم",
+heroBadge:"✝️ یسوع مسیح ہی راہ ہیں - 2026",heroTitle:"خدا کے مطابق ابدی عہد پانے کے لیے یسوع مسیح مرکز میں۔",heroDesc:"<strong>یسوع مسیح ہی بنیاد ہیں۔</strong> پادری تصدیق، یسوع پر بائبل مطالعہ، یسوع کے نام میں دعائیہ چیٹ اور یسوع پر بائبل کھیل۔ محبت کے مرکز میں یسوع ہیں۔",
+btnDiscover:"یسوع میں پروفائل دیکھیں",btnVerses:"یسوع کے بارے میں آیات",
+verseDayTitle:"✝️ آج کی آیت - یسوع",verseDayText:"« یسوع مسیح کل اور آج بلکہ ابد تک یکساں ہے - وہی ہماری محبت کا نمونہ ہے »",verseDayCite:"عبرانیوں 13:8 اور 1 کرنتھیوں 13:4 — یسوع، ہر عہد کی بنیاد",
+meetTitle:"یسوع مسیح میں ملاقات",meetLead:"ہر پروفائل میں نام، عمر اور شہر نظر آتا ہے۔ عمر (X اور Y کے درمیان)، کلیسیا اور جنس کے مطابق چھانٹیں۔",
+churchAll:"یسوع میں تمام کلیسیائی فرقے",genderAll:"تمام جنس",searchPh:"نام، یسوع کی آیت تلاش کریں...",
+ageMinLabel:"کم از کم عمر:",ageMaxLabel:"زیادہ سے زیادہ عمر:",ageTo:"تا",
+loginTitle:"یسوع میں لاگ اِن",loginBtn:"یسوع میں لاگ اِن کریں",registerTitle:"رجسٹریشن - یسوع میں عہد سے جُڑیں",registerBtn:"یسوع میں میرا پروفائل بنائیں",
+versesTitle:"📖 آیات کی لائبریری - یسوع مرکز میں",versesLead:"یہ تمام آیات یسوع مسیح کے بارے میں ہیں۔ آیت کاپی کرنے کے لیے کلک کریں۔ یسوع ہر عہد کے مرکز میں ہیں۔",
+gameTitle:"یسوع پر بائبل کھیل 🎮",gameLead:"یسوع اور شادی پر 25 سوالات، یسوع کی 12 آیات، 12 بائبلی جوڑے۔",
+musicTitle:"مسیحی موسیقی - یسوع",musicLead:"یسوع مسیح کے لیے حمدیں، ہمارے آسمانی دولہا کے لیے۔",
+uploadTitle:"🎵 یسوع کے لیے حمدیں اپ لوڈ کریں",uploadBtn:"یسوع کے لیے شامل کریں",
+modTitle:"یسوع میں نگرانی",modLead:"یسوع میں پروفائلز کا انتظام کریں۔ ترمیم کریں یا حذف کریں۔ حذف شدہ واپس نہیں آتا۔",
+premiumTitle:"یسوع میں رکنیت - CFA قیمتیں",premiumLead:"افریقہ کے لیے بنائی گئی قیمتیں، یسوع پر مرکوز۔ 9,000 F / 15,000 F / 30,000 F",paymentTitle:"یسوع کے کام کے لیے ادائیگی",footerDesc:"یسوع مسیح پر مرکوز مسیحی ملاقات۔ یسوع مرکز میں۔ 21 زبانیں۔ حذف مستقل ہے۔"
+},
+ro:{
+choose:"Alege acest plan",free:"Gratuit",navHome:"Acasă",navMeet:"Întâlniri",navVerses:"Versete despre Isus",navGame:"Joc biblic",navMusic:"Muzică",navMod:"Moderare",navPremium:"Premium",
+heroBadge:"✝️ Isus Hristos este Calea - 2026",heroTitle:"Isus Hristos în centru pentru a găsi un legământ veșnic după voia lui Dumnezeu.",heroDesc:"<strong>Isus Hristos este temelia.</strong> Verificare pastorală, studiu biblic despre Isus, chat de rugăciune în numele lui Isus și jocuri biblice despre Isus. Iubirea îl are pe Isus în centru.",
+btnDiscover:"Descoperă profilurile în Isus",btnVerses:"Versete despre Isus",
+verseDayTitle:"✝️ Versetul zilei - Isus",verseDayText:"« Isus Hristos este același ieri, azi și în veci - El este modelul nostru de iubire »",verseDayCite:"Evrei 13:8 și 1 Corinteni 13:4 — Isus, temelia fiecărui legământ",
+meetTitle:"Întâlniri în Isus Hristos",meetLead:"Fiecare profil afișează numele, vârsta și orașul. Filtrează după vârstă (între X și Y), biserică și gen.",
+churchAll:"Toate confesiunile în Isus",genderAll:"Toate genurile",searchPh:"Caută prenume, verset despre Isus...",
+ageMinLabel:"Vârsta minimă:",ageMaxLabel:"Vârsta maximă:",ageTo:"până la",
+loginTitle:"Conectare în Isus",loginBtn:"Conectează-te în Isus",registerTitle:"Înregistrare - Intră în legământul în Isus",registerBtn:"Creează-mi profilul în Isus",
+versesTitle:"📖 Biblioteca de versete - Isus în centru",versesLead:"Toate aceste versete vorbesc despre Isus Hristos. Apasă pentru a copia versetul. Isus este în centrul fiecărui legământ.",
+gameTitle:"Joc biblic despre Isus 🎮",gameLead:"25 de întrebări despre Isus și căsătorie, 12 versete ale lui Isus, 12 cupluri biblice.",
+musicTitle:"Muzică creștină - Isus",musicLead:"Cântări pentru Isus Hristos, Mirele nostru ceresc.",
+uploadTitle:"🎵 Încarcă cântări pentru Isus",uploadBtn:"Adaugă pentru Isus",
+modTitle:"Moderare în Isus",modLead:"Gestionează profilurile în Isus. Modifică sau șterge. Ștergerile nu se mai pot anula.",
+premiumTitle:"Abonamente în Isus - Prețuri în CFA",premiumLead:"Prețuri gândite pentru Africa, centrate pe Isus. 9 000 F / 15 000 F / 30 000 F",paymentTitle:"Plată pentru lucrarea lui Isus",footerDesc:"Întâlniri creștine centrate pe Isus Hristos. Isus în centru. 21 de limbi. Ștergeri definitive."
 }
 };
 
@@ -219,19 +414,24 @@ if(currentCurrency==='XOF') return Math.round(val).toLocaleString('fr-FR')+' '+s
 if(currentCurrency==='EUR') return val.toFixed(2)+' '+sym;
 return sym+val.toFixed(2);
 }
+const PRICEX={fr:["Découverte", "Mensuel Jésus", "Alliance 6 Mois", "Éternelle 12 Mois", "Gratuit à vie", "/ mois", "/ 6 mois", "/ 12 mois", "★ Le plus choisi", "★ Meilleure offre Jésus", "Économisez {p} en Jésus", "soit {p} / mois · payé en une fois", "10 likes/jour en Jésus", "Écouter la musique", "Jeux sur Jésus", "Étude biblique", "Profils : nom, âge et ville", "Likes illimités en Jésus", "Chat prière au nom de Jésus (messages écrits et vocaux)", "Étude biblique Jésus à deux", "Écouter et télécharger la musique", "Jeux complets Jésus", "Filtres âge, genre et confession", "Profil mis en avant", "Vérification pastorale Jésus", "Coaching mariage en Jésus", "Top profil 1 an", "Support en Jésus"],en:["Discovery", "Monthly", "Alliance 6 months", "Eternal 12 months", "Free for life", "/ month", "/ 6 months", "/ 12 months", "★ Most popular", "★ Best offer", "Save {p} in Jesus", "that is {p} / month · paid at once", "10 likes/day in Jesus", "Listen to music", "Games about Jesus", "Bible study", "Profiles: name, age and city", "Unlimited likes in Jesus", "Prayer chat in Jesus' name (written and voice messages)", "Bible study about Jesus for two", "Listen to and download music", "Full games about Jesus", "Age, gender and denomination filters", "Featured profile", "Pastoral verification", "Marriage coaching in Jesus", "Top profile for 1 year", "Support in Jesus"],es:["Descubrimiento", "Mensual", "Alianza 6 meses", "Eterna 12 meses", "Gratis de por vida", "/ mes", "/ 6 meses", "/ 12 meses", "★ La más elegida", "★ Mejor oferta", "Ahorra {p} en Jesús", "es decir {p} / mes · pagado de una vez", "10 me gusta al día en Jesús", "Escuchar música", "Juegos sobre Jesús", "Estudio bíblico", "Perfiles: nombre, edad y ciudad", "Me gusta ilimitados en Jesús", "Chat de oración en el nombre de Jesús (mensajes escritos y de voz)", "Estudio bíblico sobre Jesús en pareja", "Escuchar y descargar música", "Juegos completos sobre Jesús", "Filtros de edad, género y confesión", "Perfil destacado", "Verificación pastoral", "Coaching matrimonial en Jesús", "Perfil destacado durante 1 año", "Soporte en Jesús"],pt:["Descoberta", "Mensal", "Aliança 6 meses", "Eterna 12 meses", "Grátis para sempre", "/ mês", "/ 6 meses", "/ 12 meses", "★ A mais escolhida", "★ Melhor oferta", "Poupe {p} em Jesus", "ou seja {p} / mês · pago de uma só vez", "10 curtidas por dia em Jesus", "Ouvir música", "Jogos sobre Jesus", "Estudo bíblico", "Perfis: nome, idade e cidade", "Curtidas ilimitadas em Jesus", "Chat de oração em nome de Jesus (mensagens escritas e de voz)", "Estudo bíblico sobre Jesus a dois", "Ouvir e baixar música", "Jogos completos sobre Jesus", "Filtros de idade, género e confissão", "Perfil em destaque", "Verificação pastoral", "Coaching de casamento em Jesus", "Perfil em destaque por 1 ano", "Suporte em Jesus"],it:["Scoperta", "Mensile", "Alleanza 6 mesi", "Eterna 12 mesi", "Gratis a vita", "/ mese", "/ 6 mesi", "/ 12 mesi", "★ La più scelta", "★ Migliore offerta", "Risparmia {p} in Gesù", "cioè {p} / mese · pagato in un'unica soluzione", "10 like al giorno in Gesù", "Ascoltare la musica", "Giochi su Gesù", "Studio biblico", "Profili: nome, età e città", "Like illimitati in Gesù", "Chat di preghiera nel nome di Gesù (messaggi scritti e vocali)", "Studio biblico su Gesù in due", "Ascoltare e scaricare la musica", "Giochi completi su Gesù", "Filtri per età, genere e confessione", "Profilo in evidenza", "Verifica pastorale", "Coaching matrimoniale in Gesù", "Profilo in evidenza per 1 anno", "Supporto in Gesù"],de:["Entdeckung", "Monatlich", "Bund 6 Monate", "Ewig 12 Monate", "Lebenslang kostenlos", "/ Monat", "/ 6 Monate", "/ 12 Monate", "★ Am beliebtesten", "★ Bestes Angebot", "Sparen Sie {p} in Jesus", "also {p} / Monat · einmalig bezahlt", "10 Likes pro Tag in Jesus", "Musik hören", "Spiele über Jesus", "Bibelstudium", "Profile: Name, Alter und Stadt", "Unbegrenzte Likes in Jesus", "Gebetschat im Namen Jesu (Text- und Sprachnachrichten)", "Bibelstudium über Jesus zu zweit", "Musik hören und herunterladen", "Vollständige Spiele über Jesus", "Filter für Alter, Geschlecht und Konfession", "Hervorgehobenes Profil", "Pastorale Überprüfung", "Ehecoaching in Jesus", "Top-Profil für 1 Jahr", "Support in Jesus"],ar:["اكتشاف", "شهري", "العهد 6 أشهر", "الأبدية 12 شهرًا", "مجاني مدى الحياة", "/ شهر", "/ 6 أشهر", "/ 12 شهرًا", "★ الأكثر اختيارًا", "★ أفضل عرض", "وفّر {p} في يسوع", "أي {p} / شهر · يُدفع دفعة واحدة", "10 إعجابات يوميًا في يسوع", "الاستماع إلى الموسيقى", "ألعاب عن يسوع", "دراسة الكتاب المقدس", "الملفات: الاسم والعمر والمدينة", "إعجابات غير محدودة في يسوع", "دردشة صلاة باسم يسوع (رسائل مكتوبة وصوتية)", "دراسة الكتاب المقدس عن يسوع بين اثنين", "الاستماع إلى الموسيقى وتحميلها", "ألعاب كاملة عن يسوع", "مرشحات العمر والجنس والطائفة", "ملف مميز", "تحقق رعوي", "إرشاد زواجي في يسوع", "ملف في الصدارة لمدة سنة", "دعم في يسوع"],zh:["探索版", "月度", "盟约 6 个月", "永恒 12 个月", "终身免费", "/ 月", "/ 6 个月", "/ 12 个月", "★ 最多人选择", "★ 最优惠", "在耶稣里节省 {p}", "即 {p} / 月 · 一次付清", "在耶稣里每天 10 个赞", "听音乐", "关于耶稣的游戏", "圣经学习", "资料：姓名、年龄和城市", "在耶稣里无限点赞", "奉耶稣的名祷告聊天（文字和语音消息）", "两人一起的耶稣圣经学习", "听音乐和下载音乐", "完整的耶稣游戏", "年龄、性别和宗派筛选", "突出显示的资料", "牧者验证", "在耶稣里的婚姻辅导", "置顶资料 1 年", "在耶稣里的支持"],nl:["Ontdekking", "Maandelijks", "Verbond 6 maanden", "Eeuwig 12 maanden", "Gratis voor altijd", "/ maand", "/ 6 maanden", "/ 12 maanden", "★ Meest gekozen", "★ Beste aanbieding", "Bespaar {p} in Jezus", "dus {p} / maand · in één keer betaald", "10 likes per dag in Jezus", "Muziek beluisteren", "Spellen over Jezus", "Bijbelstudie", "Profielen: naam, leeftijd en stad", "Onbeperkt likes in Jezus", "Gebedschat in de naam van Jezus (geschreven en gesproken berichten)", "Bijbelstudie over Jezus samen", "Muziek beluisteren en downloaden", "Volledige spellen over Jezus", "Filters op leeftijd, geslacht en kerkgenootschap", "Uitgelicht profiel", "Pastorale verificatie", "Huwelijkscoaching in Jezus", "Topprofiel gedurende 1 jaar", "Ondersteuning in Jezus"],ru:["Знакомство", "Ежемесячно", "Союз на 6 месяцев", "Вечный на 12 месяцев", "Бесплатно навсегда", "/ месяц", "/ 6 месяцев", "/ 12 месяцев", "★ Самый популярный", "★ Лучшее предложение", "Сэкономьте {p} в Иисусе", "то есть {p} / месяц · оплата сразу", "10 лайков в день в Иисусе", "Слушать музыку", "Игры об Иисусе", "Изучение Библии", "Анкеты: имя, возраст и город", "Безлимитные лайки в Иисусе", "Молитвенный чат во имя Иисуса (текстовые и голосовые сообщения)", "Изучение Библии об Иисусе вдвоём", "Слушать и скачивать музыку", "Полные игры об Иисусе", "Фильтры по возрасту, полу и конфессии", "Выделенная анкета", "Пасторская проверка", "Брачный коучинг в Иисусе", "Топ-анкета на 1 год", "Поддержка в Иисусе"],ln:["Boyebi", "Sanza na sanza", "Bondeko sanza 6", "Seko sanza 12", "Ofele libela", "/ sanza", "/ sanza 6", "/ sanza 12", "★ Oyo bato mingi baponi", "★ Likambo ya malamu", "Kobomba {p} na Yesu", "ezali {p} / sanza · efutami mbala moko", "Likes 10 na mokolo na Yesu", "Koyoka miziki", "Momekano na ntina ya Yesu", "Boyekoli Biblia", "Mapwofile : kombo, mbula mpe engumba", "Likes ebimeli te na Yesu", "Tchat ya mabondeli na kombo ya Yesu (nsango ekomami mpe ya mongongo)", "Boyekoli Biblia na ntina ya Yesu mibale", "Koyoka mpe kozwa miziki", "Momekano mobimba na ntina ya Yesu", "Filtre ya mbula, bonsomi mpe eklezya", "Pwofile ezali kolakisama", "Botalaki ya pasteur", "Koteya libala na Yesu", "Pwofile ya liboso mbula 1", "Lisungi na Yesu"],sw:["Ugunduzi", "Kila mwezi", "Agano miezi 6", "Milele miezi 12", "Bure maisha yote", "/ mwezi", "/ miezi 6", "/ miezi 12", "★ Inayochaguliwa zaidi", "★ Ofa bora", "Okoa {p} katika Yesu", "yaani {p} / mwezi · inalipwa mara moja", "Likes 10 kwa siku katika Yesu", "Kusikiliza muziki", "Michezo kuhusu Yesu", "Funzo la Biblia", "Wasifu: jina, umri na mji", "Likes zisizo na kikomo katika Yesu", "Gumzo la maombi kwa jina la Yesu (ujumbe wa maandishi na wa sauti)", "Funzo la Biblia kuhusu Yesu kwa wawili", "Kusikiliza na kupakua muziki", "Michezo kamili kuhusu Yesu", "Vichujio vya umri, jinsia na dhehebu", "Wasifu unaoangaziwa", "Uthibitisho wa kichungaji", "Ushauri wa ndoa katika Yesu", "Wasifu wa juu kwa mwaka 1", "Msaada katika Yesu"],hi:["खोज", "मासिक", "वाचा 6 महीने", "अनन्त 12 महीने", "जीवन भर निःशुल्क", "/ माह", "/ 6 महीने", "/ 12 महीने", "★ सबसे ज़्यादा चुना गया", "★ सर्वोत्तम ऑफ़र", "यीशु में {p} बचाएँ", "यानी {p} / माह · एक बार में भुगतान", "यीशु में प्रतिदिन 10 लाइक", "संगीत सुनें", "यीशु पर खेल", "बाइबल अध्ययन", "प्रोफ़ाइल: नाम, उम्र और शहर", "यीशु में असीमित लाइक", "यीशु के नाम में प्रार्थना चैट (लिखित और वॉइस संदेश)", "दो लोगों के लिए यीशु पर बाइबल अध्ययन", "संगीत सुनें और डाउनलोड करें", "यीशु पर पूर्ण खेल", "उम्र, लिंग और कलीसिया के फ़िल्टर", "विशेष रूप से दिखाई जाने वाली प्रोफ़ाइल", "पास्टरीय सत्यापन", "यीशु में विवाह परामर्श", "1 वर्ष के लिए शीर्ष प्रोफ़ाइल", "यीशु में सहायता"],id:["Penemuan", "Bulanan", "Perjanjian 6 bulan", "Kekal 12 bulan", "Gratis seumur hidup", "/ bulan", "/ 6 bulan", "/ 12 bulan", "★ Paling banyak dipilih", "★ Penawaran terbaik", "Hemat {p} dalam Yesus", "yaitu {p} / bulan · dibayar sekaligus", "10 suka per hari dalam Yesus", "Mendengarkan musik", "Permainan tentang Yesus", "Pendalaman Alkitab", "Profil: nama, usia, dan kota", "Suka tanpa batas dalam Yesus", "Obrolan doa dalam nama Yesus (pesan tertulis dan suara)", "Pendalaman Alkitab tentang Yesus berdua", "Mendengarkan dan mengunduh musik", "Permainan lengkap tentang Yesus", "Filter usia, jenis kelamin, dan denominasi", "Profil unggulan", "Verifikasi pastoral", "Konseling pernikahan dalam Yesus", "Profil teratas selama 1 tahun", "Dukungan dalam Yesus"],tl:["Pagtuklas", "Buwanan", "Tipan 6 buwan", "Walang hanggan 12 buwan", "Libre habambuhay", "/ buwan", "/ 6 buwan", "/ 12 buwan", "★ Pinakapinipili", "★ Pinakamagandang alok", "Makatipid ng {p} kay Hesus", "o {p} / buwan · isang bayaran lang", "10 likes bawat araw kay Hesus", "Makinig ng musika", "Mga laro tungkol kay Hesus", "Pag-aaral ng Biblia", "Mga profile: pangalan, edad, at lungsod", "Walang limit na likes kay Hesus", "Panalanging chat sa pangalan ni Hesus (nakasulat at boses na mensahe)", "Pag-aaral ng Biblia tungkol kay Hesus nang dalawa", "Makinig at mag-download ng musika", "Kumpletong mga laro tungkol kay Hesus", "Mga filter sa edad, kasarian, at denominasyon", "Naka-highlight na profile", "Pastoral na beripikasyon", "Marriage coaching kay Hesus", "Top profile sa loob ng 1 taon", "Suporta kay Hesus"],ko:["탐색", "월간", "언약 6개월", "영원 12개월", "평생 무료", "/ 월", "/ 6개월", "/ 12개월", "★ 가장 많이 선택", "★ 최고의 혜택", "예수님 안에서 {p} 절약", "즉 월 {p} · 한 번에 결제", "예수님 안에서 하루 좋아요 10개", "음악 듣기", "예수님에 관한 게임", "성경 공부", "프로필: 이름, 나이, 도시", "예수님 안에서 무제한 좋아요", "예수님의 이름으로 하는 기도 채팅 (문자 및 음성 메시지)", "둘이 함께하는 예수님 성경 공부", "음악 듣기 및 다운로드", "예수님에 관한 전체 게임", "나이, 성별, 교단 필터", "강조 프로필", "목회적 검증", "예수님 안에서의 결혼 코칭", "1년간 상위 프로필", "예수님 안에서의 지원"],vi:["Khám phá", "Hằng tháng", "Giao ước 6 tháng", "Vĩnh cửu 12 tháng", "Miễn phí trọn đời", "/ tháng", "/ 6 tháng", "/ 12 tháng", "★ Được chọn nhiều nhất", "★ Ưu đãi tốt nhất", "Tiết kiệm {p} trong Chúa Giêsu", "tức {p} / tháng · thanh toán một lần", "10 lượt thích mỗi ngày trong Chúa Giêsu", "Nghe nhạc", "Trò chơi về Chúa Giêsu", "Học Kinh Thánh", "Hồ sơ: tên, tuổi và thành phố", "Lượt thích không giới hạn trong Chúa Giêsu", "Trò chuyện cầu nguyện nhân danh Chúa Giêsu (tin nhắn văn bản và giọng nói)", "Học Kinh Thánh về Chúa Giêsu cho hai người", "Nghe và tải nhạc", "Trò chơi đầy đủ về Chúa Giêsu", "Bộ lọc tuổi, giới tính và giáo phái", "Hồ sơ nổi bật", "Xác minh mục vụ", "Tư vấn hôn nhân trong Chúa Giêsu", "Hồ sơ hàng đầu trong 1 năm", "Hỗ trợ trong Chúa Giêsu"],pl:["Odkrywanie", "Miesięczny", "Przymierze 6 miesięcy", "Wieczny 12 miesięcy", "Za darmo na zawsze", "/ miesiąc", "/ 6 miesięcy", "/ 12 miesięcy", "★ Najczęściej wybierany", "★ Najlepsza oferta", "Zaoszczędź {p} w Jezusie", "czyli {p} / miesiąc · płatne jednorazowo", "10 polubień dziennie w Jezusie", "Słuchanie muzyki", "Gry o Jezusie", "Studium biblijne", "Profile: imię, wiek i miasto", "Nieograniczone polubienia w Jezusie", "Czat modlitewny w imię Jezusa (wiadomości tekstowe i głosowe)", "Studium biblijne o Jezusie we dwoje", "Słuchanie i pobieranie muzyki", "Pełne gry o Jezusie", "Filtry wieku, płci i wyznania", "Wyróżniony profil", "Weryfikacja duszpasterska", "Coaching małżeński w Jezusie", "Najlepszy profil przez 1 rok", "Wsparcie w Jezusie"],uk:["Знайомство", "Щомісяця", "Завіт на 6 місяців", "Вічний на 12 місяців", "Безкоштовно назавжди", "/ місяць", "/ 6 місяців", "/ 12 місяців", "★ Найпопулярніший", "★ Найкраща пропозиція", "Заощадьте {p} в Ісусі", "тобто {p} / місяць · оплата одразу", "10 вподобань на день в Ісусі", "Слухати музику", "Ігри про Ісуса", "Вивчення Біблії", "Анкети: ім’я, вік і місто", "Необмежені вподобання в Ісусі", "Молитовний чат в ім’я Ісуса (текстові та голосові повідомлення)", "Вивчення Біблії про Ісуса вдвох", "Слухати та завантажувати музику", "Повні ігри про Ісуса", "Фільтри за віком, статтю та конфесією", "Виділена анкета", "Пастирська перевірка", "Шлюбний коучинг в Ісусі", "Топ-анкета на 1 рік", "Підтримка в Ісусі"],ur:["دریافت", "ماہانہ", "عہد 6 ماہ", "ابدی 12 ماہ", "عمر بھر مفت", "/ ماہ", "/ 6 ماہ", "/ 12 ماہ", "★ سب سے زیادہ منتخب", "★ بہترین پیشکش", "یسوع میں {p} بچائیں", "یعنی {p} / ماہ · ایک ساتھ ادائیگی", "یسوع میں روزانہ 10 لائکس", "موسیقی سنیں", "یسوع پر کھیل", "بائبل مطالعہ", "پروفائل: نام، عمر اور شہر", "یسوع میں لامحدود لائکس", "یسوع کے نام میں دعائیہ چیٹ (تحریری اور صوتی پیغامات)", "دو افراد کے لیے یسوع پر بائبل مطالعہ", "موسیقی سنیں اور ڈاؤن لوڈ کریں", "یسوع پر مکمل کھیل", "عمر، جنس اور کلیسیائی فرقے کے فلٹر", "نمایاں پروفائل", "پادری تصدیق", "یسوع میں ازدواجی رہنمائی", "1 سال کے لیے سرِفہرست پروفائل", "یسوع میں معاونت"],ro:["Descoperire", "Lunar", "Legământ 6 luni", "Veșnic 12 luni", "Gratuit pe viață", "/ lună", "/ 6 luni", "/ 12 luni", "★ Cel mai ales", "★ Cea mai bună ofertă", "Economisește {p} în Isus", "adică {p} / lună · plătit o singură dată", "10 aprecieri pe zi în Isus", "Ascultă muzică", "Jocuri despre Isus", "Studiu biblic", "Profiluri: nume, vârstă și oraș", "Aprecieri nelimitate în Isus", "Chat de rugăciune în numele lui Isus (mesaje scrise și vocale)", "Studiu biblic despre Isus în doi", "Ascultă și descarcă muzică", "Jocuri complete despre Isus", "Filtre după vârstă, gen și confesiune", "Profil evidențiat", "Verificare pastorală", "Coaching pentru căsătorie în Isus", "Profil de top timp de 1 an", "Suport în Isus"]};
+function PX(i){const l=String(currentLang||'fr').toLowerCase();const a=PRICEX[l]||PRICEX.fr;return a[i]||PRICEX.fr[i];}
+function PXL(i,fb){return String(currentLang||'fr').toLowerCase()==='fr'?fb:PX(i);}
 function renderPricing(){
 const grid=document.getElementById("pricingGrid");
 const dict=I18N[currentLang]||I18N.fr;
+const FD=[PX(12),PX(13),PX(14),PX(15),PX(16)];
+const FP=[17,18,19,20,21,22,23,24,25,26,27].map(PX);
 const plans=[
-{key:"Découverte",keyId:"Découverte",xof:0,duration:"Gratuit à vie",features:["10 likes/jour en Jésus","Écouter la musique","Jeux sur Jésus","Étude biblique","Profils : nom, âge et ville"],cta:dict.choose,cls:""},
-{key:"Mensuel Jésus",keyId:"Mensuel",xof:BASE_PRICES_XOF.mensuel,duration:"/ mois",badge:"",features:["Likes illimités en Jésus", "Chat prière au nom de Jésus (messages écrits et vocaux)", "Étude biblique Jésus à deux", "Écouter et télécharger la musique", "Jeux complets Jésus", "Filtres âge, genre et confession", "Profil mis en avant", "Vérification pastorale Jésus", "Coaching mariage en Jésus", "Top profil 1 an", "Support en Jésus"],cta:dict.choose,cls:""},
-{key:"Alliance 6 Mois",keyId:"Alliance",months:6,xof:BASE_PRICES_XOF.semestre,duration:"/ 6 mois",badge:"★ Le plus choisi",save:"Économisez 39 000 F en Jésus",featured:true,features:["Likes illimités en Jésus", "Chat prière au nom de Jésus (messages écrits et vocaux)", "Étude biblique Jésus à deux", "Écouter et télécharger la musique", "Jeux complets Jésus", "Filtres âge, genre et confession", "Profil mis en avant", "Vérification pastorale Jésus", "Coaching mariage en Jésus", "Top profil 1 an", "Support en Jésus"],cta:dict.choose,cls:"featured"},
-{key:"Éternelle 12 Mois",keyId:"Éternelle",months:12,xof:BASE_PRICES_XOF.annuel,duration:"/ 12 mois",badge:"★ Meilleure offre Jésus",save:"Économisez 78 000 F en Jésus",features:["Likes illimités en Jésus", "Chat prière au nom de Jésus (messages écrits et vocaux)", "Étude biblique Jésus à deux", "Écouter et télécharger la musique", "Jeux complets Jésus", "Filtres âge, genre et confession", "Profil mis en avant", "Vérification pastorale Jésus", "Coaching mariage en Jésus", "Top profil 1 an", "Support en Jésus"],cta:dict.choose,cls:""}
+{key:PX(0),keyId:"Découverte",xof:0,duration:PX(4),features:FD,cta:dict.choose,cls:""},
+{key:PX(1),keyId:"Mensuel",xof:BASE_PRICES_XOF.mensuel,duration:PX(5),badge:"",features:FP,cta:dict.choose,cls:""},
+{key:PX(2),keyId:"Alliance",months:6,xof:BASE_PRICES_XOF.semestre,duration:PX(6),badge:PX(8),save:PX(10).replace("{p}",formatPrice(39000)),featured:true,features:FP,cta:dict.choose,cls:"featured"},
+{key:PX(3),keyId:"Éternelle",months:12,xof:BASE_PRICES_XOF.annuel,duration:PX(7),badge:PX(9),save:PX(10).replace("{p}",formatPrice(78000)),features:FP,cta:dict.choose,cls:""}
 ];
 grid.innerHTML=plans.map(p=>{
 let priceHtml;
 if(p.xof===0) priceHtml=`<div class="price">${dict.free}<small style="font-size:.5em;display:block;color:var(--muted);margin-top:4px">${p.duration}</small></div>`;
-else priceHtml=`<div class="price">${formatPrice(p.xof)}<small>${p.duration}</small>${p.months?`<div style="font-size:.4em;color:var(--muted);font-weight:700;margin-top:8px">soit ${formatPrice(p.xof/p.months)} / mois · payé en une fois</div>`:''}${p.save?`<div style="background:#dcfce7;color:#166534;font-size:.42em;padding:4px 10px;border-radius:999px;margin-top:10px;display:inline-block;font-weight:800">${p.save}</div>`:''}</div>`;
+else priceHtml=`<div class="price">${formatPrice(p.xof)}<small>${p.duration}</small>${p.months?`<div style="font-size:.4em;color:var(--muted);font-weight:700;margin-top:8px">${PX(11).replace("{p}",formatPrice(p.xof/p.months))}</div>`:''}${p.save?`<div style="background:#dcfce7;color:#166534;font-size:.42em;padding:4px 10px;border-radius:999px;margin-top:10px;display:inline-block;font-weight:800">${p.save}</div>`:''}</div>`;
 let badgeHtml=p.badge?`<div style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:${p.keyId==='Alliance'?'var(--gold)':'var(--navy)'};color:${p.keyId==='Alliance'?'#111':'#fff'};font-weight:900;font-size:.70rem;padding:5px 14px;border-radius:999px;white-space:nowrap">${p.badge}</div>`:'';
 return `<div class="plan ${p.cls}" style="position:relative">${badgeHtml}<h3>${p.key}</h3>${priceHtml}<ul>${p.features.map(f=>`<li>${f}</li>`).join("")}</ul><button class="btn ${p.featured?'btn-gold':'btn-outline'}" style="width:100%" data-nlj-act="choosePlan" data-nlj-a="${NLJA([p.keyId])}">${p.cta}</button></div>`
 }).join("");

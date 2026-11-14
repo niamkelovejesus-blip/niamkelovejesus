@@ -65,10 +65,10 @@
     return '<div class="mv-h"><span class="mv-av">'+esc(nm.charAt(0).toUpperCase())+'</span><div><b>'+esc(nm)+'</b><time>'+esc(ago(p.created_at))+'</time></div>'+(mine?'<button type="button" class="mv-del" data-del="'+esc(p.id)+'" aria-label="Supprimer">🗑️</button>':'')+'</div>';}
   function question(q){
     var reps=POSTS.filter(function(x){return x.parent_id===q.id;}).sort(function(a,b){return new Date(a.created_at)-new Date(b.created_at);});
-    var h='<article class="mv-q">'+head(q)+player(q.audio_path,q.duration)+
+    var h='<article class="mv-q">'+head(q)+player(q.audio_path,q.duration)+trHtml(q)+
       '<div class="mv-act">'+likeBtn(q)+'<button type="button" data-reply="'+esc(q.id)+'">🎤 Répondre</button>'+
       '<button type="button" class="'+(OPEN[q.id]?'on':'')+'" data-open="'+esc(q.id)+'">💬 '+reps.length+' réponse'+(reps.length>1?'s':'')+'</button></div>';
-    if(OPEN[q.id]&&reps.length)h+='<div class="mv-rep">'+reps.map(function(r){return '<div class="mv-r">'+head(r)+player(r.audio_path,r.duration)+'<div class="mv-act">'+likeBtn(r)+'</div></div>';}).join('')+'</div>';
+    if(OPEN[q.id]&&reps.length)h+='<div class="mv-rep">'+reps.map(function(r){return '<div class="mv-r">'+head(r)+player(r.audio_path,r.duration)+trHtml(r)+'<div class="mv-act">'+likeBtn(r)+'</div></div>';}).join('')+'</div>';
     return h+'</article>';
   }
   function renderList(){
@@ -89,10 +89,10 @@
           (rr.data||[]).forEach(function(x){var o=REAC[x.prayer_id]=REAC[x.prayer_id]||{};(o[x.kind]=o[x.kind]||[]).push(x.user_id);});}
         renderAdmin();}
       else console.warn('admin_prayers:',ap.error.message);
-      var qs=await c.from('voice_posts').select('id,user_id,author_name,parent_id,audio_path,duration,created_at').is('parent_id',null).eq('visible',true).order('created_at',{ascending:false}).limit(40);
+      var qs=await c.from('voice_posts').select('*').is('parent_id',null).eq('visible',true).order('created_at',{ascending:false}).limit(40);
       if(qs.error){console.warn('voice_posts:',qs.error.message);elList.innerHTML='<p class="mv-empty">Le mur vocal arrive bientôt 🙏</p>';return;}
       var all=qs.data||[],ids=all.map(function(x){return x.id;});
-      if(ids.length){var rp=await c.from('voice_posts').select('id,user_id,author_name,parent_id,audio_path,duration,created_at').in('parent_id',ids).eq('visible',true).order('created_at',{ascending:true}).limit(300);all=all.concat(rp.data||[]);}
+      if(ids.length){var rp=await c.from('voice_posts').select('*').in('parent_id',ids).eq('visible',true).order('created_at',{ascending:true}).limit(300);all=all.concat(rp.data||[]);}
       POSTS=all;LIKES={};
       var pids=all.map(function(x){return x.id;});
       for(var k=0,cs=chunk(pids,40);k<cs.length;k++){var lk=await c.from('voice_likes').select('post_id,user_id').in('post_id',cs[k]);(lk.data||[]).forEach(function(x){(LIKES[x.post_id]=LIKES[x.post_id]||[]).push(x.user_id);});}
@@ -103,15 +103,34 @@
   /* ---------- enregistreur vocal ---------- */
   var R={mr:null,chunks:[],stream:null,t0:0,tick:null,blob:null,dur:0,parent:null,busy:false};
   function pickMime(){var c=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus'];if(!window.MediaRecorder||!MediaRecorder.isTypeSupported)return '';for(var i=0;i<c.length;i++)if(MediaRecorder.isTypeSupported(c[i]))return c[i];return '';}
+
+  /* ---------- transcription (texte du vocal, traduit ensuite par nlj-translate.js) ---------- */
+  var SR_LANG={fr:'fr-FR',en:'en-US',es:'es-ES',pt:'pt-PT',it:'it-IT',de:'de-DE',ar:'ar-SA',zh:'zh-CN',nl:'nl-NL',ru:'ru-RU',sw:'sw-KE',hi:'hi-IN',id:'id-ID',tl:'fil-PH',ko:'ko-KR',vi:'vi-VN',pl:'pl-PL',uk:'uk-UA',ur:'ur-PK',ro:'ro-RO'};
+  function myLang(){var l='fr';try{l=(localStorage.getItem('niamke_lang')||'fr').toLowerCase().slice(0,2);}catch(e){}return l;}
+  function srStart(){
+    R.tr='';R.sr=null;R.srOn=false;
+    var SR=window.SpeechRecognition||window.webkitSpeechRecognition,lg=SR_LANG[myLang()];
+    if(!SR||!lg)return;
+    try{
+      var sr=new SR();sr.lang=lg;sr.continuous=true;sr.interimResults=false;R.sr=sr;R.srOn=true;
+      sr.onresult=function(ev){for(var i=ev.resultIndex;i<ev.results.length;i++){if(ev.results[i].isFinal){R.tr+=(R.tr?' ':'')+String(ev.results[i][0].transcript||'').trim();}}};
+      sr.onerror=function(ev){if(ev&&(ev.error==='not-allowed'||ev.error==='service-not-allowed'))R.srOn=false;};
+      sr.onend=function(){if(R.srOn&&R.mr&&R.mr.state==='recording'){try{sr.start();}catch(e){}}};
+      sr.start();
+    }catch(e){R.sr=null;R.srOn=false;}
+  }
+  function srStop(){R.srOn=false;try{R.sr&&R.sr.stop();}catch(e){}R.sr=null;}
+  function trHtml(p){var t=String(p&&p.transcript||'').trim();return t?'<div class=\"mv-tr\" lang=\"'+esc(p.transcript_lang||'')+'\">💬 '+esc(t)+'</div>':'';}
   function stopStream(){try{R.stream&&R.stream.getTracks().forEach(function(t){t.stop();});}catch(e){}R.stream=null;}
-  function cleanup(){clearInterval(R.tick);try{if(R.mr&&R.mr.state!=='inactive'){R.mr.onstop=null;R.mr.stop();}}catch(e){}stopStream();R.mr=null;R.chunks=[];R.blob=null;R.dur=0;}
+  function cleanup(){srStop();clearInterval(R.tick);try{if(R.mr&&R.mr.state!=='inactive'){R.mr.onstop=null;R.mr.stop();}}catch(e){}stopStream();R.mr=null;R.chunks=[];R.blob=null;R.dur=0;R.tr='';}
   function recUI(state,hint){
+    var ta0=$('mvTr');if(ta0)R.tr=ta0.value;
     elRec.classList.toggle('recording',state==='rec');
     var title=R.parent?'🎤 Ta réponse en voix':'🎤 Ta question en voix';
     var h='<h4>'+title+'</h4>';
     if(state==='idle')h+='<div class="mv-timer">0:00</div><p class="mv-hint">'+esc(hint||'Appuie sur le bouton rouge et parle')+'</p><div class="mv-row"><button type="button" class="mv-big go" data-rec="start">🎤 Parler</button><button type="button" class="mv-big cancel" data-rec="cancel">✖ Fermer</button></div>';
     if(state==='rec')h+='<div class="mv-timer" id="mvTimer">0:00</div><p class="mv-hint">Je t\'écoute… (max '+MAXSEC+' secondes)</p><div class="mv-row"><button type="button" class="mv-big stop" data-rec="stop">⏹️ Terminer</button></div>';
-    if(state==='review')h+='<div class="mv-timer">'+mmss(R.dur)+'</div><audio controls src="'+esc(R.url||'')+'"></audio><p class="mv-hint">Écoute, puis envoie.</p><div class="mv-row"><button type="button" class="mv-big send" data-rec="send"'+(R.busy?' disabled':'')+'>'+(R.busy?'⏳ Envoi…':'✅ Envoyer')+'</button><button type="button" class="mv-big redo" data-rec="redo"'+(R.busy?' disabled':'')+'>🔁 Refaire</button><button type="button" class="mv-big cancel" data-rec="cancel">✖ Annuler</button></div>';
+    if(state==='review')h+='<div class="mv-timer">'+mmss(R.dur)+'</div><audio controls src="'+esc(R.url||'')+'"></audio><p class="mv-hint">Écoute, puis envoie.</p><label class="mv-trl" for="mvTr">📝 Texte de ton message (traduit pour les autres membres). Corrige-le si besoin :</label><textarea id="mvTr" class="mv-trbox" rows="3" maxlength="1200" translate="no"'+(R.busy?' disabled':'')+'>'+esc(R.tr||'')+'</textarea><div class="mv-row"><button type="button" class="mv-big send" data-rec="send"'+(R.busy?' disabled':'')+'>'+(R.busy?'⏳ Envoi…':'✅ Envoyer')+'</button><button type="button" class="mv-big redo" data-rec="redo"'+(R.busy?' disabled':'')+'>🔁 Refaire</button><button type="button" class="mv-big cancel" data-rec="cancel">✖ Annuler</button></div>';
     elRec.innerHTML=h;
   }
   function openRec(parent){
@@ -125,22 +144,25 @@
     R.stream=stream;R.chunks=[];var mime=pickMime(),mr;
     try{mr=mime?new MediaRecorder(stream,{mimeType:mime}):new MediaRecorder(stream);}catch(e){stopStream();recUI('idle','🎤 Enregistrement impossible sur cet appareil.');return;}
     R.mr=mr;mr.ondataavailable=function(ev){if(ev.data&&ev.data.size)R.chunks.push(ev.data);};
-    mr.onstop=function(){clearInterval(R.tick);stopStream();var type=(mr.mimeType||mime||'audio/webm');R.blob=new Blob(R.chunks,{type:type});R.dur=Math.max(0,Math.round((Date.now()-R.t0)/1000));
+    mr.onstop=function(){clearInterval(R.tick);srStop();stopStream();var type=(mr.mimeType||mime||'audio/webm');R.blob=new Blob(R.chunks,{type:type});R.dur=Math.max(0,Math.round((Date.now()-R.t0)/1000));
       if(R.dur<1||R.blob.size<500){R.blob=null;recUI('idle','Trop court. Parle un peu plus longtemps.');return;}
       R.url=URL.createObjectURL(R.blob);recUI('review');};
-    R.t0=Date.now();mr.start();recUI('rec');
+    R.t0=Date.now();mr.start();srStart();recUI('rec');
     R.tick=setInterval(function(){var s=(Date.now()-R.t0)/1000,t=$('mvTimer');if(t)t.textContent=mmss(s);if(s>=MAXSEC)try{mr.stop();}catch(e){}},250);
   }
   function stopRec(){try{if(R.mr&&R.mr.state==='recording')R.mr.stop();}catch(e){}}
   async function sendRec(){
-    var c=sb();if(!c||!ME||!R.blob||R.busy)return;R.busy=true;recUI('review');
+    var c=sb();if(!c||!ME||!R.blob||R.busy)return;var ta1=$('mvTr');if(ta1)R.tr=ta1.value;R.busy=true;recUI('review');
     var type=String(R.blob.type||'audio/webm').split(';')[0].replace(/^video\//,'audio/');
     var ext=/mp4|m4a|aac/.test(type)?'m4a':/ogg/.test(type)?'ogg':'webm';
     if(ext==='m4a')type='audio/mp4';
     var path='membres/'+ME.id+'/'+Date.now()+'-'+Math.random().toString(36).slice(2,8)+'.'+ext;
     var up=await c.storage.from(BUCKET).upload(path,R.blob,{contentType:type,cacheControl:'31536000',upsert:false});
     if(up.error){R.busy=false;recUI('review');console.warn('upload vocal:',up.error.message);toast("❌ Envoi impossible pour le moment");return;}
-    var ins=await c.from('voice_posts').insert([{user_id:ME.id,author_name:myName(),parent_id:R.parent||null,audio_path:path,duration:R.dur}]).select().single();
+    var row={user_id:ME.id,author_name:myName(),parent_id:R.parent||null,audio_path:path,duration:R.dur},tx=String(R.tr||'').replace(/\s+/g,' ').trim().slice(0,1200);
+    if(tx){row.transcript=tx;row.transcript_lang=myLang();}
+    var ins=await c.from('voice_posts').insert([row]).select().single();
+    if(ins.error&&tx&&/transcript/i.test(ins.error.message||'')){delete row.transcript;delete row.transcript_lang;ins=await c.from('voice_posts').insert([row]).select().single();}   /* colonne pas encore créée : on publie quand même le vocal */
     if(ins.error){try{await c.storage.from(BUCKET).remove([path]);}catch(e){}R.busy=false;recUI('review');
       toast(/nlj_voice_daily_limit/.test(ins.error.message||'')?'⏳ Tu as atteint la limite de 15 messages vocaux aujourd\'hui. Reviens demain 🙏':'❌ Publication impossible pour le moment');return;}
     var wasReply=R.parent;if(wasReply)OPEN[wasReply]=true;POSTS.push(ins.data);closeRec();renderList();toast(wasReply?'✅ Réponse envoyée':'✅ Question envoyée');

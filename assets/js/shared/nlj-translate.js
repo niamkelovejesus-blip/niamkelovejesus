@@ -76,35 +76,73 @@
   }
 
   /* ---------- moteurs de traduction (avec secours) ---------- */
+  /* Disjoncteur : si Google bloque / limite / ne répond pas, on arrête de marteler le service,
+     on attend (5 s, 10 s, 20 s… jusqu'à 2 min) puis on réessaie tout seul. */
+  var cool = { until: 0, step: 0, tmr: null };
+  var bad = {};                                   // { 'ln': { 'texte': heure de l'échec } } : pas de re-essai immédiat
+  var mmBudget = 40;                              // MyMemory : quota gratuit très limité
+  function nowMs() { return new Date().getTime(); }
+  function tripped() { return nowMs() < cool.until; }
+  function failing() { return cool.step > 0; }
+  function trip() {
+    cool.step = Math.min(cool.step + 1, 5);
+    var wait = Math.min(5000 * Math.pow(2, cool.step - 1), 120000);
+    cool.until = nowMs() + wait;
+    clearTimeout(cool.tmr);
+    cool.tmr = setTimeout(function () { if (!showOriginal) { try { go(false); } catch (e) {} } }, wait + 50);
+    try { setBar(); } catch (e) {}
+  }
+  function healthy() { if (cool.step) { cool.step = 0; cool.until = 0; try { setBar(); } catch (e) {} } }
+  function isBad(l, k) { var t = (bad[l] || {})[k]; return !!t && nowMs() - t < 45000; }
+  function markBad(l, k) { (bad[l] = bad[l] || {})[k] = nowMs(); }
+  function retryNow() { cool.step = 0; cool.until = 0; bad = {}; try { go(true); } catch (e) {} }
+
+  function fetchT(url, opt, ms) {
+    var ctl = window.AbortController ? new AbortController() : null, tm = null;
+    if (ctl) { opt.signal = ctl.signal; tm = setTimeout(function () { ctl.abort(); }, ms || 9000); }
+    return fetch(url, opt).then(function (r) { if (tm) clearTimeout(tm); return r; },
+      function (e) { if (tm) clearTimeout(tm); throw e; });
+  }
   function gtxBatch(texts, tgt) {
     var body = 'client=gtx&sl=auto&tl=' + encodeURIComponent(tgt) + '&dt=t&q=' + encodeURIComponent(texts.join(SEP));
-    return fetch('https://translate.googleapis.com/translate_a/single', {
+    return fetchT('https://translate.googleapis.com/translate_a/single', {
       method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body
-    }).then(function (r) { if (!r.ok) throw new Error('gtx ' + r.status); return r.json(); })
+    }, 9000).then(function (r) { if (!r.ok) { var e = new Error('gtx ' + r.status); e.http = r.status; throw e; } return r.json(); })
       .then(function (j) {
         var full = (j[0] || []).map(function (x) { return x[0] || ''; }).join('');
         var parts = full.split(/\s*§\s*§\s*§\s*/);
-        if (parts.length !== texts.length) throw new Error('mismatch');
+        if (parts.length !== texts.length) { var e = new Error('mismatch'); e.mismatch = true; throw e; }
         return parts.map(function (p) { return p.trim(); });
       });
   }
   function myMemory(text, tgt) {
+    if (mmBudget <= 0) return Promise.reject(new Error('mm-budget'));
+    mmBudget--;
     var u = 'https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text.slice(0, 480)) + '&langpair=' + encodeURIComponent('fr|' + tgt);
-    return fetch(u).then(function (r) { return r.json(); }).then(function (j) {
+    return fetchT(u, {}, 8000).then(function (r) { return r.json(); }).then(function (j) {
       var t = j && j.responseData && j.responseData.translatedText;
       if (j && +j.responseStatus === 200 && t && !/MYMEMORY WARNING|QUERY LENGTH LIMIT/i.test(t)) return t;
       throw new Error('mm');
     });
   }
-  function gtxOne(text, tgt) {
-    return gtxBatch([text], tgt).then(function (a) { return a[0]; });
-  }
+  function nulls(n) { var a = []; for (var i = 0; i < n; i++) a.push(null); return a; }
+  /* Lot ; si Google a abîmé le séparateur, on coupe le lot en deux (et non texte par texte) :
+     quelques requêtes au lieu de centaines. Jamais d'exception : les échecs reviennent en null. */
   function translateMany(texts, tgt) {
-    // essaie le lot ; si le découpage ne correspond pas, traduit un par un
-    return gtxBatch(texts, tgt).catch(function () {
-      return Promise.all(texts.map(function (t) {
-        return gtxOne(t, tgt).catch(function () { return myMemory(t, tgt); }).catch(function () { return null; });
-      }));
+    if (!texts.length) return Promise.resolve([]);
+    if (tripped()) return Promise.resolve(nulls(texts.length));
+    return gtxBatch(texts, tgt).then(function (r) { healthy(); return r; }, function (err) {
+      if (err && err.mismatch) {
+        if (texts.length > 1) {
+          var h = Math.ceil(texts.length / 2);
+          return Promise.all([translateMany(texts.slice(0, h), tgt), translateMany(texts.slice(h), tgt)])
+            .then(function (a) { return a[0].concat(a[1]); });
+        }
+        return myMemory(texts[0], tgt).then(function (t) { return [t]; }, function () { return [null]; });
+      }
+      // réseau coupé, 429, 5xx, délai dépassé : on met le service en pause
+      trip();
+      return nulls(texts.length);
     });
   }
 
@@ -217,10 +255,12 @@
     });
 
     var pending = [];
+    if (tripped()) cacheOnly = true;                       // service en pause : on n'appelle rien
     jobs.forEach(function (j) {
       var key = j.orig.trim();
       if (tgt === 'fr') return;
       if (c[key] != null) { apply(j, c[key]); }
+      else if (isBad(tgt, key)) { /* a échoué il y a peu : on attend avant de réessayer */ }
       else { if (!need[key]) { need[key] = 1; pending.push(key); } }
     });
     if (!pending.length || cacheOnly) { if (!cacheOnly) setBar(); return Promise.resolve(); }
@@ -258,7 +298,7 @@
               if (tr == null) { ok = false; break; }
               out.push(ps[q].l + tr + ps[q].r);
             }
-            if (ok) c[k] = out.join('');
+            if (ok) c[k] = out.join(''); else markBad(tgt, k);
           });
           persist(tgt);
           jobs.forEach(function (j) { var k = j.orig.trim(); if (c[k] != null && !j.applied) apply(j, c[k]); });
@@ -309,12 +349,17 @@
       st.textContent = '.nljt-on footer{padding-bottom:88px!important}';
       document.head.appendChild(st);
       document.body.appendChild(bar);
-      bar.querySelector('#nljt-b').addEventListener('click', function () { toggleOriginal(); });
+      bar.querySelector('#nljt-b').addEventListener('click', function () { if (failing() && !showOriginal) retryNow(); else toggleOriginal(); });
     }
     bar.style.display = 'flex';
     document.documentElement.classList.add('nljt-on');
-    bar.querySelector('#nljt-t').textContent = busy ? '🌐 ' + ui(3) : '🌐 ' + ui(0) + (l !== 'fr' ? ' (' + l.toUpperCase() + ')' : '');
-    bar.querySelector('#nljt-b').textContent = showOriginal ? ui(2) : ui(1);
+    if (failing() && !showOriginal) {
+      bar.querySelector('#nljt-t').textContent = '🌐 ⚠ ' + l.toUpperCase();
+      bar.querySelector('#nljt-b').textContent = '↻';
+    } else {
+      bar.querySelector('#nljt-t').textContent = busy ? '🌐 ' + ui(3) : '🌐 ' + ui(0) + (l !== 'fr' ? ' (' + l.toUpperCase() + ')' : '');
+      bar.querySelector('#nljt-b').textContent = showOriginal ? ui(2) : ui(1);
+    }
   }
 
   function toggleOriginal() {

@@ -81,3 +81,8 @@
   .mv-mic{width:116px;height:116px;font-size:3rem}
 }
 @media (prefers-reduced-motion:reduce){.mv-rec{transition:none}.mv-rec.recording .mv-timer{animation:none}}
+
+/* Texte du vocal (traduit automatiquement par nlj-translate.js) */
+.mv-tr{margin:8px 2px 2px;padding:8px 10px;border-radius:10px;background:rgba(127,127,127,.12);font-size:.92rem;line-height:1.4;word-break:break-word}
+.mv-trl{display:block;margin:10px 0 4px;font-size:.85rem;text-align:left}
+.mv-trbox{width:100%;box-sizing:border-box;padding:8px 10px;border-radius:10px;border:1px solid rgba(127,127,127,.4);font:inherit;font-size:.95rem;resize:vertical}

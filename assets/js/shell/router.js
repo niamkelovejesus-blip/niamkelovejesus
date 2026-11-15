@@ -1,7 +1,7 @@
-var TITLES={p1:'Niamké Love Jésus — Rencontre chrétienne centrée sur Jésus-Christ',p2:'Rencontre — Niamké Love Jésus',p3:'Mon Premium — Niamké Love Jésus'};
-var URLS={p1:'pages/accueil.html',p2:'pages/rencontre.html',p3:'pages/premium.html'};
+var TITLES={p1:'Niamké Love Jésus — Rencontre chrétienne centrée sur Jésus-Christ',p2:'Rencontre — Niamké Love Jésus',p3:'Mon Premium — Niamké Love Jésus',p4:'Parlons avec Jésus — Niamké Love Jésus'};
+var URLS={p1:'pages/accueil.html',p2:'pages/rencontre.html',p3:'pages/premium.html',p4:'pages/parlons-avec-jesus.html'};
 function navFrame(f,u){try{f.contentWindow.location.replace(u);}catch(e){f.src=u;}}
-var NAMES={p1:'accueil',p2:'rencontre',p3:'premium'},BYNAME={accueil:'p1',rencontre:'p2',premium:'p3'};
+var NAMES={p1:'accueil',p2:'rencontre',p3:'premium',p4:'parlons'},BYNAME={accueil:'p1',rencontre:'p2',premium:'p3',parlons:'p4'};
 var loaded={},loadedLang={},cur=null,STATE={known:false,premium:false,plan:'',user:false};
 function lang(){try{return(localStorage.getItem('niamke_lang')||'fr').toLowerCase();}catch(e){return 'fr';}}
 function load(p,cb){
@@ -12,7 +12,7 @@ function load(p,cb){
 function _show(p,id,pop){
   if(cur&&loaded[cur])loadedLang[cur]=lang();
   cur=p;try{document.title=TITLES[p];}catch(e){}
-  ['p1','p2','p3'].forEach(function(k){document.getElementById(k).classList.toggle('on',k===p);});
+  ['p1','p2','p3','p4'].forEach(function(k){document.getElementById(k).classList.toggle('on',k===p);});
   if(!pop){try{history.pushState({p:p},'','#'+NAMES[p]);}catch(e){}}
   load(p,function(){try{document.getElementById(p).contentWindow.postMessage({nlj:'scroll',id:id||''},'*');if(p==='p2'&&window.FILTERS)document.getElementById(p).contentWindow.postMessage({nlj:'filters',church:FILTERS.church,gender:FILTERS.gender,search:FILTERS.search,ageMin:FILTERS.ageMin,ageMax:FILTERS.ageMax},'*');}catch(e){}});
 }
@@ -31,7 +31,7 @@ function sendState(){
   try{document.getElementById('p3').contentWindow.postMessage({nlj:'state',premium:STATE.premium,plan:STATE.plan,user:STATE.user},'*');}catch(e){}
 }
 window.addEventListener('message',function(e){
-  var ok=['p1','p2','p3'].some(function(k){return document.getElementById(k).contentWindow===e.source;});
+  var ok=['p1','p2','p3','p4'].some(function(k){return document.getElementById(k).contentWindow===e.source;});
   if(!ok)return;
   var d=e.data;if(!d||!d.nlj)return;
   if(d.nlj==='go'&&NAMES[d.page])show(d.page,d.id);

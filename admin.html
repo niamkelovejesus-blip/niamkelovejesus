@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-gmclDTVV1K4hv+pam88Mz44gBrGroaKanvkK4wAX8oc=' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'sha256-9HXO0M+GULA5wMC17g+x31zGrwyrYLZd0bcdHkSq8CI=' ; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://qxxhbfoqlreiqyshbpqp.supabase.co wss://qxxhbfoqlreiqyshbpqp.supabase.co https://translate.googleapis.com; worker-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-uy+nhWvDRciI4VMWKZc5eig6XqnNg3MG+ug3uasl1p8=' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'sha256-9HXO0M+GULA5wMC17g+x31zGrwyrYLZd0bcdHkSq8CI=' ; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://qxxhbfoqlreiqyshbpqp.supabase.co wss://qxxhbfoqlreiqyshbpqp.supabase.co https://translate.googleapis.com; worker-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <meta name="referrer" content="no-referrer">
 <meta name="color-scheme" content="light">
 <script>if(window.top!==window.self){document.documentElement.style.display="none";try{window.top.location.replace(window.self.location.href)}catch(e){}}</script>
@@ -242,8 +242,9 @@ function audioDuration(file) {
 }
 async function act(fn, msg) {
   if (act.busy) { toast('Action en cours, patientez un instant…', true); return false; }   // évite les doubles clics (ex. valider deux fois un paiement)
+  const jctx = act.ctx; act.ctx = null;   // contexte pour le journal admin
   act.busy = true;
-  try { await fn(); toast(msg); go(cur); return true; } catch (e) { act.err = e.message || 'Erreur'; toast(act.err, true); return false; }
+  try { await fn(); toast(msg); if (window.nljLog) nljLog(jctx); go(cur); return true; } catch (e) { act.err = e.message || 'Erreur'; toast(act.err, true); return false; }
   finally { act.busy = false; }
 }
 const head = (t, sub = '', extra = '') => `<div class="head"><div><h2>${t}</h2>${sub ? `<p>${sub}</p>` : ''}</div>${extra}</div>`;
@@ -1103,21 +1104,22 @@ const C = {
   pstatus: (id, v) => act(() => updRows(sb.from('profiles').update({ status: v }).eq('id', id)), 'Statut mis à jour')
 };
 document.addEventListener('click', e => {
-  const b = e.target.closest('[data-a]'); if (b) return A[b.dataset.a] && A[b.dataset.a](b.dataset.id, b);
+  const b = e.target.closest('[data-a]'); if (b) { act.ctx = window.nljCtx ? nljCtx(b, b.dataset.a) : null; try { return A[b.dataset.a] && A[b.dataset.a](b.dataset.id, b); } finally { act.ctx = null; } }
   const t = e.target.closest('[data-t]'); if (t) { e.preventDefault(); go(t.dataset.t); }
 });
 document.addEventListener('change', e => {
   const t = e.target;
-  if (t.dataset && t.dataset.c) C[t.dataset.c](t.dataset.id, t.value);
-  if (t.dataset && t.dataset.p && t.files[0]) act(async () => {
+  if (t.dataset && t.dataset.c) { act.ctx = window.nljCtx ? Object.assign(nljCtx(t, 'c:' + t.dataset.c), { details: 'Nouvelle valeur : ' + t.value }) : null; try { C[t.dataset.c](t.dataset.id, t.value); } finally { act.ctx = null; } }
+  if (t.dataset && t.dataset.p && t.files[0]) { act.ctx = window.nljCtx ? nljCtx(t, 'photo') : null; act(async () => {
     const u = await upImg(t.files[0], 'members');
     await updRows(sb.from('profiles').update({ photo_url: u }).eq('id', t.dataset.p));
-  }, 'Photo mise à jour');
+  }, 'Photo mise à jour'); act.ctx = null; }
 });
 document.addEventListener('submit', async e => {
   const f = e.target; if (!f.dataset.f) return;
   e.preventDefault(); const b = f.querySelector('button.p'), t0 = b.innerHTML, box = f.querySelector('[data-e]');
   b.disabled = true; if (box) box.textContent = '';
+  act.ctx = window.nljFormCtx ? nljFormCtx(f) : null;
   const ok = await act(() => FORMS[f.dataset.f](f), 'Enregistré');
   if (!ok) { b.disabled = false; b.innerHTML = t0; if (box) box.textContent = act.err; }
 });
@@ -1209,7 +1211,10 @@ $('#eye').onclick = () => {
   $('#eye').setAttribute('aria-label', show ? 'Masquer le mot de passe' : 'Afficher le mot de passe');
 };
 $('#out').onclick = async () => { await sb.auth.signOut(); me = null; boot(); };
-boot().catch(e => { $('#app').classList.add('hide'); $('#login').classList.remove('hide'); $('#lerr').textContent = 'Connexion au serveur impossible : ' + (e.message || e); });
+const startAdmin = () => boot().catch(e => { $('#app').classList.add('hide'); $('#login').classList.remove('hide'); $('#lerr').textContent = 'Connexion au serveur impossible : ' + (e.message || e); });
+// Les outils (assets/js/admin/outils.js) démarrent l'admin eux-mêmes ; si ce fichier est absent, on démarre quand même au chargement.
+window.addEventListener('load', () => { if (!window.nljStarted) startAdmin(); });
 </script>
+<script src="assets/js/admin/outils.js?v=1"></script>
 </body>
 </html>

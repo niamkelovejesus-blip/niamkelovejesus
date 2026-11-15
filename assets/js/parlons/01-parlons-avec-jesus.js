@@ -44,11 +44,37 @@ re:{t:"Relation et mariage",p:"Père, je te confie ma vie de cœur. Guide mes pa
 me:{t:"Remerciement",p:"Seigneur, merci pour la vie, pour ta fidélité et pour chaque bienfait, connu ou caché. Merci pour Jésus et pour ton amour. Que ma vie te glorifie. Au nom de Jésus, Amen.",v:V("Louez l’Éternel, car il est bon, car sa miséricorde dure à toujours !","Psaume 107:1")}
 };
 
+
+/* Questions modifiables depuis l'admin (table parlons_faq). Si la table est vide ou injoignable, on garde les questions ci-dessus. */
+(function(){
+  var URL_="https://qxxhbfoqlreiqyshbpqp.supabase.co",KEY="sb_publishable_OK9ncVWB2Ih8xZ5fzqEQWg_mSV6vCoe";
+  var ctl=("AbortController" in window)?new AbortController():null,tm=setTimeout(function(){try{ctl&&ctl.abort();}catch(e){}},5000);
+  fetch(URL_+"/rest/v1/parlons_faq?select=id,slug,topic,keywords,answer,verse_text,verse_ref,show_salut&visible=eq.true&order=sort.asc,created_at.asc&limit=200",
+    {headers:{apikey:KEY},signal:ctl?ctl.signal:undefined})
+  .then(function(r){return r.ok?r.json():[];}).then(function(rows){
+    clearTimeout(tm);
+    if(!Array.isArray(rows)||!rows.length)return;
+    var neu={};
+    rows.forEach(function(r){
+      if(!r||!r.topic)return;
+      var paras=String(r.answer||"").split(/\n{2,}/).map(function(x){return x.trim();}).filter(Boolean);
+      var a=paras.map(function(x){return "<p>"+esc(x).replace(/\n/g,"<br>")+"</p>";}).join("");
+      if(r.verse_text&&String(r.verse_text).trim())a+=V(esc(String(r.verse_text).trim()),esc(String(r.verse_ref||"").trim()));
+      var kw=String(r.keywords||"").split(/[,;\n]/).map(function(x){return norm(x).trim();}).filter(function(x){return x.length>=3;});
+      neu[r.slug||("db_"+r.id)]={t:r.topic,k:kw,a:a,s:r.show_salut?1:0};
+    });
+    if(!Object.keys(neu).length)return;
+    Object.keys(FAQ).forEach(function(k){delete FAQ[k];});
+    Object.keys(neu).forEach(function(k){FAQ[k]=neu[k];});
+  }).catch(function(){clearTimeout(tm);});
+})();
+
 const MENU=[["📖 Question sur la Bible",bible],["🙏 Prier avec moi",priere],["✝️ Donner ma vie à Jésus",salut]];
 const tp=k=>[FAQ[k].t,()=>repondre(FAQ[k])];
+const keysFaq=n=>Object.keys(FAQ).filter(k=>k!=="salut"||Object.keys(FAQ).length<=n).slice(0,n);
 
 function menu(){mode="";bot(["Que veux-tu faire ?"],MENU);}
-function bible(){mode="";bot(["Pose-moi ta question dans la zone de texte, ou choisis un sujet :"],[...["jesus","bible","priere","pardon","peur","ciel","esprit","bapteme"].map(tp),["Menu",menu]]);}
+function bible(){mode="";bot(["Pose-moi ta question dans la zone de texte, ou choisis un sujet :"],[...keysFaq(8).map(tp),["Menu",menu]]);}
 function repondre(e){mode="";bot([e.a],[...(e.s?[["✝️ Donner ma vie à Jésus",salut]]:[]),["Une autre question",bible],["🙏 Prier avec moi",priere],["Menu",menu]]);}
 
 const APRES=[["🙏 Amen",amen],["Prier pour autre chose",priere],["Menu",menu]];
@@ -74,7 +100,7 @@ if(/^(merci|amen|ok|d accord)/.test(s))return bot(["Avec joie 🙏 Que Dieu te b
 let best=null,sc=0;
 for(const k in FAQ){let x=0;FAQ[k].k.forEach(w=>{if(n.includes(w))x+=w.length;});if(x>sc){sc=x;best=FAQ[k];}}
 if(best&&sc>=4)return repondre(best);
-bot(["Je n’ai pas de réponse toute prête à cette question 🙏 Choisis un sujet ci-dessous. Pour aller plus loin, parle à un pasteur ou à un responsable de ton église."],[...["jesus","bible","priere","pardon","peur","ciel"].map(tp),["Menu",menu]]);
+bot(["Je n’ai pas de réponse toute prête à cette question 🙏 Choisis un sujet ci-dessous. Pour aller plus loin, parle à un pasteur ou à un responsable de ton église."],[...keysFaq(6).map(tp),["Menu",menu]]);
 }
 
 form.onsubmit=e=>{e.preventDefault();const t=inp.value.trim();if(!t||busy)return;inp.value="";add("me",esc(t));route(t);};

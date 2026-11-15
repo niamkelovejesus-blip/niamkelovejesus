@@ -1,0 +1,23 @@
+/* === iPhone / Safari iOS : affichage correct ===
+   - pas de zoom automatique quand on touche un champ (iOS zoome si la police < 16 px)
+   - pas de zoom au double-tapotement sur les boutons et liens
+   - taille de texte stable en paysage */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+a,button,[role="button"],label,select,input,summary{touch-action:manipulation}
+button,a{-webkit-tap-highlight-color:rgba(201,162,39,.18)}
+@supports (-webkit-touch-callout:none){
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="button"]):not([type="submit"]),
+  select,textarea{font-size:16px!important}
+  input[type="date"],input[type="time"],input[type="datetime-local"]{min-height:46px;-webkit-appearance:none;appearance:none}
+  input[type="text"],input[type="email"],input[type="password"],input[type="search"],input[type="tel"],input[type="number"],input[type="url"],textarea{-webkit-appearance:none;appearance:none}
+}
+/* anciens iPhone (iOS < 16) : pas de overflow-x:clip → on évite le défilement horizontal */
+@supports not (overflow:clip){html,body{overflow-x:hidden}}
+
+/* === menus qui défilent de côté : fondu sur le bord (voir nlj-scrollhint.js) === */
+.nav-links.sh-on,.chips.sh-on{
+  -webkit-mask-image:linear-gradient(var(--sh-dir,to right),transparent 0,#000 var(--sh-a,0px),#000 calc(100% - var(--sh-b,0px)),transparent 100%);
+  mask-image:linear-gradient(var(--sh-dir,to right),transparent 0,#000 var(--sh-a,0px),#000 calc(100% - var(--sh-b,0px)),transparent 100%)}
+.chips,.mobile-nav{-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain}
+.chips::-webkit-scrollbar,.mobile-nav::-webkit-scrollbar{display:none}
+.chips a,.mobile-nav a,.mobile-nav span{flex:0 0 auto}

@@ -19,7 +19,7 @@ p.lead{color:var(--muted);max-width:720px;margin:0 auto;font-size:1.05rem}
 .verse-ticker:hover .ticker-track{animation-play-state:paused}
 .ticker-track b{color:var(--gold)} .ticker-track i{color:#f1f5f9;font-style:normal}
 @keyframes scrollVerses{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-header{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-bottom:1px solid #e5e7eb;overflow:visible;box-shadow:0 4px 20px rgba(15,23,42,.05)}
+header{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid #e5e7eb;overflow:visible;box-shadow:0 4px 20px rgba(15,23,42,.05)}
 .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px;flex-wrap:wrap;overflow:visible}
 .header-controls{display:flex;gap:10px;align-items:center;flex-wrap:nowrap;overflow:visible;position:relative;z-index:1000}
 .select-pill{padding:8px 32px 8px 14px;border-radius:999px;border:1.5px solid #d7dde5;background:#fff;font-weight:700;font-size:.85rem;cursor:pointer;position:relative;z-index:1001;width:auto !important;min-width:135px;color:#0f172a !important;-webkit-appearance:auto;appearance:auto}
@@ -104,7 +104,7 @@ footer a{display:block;color:#94a3b8;text-decoration:none;margin:7px 0;font-size
 .message.me{align-self:flex-end;background:var(--navy);color:#fff}
 .message.them{align-self:flex-start;background:#f1f5f9}
 .chat-form{display:flex;gap:10px}.chat-form input{flex:1}
-.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.55);backdrop-filter:blur(6px);display:grid;place-items:center;z-index:500;padding:20px;opacity:0;pointer-events:none;transition:.25s}
+.modal-overlay{position:fixed;top:0;right:0;bottom:0;left:0;inset:0;background:rgba(15,23,42,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:grid;place-items:center;z-index:500;padding:20px;opacity:0;pointer-events:none;transition:.25s}
 .modal-overlay.open{opacity:1;pointer-events:auto}
 .modal{background:#fff;border-radius:22px;box-shadow:0 30px 80px rgba(0,0,0,.28);width:min(540px,100%);padding:28px;transform:translateY(20px) scale(.98);transition:.25s}
 .modal-overlay.open .modal{transform:translateY(0) scale(1)}
@@ -160,7 +160,7 @@ footer{margin-top:0 !important;padding-top:28px !important;padding-bottom:18px !
 .rencontre-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
 .rs-left{min-width:0}
 .rs-left .profiles{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
-.rs-right{min-width:0;position:sticky;top:128px;background:#fff;border:1px solid #eef2f7;border-radius:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;max-height:calc(100vh - 150px);overflow:hidden}
+.rs-right{min-width:0;position:sticky;top:128px;background:#fff;border:1px solid #eef2f7;border-radius:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;max-height:calc(100vh - 150px);max-height:calc(100dvh - 150px);overflow:hidden}
 .pw-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:18px 20px 12px;background:linear-gradient(145deg,#0f172a,#1e293b);color:#f1f5f9}
 .pw-head h3{font-size:1.35rem;color:var(--gold);margin:0}
 .pw-head p{font-size:.8rem;color:#cbd5e1;margin:4px 0 0}
@@ -338,7 +338,7 @@ footer{margin-top:0 !important;padding-top:28px !important;padding-bottom:18px !
 .profile.pc .pc-act .btn[data-nlj-report]{flex:none}
 #profil .pf-ph{width:96px!important;height:96px!important}
 @media(max-width:600px){.rs-left .profiles,.profiles{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}.profile.pc .pc-info{padding:8px 10px 0}.profile.pc .pc-act{padding:6px 10px 10px}}
-.lbx{position:fixed;inset:0;z-index:4000;background:rgba(0,0,0,.88);display:grid;place-items:center;padding:16px;cursor:zoom-out}.lbx img{max-width:100%;max-height:100%;border-radius:12px;object-fit:contain}
+.lbx{position:fixed;top:0;right:0;bottom:0;left:0;inset:0;z-index:4000;background:rgba(0,0,0,.88);display:grid;place-items:center;padding:16px;cursor:zoom-out}.lbx img{max-width:100%;max-height:100%;border-radius:12px;object-fit:contain}
 /* Finitions pro */
 .hero{padding:44px 0 36px!important}
 .section{padding:48px 0}
@@ -350,7 +350,7 @@ footer{margin-top:0 !important;padding-top:28px !important;padding-bottom:18px !
 .msg-fab .msg-badge{position:absolute;top:-4px;right:-4px}
 .mg-dot,.msg-badge{font-style:normal;background:#e11d48;color:#fff;min-width:20px;height:20px;border-radius:999px;font-size:.72rem;font-weight:800;display:inline-grid;place-items:center;padding:0 6px}
 body:has(#chatPanel:not(.hidden)) #waFloat,body:has(#chatPanel:not(.hidden)) .msg-fab{display:none!important}
-#chatPanel{position:fixed!important;inset:0;z-index:3000;display:flex!important;align-items:center;justify-content:center;background:rgba(15,23,42,.55)!important;backdrop-filter:blur(4px);padding:20px!important;margin:0!important;border:0!important;border-radius:0!important;min-height:0!important;box-shadow:none!important}
+#chatPanel{position:fixed!important;top:0;right:0;bottom:0;left:0;inset:0;z-index:3000;display:flex!important;align-items:center;justify-content:center;background:rgba(15,23,42,.55)!important;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);padding:20px!important;margin:0!important;border:0!important;border-radius:0!important;min-height:0!important;box-shadow:none!important}
 #chatPanel.hidden{display:none!important}
 .msgr{display:grid;grid-template-columns:320px minmax(0,1fr);width:min(960px,100%);height:min(680px,100%);background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.35)}
 .mg-list{display:flex;flex-direction:column;border-right:1px solid #e5e7eb;background:#f8fafc;min-height:0}
@@ -397,7 +397,7 @@ footer{padding-bottom:96px!important}
 .pricing{gap:14px;margin-top:22px}.pricing>.plan,.plan{padding:20px 20px 18px;border-radius:16px}.plan h3{font-size:1.05rem}.price{font-size:1.65rem;margin:6px 0}.plan ul{margin:10px 0 14px}.plan li{padding:6px 0;font-size:.88rem}.pricing>.plan{margin-bottom:0}.pricing>.plan>button{min-height:42px}.plan .btn{padding-top:9px;padding-bottom:9px}
 
 /* === nlj-hero-photo === */
-.hero-inner{grid-template-columns:1.1fr .9fr!important;max-width:none!important;gap:40px!important}.hero-photo{position:relative;border-radius:22px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35);border:1px solid rgba(201,162,39,.4);aspect-ratio:4/3}.hero-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 35%}.hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(15,23,42,.35));pointer-events:none}@media(max-width:900px){.hero-inner{grid-template-columns:1fr!important}.hero-photo{aspect-ratio:16/10;order:-1}}
+.hero-inner{grid-template-columns:1.1fr .9fr!important;max-width:none!important;gap:40px!important}.hero-photo{position:relative;border-radius:22px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35);border:1px solid rgba(201,162,39,.4);aspect-ratio:4/3}.hero-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 35%}.hero-photo::after{content:"";position:absolute;top:0;right:0;bottom:0;left:0;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(15,23,42,.35));pointer-events:none}@media(max-width:900px){.hero-inner{grid-template-columns:1fr!important}.hero-photo{aspect-ratio:16/10;order:-1}}
 
 /* === nlj-mz-video === */
 .mz-cover.mz-vid{background:#000;font-size:0}
@@ -718,17 +718,28 @@ html.nlj-pres-ready .profile.pc.is-online .pc-name::after,html.nlj-pres-ready .m
 
 /* === nlj-chat-plein-ecran : sur téléphone, la discussion couvre tout l'écran (plus de page visible derrière en haut/en bas) === */
 @media(max-width:760px){
-  #chatPanel{align-items:stretch!important;justify-content:stretch!important;background:#fdfcf8!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;top:0!important;bottom:0!important;left:0!important;right:0!important}
+  #chatPanel{align-items:stretch!important;justify-content:stretch!important;background:#fdfcf8!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;top:0!important;bottom:0!important;left:0!important;right:0!important}
   #chatPanel .msgr{height:100%!important;max-height:none!important;width:100%!important}
 }
 
 .mz-sw{padding:8px 12px}.mz-q{width:100%;box-sizing:border-box;padding:10px 14px;border:1px solid #e8dcae;border-radius:999px;font:inherit;background:#fffdf6}
 
 /* === nlj-mobile-menu === */
-/* Téléphone : le menu du haut (Rencontre, Versets, Jeu biblique, Musique…) passe sur plusieurs lignes et reste entièrement visible, sans glisser de côté */
+/* Téléphone : en-tête compact (3 lignes au lieu de ~10). Le menu tient sur UNE ligne qui défile de côté,
+   avec un fondu sur le bord et la section active centrée automatiquement (nlj-scrollhint.js).
+   Pour revenir à l'ancien menu sur plusieurs lignes : supprimer ce bloc. */
 @media (max-width:700px){
-  header .nav-links{flex-wrap:wrap!important;overflow:visible!important;justify-content:center!important;gap:6px!important;padding:6px 0 8px!important}
-  header .nav-links a,header .nav-links button.nav-msg{flex:0 0 auto!important;min-height:36px!important;padding:7px 12px!important;font-size:.82rem!important;background:#f1f5f9;border:1px solid #e2e8f0}
+  header .nav{padding:8px 0 2px!important;gap:8px!important;justify-content:flex-start!important;text-align:start!important}
+  header .brand{width:100%;font-size:1.08rem;gap:10px}
+  header .brand-logo{width:40px!important;height:40px!important}
+  header .brand-text small{font-size:.55rem;margin-top:2px}
+  header .header-controls{width:100%;flex-wrap:wrap!important;justify-content:stretch!important;gap:8px!important}
+  header .header-controls .select-pill{flex:1 1 55%;min-width:0!important;width:auto!important;padding-top:7px;padding-bottom:7px}
+  header .header-controls #currencySelect{flex:1 1 30%}
+  header .header-controls .btn-premium-cta{flex:1 1 100%;min-height:40px;padding:8px 14px;font-size:.9rem}
+  header .nav-links{flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;justify-content:flex-start!important;gap:6px!important;padding:2px 0 8px!important;width:100%;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain;scroll-snap-type:x proximity}
+  header .nav-links::-webkit-scrollbar{display:none}
+  header .nav-links a,header .nav-links button.nav-msg{flex:0 0 auto!important;white-space:nowrap;scroll-snap-align:center;min-height:36px!important;padding:7px 13px!important;font-size:.85rem!important;background:#f1f5f9;border:1px solid #e2e8f0}
   header .nav-links a.active,header .nav-links a:active{background:var(--navy)!important;color:#fff!important}
   header .nav-links button.nav-msg{background:var(--gold)!important;border-color:var(--gold)}
 }
@@ -795,7 +806,7 @@ html.nlj-pres-ready .profile.pc.is-online .pc-name::after,html.nlj-pres-ready .m
 .mg-send{background:#00a884!important;color:#fff!important}
 .mg-send:disabled{opacity:.5}
 
-.mg-sheet{position:absolute;inset:0;z-index:20;background:rgba(11,20,26,.5);display:flex;align-items:flex-end;justify-content:center}
+.mg-sheet{position:absolute;top:0;right:0;bottom:0;left:0;inset:0;z-index:20;background:rgba(11,20,26,.5);display:flex;align-items:flex-end;justify-content:center}
 .mg-sheet-c{background:#fff;width:100%;max-width:420px;border-radius:18px 18px 0 0;padding:20px 18px 18px;display:grid;gap:10px;text-align:center}
 .mg-sheet-c p{margin:0 0 4px;font-weight:700;color:#111b21;font-size:1rem}
 .mg-sheet-c button{border:0;border-radius:12px;padding:13px;font-size:1rem;font-weight:700;cursor:pointer}
@@ -805,7 +816,7 @@ html.nlj-pres-ready .profile.pc.is-online .pc-name::after,html.nlj-pres-ready .m
 
 /* Photos du tchat (v28) */
 .mg-photo{display:block;max-width:100%;max-height:260px;border-radius:10px;cursor:zoom-in;background:rgba(0,0,0,.06);min-width:120px;min-height:80px;object-fit:cover}
-.mg-lb{position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,.88);display:grid;place-items:center;padding:16px;cursor:zoom-out}
+.mg-lb{position:fixed;top:0;right:0;bottom:0;left:0;inset:0;z-index:5000;background:rgba(0,0,0,.88);display:grid;place-items:center;padding:16px;cursor:zoom-out}
 .mg-lb img{max-width:100%;max-height:100%;border-radius:8px}
 
 
@@ -869,11 +880,12 @@ html.nlj-pres-ready .mg-ct.is-online .mg-ci b::after{background:#22c55e!importan
 #chatMic:hover,#chatPhoto:hover,#chatVideo:hover{background-color:#f4dfaa!important;transform:scale(1.06)}
 #chatMic.rec{font-size:.9rem!important;font-weight:800;color:#fff!important;background-color:#dc2626!important;border-color:#dc2626!important;background-image:none!important;width:auto!important;min-width:76px;padding:0 14px!important;border-radius:999px!important}
 
-/* === bouton « Parlons avec Jésus » (à gauche : la droite est prise par WhatsApp et la messagerie) === */
-#nlj-parlons{position:fixed;left:16px;bottom:calc(64px + env(safe-area-inset-bottom,0px));z-index:9999;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px 0 12px;border-radius:999px;background:#0f2a4a;color:#fff;font:700 13px system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer;border:2px solid #d9b97a;box-shadow:0 8px 24px rgba(15,42,74,.35);transition:transform .2s}
-#nlj-parlons:hover{transform:translateY(-2px)}
-#nlj-parlons:focus-visible{outline:3px solid #d9b97a;outline-offset:3px}
-#nlj-parlons span{font-size:18px;line-height:1}
-body:has(#chatPanel:not(.hidden)) #nlj-parlons,body:has(#premiumModal.open) #nlj-parlons{display:none!important}
-@media(max-width:560px){#nlj-parlons{height:40px;padding:0 12px 0 10px;font-size:12px}}
-@media(prefers-reduced-motion:reduce){#nlj-parlons{transition:none}}
+/* === jeux : stabilité sur téléphone === */
+#gameBoard{scroll-margin-top:110px;overflow-anchor:none}
+.answer,.game .btn,#gameBoard .btn{touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+#gameBoard .answer{min-width:0;overflow-wrap:anywhere}
+#gameContent{transition:none}
+@media(max-width:600px){
+  #gameBoard{scroll-margin-top:60px;padding:16px}
+  #gameBoard [data-nlj-act="flipCard"]{height:72px!important;padding:4px 2px!important;font-size:.78rem!important;text-align:center}
+}

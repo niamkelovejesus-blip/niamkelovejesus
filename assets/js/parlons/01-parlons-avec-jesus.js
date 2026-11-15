@@ -1,6 +1,9 @@
 const log=document.getElementById("log"),chips=document.getElementById("chips"),form=document.getElementById("f"),inp=document.getElementById("t");
 let mode="",busy=false;
-const V=(t,r)=>'<div class="v">« '+t+' »<b>'+r+'</b></div>';
+/* Bible en ligne (Louis Segond 1910) : cliquer sur une référence ouvre le passage complet dans la Bible */
+const bibleUrl=r=>'https://www.biblegateway.com/passage/?search='+encodeURIComponent(String(r).replace(/<[^>]*>/g,'').replace(/&[a-z]+;/g,' ').trim())+'&version=LSG';
+const L=r=>'<a class="bl" href="'+bibleUrl(r)+'" target="_blank" rel="noopener noreferrer" title="Lire dans la Bible">'+r+'</a>';
+const V=(t,r)=>'<div class="v">« '+t+' »<b>'+(String(r||'').trim()?L(r)+' <span aria-hidden="true">📖</span>':'')+'</b></div>';
 const P=t=>'<div class="pr">'+t+'</div>';
 const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const norm=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9?\s]/g," ");
@@ -26,7 +29,7 @@ ciel:{t:"Le ciel et l’enfer",k:["ciel","enfer","paradis","apres la mort","juge
 peur:{t:"La peur et l’inquiétude",k:["peur","anxiete","angoisse","stress","inquiet","soucis","decourage"],a:"<p>Dieu t’invite à lui confier ce qui te pèse. Tu n’as pas à tout porter seul(e).</p>"+PH},
 souffrance:{t:"Pourquoi la souffrance ?",k:["souffr","epreuve","pourquoi dieu","injustice","malheur"],a:"<p>Dieu n’est pas absent de ta douleur : Jésus lui-même a souffert et il comprend. Nous ne savons pas toujours pourquoi, mais il promet d’être avec nous et d’œuvrer pour le bien, même dans l’épreuve.</p>"+V("Nous savons, du reste, que toutes choses concourent au bien de ceux qui aiment Dieu, de ceux qui sont appelés selon son dessein.","Romains 8:28")},
 esprit:{t:"Le Saint-Esprit",k:["saint esprit","esprit saint","esprit de dieu"],a:"<p>Le Saint-Esprit est Dieu présent en nous : il nous guide, nous console et nous transforme de l’intérieur. Sa présence porte du fruit dans notre vie.</p>"+V("Mais le fruit de l’Esprit, c’est l’amour, la joie, la paix, la patience, la bonté, la bénignité, la fidélité, la douceur, la tempérance.","Galates 5:22")},
-bapteme:{t:"Le baptême",k:["bapteme","baptise","trinite"],a:"<p>Le baptême est le premier pas public d’un croyant : il montre qu’on est uni à Jésus dans sa mort et sa résurrection. Jésus a demandé à ses disciples de baptiser « au nom du Père, du Fils et du Saint-Esprit » (Matthieu 28:19). Parle à un pasteur pour t’y préparer.</p>"},
+bapteme:{t:"Le baptême",k:["bapteme","baptise","trinite"],a:"<p>Le baptême est le premier pas public d’un croyant : il montre qu’on est uni à Jésus dans sa mort et sa résurrection. Jésus a demandé à ses disciples de baptiser « au nom du Père, du Fils et du Saint-Esprit » ("+L("Matthieu 28:19")+"). Parle à un pasteur pour t’y préparer.</p>"},
 eglise:{t:"Pourquoi aller à l’église ?",k:["eglise","pasteur","communaute","assemblee","culte"],a:"<p>On grandit mieux ensemble : l’église est une famille qui prie, enseigne la Bible et s’entraide.</p>"+V("N’abandonnons pas notre assemblée, comme c’est la coutume de quelques-uns","Hébreux 10:25")},
 couple:{t:"Amour et mariage",k:["mariage","couple","rencontre","relation","celibat","fiance","epouse","epoux","petit ami","petite amie"],a:"<p>Confie ta recherche à Dieu dans la prière, avance avec patience et cherche une personne qui aime Jésus et partage tes valeurs. Prenez le temps de bien vous connaître et demandez conseil à des chrétiens mûrs.</p>"+PRV},
 pardonner:{t:"Pardonner aux autres",k:["pardonner","rancune","colere","offense","trahi","blesse"],a:"<p>Pardonner ne veut pas dire excuser le mal : c’est choisir de ne plus porter la rancune, avec l’aide de Dieu. C’est un chemin, et tu peux le demander dans la prière.</p>"+V("Soyez bons les uns envers les autres, compatissants, vous pardonnant réciproquement, comme Dieu vous a pardonné en Christ.","Éphésiens 4:32")},
@@ -69,7 +72,7 @@ me:{t:"Remerciement",p:"Seigneur, merci pour la vie, pour ta fidélité et pour 
   }).catch(function(){clearTimeout(tm);});
 })();
 
-const MENU=[["📖 Question sur la Bible",bible],["🙏 Prier avec moi",priere],["✝️ Donner ma vie à Jésus",salut]];
+const MENU=[["📖 Question sur la Bible",bible],["🙏 Prier avec moi",priere],["✝️ Donner ma vie à Jésus",salut],["📜 Lire la Bible",lireBible]];
 const tp=k=>[FAQ[k].t,()=>repondre(FAQ[k])];
 const keysFaq=n=>Object.keys(FAQ).filter(k=>k!=="salut"||Object.keys(FAQ).length<=n).slice(0,n);
 
@@ -77,6 +80,10 @@ function menu(){mode="";bot(["Que veux-tu faire ?"],MENU);}
 function bible(){mode="";bot(["Pose-moi ta question dans la zone de texte, ou choisis un sujet :"],[...keysFaq(8).map(tp),["Menu",menu]]);}
 function repondre(e){mode="";bot([e.a],[...(e.s?[["✝️ Donner ma vie à Jésus",salut]]:[]),["Une autre question",bible],["🙏 Prier avec moi",priere],["Menu",menu]]);}
 
+function lireBible(){mode="";bot(["Voici la Bible en ligne (Louis Segond). Touche un livre pour le lire :<ul><li>"+L("Jean 1")+" — l’Évangile qui présente Jésus</li><li>"+L("Psaumes 23")+" — pour prier</li><li>"+L("Proverbes 3")+" — la sagesse au quotidien</li><li>"+L("Matthieu 5")+" — le sermon sur la montagne</li></ul>Tu peux aussi m’écrire une référence, par exemple <i>Jean 3:16</i>, et je t’ouvre le passage."],[["Question sur la Bible",bible],["Menu",menu]]);}
+const LIVRES="genese exode levitique nombres deuteronome josue juges ruth 1 samuel 2 samuel 1 rois 2 rois 1 chroniques 2 chroniques esdras nehemie esther job psaume psaumes proverbes ecclesiaste cantique des cantiques esaie isaie jeremie lamentations ezechiel daniel osee joel amos abdias jonas jonas michee nahum habacuc sophonie aggee zacharie malachie matthieu marc luc jean actes romains 1 corinthiens 2 corinthiens galates ephesiens philippiens colossiens 1 thessaloniciens 2 thessaloniciens 1 timothee 2 timothee tite philemon hebreux jacques 1 pierre 2 pierre 1 jean 2 jean 3 jean jude apocalypse";
+const estLivre=b=>(" "+LIVRES+" ").includes(" "+b.trim()+" ");
+function verset(t){const m=norm(t).trim().replace(/\s+/g," ").match(/^((?:[123] ?)?[a-z]+(?: des [a-z]+)?) (\d{1,3})(?: (\d{1,3})(?: (\d{1,3}))?)?$/);return !!m&&estLivre(m[1].replace(/^([123])(?=[a-z])/,"$1 "));}
 const APRES=[["🙏 Amen",amen],["Prier pour autre chose",priere],["Menu",menu]];
 function priere(){mode="priere";bot(["Avec joie 🙏 Pour quoi veux-tu que nous priions ? Choisis un sujet, ou écris-le toi-même dans la zone de texte."],Object.keys(PR).map(k=>[PR[k].t,()=>prier(k)]));}
 function prier(k){mode="priere";bot(["Prions ensemble. Tu peux lire à voix haute, doucement :",P(PR[k].p)+PR[k].v],APRES);}
@@ -91,6 +98,7 @@ function crise(){mode="";bot(["Ce que tu traverses a l’air très lourd. Merci 
 
 function route(t){
 const n=" "+norm(t)+" ",s=n.trim();
+if(verset(t)){const r=t.trim();return bot(["Voici le passage dans la Bible 📖"+V("Touche la référence pour lire le texte complet.",esc(r))],[["Question sur la Bible",bible],["Menu",menu]]);}
 if(/suicid|me tuer|en finir avec|envie de mourir|veux mourir|veux plus vivre|plus envie de vivre/.test(n))return crise();
 if(/donner ma vie|accepter jesus|devenir chretien|me convertir|recevoir jesus|etre sauve|suivre jesus|nouvelle naissance/.test(n))return salut();
 if(mode==="priere"&&!/\?|bible|qui est|comment |pourquoi/.test(n))return prierLibre(t);
@@ -105,7 +113,7 @@ bot(["Je n’ai pas de réponse toute prête à cette question 🙏 Choisis un s
 
 form.onsubmit=e=>{e.preventDefault();const t=inp.value.trim();if(!t||busy)return;inp.value="";add("me",esc(t));route(t);};
 
-bot(["Paix à toi 🙏 Bienvenue ! Je peux répondre à tes questions sur la Bible, prier avec toi et t’aider à donner ta vie à Jésus.","Je suis un assistant aux réponses préparées, pas Jésus lui-même : pour un accompagnement personnel, rapproche-toi d’un pasteur. Que veux-tu faire ?"],MENU);
+bot(["Paix à toi 🙏 Bienvenue ! Je peux répondre à tes questions sur la Bible, prier avec toi et t’aider à donner ta vie à Jésus.","Je suis un assistant aux réponses préparées, pas Jésus lui-même : pour un accompagnement personnel, rapproche-toi d’un pasteur. Touche une référence biblique (ex. Jean 3:16 📖) pour lire le passage complet dans la Bible. Que veux-tu faire ?"],MENU);
 
 /* Intégration au site : retour vers l'accueil (la page est affichée dans la coque index.html) */
 (function(){var b=document.getElementById("back");if(b)b.onclick=function(){try{parent.postMessage({nlj:"go",page:"p1"},"*");}catch(e){location.href="../";}};})();

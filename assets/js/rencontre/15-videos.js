@@ -16,7 +16,7 @@ var css=document.createElement('style');css.id='nlj-videos-css';css.textContent=
 '#videos .nv-c:hover{transform:translateY(-3px)}'+
 '#videos .nv-m{position:relative;aspect-ratio:16/9;background:#0f172a;overflow:hidden}'+
 '#videos .nv-m img,#videos .nv-m video{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}'+
-'#videos .nv-p{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(to top,rgba(0,0,0,.35),transparent 60%)}'+
+'#videos .nv-p{position:absolute;top:0;right:0;bottom:0;left:0;inset:0;display:grid;place-items:center;background:linear-gradient(to top,rgba(0,0,0,.35),transparent 60%)}'+
 '#videos .nv-p i{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center}'+
 '#videos .nv-p svg{width:22px;height:22px;margin-left:3px;fill:#0f172a}'+
 '#videos .nv-d{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.7);color:#fff;font-size:12px;font-weight:600;border-radius:6px;padding:2px 7px}'+
@@ -25,7 +25,7 @@ var css=document.createElement('style');css.id='nlj-videos-css';css.textContent=
 '#videos .nv-t{font-family:"Playfair Display",serif;font-weight:700;font-size:18px;line-height:1.3;color:#0f172a;margin:4px 0 0}'+
 '#videos .nv-s{font-size:13px;color:#64748b;margin:6px 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}'+
 '#videos .nv-n{text-align:center;color:#64748b;padding:24px 0}'+
-'#nv-modal{position:fixed;inset:0;z-index:2147483000;background:rgba(5,12,24,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px}'+
+'#nv-modal{position:fixed;top:0;right:0;bottom:0;left:0;inset:0;z-index:2147483000;background:rgba(5,12,24,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px}'+
 '#nv-modal video{max-width:100%;max-height:78vh;border-radius:12px;background:#000}'+
 '#nv-modal h3{color:#fff;font:700 18px "Playfair Display",serif;margin:0 0 12px;text-align:center}'+
 '#nv-modal button{position:absolute;top:14px;right:14px;border:0;border-radius:999px;background:#fff;color:#0f172a;font-weight:700;font-size:14px;padding:10px 16px;cursor:pointer}';
@@ -35,7 +35,7 @@ function embedOf(u){try{var E=window.NLJ_EMBED;if(!E||!u)return null;var c=E.cle
 function embedSrc(e){var s=e.src,j=s.indexOf('?')<0?'?':'&';if(e.net==='YouTube')return s+j+'autoplay=1&playsinline=1&rel=0';if(e.net==='Vimeo'||e.net==='Dailymotion')return s+j+'autoplay=1';if(e.net==='Facebook'&&(e.kind==='v'||e.kind==='r'))return s+'&autoplay=true';return s;}
 function card(v,i){var u=safeUrl(v.image_url),vu=safeUrl(v.url),k=v.kind==='priere'?T.pr:T.so,em=embedOf(vu);
  var th=u||(em&&em.thumb)||'';
- var media=th?'<img src="'+esc(th)+'" alt="" loading="lazy" referrerpolicy="no-referrer">':(em?'<div style="position:absolute;inset:0;display:grid;place-items:center;color:#fff;font:700 20px Inter,system-ui,sans-serif;letter-spacing:.04em">'+esc(em.net)+'</div>':'<video src="'+esc(vu)+'#t=0.5" preload="metadata" muted playsinline></video>');
+ var media=th?'<img src="'+esc(th)+'" alt="" loading="lazy" referrerpolicy="no-referrer">':(em?'<div style="position:absolute;top:0;right:0;bottom:0;left:0;inset:0;display:grid;place-items:center;color:#fff;font:700 20px Inter,system-ui,sans-serif;letter-spacing:.04em">'+esc(em.net)+'</div>':'<video src="'+esc(vu)+'#t=0.5" preload="metadata" muted playsinline></video>');
  return '<button type="button" class="nv-c" data-i="'+i+'" aria-label="'+esc(T.play+' : '+(v.title||''))+'"><div class="nv-m">'+media+'<div class="nv-p"><i><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></i></div>'+(v.duration?'<span class="nv-d">'+dur(v.duration)+'</span>':'')+'</div><div class="nv-i"><div class="nv-k">'+esc(k)+'</div><h3 class="nv-t">'+esc(v.title||'')+'</h3>'+(v.description?'<p class="nv-s">'+esc(v.description)+'</p>':'')+'</div></button>';}
 function open(i){var v=data[i];if(!v)return;var o=document.createElement('div');o.id='nv-modal';o.setAttribute('role','dialog');o.setAttribute('aria-modal','true');
  var em=embedOf(safeUrl(v.url)),pl;

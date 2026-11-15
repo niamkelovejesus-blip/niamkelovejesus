@@ -616,7 +616,7 @@ video {
 }
 
 .inset-0{
-  inset: 0px;
+  top:0;right:0;bottom:0;left:0;inset:0;
 }
 
 .-bottom-1{
@@ -1706,7 +1706,7 @@ header button:last-of-type{ display:none !important; }
 #nlj-forgot-error { display:none; background:#fef2f2; border:1px solid #fecaca; color:#dc2626; padding:8px 10px; border-radius:8px; font-size:12px; font-weight:600; margin-top:8px; }
 
 /* === nja-css === */
-.nja-ov{position:fixed;inset:0;z-index:2147483000;display:none;align-items:center;justify-content:center;padding:14px;background:rgba(15,42,74,.62);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.nja-ov{position:fixed;top:0;right:0;bottom:0;left:0;inset:0;z-index:2147483000;display:none;align-items:center;justify-content:center;padding:14px;background:rgba(15,42,74,.62);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
 .nja-ov.on{display:flex}
 .nja-box{position:relative;width:100%;max-width:520px;max-height:94vh;overflow:auto;background:#fff;color:#0f2a4a;border-radius:20px;padding:26px 24px 22px;box-shadow:0 24px 60px rgba(0,0,0,.35);line-height:1.5;font-size:15px}
 .nja-x{position:absolute;top:8px;right:14px;border:0;background:none;font-size:30px;line-height:1;cursor:pointer;color:#0f2a4a}
@@ -1736,7 +1736,7 @@ header button:last-of-type{ display:none !important; }
 .nja-ph{display:flex;flex-direction:column;align-items:center;gap:8px}
 .nja-circle{position:relative;width:104px;height:104px;border-radius:50%;border:2px dashed #cdbfae;background:#fdf8f1;display:flex;align-items:center;justify-content:center;font-size:34px;overflow:hidden;cursor:pointer;margin:0}
 .nja-circle.has{border:2px solid #d9a441;box-shadow:0 6px 18px rgba(15,42,74,.18)}
-.nja-circle img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%;display:none}
+.nja-circle img{position:absolute;top:0;right:0;bottom:0;left:0;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%;display:none}
 .nja-pick{font-size:13px;font-weight:700;color:#9a7440;text-decoration:underline;cursor:pointer;margin:0}
 #nja-photo{display:none}
 @media(max-width:480px){.nja-g{grid-template-columns:1fr}}
@@ -1813,10 +1813,14 @@ html{scroll-behavior:smooth}
 img{max-width:100%}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
-/* === bouton flottant « Parlons avec Jésus » === */
-#nlj-parlons{position:fixed;right:18px;bottom:calc(74px + env(safe-area-inset-bottom,0px));z-index:39;display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 18px 0 14px;border:0;border-radius:999px;background:#0f2a4a;color:#fff;font:700 13px "DM Sans",system-ui,sans-serif;letter-spacing:.2px;cursor:pointer;box-shadow:0 8px 24px rgba(15,42,74,.35);border:2px solid var(--gold,#c9a77a);transition:transform .2s,box-shadow .2s}
-#nlj-parlons:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(15,42,74,.45)}
+/* === bouton flottant « Parlons de Jésus » (ange) === */
+#nlj-parlons{position:fixed;right:18px;bottom:calc(74px + env(safe-area-inset-bottom,0px));z-index:39;display:inline-flex;align-items:center;gap:10px;max-width:calc(100vw - 36px);padding:6px 18px 6px 6px;border-radius:999px;background:#fff;color:#0f2a4a;text-align:left;cursor:pointer;border:2px solid var(--gold,#c9a77a);box-shadow:0 10px 28px rgba(15,42,74,.28);transition:transform .2s,box-shadow .2s;animation:nljAnge 3.2s ease-in-out infinite}
+#nlj-parlons img{flex:none;width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid var(--gold,#c9a77a);background:#fbf7ec}
+#nlj-parlons .nlj-pt{display:flex;flex-direction:column;gap:1px;min-width:0}
+#nlj-parlons b{font:800 14px/1.2 "DM Sans",system-ui,sans-serif;color:#1f6fd1}
+#nlj-parlons small{font:600 11px/1.25 "DM Sans",system-ui,sans-serif;color:#0f2a4a}
+#nlj-parlons:hover{animation-play-state:paused;transform:translateY(-3px);box-shadow:0 14px 32px rgba(15,42,74,.4)}
 #nlj-parlons:focus-visible{outline:3px solid var(--gold,#c9a77a);outline-offset:3px}
-#nlj-parlons span{font-size:18px;line-height:1}#nlj-parlons b{font-weight:700}
-@media(max-width:720px){#nlj-parlons{bottom:132px;height:42px;padding:0 14px 0 12px;font-size:12px}}
-@media(prefers-reduced-motion:reduce){#nlj-parlons{transition:none}}
+@keyframes nljAnge{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media(max-width:720px){#nlj-parlons{bottom:132px;right:12px;gap:8px;padding:5px 14px 5px 5px;max-width:calc(100vw - 24px)}#nlj-parlons img{width:40px;height:40px}#nlj-parlons b{font-size:13px}#nlj-parlons small{font-size:10.5px}}
+@media(prefers-reduced-motion:reduce){#nlj-parlons{animation:none;transition:none}}

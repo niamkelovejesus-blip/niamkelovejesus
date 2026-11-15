@@ -22,8 +22,8 @@ B. SUPABASE
      connecté au moment de traduire).
   4. Edge Functions > « Secrets » > ajoute :
        GOOGLE_TRANSLATE_KEY  = (la clé copiée à l'étape A.4)
-       ALLOWED_ORIGINS       = https://niamkelovejesus-blip.github.io,https://TON-NOUVEAU-DOMAINE
-     (sans "/" à la fin ; sépare par une virgule ; ajoute le domaine + la version www)
+       ALLOWED_ORIGINS       = https://niamkelovejesus-blip.github.io,https://niamkelovejesus.com,https://www.niamkelovejesus.com
+     (sans "/" à la fin ; sépare par une virgule ; ancien lien + domaine + version www)
 
 C. VÉRIFIER
   Ouvre le site, choisis le coréen, puis (sur ordinateur) F12 > Console > tape  NLJT.diag()

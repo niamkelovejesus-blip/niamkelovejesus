@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin.html
 Disallow: /verify.html
 
-Sitemap: https://niamkelovejesus-blip.github.io/niamkelovejesus/sitemap.xml
+Sitemap: https://niamkelovejesus.com/sitemap.xml

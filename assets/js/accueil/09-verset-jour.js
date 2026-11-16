@@ -215,7 +215,7 @@ function build(){
   var s=document.createElement('section');s.id='nlj-tem';s.setAttribute('aria-label','Témoignage');
   s.innerHTML='<div class="in"><small>Témoignage</small><h2>Jésus a répondu dans ma prison</h2>'
   +'<p>Je m’appelle Philippe, je suis ivoirien. Je veux partager une expérience qui a marqué ma vie pendant mon incarcération.</p>'
-  +'<p>La séparation d’avec ma fille m’était insupportable. Une nuit, j’ai pleuré à chaudes larmes et j’ai supplié Dieu de me permettre de la voir, ne serait-ce qu’un instant. Je lui ai dit : « Jésus, si tu es Dieu, prouve-le-moi. Je veux voir ma fille. Trouve un moyen pour que je puisse la serrer dans mes bras. »</p>'
+  +'<p>La séparation d’avec ma fille m’était insupportable. Une nuit, j’ai pleuré à chaudes larmes et j’ai supplié Dieu de me permettre de la voir, ne serait-ce qu’un instant. Je lui ai dit : « Jésus, si tu es vraiment Dieu comme d’autres chrétiens le disent, prouve-moi. Je veux voir ma fille. Trouve un moyen pour que je puisse la serrer dans mes bras. »</p>'
   +'<div class="more" hidden>'
   +'<p>Cette nuit-là, rien de particulier ne s’est passé. Mais le lendemain matin, à six heures, après une nuit agitée, je me suis endormi profondément, et j’ai fait un rêve extraordinaire.</p>'
   +'<p>Je me trouvais devant ma fille et sa mère, dans une maison remplie de joie. J’ai pris ma fille dans mes bras, mais à ma grande surprise, elle semblait insatisfaite. Je me suis demandé si c’était à cause de mon odeur, après tout ce temps en détention.</p>'

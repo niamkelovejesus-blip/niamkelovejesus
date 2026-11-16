@@ -25,6 +25,8 @@ try{FAV=JSON.parse(localStorage.getItem('nlj_bible_fav')||'[]');}catch(e){}
 var fs=parseInt((function(){try{return localStorage.getItem('nlj_bible_fs');}catch(e){return 19;}})(),10)||19;
 function setFs(n){fs=Math.max(14,Math.min(30,n));document.documentElement.style.setProperty('--fs',fs+'px');try{localStorage.setItem('nlj_bible_fs',fs);}catch(e){}}
 setFs(fs);
+function plain(s){return String(s).replace(/[\u27E6\u27E7]/g,'');}
+function rich(s){return esc(s).replace(/\u27E6/g,'<span class="wj">').replace(/\u27E7/g,'</span>');}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function norm(j){
   if(Array.isArray(j)&&j.length&&j[0]&&Array.isArray(j[0].chapters)&&(j[0].chapters.length===0||Array.isArray(j[0].chapters[0])))return j.map(function(b){return b.chapters;});
@@ -37,7 +39,7 @@ function save(){try{localStorage.setItem('nlj_bible_fav',JSON.stringify(FAV));}c
 function ref(b,c,v){return NAMES[b]+' '+(c+1)+(v!=null?':'+(v+1):'');}
 function favKey(b,c,v){return b+'.'+c+'.'+v;}
 function isFav(b,c,v){return FAV.indexOf(favKey(b,c,v))>=0;}
-function text(b,c,v){var d=BIB[cur];return d&&d[b]&&d[b][c]?d[b][c][v]:null;}
+function text(b,c,v){var d=BIB[cur];return d&&d[b]&&d[b][c]&&d[b][c][v]!=null?plain(d[b][c][v]):null;}
 function main(){return $('main');}
 function seedIdx(n){return NAMES.indexOf(n);}
 function votd(){
@@ -65,10 +67,10 @@ function chapter(b,c,hl){
   view.book=b;view.ch=c;view.sel={};
   var vs=BIB[cur][b][c]||[];
   var h='<div class="crumb"><button type="button" data-b="'+b+'">← '+esc(NAMES[b])+'</button></div><div class="ch"><h2>'+esc(NAMES[b])+' '+(c+1)+'</h2>';
-  h+=vs.map(function(t,i){return '<p class="vs'+(isFav(b,c,i)?' fav':'')+(hl===i?' sel':'')+'" data-v="'+i+'"><sup>'+(i+1)+'</sup>'+esc(t)+'</p>';}).join('');
+  h+=vs.map(function(t,i){return '<p class="vs'+(isFav(b,c,i)?' fav':'')+(hl===i?' sel':'')+'" data-v="'+i+'"><sup>'+(i+1)+'</sup>'+rich(t)+'</p>';}).join('');
   var pv=prevOf(b,c),nx=nextOf(b,c);
   h+='</div><div class="nav"><button type="button" '+(pv?'data-open="'+pv+'"':'disabled')+'>← Précédent</button><button type="button" '+(nx?'data-open="'+nx+'"':'disabled')+'>Suivant →</button></div>';
-  h+='<p class="hint">Touchez un verset pour le copier, le partager ou l\'ajouter aux favoris.</p><div class="act" id="act"><button type="button" data-a="copy">Copier</button><button type="button" data-a="share">Partager</button><button type="button" data-a="fav">⭐ Favori</button></div>';
+  h+='<p class="hint"><span class="wj">Texte en rouge</span> : paroles de Jésus. Touchez un verset pour le copier, le partager ou l\'ajouter aux favoris.</p><div class="act" id="act"><button type="button" data-a="copy">Copier</button><button type="button" data-a="share">Partager</button><button type="button" data-a="fav">⭐ Favori</button></div>';
   main().innerHTML=h;main().scrollTop=0;
   if(hl!=null){var e=main().querySelector('[data-v="'+hl+'"]');if(e)e.scrollIntoView({block:'center'});}
 }
@@ -86,7 +88,7 @@ function search(q){
   if(!BIB[cur]){var low=q.toLowerCase();var r=SEED.filter(function(s){return s[3].toLowerCase().indexOf(low)>=0||(s[0]+' '+s[1]+':'+s[2]).toLowerCase()===low;});
     main().innerHTML=r.length?r.map(function(s){return '<div class="res"><b>'+esc(s[0]+' '+s[1]+':'+s[2])+'</b>'+esc(s[3])+'</div>';}).join(''):'<p class="msg">La recherche dans toute la Bible sera disponible dès l\'ajout du fichier.</p>';return;}
   var low2=q.toLowerCase(),out=[],d=BIB[cur];
-  for(var b=0;b<66&&out.length<150;b++)for(var c=0;c<d[b].length&&out.length<150;c++)for(var v=0;v<d[b][c].length;v++){var t=d[b][c][v];if(t&&t.toLowerCase().indexOf(low2)>=0){out.push([b,c,v,t]);if(out.length>=150)break;}}
+  for(var b=0;b<66&&out.length<150;b++)for(var c=0;c<d[b].length&&out.length<150;c++)for(var v=0;v<d[b][c].length;v++){var t=plain(d[b][c][v]);if(t&&t.toLowerCase().indexOf(low2)>=0){out.push([b,c,v,t]);if(out.length>=150)break;}}
   if(!out.length){main().innerHTML='<p class="msg">Aucun verset trouvé pour « '+esc(q)+' ».</p>';return;}
   var re=new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig');
   main().innerHTML='<p class="msg">'+out.length+(out.length>=150?'+':'')+' résultat(s)</p>'+out.map(function(o){return '<div class="res" data-open="'+o[0]+'.'+o[1]+'.'+o[2]+'"><b>'+esc(ref(o[0],o[1],o[2]))+'</b>'+esc(o[3]).replace(re,'<mark>$1</mark>')+'</div>';}).join('');

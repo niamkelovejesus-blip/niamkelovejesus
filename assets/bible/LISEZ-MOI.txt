@@ -11,3 +11,5 @@ Le lecteur accepte deux formats JSON, 66 livres dans l'ordre classique (Genèse 
 Utilisez uniquement une traduction du domaine public (ex. Louis Segond 1910, Darby, Martin, Ostervald ; KJV, WEB)
 ou une traduction dont vous avez l'autorisation.
 Quand fr.json est présent, le lecteur affiche automatiquement la Bible complète, la recherche et les favoris.
+
+fr.json : Louis Segond 1910 (domaine public, source eBible.org), paroles de Jésus balisées en rouge.

@@ -2,7 +2,7 @@
   var gone=false;
   function lang(){try{return(localStorage.getItem('niamke_lang')||'fr').toLowerCase().slice(0,2);}catch(e){return 'fr';}}
   function off(){if(gone)return;gone=true;var e=document.getElementById('splash');if(e)e.classList.add('off');}
-  function fromFrame(src){return['p1','p2','p3','p4'].some(function(k){var f=document.getElementById(k);return f&&f.contentWindow===src;});}
+  function fromFrame(src){return['p1','p2','p3','p4','p5'].some(function(k){var f=document.getElementById(k);return f&&f.contentWindow===src;});}
   window.addEventListener('message',function(e){
     var d=e.data;if(!d||!fromFrame(e.source))return;
     if(d.nlj==='i18n-ready')off();                       /* page traduite */

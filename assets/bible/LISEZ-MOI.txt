@@ -1,0 +1,13 @@
+BIBLE DU SITE
+=============
+Ajoutez ici le texte de la Bible :
+  assets/bible/fr.json   (français)
+  assets/bible/en.json   (anglais, facultatif)
+
+Le lecteur accepte deux formats JSON, 66 livres dans l'ordre classique (Genèse -> Apocalypse) :
+  1) [ {"abbrev":"gn","chapters":[["verset 1","verset 2"], ...]}, ... ]
+  2) {"books":[{"name":"Genesis","chapters":[{"verses":[{"text":"..."}]}]}]}
+
+Utilisez uniquement une traduction du domaine public (ex. Louis Segond 1910, Darby, Martin, Ostervald ; KJV, WEB)
+ou une traduction dont vous avez l'autorisation.
+Quand fr.json est présent, le lecteur affiche automatiquement la Bible complète, la recherche et les favoris.

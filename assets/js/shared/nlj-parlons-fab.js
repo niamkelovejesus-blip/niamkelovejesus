@@ -19,16 +19,17 @@ st.textContent='#nlj-parlons.nlj-L{position:fixed;left:14px;bottom:calc(18px + e
 +'#nlj-parlons.nlj-L:focus-visible{outline:3px solid #c9a77a;outline-offset:3px}'
 +'@keyframes nljAnge{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}'
 +'@media(max-width:720px){#nlj-parlons.nlj-L{left:10px;bottom:calc(12px + env(safe-area-inset-bottom,0px));gap:8px;padding:5px 12px 5px 5px;max-width:calc(100vw - 90px)}#nlj-parlons.nlj-L img{width:40px;height:40px}#nlj-parlons.nlj-L b{font-size:13px}#nlj-parlons.nlj-L small{display:none}}'
-+'#nlj-bible{position:fixed;left:14px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:39;width:54px;height:54px;border-radius:50%;border:2px solid #c9a77a;background:#0f2a4a;color:#fff;font-size:26px;line-height:1;cursor:pointer;box-shadow:0 10px 28px rgba(15,42,74,.28);display:grid;place-items:center;padding:0}'
++'#nlj-bible{position:fixed;'+(ACC?'right:18px;bottom:calc(150px + env(safe-area-inset-bottom,0px))':'left:14px;bottom:calc(18px + env(safe-area-inset-bottom,0px))')+';z-index:39;display:inline-flex;align-items:center;gap:8px;padding:0 18px 0 8px;height:48px;border-radius:999px;border:2px solid #c9a77a;background:#0f2a4a;color:#fff;cursor:pointer;box-shadow:0 10px 28px rgba(15,42,74,.28);font:800 14px/1 system-ui,-apple-system,"Segoe UI",sans-serif;transition:transform .2s}'
++'#nlj-bible i{font-style:normal;font-size:22px;width:34px;height:34px;border-radius:50%;background:#c9a227;display:grid;place-items:center}'
 +'#nlj-bible:hover{transform:translateY(-3px)}#nlj-bible:focus-visible{outline:3px solid #c9a77a;outline-offset:3px}'
-+'#nlj-parlons.nlj-L{left:78px}'
-+(ACC?'#nlj-bible{bottom:calc(74px + env(safe-area-inset-bottom,0px))}@media(max-width:720px){#nlj-bible{bottom:132px;left:12px}}':'@media(max-width:720px){#nlj-bible{left:10px;bottom:calc(12px + env(safe-area-inset-bottom,0px));width:46px;height:46px;font-size:22px}#nlj-parlons.nlj-L{left:64px;max-width:calc(100vw - 140px)}}')
++'#nlj-parlons.nlj-L{left:14px;bottom:calc(76px + env(safe-area-inset-bottom,0px))}'
++(ACC?'@media(max-width:720px){#nlj-bible{right:12px;bottom:196px;height:44px;font-size:13px}#nlj-bible i{width:30px;height:30px;font-size:19px}}':'@media(max-width:720px){#nlj-bible{left:10px;bottom:calc(12px + env(safe-area-inset-bottom,0px));height:44px;font-size:13px}#nlj-bible i{width:30px;height:30px;font-size:19px}#nlj-parlons.nlj-L{left:10px;bottom:calc(64px + env(safe-area-inset-bottom,0px));max-width:calc(100vw - 20px)}}')
 +'@media(prefers-reduced-motion:reduce){#nlj-parlons.nlj-L{animation:none;transition:none}}';
 document.head.appendChild(st);
 function go(){try{parent.postMessage({nlj:'go',page:'p4',id:''},'*');}catch(e){}}
 function addBible(){
   var k=document.createElement('button');
-  k.id='nlj-bible';k.type='button';k.textContent='📖';k.setAttribute('aria-label',FR?'Ouvrir la Bible':'Open the Bible');k.title=FR?'La Bible':'The Bible';
+  k.id='nlj-bible';k.type='button';k.innerHTML='<i aria-hidden="true">📖</i><span></span>';k.lastChild.textContent=FR?'Apprenons la Bible':'Let’s learn the Bible';k.setAttribute('aria-label',FR?'Apprenons la Bible — ouvrir la Bible':'Let’s learn the Bible — open the Bible');
   k.addEventListener('click',function(){try{parent.postMessage({nlj:'go',page:'p5',id:''},'*');}catch(e){}});
   document.body.appendChild(k);
 }

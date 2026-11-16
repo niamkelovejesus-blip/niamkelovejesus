@@ -113,7 +113,10 @@ bot(["Je n’ai pas de réponse toute prête à cette question 🙏 Choisis un s
 
 form.onsubmit=e=>{e.preventDefault();const t=inp.value.trim();if(!t||busy)return;inp.value="";add("me",esc(t));route(t);};
 
-bot(["Paix à toi 🙏 Bienvenue ! Je peux répondre à tes questions sur la Bible, prier avec toi et t’aider à donner ta vie à Jésus.","Je suis un assistant aux réponses préparées, pas Jésus lui-même : pour un accompagnement personnel, rapproche-toi d’un pasteur. Touche une référence biblique (ex. Jean 3:16 📖) pour lire le passage complet dans la Bible. Que veux-tu faire ?"],MENU);
+bot(["Paix à toi 🙏 Bienvenue ! Je peux répondre à tes questions sur la Bible, prier avec toi et t’aider à donner ta vie à Jésus.","Je suis un assistant aux réponses préparées, pas Jésus lui-même : pour un accompagnement personnel, rapproche-toi d’un pasteur. Touche une référence biblique (ex. Jean 3:16 📖) pour la lire dans la Bible du site. Que veux-tu faire ?"],MENU);
+
+/* Références bibliques : ouvrent la Bible du site (page 5) au bon verset ; si la coque est absente, le lien biblegateway reste le secours */
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a.bl");if(!a)return;if(window.parent===window)return;e.preventDefault();try{parent.postMessage({nlj:"bible-open",ref:a.textContent.trim()},"*");}catch(x){window.open(a.href,"_blank","noopener");}},true);
 
 /* Intégration au site : retour vers l'accueil (la page est affichée dans la coque index.html) */
 (function(){var b=document.getElementById("back");if(b)b.onclick=function(){try{parent.postMessage({nlj:"go",page:"p1"},"*");}catch(e){location.href="../";}};})();

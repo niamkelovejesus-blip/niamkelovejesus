@@ -2,11 +2,12 @@ var TITLES={p1:'Niamké Love Jésus — Rencontre chrétienne centrée sur Jésu
 var URLS={p1:'pages/accueil.html',p2:'pages/rencontre.html',p3:'pages/premium.html',p4:'pages/parlons-avec-jesus.html',p5:'pages/bible.html'};
 function navFrame(f,u){try{f.contentWindow.location.replace(u);}catch(e){f.src=u;}}
 var NAMES={p1:'accueil',p2:'rencontre',p3:'premium',p4:'parlons',p5:'bible'},BYNAME={accueil:'p1',rencontre:'p2',premium:'p3',parlons:'p4',bible:'p5'};
+var bibleReady=false,pendingBible='';
 var loaded={},loadedLang={},cur=null,STATE={known:false,premium:false,plan:'',user:false};
 function lang(){try{return(localStorage.getItem('niamke_lang')||'fr').toLowerCase();}catch(e){return 'fr';}}
 function load(p,cb){
   var f=document.getElementById(p);
-  if(!loaded[p]||loadedLang[p]!==lang()){loaded[p]=true;loadedLang[p]=lang();f.onload=function(){if(cb)setTimeout(cb,300);};navFrame(f,URLS[p]);}
+  if(!loaded[p]||loadedLang[p]!==lang()){if(p==='p5')bibleReady=false;loaded[p]=true;loadedLang[p]=lang();f.onload=function(){if(cb)setTimeout(cb,300);};navFrame(f,URLS[p]);}
   else if(cb)cb();
 }
 function _show(p,id,pop){
@@ -30,6 +31,7 @@ function sendState(){
   if(!STATE.known)return;
   try{document.getElementById('p3').contentWindow.postMessage({nlj:'state',premium:STATE.premium,plan:STATE.plan,user:STATE.user},'*');}catch(e){}
 }
+function flushBible(){try{document.getElementById('p5').contentWindow.postMessage({nlj:'bible',q:pendingBible},'*');}catch(x){}pendingBible='';}
 window.addEventListener('message',function(e){
   var ok=['p1','p2','p3','p4','p5'].some(function(k){return document.getElementById(k).contentWindow===e.source;});
   if(!ok)return;
@@ -37,6 +39,8 @@ window.addEventListener('message',function(e){
   if(d.nlj==='go'&&NAMES[d.page])show(d.page,d.id);
   else if(d.nlj==='state'){STATE={known:true,premium:!!d.premium,plan:d.plan||'',user:!!d.user};sendState();}
   else if(d.nlj==='need-state')sendState();
+  else if(d.nlj==='bible-open'){pendingBible=String(d.ref||'');show('p5');if(bibleReady&&pendingBible)flushBible();}
+  else if(d.nlj==='bible-ready'){bibleReady=true;if(pendingBible)flushBible();}
   else if(d.nlj==='filters'){window.FILTERS={church:d.church||'',gender:d.gender||'',search:d.search||'',ageMin:d.ageMin,ageMax:d.ageMax};show('p2','profilesGrid');}
   else if(d.nlj==='legal')showLegal(d.doc);
   else if(d.nlj==='authed'){loaded.p2=false;show('p2','');}

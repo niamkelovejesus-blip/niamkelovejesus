@@ -53,6 +53,10 @@ h2{font:600 1.15rem Georgia,serif;color:var(--nuit);margin:18px 0 10px}
 .msg{color:var(--gris);text-align:center;padding:24px 8px}
 .warn{background:#fff7e0;border:1px solid #e8d18a;border-radius:10px;padding:12px 14px;font-size:.9rem;margin:12px 0}
 .hint{font-size:.78rem;color:var(--gris);margin-top:10px}
+.pbar{height:10px;border-radius:99px;background:#e6dfc9;overflow:hidden}.pbar i{display:block;height:100%;background:var(--or)}
+.pnext{width:100%;font:inherit;font-weight:700;padding:12px;border-radius:12px;border:0;background:var(--nuit);color:#fff;cursor:pointer;margin-bottom:12px}
+.prow.ok{opacity:.65}
+.plan-ok{text-align:center;margin-top:16px}.plan-ok button{font:inherit;font-weight:700;padding:11px 18px;border-radius:999px;border:2px solid var(--or);background:#fff;color:var(--nuit);cursor:pointer}
 button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--or);outline-offset:2px}
 </style>
 </head>
@@ -60,7 +64,7 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 <div class="app">
 <header><button class="hb" id="back" type="button" aria-label="Retour à l'accueil">← Accueil</button><h1>📖 La Bible</h1><button class="hb" id="fsm" type="button" aria-label="Réduire le texte">A−</button><button class="hb" id="fsp" type="button" aria-label="Agrandir le texte">A+</button></header>
 <div class="bar"><input id="q" type="search" placeholder="Chercher un mot ou « Jean 3:16 »…" aria-label="Rechercher" autocomplete="off"><select id="tr" aria-label="Traduction" hidden></select><button id="go" type="button">OK</button></div>
-<div class="tabs" role="tablist"><button class="on" data-t="lire" type="button">Lire</button><button data-t="fav" type="button">⭐ Favoris</button></div>
+<div class="tabs" role="tablist"><button class="on" data-t="lire" type="button">Lire</button><button data-t="plan" type="button">📅 Plan</button><button data-t="fav" type="button">⭐ Favoris</button></div>
 <main id="main"></main>
 </div>
 <script src="../assets/js/bible/01-bible.js?v=1"></script>

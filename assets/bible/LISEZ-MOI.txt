@@ -13,3 +13,6 @@ ou une traduction dont vous avez l'autorisation.
 Quand fr.json est présent, le lecteur affiche automatiquement la Bible complète, la recherche et les favoris.
 
 fr.json : Louis Segond 1910 (domaine public, source eBible.org), paroles de Jésus balisées en rouge.
+
+versets-du-jour.json : 114 versets (Louis Segond 1910) pour le verset du jour (accueil + page Bible). Pour changer la liste, remplacer ce fichier : [["Jean",3,16,"texte"],...]
+en.json : facultatif. Si présent, un sélecteur de langue apparait dans la Bible.

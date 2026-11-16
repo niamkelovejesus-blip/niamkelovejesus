@@ -98,3 +98,42 @@ fetch('../assets/bible/versets-du-jour.json').then(function(r){return r.ok?r.jso
   setInterval(refresh,60000);
 }).catch(function(){});
 })();
+
+/* ===== Titre d'accueil « Bienvenue à Niamké Love Jésus » (nouveau style, traduit dans les 21 langues) ===== */
+(function(){
+var T={fr:'Bienvenue à',en:'Welcome to',es:'Bienvenidos a',pt:'Bem-vindo ao',it:'Benvenuti a',de:'Willkommen bei',ar:'مرحبًا بكم في',zh:'欢迎来到',nl:'Welkom bij',ru:'Добро пожаловать в',ln:'Boyei malamu na',sw:'Karibu kwenye',hi:'आपका स्वागत है',id:'Selamat datang di',tl:'Maligayang pagdating sa',ko:'환영합니다',vi:'Chào mừng đến với',pl:'Witamy w',uk:'Ласкаво просимо до',ur:'خوش آمدید',ro:'Bun venit la'};
+var st=document.createElement('style');
+st.textContent='#home::before{content:none!important;display:none!important;animation:none!important}'
++'#nlj-bv{text-align:center;padding:26px 16px 8px}'
++'#nlj-bv .a{display:block;font:700 clamp(12px,2.1vw,16px)/1.3 system-ui,"Segoe UI",sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#0f2a4a;margin-bottom:2px}'
++'#nlj-bv[data-l=ar] .a,#nlj-bv[data-l=ur] .a,#nlj-bv[data-l=hi] .a,#nlj-bv[data-l=zh] .a,#nlj-bv[data-l=ko] .a{letter-spacing:.04em;text-transform:none;font-size:clamp(15px,2.6vw,20px)}'
++'#nlj-bv .n{display:block;font-family:"Great Vibes","Brush Script MT",cursive;font-weight:400;font-size:clamp(46px,9.5vw,108px);line-height:1.12;text-wrap:balance;'
++'background:linear-gradient(100deg,#8a5a12 0%,#c9a227 32%,#f3dc8f 50%,#c9a227 68%,#8a5a12 100%) 0 0/200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;'
++'filter:drop-shadow(0 2px 4px rgba(15,42,74,.22));animation:nljBvIn .9s ease-out both,nljBvShine 7s ease-in-out 1s infinite alternate}'
++'#nlj-bv .o{display:flex;align-items:center;justify-content:center;gap:12px;color:#c9a227;font-size:18px;margin-top:4px}'
++'#nlj-bv .o:before,#nlj-bv .o:after{content:"";width:clamp(50px,12vw,110px);height:1px;background:linear-gradient(90deg,transparent,#c9a227)}'
++'#nlj-bv .o:after{transform:scaleX(-1)}'
++'@keyframes nljBvIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}'
++'@keyframes nljBvShine{from{background-position:0 0}to{background-position:100% 0}}'
++'@media(prefers-reduced-motion:reduce){#nlj-bv .n{animation:none}}';
+document.head.appendChild(st);
+function lang(){var l='fr';try{l=(localStorage.getItem('niamke_lang')||'fr').toLowerCase().slice(0,2);}catch(e){}return T[l]?l:'fr';}
+function make(){
+  var l=lang(),d=document.createElement('div');
+  d.id='nlj-bv';d.setAttribute('translate','no');d.className='notranslate';d.setAttribute('data-l',l);
+  d.innerHTML='<span class="a"></span><span class="n">Niamké Love Jésus</span><span class="o">✝︎</span>';
+  d.firstChild.textContent=T[l];
+  return d;
+}
+function sync(){
+  var h=document.getElementById('home');if(!h)return;
+  var e=document.getElementById('nlj-bv'),l=lang();
+  if(!e){h.insertBefore(make(),h.firstChild);return;}
+  if(e.getAttribute('data-l')!==l){e.setAttribute('data-l',l);e.firstChild.textContent=T[l];}
+}
+sync();
+var root=document.getElementById('root'),t;
+if(root&&window.MutationObserver)new MutationObserver(function(){clearTimeout(t);t=setTimeout(sync,120);}).observe(root,{childList:true,subtree:true});
+setInterval(sync,1500);
+window.addEventListener('storage',sync);
+})();

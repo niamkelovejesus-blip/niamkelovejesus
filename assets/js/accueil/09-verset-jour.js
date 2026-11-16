@@ -194,3 +194,56 @@ sync();
 var root=document.getElementById('root'),t;
 if(root&&window.MutationObserver)new MutationObserver(function(){clearTimeout(t);t=setTimeout(sync,100);}).observe(root,{childList:true,subtree:true});
 })();
+
+/* ===== Témoignage de Philippe (accueil) : sous « Notre histoire », version repliée avec bouton « Lire la suite » ===== */
+(function(){
+var st=document.createElement('style');
+st.textContent='#nlj-tem{background:#fbf7ec;padding:0 16px 38px}'
++'#nlj-tem .in{max-width:760px;margin:0 auto;background:#fff;border:1px solid #e9dcb8;border-left:5px solid #c9a227;border-radius:18px;padding:28px 26px;box-shadow:0 14px 40px rgba(15,42,74,.10)}'
++'#nlj-tem small{display:block;text-align:center;font:700 11px/1.2 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#a07d12;margin-bottom:6px}'
++'#nlj-tem h2{margin:0 0 16px;text-align:center;font:400 clamp(30px,5.4vw,46px)/1.15 "Great Vibes","Brush Script MT",cursive;color:#9a7a14}'
++'#nlj-tem h2::after{display:none!important}'
++'#nlj-tem p{margin:0 0 14px;font:1.05rem/1.7 Georgia,"Times New Roman",serif;color:#0f2a4a}'
++'#nlj-tem .vx{margin:18px 0;padding:14px 18px;border-left:3px solid #c9a227;background:#fbf7ec;border-radius:0 12px 12px 0;font-style:italic;font-weight:700}'
++'#nlj-tem .more[hidden]{display:none}'
++'#nlj-tem .bt{display:block;margin:6px auto 0;font:700 .95rem system-ui,sans-serif;padding:11px 24px;border-radius:999px;border:0;background:#c9a227;color:#0f2a4a;cursor:pointer}'
++'#nlj-tem .bt:focus-visible{outline:3px solid #c9a227;outline-offset:2px}'
++'#nlj-tem .sg{margin:14px 0 0;text-align:right;font:italic .95rem Georgia,serif;color:#7a5a10}'
++'#nlj-tem .fin{text-align:center;font-weight:700;margin-top:16px}';
+document.head.appendChild(st);
+function build(){
+  var s=document.createElement('section');s.id='nlj-tem';s.setAttribute('aria-label','Témoignage');
+  s.innerHTML='<div class="in"><small>Témoignage</small><h2>Jésus a répondu dans ma prison</h2>'
+  +'<p>Je m’appelle Philippe, je suis ivoirien. Je veux partager une expérience qui a marqué ma vie pendant mon incarcération.</p>'
+  +'<p>La séparation d’avec ma fille m’était insupportable. Une nuit, j’ai pleuré à chaudes larmes et j’ai supplié Dieu de me permettre de la voir, ne serait-ce qu’un instant. Je lui ai dit : « Si tu es vraiment Dieu, prouve-le-moi. Je veux voir ma fille. Trouve un moyen pour que je puisse la serrer dans mes bras. »</p>'
+  +'<div class="more" hidden>'
+  +'<p>Cette nuit-là, rien de particulier ne s’est passé. Mais le lendemain matin, à six heures, après une nuit agitée, je me suis endormi profondément, et j’ai fait un rêve extraordinaire.</p>'
+  +'<p>Je me trouvais devant ma fille et sa mère, dans une maison remplie de joie. J’ai pris ma fille dans mes bras, mais à ma grande surprise, elle semblait insatisfaite. Je me suis demandé si c’était à cause de mon odeur, après tout ce temps en détention.</p>'
+  +'<p>Soudain, j’ai vu les gardiens de la prison qui me cherchaient par la fenêtre. J’ai alors prié : « Jésus, aide-moi à quitter cet endroit. J’ai déjà vu ma fille, c’est suffisant. »</p>'
+  +'<p>À cet instant, je me suis retrouvé au ciel, dans les mains d’une présence divine que je ne pouvais pas voir. J’avais peur. Je l’ai supplié de me renvoyer en prison, car les gardiens allaient me trouver. Une voix m’a répondu :</p>'
+  +'<p class="vx">« Ne t’inquiète pas. Je vais te renvoyer en prison, mais tu n’y resteras pas longtemps. Je vais te faire sortir bientôt. »</p>'
+  +'<p>Je me suis retrouvé dans mon corps. Les gardiens me cherchaient toujours et demandaient au chef de la prison si j’étais là. Je me suis réveillé en sursaut, le cœur battant, mais avec une paix et une espérance que je n’avais pas avant.</p>'
+  +'<p>Une semaine plus tard, j’ai été transféré dans une autre prison. Deux mois et quelques jours après, j’ai été libéré.</p>'
+  +'<p>Merci Jésus pour tout ce que tu as fait pour moi.</p>'
+  +'<p class="fin">Si tu traverses une épreuve, tu n’es pas seul : Dieu veille sur toi.</p>'
+  +'<p class="sg" translate="no"><span class="notranslate">Niamké Philippe Tao, </span><span>fondateur</span></p>'
+  +'</div>'
+  +'<button type="button" class="bt" aria-expanded="false">Lire mon témoignage</button></div>';
+  var m=s.querySelector('.more'),b=s.querySelector('.bt');
+  b.addEventListener('click',function(){
+    var open=m.hasAttribute('hidden');
+    if(open){m.removeAttribute('hidden');b.textContent='Réduire';}else{m.setAttribute('hidden','');b.textContent='Lire mon témoignage';s.scrollIntoView({behavior:'smooth',block:'start'});}
+    b.setAttribute('aria-expanded',open?'true':'false');
+  });
+  return s;
+}
+var el=build();
+function place(){
+  if(document.getElementById('nlj-tem'))return;
+  var h=document.getElementById('nlj-hist');
+  if(h&&h.parentNode)h.parentNode.insertBefore(el,h.nextSibling);
+}
+place();
+var root=document.getElementById('root'),t;
+if(root&&window.MutationObserver)new MutationObserver(function(){clearTimeout(t);t=setTimeout(place,160);}).observe(root,{childList:true,subtree:true});
+})();

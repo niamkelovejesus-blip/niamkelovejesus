@@ -81,7 +81,7 @@ function build(){
 }
 function place(){
   if(!card||document.getElementById('nlj-vdj'))return;
-  var a=document.getElementById('couples');
+  var a=document.getElementById('nlj-hist')||document.getElementById('couples');
   if(a&&a.parentNode)a.parentNode.insertBefore(card,a);
 }
 function refresh(){
@@ -136,4 +136,61 @@ var root=document.getElementById('root'),t;
 if(root&&window.MutationObserver)new MutationObserver(function(){clearTimeout(t);t=setTimeout(sync,120);}).observe(root,{childList:true,subtree:true});
 setInterval(sync,1500);
 window.addEventListener('storage',sync);
+})();
+
+/* ===== Notre histoire (accueil) : petite section sous le verset et la prière du jour ===== */
+(function(){
+var st=document.createElement('style');
+st.textContent='#nlj-hist{background:#fbf7ec;padding:10px 16px 38px}'
++'#nlj-hist .in{max-width:760px;margin:0 auto;background:#fff;border:1px solid #e9dcb8;border-left:5px solid #c9a227;border-radius:18px;padding:28px 26px;box-shadow:0 14px 40px rgba(15,42,74,.10)}'
++'#nlj-hist h2{margin:0 0 14px;text-align:center;font:400 clamp(34px,6vw,52px)/1.1 "Great Vibes","Brush Script MT",cursive;color:#9a7a14}'
++'#nlj-hist p{margin:0 0 14px;font:1.05rem/1.7 Georgia,"Times New Roman",serif;color:#0f2a4a}'
++'#nlj-hist .bv{text-align:center;font-weight:700;margin-top:18px}'
++'#nlj-hist .sg{margin:6px 0 0;text-align:right;font:italic .95rem Georgia,serif;color:#7a5a10}';
+document.head.appendChild(st);
+function build(){
+  var s=document.createElement('section');s.id='nlj-hist';s.setAttribute('aria-label','Notre histoire');
+  s.innerHTML='<div class="in"><h2>Notre histoire</h2>'
+  +'<p>Niamké Love Jésus est né d’une épreuve. Dans une période très difficile de ma vie, j’ai reçu de Jésus une parole de paix : « Ne t’inquiète pas. » Cette parole m’a relevé, et elle a changé ma vie.</p>'
+  +'<p>J’ai voulu transmettre cette paix à d’autres. J’ai créé ce site pour rapprocher les gens de Jésus, et pour permettre à des célibataires chrétiens de se rencontrer dans le respect, la prière et la Parole de Dieu.</p>'
+  +'<p>Ici, chaque jour, un verset et une prière t’accompagnent. Si tu traverses toi-même une épreuve, souviens-toi que tu n’es pas seul : Dieu veille sur toi.</p>'
+  +'<p class="bv">Bienvenue dans la famille.</p>'
+  +'<p class="sg" translate="no"><span class="notranslate">Niamké Philippe Tao, </span><span>fondateur</span></p></div>';
+  return s;
+}
+var el=build();
+function place(){
+  if(document.getElementById('nlj-hist'))return;
+  var a=document.getElementById('couples');
+  if(a&&a.parentNode)a.parentNode.insertBefore(el,a);
+}
+place();
+var root=document.getElementById('root'),t;
+if(root&&window.MutationObserver)new MutationObserver(function(){clearTimeout(t);t=setTimeout(place,120);}).observe(root,{childList:true,subtree:true});
+})();
+
+/* ===== Barre du haut : la rangée de drapeaux (déjà dans le menu « Français ▼ ») est remplacée par des liens utiles (grands écrans) ===== */
+(function(){
+var st=document.createElement('style');
+st.textContent='.topbar-verse + div > [class~="xl:flex"]{display:none!important}'
++'#nlj-topnav{display:none;align-items:center;gap:4px;margin-right:6px}'
++'@media(min-width:1280px){#nlj-topnav{display:flex}}'
++'#nlj-topnav button{background:none;border:0;color:#fff;opacity:.88;font:600 12px/1 system-ui,"Segoe UI",sans-serif;letter-spacing:.04em;padding:6px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}'
++'#nlj-topnav button:hover{opacity:1;background:rgba(255,255,255,.12)}'
++'#nlj-topnav button:focus-visible{outline:2px solid #c9a227;outline-offset:1px}';
+document.head.appendChild(st);
+function go(id){var e=document.getElementById(id);if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
+function legal(d){try{parent.postMessage({nlj:'legal',doc:d},'*');}catch(e){}}
+var ITEMS=[['À propos',function(){go('nlj-hist');}],['Verset & prière',function(){go('nlj-vdj');}],['Aide',function(){legal('help');}],['Contact',function(){legal('contact');}]];
+function sync(){
+  if(document.getElementById('nlj-topnav'))return;
+  var v=document.querySelector('.topbar-verse');if(!v||!v.nextElementSibling)return;
+  var box=v.nextElementSibling,nav=document.createElement('nav');
+  nav.id='nlj-topnav';nav.setAttribute('aria-label','Menu');
+  ITEMS.forEach(function(it){var b=document.createElement('button');b.type='button';b.textContent=it[0];b.addEventListener('click',it[1]);nav.appendChild(b);});
+  box.insertBefore(nav,box.firstChild);
+}
+sync();
+var root=document.getElementById('root'),t;
+if(root&&window.MutationObserver)new MutationObserver(function(){clearTimeout(t);t=setTimeout(sync,100);}).observe(root,{childList:true,subtree:true});
 })();

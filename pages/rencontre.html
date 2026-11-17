@@ -27,7 +27,15 @@
 
 
 
-<link rel="stylesheet" href="../assets/css/ios.css?v=3"><script src="../assets/js/shared/nlj-scrollhint.js?v=1" defer></script></head><style>
+<link rel="stylesheet" href="../assets/css/ios.css?v=3"><script src="../assets/js/shared/nlj-scrollhint.js?v=1" defer></script><style id="nlj-menu-tel">
+/* Menu du haut : sur téléphone, une seule ligne qui défile de côté. L'ordinateur ne change pas. */
+@media (max-width:700px){
+  header .nav-links{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;justify-content:flex-start!important;gap:6px!important;width:100%;max-width:100%;min-width:0;padding:2px 0 8px!important;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  header .nav-links::-webkit-scrollbar{display:none}
+  header .nav-links a,header .nav-links button.nav-msg{flex:0 0 auto!important;white-space:nowrap}
+}
+</style>
+</head><style>
 .ms-list{background:#fff;border-radius:16px;overflow:hidden}
 .ms-row{display:flex;align-items:center;gap:16px;padding:12px 16px;cursor:pointer;transition:background .15s}
 .ms-row:hover,.ms-row.cur{background:#f5f7fb}

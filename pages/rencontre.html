@@ -28,13 +28,21 @@
 
 
 <link rel="stylesheet" href="../assets/css/ios.css?v=3"><script src="../assets/js/shared/nlj-scrollhint.js?v=1" defer></script><style id="nlj-menu-tel">
-/* Menu du haut : sur téléphone, une seule ligne qui défile de côté. L'ordinateur ne change pas. */
+/* Menu du haut : sur téléphone, un bouton « ☰ Menu » ouvre la liste vers le bas. L'ordinateur ne change pas. */
+.nlj-menu-btn{display:none}
 @media (max-width:700px){
-  header .nav-links{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;justify-content:flex-start!important;gap:6px!important;width:100%;max-width:100%;min-width:0;padding:2px 0 8px!important;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  header .nav-links::-webkit-scrollbar{display:none}
-  header .nav-links a,header .nav-links button.nav-msg{flex:0 0 auto!important;white-space:nowrap}
+  .nlj-menu-btn{display:flex;align-items:center;justify-content:space-between;width:100%;box-sizing:border-box;min-height:46px;padding:10px 20px;border:0;border-radius:999px;background:var(--navy,#0f2a4a);color:#fff;font-family:inherit;font-weight:800;font-size:1rem;cursor:pointer;box-shadow:0 2px 8px rgba(15,42,74,.25)}
+  .nlj-lbl{display:inline-flex;align-items:center;gap:10px}
+  .nlj-menu-btn i{font-style:normal;transition:transform .2s}
+  .nlj-menu-btn[aria-expanded="true"] i{transform:rotate(180deg)}
+  header .nav-links{display:none!important}
+  header .nav-links.open{display:flex!important;flex-direction:column;flex-wrap:nowrap!important;overflow-x:hidden!important;overflow-y:auto!important;max-height:62vh;align-items:stretch!important;justify-content:flex-start!important;gap:6px!important;width:100%;padding:6px 0 10px!important;-webkit-mask-image:none!important;mask-image:none!important}
+  header .nav-links.open a,header .nav-links.open button.nav-msg{flex:none!important;width:100%;box-sizing:border-box;justify-content:flex-start!important;white-space:normal;min-height:44px!important;padding:11px 16px!important;font-size:.95rem!important;border-radius:14px!important;background:#f1f5f9;border:1px solid #e2e8f0}
+  header .nav-links.open a.active{background:var(--navy,#0f2a4a)!important;color:#fff!important}
+  header .nav-links.open button.nav-msg{background:var(--gold,#c9a227)!important;border-color:var(--gold,#c9a227)}
 }
 </style>
+<script src="../assets/js/shared/nlj-menu-tel.js?v=1" defer></script>
 </head><style>
 .ms-list{background:#fff;border-radius:16px;overflow:hidden}
 .ms-row{display:flex;align-items:center;gap:16px;padding:12px 16px;cursor:pointer;transition:background .15s}
@@ -67,7 +75,7 @@
 <select id="currencySelect" class="select-pill"><option value="XOF">CFA XOF</option><option value="EUR">€ EUR</option><option value="USD">$ USD</option><option value="CAD">$ CAD</option><option value="GBP">£ GBP</option></select>
 <button type="button" class="btn btn-gold btn-sm btn-premium-cta" data-nlj-act="openPremium">⭐ Devenir Premium</button>
 </div>
-<div class="nav-links"><a href="1ere_page.html">🏠 Page d'accueil</a><a href="3eme_page.html">⭐ Mon espace Premium</a><a href="#accueil" data-i18n="navHome">Accueil</a><a href="#rencontre" data-i18n="navMeet">Rencontre</a><a href="#mur-vocal">🎙️ Mur vocal</a><a href="#versets" data-i18n="navVerses">Versets Jésus</a><a href="#jeux" data-i18n="navGame">Jeu Biblique</a><a href="#musique" data-i18n="navMusic">Musique</a><a href="#videos">🎬 Vidéos</a><a href="#medias">▶️ Écouter &amp; regarder</a><button type="button" class="nav-msg" data-nlj="msgs">💬 Messages <i class="msg-badge" style="display:none">0</i></button><a href="#moderation" data-i18n="navMod">Modération</a><a href="#premium" data-i18n="navPremium">Premium</a></div>
+<button type="button" id="nlj-menu-btn" class="nlj-menu-btn" aria-expanded="false" aria-controls="nlj-links"><span class="nlj-lbl"><span class="nlj-t">☰ Menu</span><b class="msg-badge" style="display:none">0</b></span><i aria-hidden="true">▾</i></button><div class="nav-links" id="nlj-links"><a href="1ere_page.html">🏠 Page d'accueil</a><a href="3eme_page.html">⭐ Mon espace Premium</a><a href="#accueil" data-i18n="navHome">Accueil</a><a href="#rencontre" data-i18n="navMeet">Rencontre</a><a href="#mur-vocal">🎙️ Mur vocal</a><a href="#versets" data-i18n="navVerses">Versets Jésus</a><a href="#jeux" data-i18n="navGame">Jeu Biblique</a><a href="#musique" data-i18n="navMusic">Musique</a><a href="#videos">🎬 Vidéos</a><a href="#medias">▶️ Écouter &amp; regarder</a><button type="button" class="nav-msg" data-nlj="msgs">💬 Messages <i class="msg-badge" style="display:none">0</i></button><a href="#moderation" data-i18n="navMod">Modération</a><a href="#premium" data-i18n="navPremium">Premium</a></div>
 </div>
 </div>
 </header>

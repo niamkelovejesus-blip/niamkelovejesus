@@ -418,7 +418,7 @@ V.messages = async () => {
 };
 
 // ---- Liens de chansons + classement par catégorie ----
-const CATS = ['Louange', 'Adoration', 'Prière', 'Mariage et couple', 'Noël', 'Enfants', 'Autres'];
+const CATS = ['Louange', 'Adoration', 'Prière', 'Mariage et couple', 'Noël', 'Enfants', 'Témoignage', 'Autres'];
 const catSel = () => `<label>Catégorie<select name="cat">${CATS.map(c => `<option>${esc(c)}</option>`).join('')}</select></label><label>Ou nouvelle catégorie<input name="cat_new" placeholder="ex. Pâques"></label>`;
 const catOf = r => String(r.categorie ?? r.category ?? r.genre ?? r.rubrique ?? '').trim();
 const collOf = r => String(r.recueil ?? r.collection ?? r.album ?? '').trim();

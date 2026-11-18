@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-lN1MFrTMahSQ7BkNbZacN3fEQM/JopujNlt1ZjIr11Y=' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'sha256-9HXO0M+GULA5wMC17g+x31zGrwyrYLZd0bcdHkSq8CI=' ; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://qxxhbfoqlreiqyshbpqp.supabase.co wss://qxxhbfoqlreiqyshbpqp.supabase.co https://translate.googleapis.com; worker-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-SGR3UhpqGNxJK7lMaYL9hU99zWNoj+9aMJo3tP1QVzk=' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'sha256-9HXO0M+GULA5wMC17g+x31zGrwyrYLZd0bcdHkSq8CI=' ; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://qxxhbfoqlreiqyshbpqp.supabase.co wss://qxxhbfoqlreiqyshbpqp.supabase.co https://translate.googleapis.com; worker-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <meta name="referrer" content="no-referrer">
 <meta name="color-scheme" content="light">
 <script>if(window.top!==window.self){document.documentElement.style.display="none";try{window.top.location.replace(window.self.location.href)}catch(e){}}</script>
@@ -432,7 +432,7 @@ V.links = async () => {
   cache.pk = keys.find(k => PATH_KEY.test(k)) || 'url';
   const G = {}; data.forEach(r => (G[catOf(r) || NO_CAT] = G[catOf(r) || NO_CAT] || []).push(r));
   const names = Object.keys(G).sort((a, b) => a === NO_CAT ? 1 : b === NO_CAT ? -1 : (CATS.indexOf(a) < 0 ? 99 : CATS.indexOf(a)) - (CATS.indexOf(b) < 0 ? 99 : CATS.indexOf(b)) || a.localeCompare(b, 'fr'));
-  const row = r => `<div class="lkr" data-s="${esc((songName(r) + ' ' + (r.artist || '') + ' ' + collOf(r)).toLowerCase())}"><span class="lkt"><b>${esc(songName(r))}</b> <span class="m">${esc([r.artist, collOf(r)].filter(Boolean).join(' · '))}</span></span><span class="tag">${((window.NLJ_EMBED && NLJ_EMBED.parse(songSrc(r))) || {}).net || (/^https?:/i.test(songSrc(r)) ? 'Lien' : 'Fichier')}</span><button data-a="playSong" data-id="${esc(r.id)}">Écouter</button><button data-a="setCat" data-id="${esc(r.id)}">Classer</button><button class="d" data-a="delSong" data-id="${esc(r.id)}">Supprimer</button></div>`;
+  const row = r => `<div class="lkr" data-s="${esc((songName(r) + ' ' + (r.artist || '') + ' ' + collOf(r)).toLowerCase())}"><span class="lkt"><b>${esc(songName(r))}</b> <span class="m">${esc([r.artist, collOf(r)].filter(Boolean).join(' · '))}</span></span><span class="tag">${((window.NLJ_EMBED && NLJ_EMBED.parse(songSrc(r))) || {}).net || (/^https?:/i.test(songSrc(r)) ? 'Lien' : 'Fichier')}</span><button data-a="playSong" data-id="${esc(r.id)}">Écouter</button><button data-a="editLink" data-id="${esc(r.id)}">Modifier</button><button data-a="setCat" data-id="${esc(r.id)}">Classer</button><button class="d" data-a="delSong" data-id="${esc(r.id)}">Supprimer</button></div>`;
   const nLinks = data.filter(r => /^https?:/i.test(songSrc(r))).length;
   $('#main').innerHTML = head('Liens & classement', `${data.length} chant${data.length > 1 ? 's' : ''} · ${names.length} catégorie${names.length > 1 ? 's' : ''} · ${nLinks} en lien (aucune place de stockage utilisée)`)
     + `<form class="formc" data-f="link"><h3>Coller des liens (chants, YouTube, Spotify, Facebook…)</h3><div class="fg">
@@ -960,6 +960,22 @@ const A = {
     const patch = { [tk]: t.trim() || songName(s) };
     if (ak) { const a = prompt('Artiste / auteur-compositeur :', s[ak] || ''); if (a === null) return; patch[ak] = a.trim() || null; }
     return act(() => updRows(sb.from('musiques').update(patch).eq('id', id)), 'Musique mise à jour');
+  },
+  editLink: id => {
+    const s = cache.songs[id]; if (!s) return;
+    const pick = (ks, d) => ks.find(k => k in s) || d, patch = {};
+    const tk = pick(['title', 'titre', 'nom', 'name'], 'title'), ak = ['artist', 'artiste'].find(k => k in s);
+    const ck = pick(['categorie', 'category', 'genre', 'rubrique'], 'categorie'), rk = ['recueil', 'collection', 'album'].find(k => k in s);
+    const uk = [cache.pk, 'url'].find(k => k && s[k] && /^https?:/i.test(s[k]));
+    const t = prompt('Titre :', songName(s)); if (t === null) return; patch[tk] = t.trim() || songName(s);
+    if (ak) { const a = prompt('Artiste :', s[ak] || ''); if (a === null) return; patch[ak] = a.trim() || null; }
+    const c = prompt('Catégorie :\n' + [...new Set([...CATS, ...Object.values(cache.songs).map(catOf).filter(Boolean)])].join(' · '), catOf(s)); if (c === null) return; patch[ck] = c.trim() || null;
+    if (rk) { const r = prompt('Recueil / collection (facultatif) :', s[rk] || ''); if (r === null) return; patch[rk] = r.trim() || null; }
+    if (uk) { const u = prompt('Lien :', s[uk]); if (u === null) return; if (u.trim() && !/^https?:\/\//i.test(u.trim())) return toast('Le lien doit commencer par http(s)://', true); if (u.trim()) patch[uk] = u.trim(); }
+    return act(async () => {
+      try { await updRows(sb.from('musiques').update(patch).eq('id', id)); }
+      catch (e) { throw new Error(/column/i.test(e.message || '') ? 'Colonne manquante : exécutez supabase_musiques_liens.sql dans Supabase.' : e.message); }
+    }, 'Lien mis à jour');
   },
   reorg: async () => {
     const todo = Object.values(cache.songs).filter(s => { const v = cache.pk && s[cache.pk]; return v && !/^https?:/i.test(v) && !String(v).startsWith('audio/'); });

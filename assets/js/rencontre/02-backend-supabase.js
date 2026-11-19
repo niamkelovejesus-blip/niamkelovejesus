@@ -435,6 +435,19 @@ else priceHtml=`<div class="price">${formatPrice(p.xof)}<small>${p.duration}</sm
 let badgeHtml=p.badge?`<div style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:${p.keyId==='Alliance'?'var(--gold)':'var(--navy)'};color:${p.keyId==='Alliance'?'#111':'#fff'};font-weight:900;font-size:.70rem;padding:5px 14px;border-radius:999px;white-space:nowrap">${p.badge}</div>`:'';
 return `<div class="plan ${p.cls}" style="position:relative">${badgeHtml}<h3>${p.key}</h3>${priceHtml}<ul>${p.features.map(f=>`<li>${f}</li>`).join("")}</ul><button class="btn ${p.featured?'btn-gold':'btn-outline'}" style="width:100%" data-nlj-act="choosePlan" data-nlj-a="${NLJA([p.keyId])}">${p.cta}</button></div>`
 }).join("");
+/* Mobile : bouton déroulant PREMIUM entre « Gratuit » et les 3 offres (caché sur ordinateur par le CSS) */
+try{
+const first=grid.querySelector(".plan");
+if(first){
+const fr=String(currentLang||"fr").toLowerCase()==="fr";
+const open=grid.classList.contains("pm-open");
+const tg=document.createElement("button");
+tg.type="button";tg.className="pm-toggle";tg.setAttribute("aria-expanded",open?"true":"false");
+tg.innerHTML='<span class="pm-t1">⭐ PREMIUM</span><span class="pm-t2">'+(fr?"À partir de ":"From ")+formatPrice(BASE_PRICES_XOF.semestre/6)+(fr?" / mois":" / month")+'</span><span class="pm-arrow" aria-hidden="true">▾</span>';
+tg.addEventListener("click",function(){const o=grid.classList.toggle("pm-open");tg.setAttribute("aria-expanded",o?"true":"false");});
+first.after(tg);
+}
+}catch(e){}
 }
 function showToast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(window.__nljT);window.__nljT=setTimeout(()=>t.classList.remove("show"),2500)}
 function updateStats(){}

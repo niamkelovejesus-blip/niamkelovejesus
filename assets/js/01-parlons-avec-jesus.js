@@ -119,9 +119,9 @@ bot(["Paix à toi 🙏 Bienvenue ! Je peux répondre à tes questions sur la Bib
 document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a.bl");if(!a)return;if(window.parent===window)return;e.preventDefault();try{parent.postMessage({nlj:"bible-open",ref:a.textContent.trim()},"*");}catch(x){window.open(a.href,"_blank","noopener");}},true);
 
 /* Intégration au site : retour vers l'accueil (la page est affichée dans la coque index.html) */
-(function(){var b=document.getElementById("back");if(b)b.onclick=function(){try{parent.postMessage({nlj:"back"},"*");}catch(e){location.href="../";}};})();
+
 
 /* La barre de traduction de la coque (langues autres que le français) est collée en bas à gauche : on laisse de la place au champ de saisie. */
 (function(){try{var h=parent.document.documentElement;function m(){document.body.classList.toggle("nljt",h.classList.contains("nljt-on"));}m();new MutationObserver(m).observe(h,{attributes:true,attributeFilter:["class"]});}catch(e){}})();
-/* Libellé du bouton retour, traduit (21 langues) */
-(function(){var T=['Retour','Back','Volver','Voltar','Indietro','Zurück','رجوع','返回','Terug','Назад','Zonga','Rudi','वापस','Kembali','Bumalik','뒤로','Quay lại','Wróć','Назад','واپس','Înapoi'],L=['fr','en','es','pt','it','de','ar','zh','nl','ru','ln','sw','hi','id','tl','ko','vi','pl','uk','ur','ro'],l='fr';try{l=(localStorage.getItem('niamke_lang')||'fr').toLowerCase();}catch(e){}var i=L.indexOf(l);if(i<0)i=1;var b=document.getElementById('back');if(b){b.textContent='\u2190 '+T[i];b.setAttribute('aria-label',T[i]);}})();
+/* Croix de fermeture : revient à la page précédente (comme la flèche retour du téléphone) */
+(function(){var T=['Fermer','Close','Cerrar','Fechar','Chiudi','Schließen','إغلاق','关闭','Sluiten','Закрыть','Kanga','Funga','बंद करें','Tutup','Isara','닫기','Đóng','Zamknij','Закрити','بند کریں','Închide'],L=['fr','en','es','pt','it','de','ar','zh','nl','ru','ln','sw','hi','id','tl','ko','vi','pl','uk','ur','ro'],l='fr';try{l=(localStorage.getItem('niamke_lang')||'fr').toLowerCase();}catch(e){}var i=L.indexOf(l);if(i<0)i=1;var b=document.getElementById('back');if(!b)return;b.textContent='\u2715';b.setAttribute('aria-label',T[i]);b.setAttribute('title',T[i]);b.onclick=function(e){if(e)e.preventDefault();try{if(parent&&parent!==window&&parent.history.length>1){parent.history.back();return;}}catch(x){}try{parent.postMessage({nlj:'go',page:'p1',id:''},'*');}catch(x){}};})();

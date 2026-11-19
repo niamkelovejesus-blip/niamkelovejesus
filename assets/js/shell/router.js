@@ -2,7 +2,7 @@ var TITLES={p1:'Niamké Love Jésus — Rencontre chrétienne centrée sur Jésu
 var URLS={p1:'pages/accueil.html',p2:'pages/rencontre.html',p3:'pages/premium.html',p4:'pages/parlons-avec-jesus.html',p5:'pages/bible.html'};
 function navFrame(f,u){try{f.contentWindow.location.replace(u);}catch(e){f.src=u;}}
 var NAMES={p1:'accueil',p2:'rencontre',p3:'premium',p4:'parlons',p5:'bible'},BYNAME={accueil:'p1',rencontre:'p2',premium:'p3',parlons:'p4',bible:'p5'};
-var bibleReady=false,pendingBible='';
+var bibleReady=false,pendingBible='',origin='';try{origin=sessionStorage.getItem('nlj_origin')||'';}catch(e){}
 var loaded={},loadedLang={},cur=null,STATE={known:false,premium:false,plan:'',user:false};
 function lang(){try{return(localStorage.getItem('niamke_lang')||'fr').toLowerCase();}catch(e){return 'fr';}}
 function load(p,cb){
@@ -12,6 +12,7 @@ function load(p,cb){
 }
 function _show(p,id,pop){
   if(cur&&loaded[cur])loadedLang[cur]=lang();
+  if((p==='p4'||p==='p5')&&cur&&cur!=='p4'&&cur!=='p5'){origin=cur;try{sessionStorage.setItem('nlj_origin',cur);}catch(e){}}
   cur=p;try{document.title=TITLES[p];}catch(e){}
   ['p1','p2','p3','p4','p5'].forEach(function(k){document.getElementById(k).classList.toggle('on',k===p);});
   if(!pop){try{history.pushState({p:p},'','#'+NAMES[p]);}catch(e){}}
@@ -36,7 +37,8 @@ window.addEventListener('message',function(e){
   var ok=['p1','p2','p3','p4','p5'].some(function(k){return document.getElementById(k).contentWindow===e.source;});
   if(!ok)return;
   var d=e.data;if(!d||!d.nlj)return;
-  if(d.nlj==='go'&&NAMES[d.page])show(d.page,d.id);
+  if(d.nlj==='back'){if(origin)show(origin);else hasSession().then(function(ok){show(ok?'p2':'p1');});}
+  else if(d.nlj==='go'&&NAMES[d.page])show(d.page,d.id);
   else if(d.nlj==='state'){STATE={known:true,premium:!!d.premium,plan:d.plan||'',user:!!d.user};sendState();}
   else if(d.nlj==='need-state')sendState();
   else if(d.nlj==='bible-open'){pendingBible=String(d.ref||'');show('p5');if(bibleReady&&pendingBible)flushBible();}

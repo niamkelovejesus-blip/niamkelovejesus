@@ -137,7 +137,7 @@ $('go').addEventListener('click',function(){search($('q').value);});
 $('q').addEventListener('keydown',function(e){if(e.key==='Enter')search($('q').value);});
 $('fsm').addEventListener('click',function(){setFs(fs-2);});
 $('fsp').addEventListener('click',function(){setFs(fs+2);});
-$('back').addEventListener('click',function(){try{parent.postMessage({nlj:'back'},'*');}catch(e){}});
+
 $('tr').addEventListener('change',function(){cur=this.value;try{localStorage.setItem('nlj_bible_tr',cur);}catch(e){}home();});
 /* démarrage : charge les traductions disponibles */
 fetch('../assets/bible/versets-du-jour.json').then(function(r){return r.ok?r.json():null;}).then(function(j){if(Array.isArray(j)&&j.length)VDJ=j.map(function(x){return [x[0],x[1],x[2],x[3]];});}).catch(function(){});
@@ -151,5 +151,5 @@ Promise.all(TR.map(load)).then(function(){
 });
 window.addEventListener('message',function(e){var d=e.data;if(!d||d.nlj!=='bible')return;if(d.ref)openRef(d.ref);else if(d.q){$('q').value=d.q;if(!search(d.q)){}}});
 })();
-/* Libellé du bouton retour, traduit (21 langues) */
-(function(){var T=['Retour','Back','Volver','Voltar','Indietro','Zurück','رجوع','返回','Terug','Назад','Zonga','Rudi','वापस','Kembali','Bumalik','뒤로','Quay lại','Wróć','Назад','واپس','Înapoi'],L=['fr','en','es','pt','it','de','ar','zh','nl','ru','ln','sw','hi','id','tl','ko','vi','pl','uk','ur','ro'],l='fr';try{l=(localStorage.getItem('niamke_lang')||'fr').toLowerCase();}catch(e){}var i=L.indexOf(l);if(i<0)i=1;var b=document.getElementById('back');if(b){b.textContent='\u2190 '+T[i];b.setAttribute('aria-label',T[i]);}})();
+/* Croix de fermeture : revient à la page précédente (comme la flèche retour du téléphone) */
+(function(){var T=['Fermer','Close','Cerrar','Fechar','Chiudi','Schließen','إغلاق','关闭','Sluiten','Закрыть','Kanga','Funga','बंद करें','Tutup','Isara','닫기','Đóng','Zamknij','Закрити','بند کریں','Închide'],L=['fr','en','es','pt','it','de','ar','zh','nl','ru','ln','sw','hi','id','tl','ko','vi','pl','uk','ur','ro'],l='fr';try{l=(localStorage.getItem('niamke_lang')||'fr').toLowerCase();}catch(e){}var i=L.indexOf(l);if(i<0)i=1;var b=document.getElementById('back');if(!b)return;b.textContent='\u2715';b.setAttribute('aria-label',T[i]);b.setAttribute('title',T[i]);b.onclick=function(e){if(e)e.preventDefault();try{if(parent&&parent!==window&&parent.history.length>1){parent.history.back();return;}}catch(x){}try{parent.postMessage({nlj:'go',page:'p1',id:''},'*');}catch(x){}};})();

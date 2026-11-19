@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html data-nlj-page="parlons" lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://qxxhbfoqlreiqyshbpqp.supabase.co wss://qxxhbfoqlreiqyshbpqp.supabase.co https://translate.googleapis.com https://api.mymemory.translated.net; worker-src 'self' blob:; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<script src="../assets/js/shared/frame-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parlons avec Jésus — Niamké Love Jésus</title>
+<style>
+:root{--nuit:#0f2a4a;--ciel:#1d4a7a;--or:#c9a227;--aube:#fbf7ec;--texte:#1b2430;--gris:#5b6675}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--nuit);color:var(--texte);display:flex;justify-content:center}
+.app{width:100%;max-width:640px;height:100%;height:100dvh;display:flex;flex-direction:column;background:var(--aube)}
+header{background:var(--nuit);color:#fff;padding:18px 20px 16px;border-bottom:3px solid var(--or)}
+h1{margin:0;font:600 1.5rem/1.2 Georgia,"Times New Roman",serif}
+header p{margin:4px 0 0;color:#cfd8e6;font-size:.9rem}
+#log{flex:1;overflow-y:auto;padding:18px 16px 8px;display:flex;flex-direction:column;gap:10px}
+.m{max-width:88%;padding:11px 14px;border-radius:16px;overflow-wrap:anywhere}
+.bot{align-self:flex-start;background:#fff;border:1px solid #e6dfc9;border-bottom-left-radius:4px}
+.me{align-self:flex-end;background:var(--ciel);color:#fff;border-bottom-right-radius:4px}
+.v{margin:8px 0 2px;padding:8px 12px;border-left:3px solid var(--or);background:var(--aube);font:italic 1.02rem/1.5 Georgia,serif}
+.v b{display:block;margin-top:2px;font:600 .8rem system-ui,sans-serif;color:var(--gris)}
+.v b a.bl,.m a.bl{color:#1d4a7a;text-decoration:underline;text-underline-offset:2px;font-weight:700}
+.v b a.bl:hover,.m a.bl:hover{color:#0f2a4a;background:#f3e9c4}
+.pr{margin:8px 0 2px;padding:12px 14px;border-radius:10px;background:var(--nuit);color:#fff;font:1.02rem/1.6 Georgia,serif}
+.m p{margin:0 0 .5em}.m p:last-child{margin:0}
+.m ul{margin:.3em 0;padding-left:1.2em}
+#chips{display:flex;flex-wrap:wrap;gap:8px;padding:6px 16px 10px}
+#chips button{font:inherit;font-size:.92rem;padding:8px 13px;border-radius:999px;border:1.5px solid var(--nuit);background:#fff;color:var(--nuit);cursor:pointer}
+#chips button:hover{background:var(--nuit);color:#fff}
+form{display:flex;gap:8px;padding:10px 16px calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid #e6dfc9;background:#fff}
+input{flex:1;min-width:0;font:inherit;padding:11px 14px;border:1.5px solid #c9c2ab;border-radius:999px}
+form button{font:inherit;font-weight:600;padding:0 18px;border:0;border-radius:999px;background:var(--or);color:var(--nuit);cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--or);outline-offset:2px}
+.dots span{display:inline-block;width:7px;height:7px;margin:0 2px;border-radius:50%;background:var(--gris);animation:b 1s infinite}
+.dots span:nth-child(2){animation-delay:.15s}.dots span:nth-child(3){animation-delay:.3s}
+@keyframes b{50%{opacity:.25}}
+@media(prefers-reduced-motion:reduce){.dots span{animation:none}}
+
+.top{display:flex;align-items:center;gap:12px}
+#back{flex:none;font:inherit;font-size:.85rem;font-weight:600;padding:7px 12px;border-radius:999px;border:1.5px solid rgba(255,255,255,.35);background:transparent;color:#fff;cursor:pointer}
+#back:hover{background:rgba(255,255,255,.14)}
+body.nljt form{padding-bottom:calc(62px + env(safe-area-inset-bottom,0px))}
+</style>
+<link rel="stylesheet" href="../assets/css/ios.css?v=3"></head>
+<body>
+<main class="app">
+<header><div class="top"><button type="button" id="back" aria-label="Retour">← Retour</button><h1>Parlons avec Jésus</h1></div><p>Questions sur la Bible, prière, vie avec Jésus</p></header>
+<div id="log" role="log" aria-live="polite"></div>
+<div id="chips"></div>
+<form id="f"><input id="t" aria-label="Ton message" placeholder="Écris ta question ou ta prière…" autocomplete="off"><button>Envoyer</button></form>
+</main>
+<script src="../assets/js/parlons/01-parlons-avec-jesus.js?v=54"></script>
+<script src="../assets/js/shared/nlj-parlons-fab.js"></script></body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html data-nlj-page="jeu" lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<script src="../assets/js/shared/frame-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>De Bethléem au Retour — Niamké Love Jésus</title>
+<style>
+:root{--nuit:#0f2a4a;--ciel:#1d4a7a;--or:#c9a227;--aube:#fbf7ec;--texte:#1b2430;--gris:#5b6675;--ok:#2e7d4f;--ko:#b3402f}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--nuit);color:var(--texte);display:flex;justify-content:center}
+.app{width:100%;max-width:680px;height:100dvh;display:flex;flex-direction:column;background:var(--aube)}
+header{background:var(--nuit);color:#fff;padding:12px 14px;border-bottom:3px solid var(--or);display:flex;align-items:center;gap:10px}
+header h1{margin:0;font:600 1.2rem/1.2 Georgia,serif;flex:1;min-width:0}
+.hb{flex:none;font:inherit;font-size:.85rem;font-weight:600;padding:7px 12px;border-radius:999px;border:1.5px solid rgba(255,255,255,.35);background:transparent;color:#fff;cursor:pointer}
+.pts{flex:none;font-weight:700;color:var(--or);font-size:.95rem}
+main{flex:1;overflow-y:auto;padding:18px 16px 40px;-webkit-overflow-scrolling:touch}
+h2{font:600 1.3rem Georgia,serif;color:var(--nuit);margin:0 0 6px}
+.lead{color:var(--gris);margin:0 0 16px}
+.ch{display:flex;gap:14px;align-items:center;width:100%;text-align:left;font:inherit;padding:16px;margin-bottom:12px;background:#fff;border:1.5px solid #e6dfc9;border-left:5px solid var(--or);border-radius:14px;cursor:pointer;color:inherit}
+.ch:hover{box-shadow:0 6px 18px rgba(15,42,74,.14)}
+.ch i{font-style:normal;font-size:2rem;flex:none}
+.ch b{display:block;font:600 1.1rem Georgia,serif;color:var(--nuit)}
+.ch small{color:var(--gris)}
+.st{margin-left:auto;color:var(--or);letter-spacing:2px;white-space:nowrap}
+.bar{height:8px;border-radius:99px;background:#e6dfc9;overflow:hidden;margin-bottom:14px}
+.bar div{height:100%;background:var(--or);transition:width .3s}
+.q{font:600 1.15rem/1.45 Georgia,serif;color:var(--nuit);margin:0 0 14px}
+.opt{display:block;width:100%;text-align:left;font:inherit;padding:13px 14px;margin-bottom:10px;border-radius:12px;border:1.5px solid #d9d1b6;background:#fff;color:var(--texte);cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--ciel);background:#f4f8fd}
+.opt.ok{background:#e8f5ed;border-color:var(--ok);color:#1d5a37}
+.opt.ko{background:#fbece8;border-color:var(--ko);color:#8a2e20;animation:sh .35s}
+.opt:disabled{cursor:default}
+.ex{margin:14px 0;padding:12px 14px;border-left:3px solid var(--or);background:#fff;border-radius:0 10px 10px 0;font:italic 1rem/1.5 Georgia,serif}
+.ex b{display:block;margin-top:4px;font:600 .82rem system-ui;color:var(--gris)}
+.ex a{color:var(--ciel);cursor:pointer;text-decoration:underline;font-weight:700}
+.btn{font:inherit;font-weight:700;padding:12px 22px;border:0;border-radius:999px;background:var(--or);color:var(--nuit);cursor:pointer}
+.btn.s{background:#fff;border:1.5px solid var(--nuit)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.big{text-align:center;padding:10px 0}
+.big .ico{font-size:3rem}
+.big .stars{font-size:2rem;color:var(--or);letter-spacing:4px}
+.vf{margin:16px 0;padding:16px;border-radius:14px;background:var(--nuit);color:#fff;font:italic 1.08rem/1.6 Georgia,serif}
+.vf b{display:block;margin-top:6px;font:600 .85rem system-ui;color:#e7d9a6}
+button:focus-visible{outline:3px solid var(--or);outline-offset:2px}
+@keyframes sh{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@media(prefers-reduced-motion:reduce){.opt.ko{animation:none}.bar div{transition:none}}
+</style>
+<link rel="stylesheet" href="../assets/css/ios.css?v=3">
+</head>
+<body>
+<div class="app">
+<header><button type="button" class="hb" id="back" aria-label="Retour à l’accueil">← Accueil</button><h1>De Bethléem au Retour</h1><span class="pts" id="pts" aria-live="polite">0 pt</span></header>
+<main id="m" aria-live="polite"></main>
+</div>
+<script src="../assets/js/jeu/01-jeu-jesus.js?v=1"></script>
+</body>
+</html>

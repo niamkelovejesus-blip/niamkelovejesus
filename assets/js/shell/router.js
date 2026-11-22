@@ -1,30 +1,19 @@
 var TITLES={p1:'Niamké Love Jésus — Rencontre chrétienne centrée sur Jésus-Christ',p2:'Rencontre — Niamké Love Jésus',p3:'Mon Premium — Niamké Love Jésus',p4:'Parlons avec Jésus — Niamké Love Jésus',p5:'La Bible — Niamké Love Jésus'};
-var URLS={p1:'pages/accueil.html',p2:'pages/rencontre.html',p3:'pages/premium.html',p4:'pages/parlons-avec-jesus.html',p5:'pages/bible.html'};
+/* Numéro de version des pages : à augmenter à chaque mise en ligne, pour que le téléphone recharge toujours la dernière version (menu compris) au lieu de garder l'ancienne en mémoire. */
+var PV='56';
+var URLS={p1:'pages/accueil.html?v='+PV,p2:'pages/rencontre.html?v='+PV,p3:'pages/premium.html?v='+PV,p4:'pages/parlons-avec-jesus.html?v='+PV,p5:'pages/bible.html?v='+PV};
 function navFrame(f,u){try{f.contentWindow.location.replace(u);}catch(e){f.src=u;}}
 var NAMES={p1:'accueil',p2:'rencontre',p3:'premium',p4:'parlons',p5:'bible'},BYNAME={accueil:'p1',rencontre:'p2',premium:'p3',parlons:'p4',bible:'p5'};
-var bibleReady=false,pendingBible='',origin='';try{origin=sessionStorage.getItem('nlj_origin')||'';}catch(e){}
+var bibleReady=false,pendingBible='';
 var loaded={},loadedLang={},cur=null,STATE={known:false,premium:false,plan:'',user:false};
-var overlay='',ignorePop=false;
 function lang(){try{return(localStorage.getItem('niamke_lang')||'fr').toLowerCase();}catch(e){return 'fr';}}
 function load(p,cb){
   var f=document.getElementById(p);
   if(!loaded[p]||loadedLang[p]!==lang()){if(p==='p5')bibleReady=false;loaded[p]=true;loadedLang[p]=lang();f.onload=function(){if(cb)setTimeout(cb,300);};navFrame(f,URLS[p]);}
   else if(cb)cb();
 }
-function openOverlay(p){
-  var f=document.getElementById(p);
-  if(overlay&&overlay!==p)document.getElementById(overlay).classList.remove('on');
-  if(!overlay){try{history.pushState({p:cur,ov:1},'','#'+NAMES[cur]);}catch(e){}}
-  overlay=p;f.style.zIndex=20;
-  load(p,function(){try{f.contentWindow.postMessage({nlj:'scroll',id:''},'*');}catch(e){}});
-  f.classList.add('on');
-}
-function closeOverlay(){if(!overlay)return;document.getElementById(overlay).classList.remove('on');overlay='';}
-function dismissOverlay(){closeOverlay();try{if(history.state&&history.state.ov){ignorePop=true;history.back();}}catch(e){}}
 function _show(p,id,pop){
-  overlay='';
   if(cur&&loaded[cur])loadedLang[cur]=lang();
-  if((p==='p4'||p==='p5')&&cur&&cur!=='p4'&&cur!=='p5'){origin=cur;try{sessionStorage.setItem('nlj_origin',cur);}catch(e){}}
   cur=p;try{document.title=TITLES[p];}catch(e){}
   ['p1','p2','p3','p4','p5'].forEach(function(k){document.getElementById(k).classList.toggle('on',k===p);});
   if(!pop){try{history.pushState({p:p},'','#'+NAMES[p]);}catch(e){}}
@@ -49,11 +38,10 @@ window.addEventListener('message',function(e){
   var ok=['p1','p2','p3','p4','p5'].some(function(k){return document.getElementById(k).contentWindow===e.source;});
   if(!ok)return;
   var d=e.data;if(!d||!d.nlj)return;
-  if(d.nlj==='back'){if(overlay)dismissOverlay();else if(origin)show(origin);else hasSession().then(function(ok){show(ok?'p2':'p1');});}
-  else if(d.nlj==='go'&&NAMES[d.page]){if((d.page==='p4'||d.page==='p5')&&cur&&cur!=='p4'&&cur!=='p5')openOverlay(d.page);else show(d.page,d.id);}
+  if(d.nlj==='go'&&NAMES[d.page])show(d.page,d.id);
   else if(d.nlj==='state'){STATE={known:true,premium:!!d.premium,plan:d.plan||'',user:!!d.user};sendState();}
   else if(d.nlj==='need-state')sendState();
-  else if(d.nlj==='bible-open'){pendingBible=String(d.ref||'');if(overlay||(cur&&cur!=='p4'&&cur!=='p5'))openOverlay('p5');else show('p5');if(bibleReady&&pendingBible)flushBible();}
+  else if(d.nlj==='bible-open'){pendingBible=String(d.ref||'');show('p5');if(bibleReady&&pendingBible)flushBible();}
   else if(d.nlj==='bible-ready'){bibleReady=true;if(pendingBible)flushBible();}
   else if(d.nlj==='filters'){window.FILTERS={church:d.church||'',gender:d.gender||'',search:d.search||'',ageMin:d.ageMin,ageMax:d.ageMax};show('p2','profilesGrid');}
   else if(d.nlj==='legal')showLegal(d.doc);
@@ -62,9 +50,6 @@ window.addEventListener('message',function(e){
   else if(d.nlj==='logout'){wipePrivate();_show('p1');}
 });
 window.addEventListener('popstate',function(e){
-  if(ignorePop){ignorePop=false;return;}
-  if(overlay){closeOverlay();return;}
-  if(e.state&&e.state.ov)return;
   var p=(e.state&&e.state.p)||BYNAME[(location.hash||'').slice(1)]||'p1';show(p,'',true);
 });
 var hadHash=!!(location.hash||'').slice(1);

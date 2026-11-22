@@ -1,0 +1,76 @@
+/* ===== Page 2 (Rencontre) — palette professionnelle =====
+   Identité conservée : bleu nuit + or.
+   Couleurs ajoutées : bleu royal profond, bleu glacé et sable doux,
+   en alternance pour donner du rythme aux sections.
+   Pour revenir en arrière : retirer la ligne <link> de pages/rencontre.html. */
+:root{
+  --nlj-royal:#12305a;
+  --nlj-royal-2:#1c4478;
+  --nlj-glace:#eaf1f9;
+  --nlj-glace-bord:#d5e2f1;
+  --nlj-sable:#f6f1e6;
+  --nlj-sable-bord:#e6dcc3;
+}
+html,body{background:var(--nlj-sable)}
+
+/* Alternance douce des sections */
+#rencontre{background:var(--nlj-sable)}
+#mur-vocal{background:var(--nlj-glace);border-top:1px solid var(--nlj-glace-bord);border-bottom:1px solid var(--nlj-glace-bord)}
+#profil{background:var(--nlj-sable)}
+#jeux{background:var(--nlj-glace);border-top:1px solid var(--nlj-glace-bord);border-bottom:1px solid var(--nlj-glace-bord)}
+#musique{background:var(--nlj-sable)}
+#videos{background:#fff;border-top:1px solid var(--nlj-sable-bord);border-bottom:1px solid var(--nlj-sable-bord)}
+#medias{background:var(--nlj-glace);border-bottom:1px solid var(--nlj-glace-bord)}
+#versets{background:#fff !important;border-top:1px solid var(--nlj-sable-bord) !important;border-bottom:1px solid var(--nlj-sable-bord) !important}
+#galerie-mariages{border-top:1px solid #e3d6a4 !important;border-bottom:1px solid #e3d6a4 !important}
+
+/* Abonnements : grand bandeau bleu royal, cartes blanches en relief */
+#premium{
+  background:radial-gradient(800px 380px at 15% 0%,rgba(201,162,39,.16),transparent),linear-gradient(160deg,#0f2a4a 0%,var(--nlj-royal-2) 100%);
+  border-top:3px solid #c9a227;border-bottom:3px solid #c9a227;
+  padding:48px 0 52px !important;
+}
+#premium h2{color:#fff}
+#premium .lead{color:#cbd5e1}
+#premium .plan{border-color:transparent;box-shadow:0 18px 40px rgba(2,10,30,.35)}
+#premium .payment-methods,#premium .pm-guide{box-shadow:0 18px 40px rgba(2,10,30,.30)}
+
+/* Titres de section : or un peu plus profond, plus lisible sur fond clair */
+#rencontre h2::after,#jeux h2::after,#musique h2::after,#videos h2::after,#medias h2::after{background:#b8901f}
+
+/* ===== Finitions professionnelles (CSS seul, aucune logique modifiée) ===== */
+html{scroll-behavior:smooth}
+::selection{background:#c9a227;color:#0f172a}
+
+/* Accessibilité : anneau doré visible au clavier */
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{
+  outline:3px solid #c9a227;outline-offset:2px;border-radius:10px}
+
+/* Cartes : léger relief au survol */
+.plan,.game,.pv-card,.profile{transition:transform .22s ease,box-shadow .22s ease}
+@media (hover:hover){
+  .plan:hover,.game:hover,.pv-card:hover,.profile:hover{transform:translateY(-4px);box-shadow:0 22px 48px rgba(15,23,42,.16)}
+}
+
+/* Boutons : réaction douce */
+.btn{transition:transform .15s ease,box-shadow .15s ease,background .2s ease}
+@media (hover:hover){
+  .btn-gold:hover{box-shadow:0 8px 20px rgba(201,162,39,.40);transform:translateY(-1px)}
+  .btn-primary:hover{background:var(--nlj-royal);transform:translateY(-1px)}
+}
+
+/* Mur vocal : message épinglé plus sobre (ivoire + or fin au lieu du jaune vif) */
+.mv-admin{
+  background:linear-gradient(145deg,#fffaf0 0%,#f8edc9 100%) !important;
+  border:1px solid #d9c27a !important;border-left:6px solid #c9a227 !important;
+  box-shadow:0 10px 28px rgba(15,42,74,.10) !important;color:#2b1d00}
+.mv-admin .mv-pin{background:var(--nlj-royal);color:#f3e3b3}
+
+/* Barre de défilement discrète */
+*{scrollbar-width:thin;scrollbar-color:#c9a227 transparent}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .plan,.game,.pv-card,.profile,.btn{transition:none}
+  .plan:hover,.game:hover,.pv-card:hover,.profile:hover{transform:none}
+}

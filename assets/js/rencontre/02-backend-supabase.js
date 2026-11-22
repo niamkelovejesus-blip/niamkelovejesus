@@ -78,7 +78,7 @@ versesTitle:"📖 Bibliothèque de Versets - Jésus au Centre",versesLead:"Tous 
 gameTitle:"Jeu Biblique sur Jésus 🎮",gameLead:"25 questions sur Jésus et le mariage, 12 versets de Jésus, 12 couples bibliques.",
 musicTitle:"Musique Chrétienne - Jésus",musicLead:"Chants pour Jésus-Christ, notre Époux céleste.",uploadTitle:"🎵 Téléverser des chants pour Jésus",uploadBtn:"Ajouter pour Jésus",
 modTitle:"Modération en Jésus",modLead:"Gère les profils en Jésus. Modifie ou supprime. Les suppressions ne reviennent plus.",
-premiumTitle:"Abonnements en Jésus - Prix CFA",premiumLead:"Prix pensés pour l'Afrique, centrés sur Jésus. 9 000 F / 15 000 F / 30 000 F",paymentTitle:"Paiement pour l'œuvre de Jésus",
+premiumTitle:"Abonnements en Jésus - Prix CFA",premiumLead:"Prix pensés pour l'Afrique, centrés sur Jésus. 9 000 F / 15 000 F / 27 000 F",paymentTitle:"Paiement pour l'œuvre de Jésus",
 footerDesc:"Rencontre chrétienne centrée sur Jésus-Christ. Jésus au centre. 21 langues. Suppressions définitives."
 },
 en:{
@@ -93,7 +93,7 @@ versesTitle:"📖 Library of Verses - Jesus at the Center",versesLead:"All these
 gameTitle:"Bible Game about Jesus 🎮",gameLead:"25 questions about Jesus and marriage, 12 verses of Jesus, 12 biblical couples.",
 musicTitle:"Christian Music - Jesus",musicLead:"Songs for Jesus Christ, our heavenly Bridegroom.",uploadTitle:"🎵 Upload songs for Jesus",uploadBtn:"Add for Jesus",
 modTitle:"Moderation in Jesus",modLead:"Manage profiles in Jesus. Edit or delete. Deletions are permanent.",
-premiumTitle:"Subscriptions in Jesus - CFA Price",premiumLead:"Prices designed for Africa, centered on Jesus. 9,000 F / 15,000 F / 30,000 F",paymentTitle:"Payment for the work of Jesus",
+premiumTitle:"Subscriptions in Jesus - CFA Price",premiumLead:"Prices designed for Africa, centered on Jesus. 9,000 F / 15,000 F / 27,000 F",paymentTitle:"Payment for the work of Jesus",
 footerDesc:"Christian dating centered on Jesus Christ. No more cities, just Jesus at the center. 21 languages. Permanent deletions."
 },
 es:{
@@ -153,7 +153,7 @@ versesTitle:"📖 Biblioteca di Versetti - GRATUIT ✅",versesLead:"Tutti questi
 gameTitle:"Gioco Biblico su Gesù 🎮 - GRATUIT ✅",gameLead:"25 domande su Gesù e il matrimonio, 12 versetti di Gesù, 12 coppie bibliche. GRATUIT",
 musicTitle:"Musica Cristiana - GRATUIT ✅",musicLead:"Canti per Gesù Cristo, nostro Sposo celeste. GRATUIT",uploadTitle:"🎵 Carica canti per Gesù",uploadBtn:"Aggiungi per Gesù",
 modTitle:"Moderazione in Gesù",modLead:"Gestisci profili in Gesù. Modifica o elimina. Les suppressions ne reviennent plus.",
-premiumTitle:"Abonnements en Jésus - Prix CFA",premiumLead:"Prix pensés pour l'Afrique, centrés sur Jésus. 9 000 F / 15 000 F / 30 000 F - TCHAT PREMIUM",paymentTitle:"Paiement pour l'œuvre de Jésus",
+premiumTitle:"Abonnements en Jésus - Prix CFA",premiumLead:"Prix pensés pour l'Afrique, centrés sur Jésus. 9 000 F / 15 000 F / 27 000 F - TCHAT PREMIUM",paymentTitle:"Paiement pour l'œuvre de Jésus",
 footerDesc:"Incontro cristiano centrato su Gesù Cristo. 21 lingue. Giochi/Musica/Bibbia GRATUIT, Tchat PREMIUM."
 },
 de:{
@@ -168,7 +168,7 @@ versesTitle:"📖 Versbibliothek - KOSTENLOS ✅",versesLead:"Alle diese Verse s
 gameTitle:"Bibelspiel über Jesus 🎮 - KOSTENLOS ✅",gameLead:"25 Fragen über Jesus und Ehe, 12 Verse von Jesus, 12 biblische Paare. KOSTENLOS",
 musicTitle:"Christliche Musik - KOSTENLOS ✅",musicLead:"Lieder für Jesus Christus, unseren himmlischen Bräutigam. KOSTENLOS",uploadTitle:"🎵 Lieder für Jesus hochladen",uploadBtn:"Für Jesus hinzufügen",
 modTitle:"Moderation in Jesus",modLead:"Profile in Jesus verwalten. Bearbeiten oder löschen. Löschungen sind endgültig.",
-premiumTitle:"Abos in Jesus - CFA Preis",premiumLead:"Preise für Afrika gedacht, zentriert auf Jesus. 9 000 F / 15 000 F / 30 000 F - PREMIUM CHAT",paymentTitle:"Zahlung für das Werk Jesu",
+premiumTitle:"Abos in Jesus - CFA Preis",premiumLead:"Preise für Afrika gedacht, zentriert auf Jesus. 9 000 F / 15 000 F / 27 000 F - PREMIUM CHAT",paymentTitle:"Zahlung für das Werk Jesu",
 footerDesc:"Christliches Treffen zentriert auf Jesus Christus. 21 Sprachen. Spiele/Musik/Bibel KOSTENLOS, Chat PREMIUM."
 },
 nl:{
@@ -185,7 +185,7 @@ gameTitle:"Bijbelspel over Jezus 🎮",gameLead:"25 vragen over Jezus en het huw
 musicTitle:"Christelijke muziek - Jezus",musicLead:"Liederen voor Jezus Christus, onze hemelse Bruidegom.",
 uploadTitle:"🎵 Liederen voor Jezus uploaden",uploadBtn:"Toevoegen voor Jezus",
 modTitle:"Moderatie in Jezus",modLead:"Beheer profielen in Jezus. Bewerk of verwijder. Verwijderingen zijn definitief.",
-premiumTitle:"Abonnementen in Jezus - Prijzen in CFA",premiumLead:"Prijzen ontworpen voor Afrika, gecentreerd op Jezus. 9 000 F / 15 000 F / 30 000 F",paymentTitle:"Betaling voor het werk van Jezus",footerDesc:"Christelijke ontmoeting gecentreerd op Jezus Christus. Jezus in het centrum. 21 talen. Definitieve verwijderingen."
+premiumTitle:"Abonnementen in Jezus - Prijzen in CFA",premiumLead:"Prijzen ontworpen voor Afrika, gecentreerd op Jezus. 9 000 F / 15 000 F / 27 000 F",paymentTitle:"Betaling voor het werk van Jezus",footerDesc:"Christelijke ontmoeting gecentreerd op Jezus Christus. Jezus in het centrum. 21 talen. Definitieve verwijderingen."
 },
 ru:{
 choose:"Выбрать этот тариф",free:"Бесплатно",navHome:"Главная",navMeet:"Знакомства",navVerses:"Стихи об Иисусе",navGame:"Библейская игра",navMusic:"Музыка",navMod:"Модерация",navPremium:"Премиум",
@@ -201,7 +201,7 @@ gameTitle:"Библейская игра об Иисусе 🎮",gameLead:"25 в
 musicTitle:"Христианская музыка - Иисус",musicLead:"Песни для Иисуса Христа, нашего Небесного Жениха.",
 uploadTitle:"🎵 Загрузить песни для Иисуса",uploadBtn:"Добавить для Иисуса",
 modTitle:"Модерация в Иисусе",modLead:"Управляйте анкетами в Иисусе. Редактируйте или удаляйте. Удалённое не возвращается.",
-premiumTitle:"Подписки в Иисусе - Цены в CFA",premiumLead:"Цены, созданные для Африки, с Иисусом в центре. 9 000 F / 15 000 F / 30 000 F",paymentTitle:"Оплата на дело Иисуса",footerDesc:"Христианские знакомства с Иисусом Христом в центре. Иисус в центре. 21 язык. Удаление окончательное."
+premiumTitle:"Подписки в Иисусе - Цены в CFA",premiumLead:"Цены, созданные для Африки, с Иисусом в центре. 9 000 F / 15 000 F / 27 000 F",paymentTitle:"Оплата на дело Иисуса",footerDesc:"Христианские знакомства с Иисусом Христом в центре. Иисус в центре. 21 язык. Удаление окончательное."
 },
 zh:{
 
@@ -216,7 +216,7 @@ versesTitle:"📖 经文图书馆 - 免费 ✅",versesLead:"所有这些经文�
 gameTitle:"关于耶稣的圣经游戏 🎮 - 免费 ✅",gameLead:"25个关于耶稣和婚姻的问题，12节耶稣的经文，12对圣经夫妇。免费",
 musicTitle:"基督教音乐 - 免费 ✅",musicLead:"为耶稣基督，我们天上的新郎的歌曲。免费",uploadTitle:"🎵 为耶稣上传歌曲",uploadBtn:"为耶稣添加",
 modTitle:"在耶稣里的管理",modLead:"在耶稣里管理资料。编辑或删除。删除是永久的。",
-premiumTitle:"在耶稣里的订阅 - 非洲法郎价格",premiumLead:"为非洲设计的价格，以耶稣为中心。9 000 F / 15 000 F / 30 000 F - 高级聊天",paymentTitle:"为耶稣的工作付款",
+premiumTitle:"在耶稣里的订阅 - 非洲法郎价格",premiumLead:"为非洲设计的价格，以耶稣为中心。9 000 F / 15 000 F / 27 000 F - 高级聊天",paymentTitle:"为耶稣的工作付款",
 footerDesc:"以耶稣基督为中心的基督徒相遇。21种语言。游戏/音乐/圣经免费，聊天高级。"
 },
 ln:{
@@ -233,7 +233,7 @@ gameTitle:"Momekano ya Biblia na ntina ya Yesu 🎮",gameLead:"Mituna 25 na ntin
 musicTitle:"Miziki ya Bakristu - Yesu",musicLead:"Nzembo mpo na Yesu Kristo, Mobali na biso ya likolo.",
 uploadTitle:"🎵 Tia nzembo mpo na Yesu",uploadBtn:"Bakisa mpo na Yesu",
 modTitle:"Bokengi na Yesu",modLead:"Kamba bapwofile na Yesu. Bongola to longola. Bolongoli ezongaka lisusu te.",
-premiumTitle:"Bokotisi na Yesu - Talo ya CFA",premiumLead:"Talo esalemi mpo na Afrika, na Yesu na katikati. 9 000 F / 15 000 F / 30 000 F",paymentTitle:"Kofuta mpo na mosala ya Yesu",footerDesc:"Kokutana ya Bakristu na katikati ya Yesu Kristo. Yesu na katikati. Minoko 21. Bolongoli ezali ya seko."
+premiumTitle:"Bokotisi na Yesu - Talo ya CFA",premiumLead:"Talo esalemi mpo na Afrika, na Yesu na katikati. 9 000 F / 15 000 F / 27 000 F",paymentTitle:"Kofuta mpo na mosala ya Yesu",footerDesc:"Kokutana ya Bakristu na katikati ya Yesu Kristo. Yesu na katikati. Minoko 21. Bolongoli ezali ya seko."
 },
 sw:{
 choose:"Chagua mpango huu",free:"Bure",navHome:"Mwanzo",navMeet:"Kukutana",navVerses:"Mistari ya Yesu",navGame:"Mchezo wa Biblia",navMusic:"Muziki",navMod:"Usimamizi",navPremium:"Premium",
@@ -249,7 +249,7 @@ gameTitle:"Mchezo wa Biblia kuhusu Yesu 🎮",gameLead:"Maswali 25 kuhusu Yesu n
 musicTitle:"Muziki wa Kikristo - Yesu",musicLead:"Nyimbo za Yesu Kristo, Bwana Arusi wetu wa mbinguni.",
 uploadTitle:"🎵 Pakia nyimbo za Yesu",uploadBtn:"Ongeza kwa ajili ya Yesu",
 modTitle:"Usimamizi katika Yesu",modLead:"Simamia wasifu katika Yesu. Hariri au futa. Vilivyofutwa havirudi tena.",
-premiumTitle:"Usajili katika Yesu - Bei za CFA",premiumLead:"Bei zilizopangwa kwa ajili ya Afrika, zikimlenga Yesu. 9 000 F / 15 000 F / 30 000 F",paymentTitle:"Malipo kwa ajili ya kazi ya Yesu",footerDesc:"Kukutana kwa Wakristo kukimlenga Yesu Kristo. Yesu katikati. Lugha 21. Ufutaji ni wa kudumu."
+premiumTitle:"Usajili katika Yesu - Bei za CFA",premiumLead:"Bei zilizopangwa kwa ajili ya Afrika, zikimlenga Yesu. 9 000 F / 15 000 F / 27 000 F",paymentTitle:"Malipo kwa ajili ya kazi ya Yesu",footerDesc:"Kukutana kwa Wakristo kukimlenga Yesu Kristo. Yesu katikati. Lugha 21. Ufutaji ni wa kudumu."
 },
 hi:{
 choose:"यह योजना चुनें",free:"निःशुल्क",navHome:"मुख्य पृष्ठ",navMeet:"मुलाक़ात",navVerses:"यीशु के वचन",navGame:"बाइबल खेल",navMusic:"संगीत",navMod:"प्रबंधन",navPremium:"प्रीमियम",
@@ -265,7 +265,7 @@ gameTitle:"यीशु पर बाइबल खेल 🎮",gameLead:"यी�
 musicTitle:"मसीही संगीत - यीशु",musicLead:"यीशु मसीह के लिए गीत, हमारे स्वर्गीय दूल्हे के लिए।",
 uploadTitle:"🎵 यीशु के लिए गीत अपलोड करें",uploadBtn:"यीशु के लिए जोड़ें",
 modTitle:"यीशु में प्रबंधन",modLead:"यीशु में प्रोफ़ाइल प्रबंधित करें। संपादित करें या हटाएँ। हटाया गया वापस नहीं आता।",
-premiumTitle:"यीशु में सदस्यता - CFA मूल्य",premiumLead:"अफ़्रीका के लिए बनाए गए मूल्य, यीशु पर केंद्रित। 9 000 F / 15 000 F / 30 000 F",paymentTitle:"यीशु के कार्य के लिए भुगतान",footerDesc:"यीशु मसीह पर केंद्रित मसीही मुलाक़ात। यीशु केंद्र में। 21 भाषाएँ। स्थायी रूप से हटाना।"
+premiumTitle:"यीशु में सदस्यता - CFA मूल्य",premiumLead:"अफ़्रीका के लिए बनाए गए मूल्य, यीशु पर केंद्रित। 9 000 F / 15 000 F / 27 000 F",paymentTitle:"यीशु के कार्य के लिए भुगतान",footerDesc:"यीशु मसीह पर केंद्रित मसीही मुलाक़ात। यीशु केंद्र में। 21 भाषाएँ। स्थायी रूप से हटाना।"
 },
 id:{
 choose:"Pilih paket ini",free:"Gratis",navHome:"Beranda",navMeet:"Pertemuan",navVerses:"Ayat Yesus",navGame:"Permainan Alkitab",navMusic:"Musik",navMod:"Moderasi",navPremium:"Premium",
@@ -281,7 +281,7 @@ gameTitle:"Permainan Alkitab tentang Yesus 🎮",gameLead:"25 pertanyaan tentang
 musicTitle:"Musik Kristen - Yesus",musicLead:"Lagu untuk Yesus Kristus, Mempelai Pria surgawi kita.",
 uploadTitle:"🎵 Unggah lagu untuk Yesus",uploadBtn:"Tambahkan untuk Yesus",
 modTitle:"Moderasi dalam Yesus",modLead:"Kelola profil dalam Yesus. Ubah atau hapus. Penghapusan tidak dapat dikembalikan.",
-premiumTitle:"Langganan dalam Yesus - Harga CFA",premiumLead:"Harga dirancang untuk Afrika, berpusat pada Yesus. 9.000 F / 15.000 F / 30.000 F",paymentTitle:"Pembayaran untuk pekerjaan Yesus",footerDesc:"Pertemuan Kristen yang berpusat pada Yesus Kristus. Yesus di pusat. 21 bahasa. Penghapusan permanen."
+premiumTitle:"Langganan dalam Yesus - Harga CFA",premiumLead:"Harga dirancang untuk Afrika, berpusat pada Yesus. 9.000 F / 15.000 F / 27.000 F",paymentTitle:"Pembayaran untuk pekerjaan Yesus",footerDesc:"Pertemuan Kristen yang berpusat pada Yesus Kristus. Yesus di pusat. 21 bahasa. Penghapusan permanen."
 },
 tl:{
 choose:"Piliin ang planong ito",free:"Libre",navHome:"Home",navMeet:"Pagkikita",navVerses:"Mga Talata ni Hesus",navGame:"Larong Biblikal",navMusic:"Musika",navMod:"Pangangasiwa",navPremium:"Premium",
@@ -297,7 +297,7 @@ gameTitle:"Larong Biblikal tungkol kay Hesus 🎮",gameLead:"25 tanong tungkol k
 musicTitle:"Kristiyanong Musika - Hesus",musicLead:"Mga awit para kay Hesukristo, ang ating makalangit na Kasintahang Lalaki.",
 uploadTitle:"🎵 Mag-upload ng mga awit para kay Hesus",uploadBtn:"Idagdag para kay Hesus",
 modTitle:"Pangangasiwa kay Hesus",modLead:"Pamahalaan ang mga profile kay Hesus. I-edit o burahin. Hindi na maibabalik ang mga binura.",
-premiumTitle:"Mga Subscription kay Hesus - Presyo sa CFA",premiumLead:"Mga presyong idinisenyo para sa Africa, nakasentro kay Hesus. 9,000 F / 15,000 F / 30,000 F",paymentTitle:"Bayad para sa gawain ni Hesus",footerDesc:"Kristiyanong pagkikita na nakasentro kay Hesukristo. Si Hesus sa sentro. 21 wika. Permanente ang pagbura."
+premiumTitle:"Mga Subscription kay Hesus - Presyo sa CFA",premiumLead:"Mga presyong idinisenyo para sa Africa, nakasentro kay Hesus. 9,000 F / 15,000 F / 27,000 F",paymentTitle:"Bayad para sa gawain ni Hesus",footerDesc:"Kristiyanong pagkikita na nakasentro kay Hesukristo. Si Hesus sa sentro. 21 wika. Permanente ang pagbura."
 },
 ko:{
 choose:"이 요금제 선택",free:"무료",navHome:"홈",navMeet:"만남",navVerses:"예수님의 말씀",navGame:"성경 게임",navMusic:"음악",navMod:"관리",navPremium:"프리미엄",
@@ -313,7 +313,7 @@ gameTitle:"예수님에 관한 성경 게임 🎮",gameLead:"예수님과 결혼
 musicTitle:"기독교 음악 - 예수님",musicLead:"우리의 하늘 신랑이신 예수 그리스도를 위한 찬양.",
 uploadTitle:"🎵 예수님을 위한 찬양 업로드",uploadBtn:"예수님을 위해 추가",
 modTitle:"예수님 안에서의 관리",modLead:"예수님 안에서 프로필을 관리하세요. 수정하거나 삭제하세요. 삭제는 되돌릴 수 없습니다.",
-premiumTitle:"예수님 안에서의 구독 - CFA 가격",premiumLead:"아프리카를 위해 마련된, 예수님 중심의 가격. 9,000 F / 15,000 F / 30,000 F",paymentTitle:"예수님의 사역을 위한 결제",footerDesc:"예수 그리스도 중심의 기독교 만남. 예수님이 중심. 21개 언어. 삭제는 영구적입니다."
+premiumTitle:"예수님 안에서의 구독 - CFA 가격",premiumLead:"아프리카를 위해 마련된, 예수님 중심의 가격. 9,000 F / 15,000 F / 27,000 F",paymentTitle:"예수님의 사역을 위한 결제",footerDesc:"예수 그리스도 중심의 기독교 만남. 예수님이 중심. 21개 언어. 삭제는 영구적입니다."
 },
 vi:{
 choose:"Chọn gói này",free:"Miễn phí",navHome:"Trang chủ",navMeet:"Gặp gỡ",navVerses:"Câu Kinh Thánh về Chúa Giêsu",navGame:"Trò chơi Kinh Thánh",navMusic:"Âm nhạc",navMod:"Quản trị",navPremium:"Premium",
@@ -329,7 +329,7 @@ gameTitle:"Trò chơi Kinh Thánh về Chúa Giêsu 🎮",gameLead:"25 câu hỏ
 musicTitle:"Âm nhạc Kitô giáo - Chúa Giêsu",musicLead:"Những bài ca dâng Chúa Giêsu Kitô, Chàng Rể trên trời của chúng ta.",
 uploadTitle:"🎵 Tải lên bài ca dâng Chúa Giêsu",uploadBtn:"Thêm cho Chúa Giêsu",
 modTitle:"Quản trị trong Chúa Giêsu",modLead:"Quản lý hồ sơ trong Chúa Giêsu. Chỉnh sửa hoặc xóa. Nội dung đã xóa không thể khôi phục.",
-premiumTitle:"Gói đăng ký trong Chúa Giêsu - Giá CFA",premiumLead:"Mức giá dành cho châu Phi, lấy Chúa Giêsu làm trung tâm. 9.000 F / 15.000 F / 30.000 F",paymentTitle:"Thanh toán cho công việc của Chúa Giêsu",footerDesc:"Gặp gỡ Kitô hữu lấy Chúa Giêsu Kitô làm trung tâm. Chúa Giêsu ở trung tâm. 21 ngôn ngữ. Xóa vĩnh viễn."
+premiumTitle:"Gói đăng ký trong Chúa Giêsu - Giá CFA",premiumLead:"Mức giá dành cho châu Phi, lấy Chúa Giêsu làm trung tâm. 9.000 F / 15.000 F / 27.000 F",paymentTitle:"Thanh toán cho công việc của Chúa Giêsu",footerDesc:"Gặp gỡ Kitô hữu lấy Chúa Giêsu Kitô làm trung tâm. Chúa Giêsu ở trung tâm. 21 ngôn ngữ. Xóa vĩnh viễn."
 },
 pl:{
 choose:"Wybierz ten plan",free:"Za darmo",navHome:"Strona główna",navMeet:"Spotkania",navVerses:"Wersety o Jezusie",navGame:"Gra biblijna",navMusic:"Muzyka",navMod:"Moderacja",navPremium:"Premium",
@@ -345,7 +345,7 @@ gameTitle:"Gra biblijna o Jezusie 🎮",gameLead:"25 pytań o Jezusa i małżeń
 musicTitle:"Muzyka chrześcijańska - Jezus",musicLead:"Pieśni dla Jezusa Chrystusa, naszego niebieskiego Oblubieńca.",
 uploadTitle:"🎵 Prześlij pieśni dla Jezusa",uploadBtn:"Dodaj dla Jezusa",
 modTitle:"Moderacja w Jezusie",modLead:"Zarządzaj profilami w Jezusie. Edytuj lub usuń. Usunięte treści nie wracają.",
-premiumTitle:"Subskrypcje w Jezusie - Ceny w CFA",premiumLead:"Ceny stworzone z myślą o Afryce, skupione na Jezusie. 9 000 F / 15 000 F / 30 000 F",paymentTitle:"Płatność na dzieło Jezusa",footerDesc:"Chrześcijańskie spotkania skupione na Jezusie Chrystusie. Jezus w centrum. 21 języków. Usunięcie jest trwałe."
+premiumTitle:"Subskrypcje w Jezusie - Ceny w CFA",premiumLead:"Ceny stworzone z myślą o Afryce, skupione na Jezusie. 9 000 F / 15 000 F / 27 000 F",paymentTitle:"Płatność na dzieło Jezusa",footerDesc:"Chrześcijańskie spotkania skupione na Jezusie Chrystusie. Jezus w centrum. 21 języków. Usunięcie jest trwałe."
 },
 uk:{
 choose:"Обрати цей тариф",free:"Безкоштовно",navHome:"Головна",navMeet:"Знайомства",navVerses:"Вірші про Ісуса",navGame:"Біблійна гра",navMusic:"Музика",navMod:"Модерація",navPremium:"Преміум",
@@ -361,7 +361,7 @@ gameTitle:"Біблійна гра про Ісуса 🎮",gameLead:"25 запи
 musicTitle:"Християнська музика - Ісус",musicLead:"Пісні для Ісуса Христа, нашого небесного Нареченого.",
 uploadTitle:"🎵 Завантажити пісні для Ісуса",uploadBtn:"Додати для Ісуса",
 modTitle:"Модерація в Ісусі",modLead:"Керуй анкетами в Ісусі. Редагуй або видаляй. Видалене не повертається.",
-premiumTitle:"Підписки в Ісусі - Ціни в CFA",premiumLead:"Ціни, створені для Африки, зосереджені на Ісусі. 9 000 F / 15 000 F / 30 000 F",paymentTitle:"Оплата на діло Ісуса",footerDesc:"Християнські знайомства, зосереджені на Ісусі Христі. Ісус у центрі. 21 мова. Видалення остаточне."
+premiumTitle:"Підписки в Ісусі - Ціни в CFA",premiumLead:"Ціни, створені для Африки, зосереджені на Ісусі. 9 000 F / 15 000 F / 27 000 F",paymentTitle:"Оплата на діло Ісуса",footerDesc:"Християнські знайомства, зосереджені на Ісусі Христі. Ісус у центрі. 21 мова. Видалення остаточне."
 },
 ur:{
 choose:"یہ پلان منتخب کریں",free:"مفت",navHome:"ہوم",navMeet:"ملاقات",navVerses:"یسوع کی آیات",navGame:"بائبل کھیل",navMusic:"موسیقی",navMod:"نگرانی",navPremium:"پریمیم",
@@ -377,7 +377,7 @@ gameTitle:"یسوع پر بائبل کھیل 🎮",gameLead:"یسوع اور ش�
 musicTitle:"مسیحی موسیقی - یسوع",musicLead:"یسوع مسیح کے لیے حمدیں، ہمارے آسمانی دولہا کے لیے۔",
 uploadTitle:"🎵 یسوع کے لیے حمدیں اپ لوڈ کریں",uploadBtn:"یسوع کے لیے شامل کریں",
 modTitle:"یسوع میں نگرانی",modLead:"یسوع میں پروفائلز کا انتظام کریں۔ ترمیم کریں یا حذف کریں۔ حذف شدہ واپس نہیں آتا۔",
-premiumTitle:"یسوع میں رکنیت - CFA قیمتیں",premiumLead:"افریقہ کے لیے بنائی گئی قیمتیں، یسوع پر مرکوز۔ 9,000 F / 15,000 F / 30,000 F",paymentTitle:"یسوع کے کام کے لیے ادائیگی",footerDesc:"یسوع مسیح پر مرکوز مسیحی ملاقات۔ یسوع مرکز میں۔ 21 زبانیں۔ حذف مستقل ہے۔"
+premiumTitle:"یسوع میں رکنیت - CFA قیمتیں",premiumLead:"افریقہ کے لیے بنائی گئی قیمتیں، یسوع پر مرکوز۔ 9,000 F / 15,000 F / 27,000 F",paymentTitle:"یسوع کے کام کے لیے ادائیگی",footerDesc:"یسوع مسیح پر مرکوز مسیحی ملاقات۔ یسوع مرکز میں۔ 21 زبانیں۔ حذف مستقل ہے۔"
 },
 ro:{
 choose:"Alege acest plan",free:"Gratuit",navHome:"Acasă",navMeet:"Întâlniri",navVerses:"Versete despre Isus",navGame:"Joc biblic",navMusic:"Muzică",navMod:"Moderare",navPremium:"Premium",
@@ -393,7 +393,7 @@ gameTitle:"Joc biblic despre Isus 🎮",gameLead:"25 de întrebări despre Isus 
 musicTitle:"Muzică creștină - Isus",musicLead:"Cântări pentru Isus Hristos, Mirele nostru ceresc.",
 uploadTitle:"🎵 Încarcă cântări pentru Isus",uploadBtn:"Adaugă pentru Isus",
 modTitle:"Moderare în Isus",modLead:"Gestionează profilurile în Isus. Modifică sau șterge. Ștergerile nu se mai pot anula.",
-premiumTitle:"Abonamente în Isus - Prețuri în CFA",premiumLead:"Prețuri gândite pentru Africa, centrate pe Isus. 9 000 F / 15 000 F / 30 000 F",paymentTitle:"Plată pentru lucrarea lui Isus",footerDesc:"Întâlniri creștine centrate pe Isus Hristos. Isus în centru. 21 de limbi. Ștergeri definitive."
+premiumTitle:"Abonamente în Isus - Prețuri în CFA",premiumLead:"Prețuri gândite pentru Africa, centrate pe Isus. 9 000 F / 15 000 F / 27 000 F",paymentTitle:"Plată pentru lucrarea lui Isus",footerDesc:"Întâlniri creștine centrate pe Isus Hristos. Isus în centru. 21 de limbi. Ștergeri definitive."
 }
 };
 
@@ -405,7 +405,7 @@ let currentLang='fr';
 let currentCurrency='XOF';
 const CURRENCY_RATES={EUR:1/655.96,USD:1.09/655.96,XOF:1,CAD:1.48/655.96,GBP:0.86/655.96};
 const CURRENCY_SYMBOLS={EUR:"€",USD:"$",XOF:"F CFA",CAD:"C$",GBP:"£"};
-const BASE_PRICES_XOF={decouverte:0,mensuel:9000,semestre:15000,annuel:30000};
+const BASE_PRICES_XOF={decouverte:0,mensuel:9000,semestre:15000,annuel:27000};
 function formatPrice(xof){
 const rate=CURRENCY_RATES[currentCurrency];
 const sym=CURRENCY_SYMBOLS[currentCurrency];
@@ -428,7 +428,7 @@ const plans=[
 {key:PX(0),keyId:"Découverte",xof:0,duration:PX(4),features:FD,cta:dict.choose,cls:""},
 {key:PX(1),keyId:"Mensuel",xof:BASE_PRICES_XOF.mensuel,duration:PX(5),badge:"",features:FM,cta:dict.choose,cls:""},
 {key:PX(2),keyId:"Alliance",months:6,xof:BASE_PRICES_XOF.semestre,duration:PX(6),badge:PX(8),save:PX(10).replace("{p}",formatPrice(39000)),featured:true,features:FA,cta:dict.choose,cls:"featured"},
-{key:PX(3),keyId:"Éternelle",months:12,xof:BASE_PRICES_XOF.annuel,duration:PX(7),badge:PX(9),save:PX(10).replace("{p}",formatPrice(78000)),features:FE,cta:dict.choose,cls:""}
+{key:PX(3),keyId:"Éternelle",months:12,xof:BASE_PRICES_XOF.annuel,duration:PX(7),badge:PX(9),save:PX(10).replace("{p}",formatPrice(81000)),features:FE,cta:dict.choose,cls:""}
 ];
 plans.sort((x,y)=>x.xof-y.xof);
 grid.innerHTML=plans.map(p=>{
@@ -492,7 +492,7 @@ document.getElementById("chatPanel").classList.remove("hidden");
 document.getElementById("chatTitle").textContent="💳 Tchat réservé aux abonnés en Jésus";
 document.getElementById("chatSubtitle").textContent="Passe en Premium pour tchater en Jésus";
 document.getElementById("chatContacts").innerHTML='<div style="padding:16px;text-align:center"><div style="font-size:2.5rem">🔒</div><h4 style="margin:10px 0">Tchat réservé Premium en Jésus</h4><p style="font-size:.85rem;color:var(--muted)">Le tchat est réservé aux abonnés. Pour tchater au nom de Jésus, choisis un abonnement.</p><div style="margin-top:16px;display:grid;gap:8px"><button class="btn btn-gold" data-nlj-act="scrollPremium">💳 Voir les abonnements - 9 000 F</button>'+'</div></div>';
-document.getElementById("chatMessages").innerHTML='<div style="padding:20px;text-align:center;color:var(--muted)"><p>💬 <strong>Pourquoi le tchat est payant en Jésus ?</strong></p><p style="font-size:.85rem;margin-top:10px">Pour éviter les faux profils et garder une communauté sérieuse en Jésus. 9 000 F CFA = engagement sérieux pour le mariage en Jésus, pas pour s\'amuser.</p><p style="font-size:.85rem;margin-top:10px">✅ Mensuel Jésus: 9 000 F - Tchat illimité en Jésus<br>✅ Alliance 6 mois: 15 000 F - Le plus choisi<br>✅ Éternelle 12 mois: 30 000 F</p></div>';
+document.getElementById("chatMessages").innerHTML='<div style="padding:20px;text-align:center;color:var(--muted)"><p>💬 <strong>Pourquoi le tchat est payant en Jésus ?</strong></p><p style="font-size:.85rem;margin-top:10px">Pour éviter les faux profils et garder une communauté sérieuse en Jésus. 9 000 F CFA = engagement sérieux pour le mariage en Jésus, pas pour s\'amuser.</p><p style="font-size:.85rem;margin-top:10px">✅ Mensuel Jésus: 9 000 F - Tchat illimité en Jésus<br>✅ Alliance 6 mois: 15 000 F - Le plus choisi<br>✅ Éternelle 12 mois: 27 000 F</p></div>';
 /* fenêtre plein écran : pas de défilement de la page derrière */
 return;
 }
@@ -597,7 +597,7 @@ const premium=profiles.filter(p=>p.plan!=='Découverte').length;
 const revenue=profiles.reduce((sum,p)=>{
 if(p.plan==='Mensuel') return sum+9000;
 if(p.plan==='Alliance') return sum+15000;
-if(p.plan==='Éternelle') return sum+30000;
+if(p.plan==='Éternelle') return sum+27000;
 return sum;
 },0);
 const chats=Object.keys(chatConversations||{}).length;

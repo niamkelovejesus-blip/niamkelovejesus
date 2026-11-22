@@ -19,7 +19,7 @@
     }
   }
   window.addEventListener('message',function(e){
-    if(e.data&&e.data.nlj==='state'&&e.source===parent){try{var pl={'Mensuel':1,'Alliance':2,'Éternelle':3};NLJ_PLAN=e.data.premium?(pl[e.data.plan]||1):0;window.NLJ_PLANNAME=e.data.premium?String(e.data.plan||''):'';}catch(x){}apply(e.data);}
+    if(e.data&&e.data.nlj==='state'&&e.source===parent){try{var pl={'Mensuel':1,'Alliance':2,'Éternelle':3};NLJ_PLAN=e.data.premium?3:0;window.NLJ_PLANNAME=e.data.premium?String(e.data.plan||''):'';}catch(x){}apply(e.data);}
   });
   try{parent.postMessage({nlj:'need-state'},'*');}catch(e){}
 })();

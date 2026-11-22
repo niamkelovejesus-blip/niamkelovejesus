@@ -1,6 +1,7 @@
 var TITLES={p1:'Niamké Love Jésus — Rencontre chrétienne centrée sur Jésus-Christ',p2:'Rencontre — Niamké Love Jésus',p3:'Mon Premium — Niamké Love Jésus',p4:'Parlons avec Jésus — Niamké Love Jésus',p5:'La Bible — Niamké Love Jésus'};
-/* Numéro de version des pages : à augmenter à chaque mise en ligne, pour que le téléphone recharge toujours la dernière version (menu compris) au lieu de garder l'ancienne en mémoire. */
-var PV='56';
+/* Numéro de version des pages : AUTOMATIQUE (change toutes les 10 minutes), donc plus rien à modifier à la main à chaque mise en ligne.
+   Le téléphone recharge ainsi la dernière version des pages (menu compris) au lieu de garder l'ancienne en mémoire. */
+var PV=String(Math.floor(Date.now()/600000));
 var URLS={p1:'pages/accueil.html?v='+PV,p2:'pages/rencontre.html?v='+PV,p3:'pages/premium.html?v='+PV,p4:'pages/parlons-avec-jesus.html?v='+PV,p5:'pages/bible.html?v='+PV};
 function navFrame(f,u){try{f.contentWindow.location.replace(u);}catch(e){f.src=u;}}
 var NAMES={p1:'accueil',p2:'rencontre',p3:'premium',p4:'parlons',p5:'bible'},BYNAME={accueil:'p1',rencontre:'p2',premium:'p3',parlons:'p4',bible:'p5'};

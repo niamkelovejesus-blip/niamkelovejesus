@@ -128,3 +128,31 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,te
   .pricing>.plan>ul{flex:1 1 auto !important}
   .pricing>.plan>button{margin-top:auto !important}
 }
+
+/* ===== Finitions v2 : lisibilité de l'or et détails professionnels (CSS seul) =====
+   Principe : l'or vif (#c9a227) reste sur les fonds sombres (contraste 6:1).
+   Sur fond clair il passe à un « or profond » (#8a6a0a, contraste 5:1), nettement plus lisible. */
+:root{--nlj-or-profond:#8a6a0a;--nlj-or-titre:#997510;--muted:#55637a}
+
+/* En-tête : nom de la marque et sous-titre lisibles sur fond blanc */
+header .brand span{color:var(--nlj-or-titre)}
+header .brand-text small{color:var(--nlj-or-profond)}
+header{box-shadow:0 1px 0 #ece3c9,0 6px 18px rgba(15,23,42,.05)}
+
+/* Références bibliques sur fond clair */
+.empty-state cite,.pw-item cite{color:var(--nlj-or-profond)}
+
+/* Boutons « télécharger » dorés : texte foncé (le blanc sur or était illisible) */
+.mz-rdl:not(.locked),.mz-rdl:hover,.mz-rdl:focus-visible{color:#1b1400}
+
+/* Boutons dorés : léger dégradé, texte bleu nuit bien contrasté */
+.btn-gold{background:linear-gradient(180deg,#d6b13a 0%,#c9a227 100%);color:#10192b}
+.btn-gold:hover{background:linear-gradient(180deg,#dcb83f 0%,#cfa82a 100%)}
+
+/* Abonnements : la formule recommandée ressort davantage */
+#premium .plan.featured{
+  border:2px solid #c9a227 !important;
+  box-shadow:0 0 0 4px rgba(201,162,39,.22),0 22px 48px rgba(2,10,30,.45) !important}
+#premium .plan h3{letter-spacing:.01em}
+#premium .plan .price{color:#0f2a4a}
+#premium .plan li::before{color:#15803d}

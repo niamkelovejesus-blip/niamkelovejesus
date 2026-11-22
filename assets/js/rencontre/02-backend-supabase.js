@@ -422,8 +422,8 @@ const grid=document.getElementById("pricingGrid");
 const dict=I18N[currentLang]||I18N.fr;
 const FD=[PX(12),PX(31),PX(30),PX(13),PX(14),PX(15)];
 const FM=[17,32,18,33,19,20,27].map(PX);
-const FA=[28,21,22,23].map(PX);
-const FE=[29,24,25,26].map(PX);
+const FA=FM.slice();/* mêmes avantages pour tous les plans Premium : seule la durée change */
+const FE=FM.slice();
 const plans=[
 {key:PX(0),keyId:"Découverte",xof:0,duration:PX(4),features:FD,cta:dict.choose,cls:""},
 {key:PX(1),keyId:"Mensuel",xof:BASE_PRICES_XOF.mensuel,duration:PX(5),badge:"",features:FM,cta:dict.choose,cls:""},

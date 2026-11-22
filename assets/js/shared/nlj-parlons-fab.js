@@ -24,76 +24,28 @@ st.textContent='#nlj-parlons.nlj-L{position:fixed;left:14px;bottom:calc(18px + e
 +'#nlj-bible:hover{transform:translateY(-3px)}#nlj-bible:focus-visible{outline:3px solid #c9a77a;outline-offset:3px}'
 +'#nlj-parlons.nlj-L{left:14px;bottom:calc(76px + env(safe-area-inset-bottom,0px))}'
 +(ACC?'@media(max-width:720px){#nlj-bible{right:12px;bottom:196px;height:44px;font-size:13px}#nlj-bible i{width:30px;height:30px;font-size:19px}}':'@media(max-width:720px){#nlj-bible{left:10px;bottom:calc(12px + env(safe-area-inset-bottom,0px));height:44px;font-size:13px}#nlj-bible i{width:30px;height:30px;font-size:19px}#nlj-parlons.nlj-L{left:10px;bottom:calc(64px + env(safe-area-inset-bottom,0px));max-width:calc(100vw - 20px)}}')
-+'#nlj-parlons.nlj-L.nlj-mini{padding:5px;max-width:none;left:8px}'
-+'#nlj-parlons.nlj-L.nlj-mini .nlj-pt{display:none}'
-+'#nlj-parlons.nlj-L.nlj-mini:hover,#nlj-parlons.nlj-L.nlj-mini:focus-visible{padding:6px 18px 6px 6px;max-width:calc(100vw - 100px)}'
-+'#nlj-parlons.nlj-L.nlj-mini:hover .nlj-pt,#nlj-parlons.nlj-L.nlj-mini:focus-visible .nlj-pt{display:flex}'
-+'#nlj-bible.nlj-mini{padding:0 7px;gap:0;left:8px}'
-+'#nlj-bible.nlj-mini span{display:none}'
-+'#nlj-bible.nlj-mini:hover,#nlj-bible.nlj-mini:focus-visible{padding:0 18px 0 8px;gap:8px}'
-+'#nlj-bible.nlj-mini:hover span,#nlj-bible.nlj-mini:focus-visible span{display:inline}'
-+'@media(prefers-reduced-motion:reduce){#nlj-parlons.nlj-L{animation:none;transition:none}}';
++'#nlj-jeu{position:fixed;'+(ACC?'right:18px;bottom:calc(204px + env(safe-area-inset-bottom,0px))':'left:14px;bottom:calc(144px + env(safe-area-inset-bottom,0px))')+';z-index:39;display:inline-flex;align-items:center;gap:8px;padding:0 18px 0 8px;height:48px;border-radius:999px;border:2px solid #0f2a4a;background:#c9a227;color:#0f2a4a;cursor:pointer;box-shadow:0 10px 28px rgba(15,42,74,.28);font:800 14px/1 system-ui,-apple-system,"Segoe UI",sans-serif;transition:transform .2s;max-width:calc(100vw - 28px)}'
++'#nlj-jeu i{font-style:normal;font-size:20px;width:34px;height:34px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}'
++'#nlj-jeu:hover{transform:translateY(-3px)}#nlj-jeu:focus-visible{outline:3px solid #0f2a4a;outline-offset:3px}'
++'@media(max-width:720px){#nlj-jeu{'+(ACC?'right:12px;bottom:248px':'left:10px;bottom:calc(120px + env(safe-area-inset-bottom,0px))')+';height:44px;font-size:12px;padding-right:12px}#nlj-jeu i{width:30px;height:30px;font-size:17px}}'
++'@media(prefers-reduced-motion:reduce){#nlj-parlons.nlj-L{animation:none;transition:none}#nlj-jeu{transition:none}}';
 document.head.appendChild(st);
-
-/* Dans Rencontre et Premium, « Parlons de Jésus » et « Apprenons la Bible » s'ouvrent PAR-DESSUS la page, sans la quitter.
-   La croix ✕ (ou la flèche retour du téléphone) referme simplement la fenêtre : on reste sur la même page. */
-var LOCAL=(PG!=='parlons'&&PG!=='bible'&&!ACC);
-var ov=null,fr=null,curP='',pend='',pushed=false,ign=false;
-function ovUrl(p){return p==='p5'?'bible.html':'parlons-avec-jesus.html';}
-function ovClose(viaPop){
-  if(!ov)return;
-  try{ov.parentNode.removeChild(ov);}catch(e){}
-  ov=null;fr=null;curP='';pend='';
-  if(!viaPop&&pushed){pushed=false;ign=true;try{history.back();}catch(e){ign=false;}}
-  else pushed=false;
-}
-function ovGo(p){
-  curP=p;
-  try{fr.contentWindow.location.replace(ovUrl(p));}catch(e){fr.src=ovUrl(p);}
-}
-function ovOpen(p,ref){
-  try{
-    if(!ov){
-      ov=document.createElement('div');ov.id='nlj-ov';
-      ov.style.cssText='position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147483000;background:#0f2a4a';
-      fr=document.createElement('iframe');
-      fr.setAttribute('title',p==='p5'?(FR?'La Bible':'The Bible'):(FR?'Parlons avec Jésus':'Talk with Jesus'));
-      fr.setAttribute('allow','clipboard-write');
-      fr.style.cssText='position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;border:0;background:#fff';
-      fr.addEventListener('load',function(){
-        try{var b=fr.contentDocument.getElementById('back');if(b)b.onclick=function(e){if(e)e.preventDefault();ovClose(false);};}catch(x){}
-      });
-      ov.appendChild(fr);document.body.appendChild(ov);
-      try{history.pushState({nljov:1},'');pushed=true;}catch(e){pushed=false;}
-      pend=ref||'';ovGo(p);
-    }else{
-      pend=ref||'';
-      if(curP===p){if(p==='p5'&&pend){fr.contentWindow.postMessage({nlj:'bible',q:pend},'*');pend='';}}
-      else ovGo(p);
-    }
-    return true;
-  }catch(e){return false;}
-}
-if(LOCAL){
-  window.addEventListener('message',function(e){
-    if(!fr||e.source!==fr.contentWindow)return;
-    var d=e.data;if(!d||!d.nlj)return;
-    if(d.nlj==='go'&&(d.page==='p4'||d.page==='p5'))ovOpen(d.page,'');
-    else if(d.nlj==='bible-open')ovOpen('p5',String(d.ref||''));
-    else if(d.nlj==='bible-ready'&&pend){try{fr.contentWindow.postMessage({nlj:'bible',q:pend},'*');}catch(x){}pend='';}
-  });
-  window.addEventListener('popstate',function(){if(ign){ign=false;return;}if(ov){pushed=false;ovClose(true);}});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&ov)ovClose(false);});
-}
-function go(){if(LOCAL&&ovOpen('p4',''))return;try{parent.postMessage({nlj:'go',page:'p4',id:''},'*');}catch(e){}}
+function go(){try{parent.postMessage({nlj:'go',page:'p4',id:''},'*');}catch(e){}}
 function addBible(){
   var k=document.createElement('button');
   k.id='nlj-bible';k.type='button';k.innerHTML='<i aria-hidden="true">📖</i><span></span>';k.lastChild.textContent=FR?'Apprenons la Bible':'Let’s learn the Bible';k.setAttribute('aria-label',FR?'Apprenons la Bible — ouvrir la Bible':'Let’s learn the Bible — open the Bible');
-  k.addEventListener('click',function(){if(LOCAL&&ovOpen('p5',''))return;try{parent.postMessage({nlj:'go',page:'p5',id:''},'*');}catch(e){}});
+  k.addEventListener('click',function(){try{parent.postMessage({nlj:'go',page:'p5',id:''},'*');}catch(e){}});
+  document.body.appendChild(k);
+}
+function addJeu(){
+  if(PG==='jeu'||document.getElementById('nlj-jeu'))return;
+  var k=document.createElement('button');
+  k.id='nlj-jeu';k.type='button';k.innerHTML='<i aria-hidden="true">✝️</i><span></span>';k.lastChild.textContent=FR?'Jeu : Jésus, de la croix au retour':'Game: Jesus, from the cross to His return';k.setAttribute('aria-label',k.lastChild.textContent);
+  k.addEventListener('click',function(){try{parent.postMessage({nlj:'go',page:'p6',id:''},'*');}catch(e){}});
   document.body.appendChild(k);
 }
 function add(){
-  addBible();
+  addBible();addJeu();
   if(!WANT_P||document.getElementById('nlj-parlons'))return;
   var b=document.createElement('button');
   b.id='nlj-parlons';b.className='nlj-L';b.type='button';b.setAttribute('aria-label',t1+' — '+t2);
@@ -101,7 +53,5 @@ function add(){
   b.addEventListener('click',go);
   document.body.appendChild(b);
 }
-function mini(){['nlj-parlons','nlj-bible'].forEach(function(i){var e=document.getElementById(i);if(e)e.classList.add('nlj-mini');});}
-if(LOCAL)setTimeout(mini,7000);
 if(document.body)add();else document.addEventListener('DOMContentLoaded',add);
 })();

@@ -74,3 +74,38 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,te
   .plan,.game,.pv-card,.profile,.btn{transition:none}
   .plan:hover,.game:hover,.pv-card:hover,.profile:hover{transform:none}
 }
+
+/* ===== Menu téléphone : bouton « ☰ Menu » + liste déroulante (≤700px) ===== */
+.nlj-menu-btn{display:none}
+@media (max-width:700px){
+  header .nlj-menu-btn{
+    display:flex;align-items:center;gap:10px;width:100%;box-sizing:border-box;
+    min-height:50px;padding:10px 18px;border:0;border-radius:999px;cursor:pointer;
+    background:linear-gradient(180deg,#16233f 0%,#0b1426 100%);color:#fff;
+    font:800 1.15rem/1 Inter,system-ui,sans-serif;text-align:left;
+    box-shadow:0 8px 22px rgba(11,20,38,.28);-webkit-tap-highlight-color:transparent}
+  header .nlj-menu-btn .nlj-menu-ic{font-size:1.25rem}
+  header .nlj-menu-btn .nlj-menu-tx{flex:0 0 auto}
+  header .nlj-menu-btn .nlj-menu-badge{
+    font-style:normal;background:#e11d48;color:#fff;min-width:26px;height:26px;padding:0 7px;
+    border-radius:999px;display:inline-grid;place-items:center;font-size:.85rem;font-weight:800;box-sizing:border-box}
+  header .nlj-menu-btn .nlj-menu-badge[hidden]{display:none}
+  header .nlj-menu-btn .nlj-menu-car{margin-left:auto;font-size:1rem;transition:transform .2s ease}
+  header .nlj-menu-btn.on .nlj-menu-car{transform:rotate(180deg)}
+
+  /* liste repliée par défaut, déroulée au clic */
+  header .nav-links.nlj-collapsed{display:none !important}
+  header .nav-links.nlj-collapsed.nlj-open{
+    display:flex !important;flex-direction:column !important;flex-wrap:nowrap !important;
+    align-items:stretch !important;justify-content:flex-start !important;
+    overflow:visible !important;width:100%;gap:4px !important;padding:8px 0 6px !important;
+    -webkit-mask-image:none !important;mask-image:none !important}
+  header .nav-links.nlj-collapsed.nlj-open a,
+  header .nav-links.nlj-collapsed.nlj-open button.nav-msg{
+    flex:none !important;width:100%;box-sizing:border-box;justify-content:flex-start !important;
+    min-height:46px !important;padding:10px 16px !important;font-size:.98rem !important;
+    border-radius:14px !important;background:#fff !important;border:1px solid #e2e8f0 !important;color:#0f172a !important}
+  header .nav-links.nlj-collapsed.nlj-open a.active{background:var(--nlj-royal) !important;color:#fff !important;border-color:var(--nlj-royal) !important}
+  header .nav-links.nlj-collapsed.nlj-open button.nav-msg{background:#c9a227 !important;border-color:#c9a227 !important;color:#111 !important}
+}
+@media (prefers-reduced-motion:reduce){header .nlj-menu-btn .nlj-menu-car{transition:none}}

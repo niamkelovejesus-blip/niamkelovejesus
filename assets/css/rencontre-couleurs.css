@@ -109,3 +109,22 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,te
   header .nav-links.nlj-collapsed.nlj-open button.nav-msg{background:#c9a227 !important;border-color:#c9a227 !important;color:#111 !important}
 }
 @media (prefers-reduced-motion:reduce){header .nlj-menu-btn .nlj-menu-car{transition:none}}
+
+/* ===== Cartes de prix : plus de grands vides =====
+   Avant : les 4 cartes partageaient les mêmes lignes (alignement « subgrid »), ce qui laissait un grand vide
+   sous le prix des formules « Découverte » et « Mensuel », et un vide au-dessus du bouton de « Découverte ».
+   Maintenant : chaque carte a la hauteur de son contenu — liste juste sous le prix, bouton juste sous la liste. */
+.pricing{align-items:start !important;row-gap:20px !important}
+.pricing>.plan{
+  display:flex !important;flex-direction:column !important;
+  grid-row:auto !important;grid-template-rows:none !important;
+  margin-bottom:0 !important;height:auto !important}
+.pricing>.plan>ul{flex:0 0 auto !important;margin:14px 0 18px !important}
+.pricing>.plan>button{align-self:stretch !important;margin-top:0 !important}
+/* Ordinateur / tablette (plusieurs colonnes) : 4 cartes de même hauteur, boutons alignés en bas */
+@media (min-width:901px){
+  .pricing{align-items:stretch !important}
+  .pricing>.plan{height:100% !important}
+  .pricing>.plan>ul{flex:1 1 auto !important}
+  .pricing>.plan>button{margin-top:auto !important}
+}

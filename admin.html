@@ -208,7 +208,7 @@ const TABS = {
   priereaudio: ['Prière audio épinglée', 'pray', 'Contenu'], mursvocal: ['Mur vocal (modération)', 'chat', 'Gestion']
 };
 // Langues proposées pour les paroles (code = celui que le site utilise pour la langue du membre)
-const LANGS = [['fr','Français'],['en','English'],['es','Español'],['pt','Português'],['ar','العربية (Arabe)'],['sw','Kiswahili'],['de','Deutsch'],['it','Italiano'],['zh','中文 (Chinois)'],['wo','Wolof'],['ln','Lingála'],['hi','हिन्दी'],['id','Bahasa Indonesia'],['tl','Tagalog'],['ko','한국어'],['vi','Tiếng Việt'],['pl','Polski'],['uk','Українська'],['ur','اردو'],['ro','Română']];
+const LANGS = [['fr','Français'],['en','English'],['es','Español'],['pt','Português'],['ar','العربية (Arabe)'],['sw','Kiswahili'],['de','Deutsch'],['nl','Nederlands'],['ru','Русский'],['it','Italiano'],['zh','中文 (Chinois)'],['wo','Wolof'],['ln','Lingála'],['hi','हिन्दी'],['id','Bahasa Indonesia'],['tl','Tagalog'],['ko','한국어'],['vi','Tiếng Việt'],['pl','Polski'],['uk','Українська'],['ur','اردو'],['ro','Română']];
 const langName = c => (LANGS.find(l => l[0] === c) || [c, c])[1];
 let cur = 'dashboard', cache = {}, me = null;
 // Pagination : 300 lignes par page, bouton « Afficher plus » quand il en reste
@@ -718,7 +718,7 @@ const FORMS = {
   }
 };
 // ---- Traduction automatique des paroles (même service que le site) ----
-const AUTO_LANGS = ['fr', 'en', 'es', 'pt', 'it', 'de', 'ar', 'zh-CN', 'nl', 'ru'];
+const AUTO_LANGS = ['fr', 'en', 'es', 'pt', 'it', 'de', 'ar', 'zh-CN', 'nl', 'ru', 'ln', 'sw', 'hi', 'id', 'tl', 'ko', 'vi', 'pl', 'uk', 'ur', 'ro']; // les 21 langues du site
 const TS_RE = /^(\[\d+:\d+(?:\.\d+)?\]\s*)?(.*)$/;
 async function gtxLines(lines, tl) {
   const SEP = '\n§§§\n';

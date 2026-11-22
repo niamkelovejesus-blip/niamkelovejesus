@@ -16,6 +16,7 @@ var A={
   
   editProfile:function(e,el){return editProfile.apply(null,Array.prototype.slice.call(arguments,2))},
   flipCard:function(e,el){return flipCard.apply(null,Array.prototype.slice.call(arguments,2))},
+  openJeuJesus:function(){try{parent.postMessage({nlj:'go',page:'p6',id:''},'*')}catch(e){}},
   goPremiumParent:function(){try{parent.postMessage({nlj:'go',page:'p3'},'*')}catch(e){}},
   likeProfile:function(e,el){return likeProfile.apply(null,Array.prototype.slice.call(arguments,2))},
   openChat:function(e,el){return openChat.apply(null,Array.prototype.slice.call(arguments,2))},

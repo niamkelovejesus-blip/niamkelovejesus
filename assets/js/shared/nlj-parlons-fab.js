@@ -28,6 +28,7 @@ st.textContent='#nlj-parlons.nlj-L{position:fixed;left:14px;bottom:calc(18px + e
 +'#nlj-jeu i{font-style:normal;font-size:20px;width:34px;height:34px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}'
 +'#nlj-jeu:hover{transform:translateY(-3px)}#nlj-jeu:focus-visible{outline:3px solid #0f2a4a;outline-offset:3px}'
 +'@media(max-width:720px){#nlj-jeu{'+(ACC?'right:12px;bottom:248px':'left:10px;bottom:calc(120px + env(safe-area-inset-bottom,0px))')+';height:44px;font-size:12px;padding-right:12px}#nlj-jeu i{width:30px;height:30px;font-size:17px}}'
++(PG==='rencontre'?'#nlj-parlons.nlj-L{bottom:calc(18px + env(safe-area-inset-bottom,0px))}@media(max-width:720px){#nlj-parlons.nlj-L{bottom:calc(12px + env(safe-area-inset-bottom,0px))}}':'')
 +'@media(prefers-reduced-motion:reduce){#nlj-parlons.nlj-L{animation:none;transition:none}#nlj-jeu{transition:none}}';
 document.head.appendChild(st);
 function go(){try{parent.postMessage({nlj:'go',page:'p4',id:''},'*');}catch(e){}}
@@ -45,7 +46,7 @@ function addJeu(){
   document.body.appendChild(k);
 }
 function add(){
-  addBible();addJeu();
+  if(PG!=='rencontre')addBible();
   if(!WANT_P||document.getElementById('nlj-parlons'))return;
   var b=document.createElement('button');
   b.id='nlj-parlons';b.className='nlj-L';b.type='button';b.setAttribute('aria-label',t1+' — '+t2);

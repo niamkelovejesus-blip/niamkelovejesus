@@ -1,10 +1,10 @@
-var TITLES={p1:'Niamké Love Jésus — Rencontre chrétienne centrée sur Jésus-Christ',p2:'Rencontre — Niamké Love Jésus',p3:'Mon Premium — Niamké Love Jésus',p4:'Parlons avec Jésus — Niamké Love Jésus',p5:'La Bible — Niamké Love Jésus'};
+var TITLES={p1:'Niamké Love Jésus — Rencontre chrétienne centrée sur Jésus-Christ',p2:'Rencontre — Niamké Love Jésus',p3:'Mon Premium — Niamké Love Jésus',p4:'Parlons avec Jésus — Niamké Love Jésus',p5:'La Bible — Niamké Love Jésus',p6:'De Bethléem au Retour — Niamké Love Jésus'};
 /* Numéro de version des pages : AUTOMATIQUE (change toutes les 10 minutes), donc plus rien à modifier à la main à chaque mise en ligne.
    Le téléphone recharge ainsi la dernière version des pages (menu compris) au lieu de garder l'ancienne en mémoire. */
 var PV=String(Math.floor(Date.now()/600000));
-var URLS={p1:'pages/accueil.html?v='+PV,p2:'pages/rencontre.html?v='+PV,p3:'pages/premium.html?v='+PV,p4:'pages/parlons-avec-jesus.html?v='+PV,p5:'pages/bible.html?v='+PV};
+var URLS={p1:'pages/accueil.html?v='+PV,p2:'pages/rencontre.html?v='+PV,p3:'pages/premium.html?v='+PV,p4:'pages/parlons-avec-jesus.html?v='+PV,p5:'pages/bible.html?v='+PV,p6:'pages/jeu-jesus.html?v='+PV};
 function navFrame(f,u){try{f.contentWindow.location.replace(u);}catch(e){f.src=u;}}
-var NAMES={p1:'accueil',p2:'rencontre',p3:'premium',p4:'parlons',p5:'bible'},BYNAME={accueil:'p1',rencontre:'p2',premium:'p3',parlons:'p4',bible:'p5'};
+var NAMES={p1:'accueil',p2:'rencontre',p3:'premium',p4:'parlons',p5:'bible',p6:'jeu'},BYNAME={accueil:'p1',rencontre:'p2',premium:'p3',parlons:'p4',bible:'p5',jeu:'p6'};
 var bibleReady=false,pendingBible='';
 var loaded={},loadedLang={},cur=null,STATE={known:false,premium:false,plan:'',user:false};
 function lang(){try{return(localStorage.getItem('niamke_lang')||'fr').toLowerCase();}catch(e){return 'fr';}}
@@ -16,7 +16,7 @@ function load(p,cb){
 function _show(p,id,pop){
   if(cur&&loaded[cur])loadedLang[cur]=lang();
   cur=p;try{document.title=TITLES[p];}catch(e){}
-  ['p1','p2','p3','p4','p5'].forEach(function(k){document.getElementById(k).classList.toggle('on',k===p);});
+  ['p1','p2','p3','p4','p5','p6'].forEach(function(k){document.getElementById(k).classList.toggle('on',k===p);});
   if(!pop){try{history.pushState({p:p},'','#'+NAMES[p]);}catch(e){}}
   load(p,function(){try{document.getElementById(p).contentWindow.postMessage({nlj:'scroll',id:id||''},'*');if(p==='p2'&&window.FILTERS)document.getElementById(p).contentWindow.postMessage({nlj:'filters',church:FILTERS.church,gender:FILTERS.gender,search:FILTERS.search,ageMin:FILTERS.ageMin,ageMax:FILTERS.ageMax},'*');}catch(e){}});
 }
@@ -36,7 +36,7 @@ function sendState(){
 }
 function flushBible(){try{document.getElementById('p5').contentWindow.postMessage({nlj:'bible',q:pendingBible},'*');}catch(x){}pendingBible='';}
 window.addEventListener('message',function(e){
-  var ok=['p1','p2','p3','p4','p5'].some(function(k){return document.getElementById(k).contentWindow===e.source;});
+  var ok=['p1','p2','p3','p4','p5','p6'].some(function(k){return document.getElementById(k).contentWindow===e.source;});
   if(!ok)return;
   var d=e.data;if(!d||!d.nlj)return;
   if(d.nlj==='go'&&NAMES[d.page])show(d.page,d.id);

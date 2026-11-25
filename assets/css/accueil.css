@@ -1,5 +1,5 @@
 /* === base === */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap');
 
 *, ::before, ::after{
   --tw-border-spacing-x: 0;
@@ -1697,7 +1697,7 @@ body {
       
 
 /* === base === */
-header button:last-of-type{ display:none !important; }
+/* v53 : règle supprimée (cachait le bouton menu sur téléphone) */
 
 /* === base === */
 .nlj-forgot-under-pw { display:flex; justify-content:flex-end; margin-top:8px; margin-bottom:2px; }
@@ -1824,3 +1824,154 @@ img{max-width:100%}
 @keyframes nljAnge{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 @media(max-width:720px){#nlj-parlons{bottom:132px;right:12px;gap:8px;padding:5px 14px 5px 5px;max-width:calc(100vw - 24px)}#nlj-parlons img{width:40px;height:40px}#nlj-parlons b{font-size:13px}#nlj-parlons small{font-size:10.5px}}
 @media(prefers-reduced-motion:reduce){#nlj-parlons{animation:none;transition:none}}
+
+/* ==========================================================================
+   v53 — DESIGN PRO DE LA PAGE D'ACCUEIL
+   Palette : bleu nuit profond + or champagne + ivoire chaud
+   Polices : Playfair Display (titres, élégant) + DM Sans (texte)
+   Pour revenir en arrière : supprimer tout ce bloc.
+   ========================================================================== */
+:root{
+  color-scheme:light;
+  --navy:#0b2342;
+  --navy-light:#14325a;
+  --beige:#faf6ee;
+  --beige-card:#fffdf8;
+  --beige-dark:#f3ead9;
+  --gold:#c19a4b;
+  --gold-hover:#a9822f;
+  --gold-light:#efe0bd;
+  --text-navy:#0b2342;
+  --text-dark:#16253b;
+  --border-beige:#e9dcc3;
+  --white:#ffffff;
+}
+/* le site est conçu en clair : on empêche le mode sombre du téléphone de mélanger les couleurs */
+@media (prefers-color-scheme:dark){
+  :root{
+    --beige:#faf6ee;--beige-card:#fffdf8;--beige-dark:#f3ead9;
+    --text-navy:#0b2342;--text-grey:#2f3b4d;--text-dark:#16253b;
+    --white:#ffffff;--border-beige:#e9dcc3;
+  }
+}
+body{background:var(--beige)}
+
+/* --- Titres : Playfair Display --- */
+#home h1,#home h1 span,
+section h2,.nlj-alt h2,.nlj-how h2,.nlj-fin h2,.nlj-st h3,
+#couples h3,#music h3{
+  font-family:'Playfair Display',Fraunces,Georgia,serif!important;
+  letter-spacing:-.01em!important;
+}
+#home h1,#home h1 span{font-weight:700!important}
+section h2,.nlj-alt h2,.nlj-how h2,.nlj-fin h2{font-weight:700!important}
+
+/* --- Barre du haut + en-tête --- */
+body > #root > div > div:first-child{
+  background:linear-gradient(90deg,#071a33,#0b2342 50%,#071a33)!important;
+  border-bottom:1px solid rgba(193,154,75,.45);
+}
+header.sticky{
+  background:rgba(255,255,255,.92)!important;
+  -webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px);
+  border-bottom:1px solid var(--border-beige)!important;
+  box-shadow:0 6px 24px rgba(11,35,66,.06)!important;
+}
+header nav a{font-weight:600!important;letter-spacing:.02em}
+header nav a:hover{color:var(--navy)!important}
+
+/* --- Boutons : or champagne avec texte bleu nuit (bon contraste) --- */
+button[style*="var(--gold)"]{
+  background:linear-gradient(135deg,#e3c27e 0%,#c19a4b 55%,#a9822f 100%)!important;
+  color:#0b2342!important;
+  border:1px solid rgba(122,90,36,.35)!important;
+  box-shadow:0 8px 22px rgba(169,130,47,.32),inset 0 1px 0 rgba(255,255,255,.45)!important;
+  text-shadow:none;
+}
+button[style*="var(--gold)"]:hover{filter:brightness(1.04);transform:translateY(-1px)}
+.nlj-btn{
+  background:linear-gradient(135deg,#e3c27e 0%,#c19a4b 55%,#a9822f 100%)!important;
+  color:#0b2342!important;border:1px solid rgba(122,90,36,.35)!important;
+  box-shadow:0 8px 22px rgba(169,130,47,.30)!important;
+}
+.nlj-login{
+  background:#fff!important;border:1.5px solid var(--navy)!important;color:var(--navy)!important;
+  font-weight:700!important;white-space:nowrap;
+}
+.nlj-login:hover{background:var(--navy)!important;color:#fff!important}
+@media(max-width:640px){.nlj-login{padding:0 14px!important;font-size:12.5px!important}}
+
+/* --- Section d'accueil (hero) --- */
+#home{
+  background:
+    radial-gradient(900px 480px at 88% 8%,rgba(193,154,75,.16),transparent 60%),
+    radial-gradient(700px 420px at 0% 100%,rgba(20,50,90,.07),transparent 60%),
+    linear-gradient(180deg,#fbf7ef 0%,#f6eddc 100%)!important;
+}
+#home::before{
+  background:linear-gradient(90deg,#7a5420 0%,#b8893f 30%,#d9b56a 50%,#b8893f 70%,#7a5420 100%)!important;
+  -webkit-background-clip:text!important;background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;color:transparent!important;
+  background-size:200% 100%!important;
+  font-size:clamp(40px,6.6vw,88px)!important;
+  padding-top:30px!important;
+}
+#home h1{color:var(--navy)!important}
+#home h1 span[style*="var(--gold)"]{color:#a9822f!important;font-style:italic}
+#home p{color:#3a4a60}
+/* photo : cadre doré décalé + ombre profonde */
+#home .relative.overflow-hidden{
+  border-radius:20px!important;
+  box-shadow:0 30px 70px rgba(11,35,66,.22),14px 14px 0 0 rgba(193,154,75,.30)!important;
+  outline:1px solid rgba(193,154,75,.55);outline-offset:-1px;
+}
+/* pastilles de confiance */
+#home [class*="eef3ff"]{background:var(--gold-light)!important;border:1px solid #e2cb97}
+#home .flex-wrap.gap-6{color:#2f3b4d!important}
+#home .flex-wrap.gap-6 > span{
+  background:#fff;border:1px solid var(--border-beige);border-radius:999px;padding:7px 14px 7px 8px;
+  box-shadow:0 2px 8px rgba(11,35,66,.05);
+}
+
+/* --- Cartes (couples, musique, jeux, étapes) --- */
+#couples{background:#fff!important}
+#couples [class*="rounded-[18px]"],#music [style*="border-radius: 18px"],.nlj-st>div{
+  background:var(--beige-card)!important;
+  border:1px solid var(--border-beige)!important;
+  border-top:3px solid var(--gold)!important;
+  box-shadow:0 10px 30px rgba(11,35,66,.07)!important;
+}
+#couples h3,#music h3{font-weight:700!important}
+.nlj-how{background:linear-gradient(180deg,#f6eddc,#f1e5cc)!important}
+.nlj-st i{background:var(--navy)!important;box-shadow:0 0 0 4px #f6eddc!important}
+.nlj-bd span{background:#fff!important;border:1px solid #e2cb97!important;color:var(--navy)!important}
+.nlj-alt q{color:#7a5420!important;border-left-color:var(--gold)!important}
+
+/* --- Appel final & bandeau du bas --- */
+.nlj-fin{
+  background:radial-gradient(700px 320px at 50% 0%,rgba(193,154,75,.22),transparent 70%),
+             linear-gradient(135deg,#071a33 0%,#0b2342 55%,#14325a 100%)!important;
+}
+#nlj-bar{background:#0b2342!important;border-top:2px solid var(--gold)!important}
+#nlj-bar .nlj-btn{padding:8px 16px}
+
+/* --- Pied de page --- */
+footer{background:linear-gradient(180deg,#0b2342,#071a33)!important;border-top:3px solid var(--gold)!important}
+
+/* petite harmonie : sélection de texte */
+::selection{background:#efe0bd;color:#0b2342}
+@media(max-width:640px){#home .relative.overflow-hidden{box-shadow:0 20px 50px rgba(11,35,66,.22),8px 8px 0 0 rgba(193,154,75,.30)!important}}
+
+/* --- Bouton « Se connecter » en haut de l'accueil : téléphone uniquement (v72) --- */
+.nlj-login-top{display:flex;justify-content:center;padding:14px 16px 0}
+.nlj-login-hero{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:230px;height:46px;padding:0 28px;border-radius:999px;
+  font-size:14px;font-weight:700;letter-spacing:.02em;
+  background:#fff!important;border:1.5px solid var(--navy)!important;
+  color:var(--navy)!important;white-space:nowrap;cursor:pointer;
+  box-shadow:0 4px 14px rgba(15,42,74,.10);
+  transition:background .15s,color .15s;
+}
+.nlj-login-hero:hover,.nlj-login-hero:active{background:var(--navy)!important;color:#fff!important}
+@media(min-width:640px){.nlj-login-top{display:none!important}}

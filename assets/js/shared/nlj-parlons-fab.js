@@ -39,6 +39,7 @@ function addBible(){
   document.body.appendChild(k);
 }
 function addJeu(){
+  if(/rencontre/.test(location.pathname))return; /* pas de bouton « Jeu : Jésus, de la croix au retour » sur la page 2 (Rencontre) */
   if(PG==='jeu'||document.getElementById('nlj-jeu'))return;
   var k=document.createElement('button');
   k.id='nlj-jeu';k.type='button';k.innerHTML='<i aria-hidden="true">✝️</i><span></span>';k.lastChild.textContent=FR?'Jeu : Jésus, de la croix au retour':'Game: Jesus, from the cross to His return';k.setAttribute('aria-label',k.lastChild.textContent);

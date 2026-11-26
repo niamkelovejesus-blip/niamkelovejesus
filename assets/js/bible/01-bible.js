@@ -33,7 +33,8 @@ function plan(){
   main().innerHTML=h;
 }
 function openPlan(d){var p=PLAN[d-1];if(!p||!BIB[cur])return;view.planDay=d;chapter(p[0],p[1]-1);}
-var TR=[{id:'fr',label:'Français',file:'../assets/bible/fr.json'},{id:'en',label:'English',file:'../assets/bible/en.json'}];
+var BIBLE_EN=false; /* mettre true quand assets/bible/en.json est ajouté (sélecteur de langue) */
+var TR=[{id:'fr',label:'Français',file:'../assets/bible/fr.json'}];if(BIBLE_EN)TR.push({id:'en',label:'English',file:'../assets/bible/en.json'});
 var VDJ=null;
 var BIB={},cur=null,view={t:'lire',book:null,ch:null,sel:{},planDay:null},FAV=[];
 try{FAV=JSON.parse(localStorage.getItem('nlj_bible_fav')||'[]');}catch(e){}
